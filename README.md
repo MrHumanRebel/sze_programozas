@@ -3,13 +3,13 @@
 
 <img src="https://networks.imdea.org/wp-content/uploads/2021/09/media-file-code-900x500.png" alt="Programozás" width="500" height="277">
 
-![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_algo_pszeudokod)
-![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_algo_pszeudokod)
-![Lines of code](https://img.shields.io/tokei/lines/github/MrHumanRebel/sze_algo_pszeudokod)
-![GitHub](https://img.shields.io/github/license/MrHumanRebel/sze_algo_pszeudokod)
+![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_programozas)
+![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_programozas)
+![Lines of code](https://img.shields.io/tokei/lines/github/MrHumanRebel/sze_programozas)
+![GitHub](https://img.shields.io/github/license/MrHumanRebel/sze_programozas)
 
-![GitHub all releases](https://img.shields.io/github/downloads/MrHumanRebel/sze_algo_pszeudokod/total)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/MrHumanRebel/sze_algo_pszeudokod)
+![GitHub all releases](https://img.shields.io/github/downloads/MrHumanRebel/sze_programozas/total)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/MrHumanRebel/sze_programozas)
 
 
 ## Információk
