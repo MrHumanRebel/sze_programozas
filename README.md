@@ -22,7 +22,7 @@
 // Beta Version //
 
 
-#algovizsganebukjmeg
+#progvizsganebukjmeg
 
 ## Tananyag
 
