@@ -29,6 +29,8 @@
 Extra .pdf/.png anyagokért ZH-ra és vizsgára keresd MrHumanRebel-t.
 
 Discord: [Mr_HumanRebel#0023](https://discord.com/users/283988657851990017)
+Replit: [@MrHumanRebel](https://replit.com/@MrHumanRebel)
+
 
 // Beta Version //
 
