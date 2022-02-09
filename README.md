@@ -1,4 +1,4 @@
-# C++ Programozás
+# Programozás
 
 **Széchenyi István Egyetem // Győr // Programozás**
 
