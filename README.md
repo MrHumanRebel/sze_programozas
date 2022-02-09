@@ -39,4 +39,6 @@ Replit: [@MrHumanRebel](https://replit.com/@MrHumanRebel)
 
 YouTube Kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
+Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
+
 // Beta Version //
