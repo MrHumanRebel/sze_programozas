@@ -11,6 +11,20 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/MrHumanRebel/sze_programozas/total)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MrHumanRebel/sze_programozas)
 
+<p align="center">
+    <table>
+        <tbody>
+            <td align="center">
+                <br><b>⚠️ Figyelmeztetés: Megjelenés előtti / Kísérleti ⚠️</b><br><sub>
+                Az anyag nem teljes, mert még erős fejlesztés alatt áll!<br>
+                Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel, kérjük segíts a projekten.
+                <br><img width=1000><br>
+                <br><br>
+            </td>
+        </tbody>
+    </table>
+</p>
+
 
 ## Információk
 **Csak oktatási célokra használd, saját felelősségre!**
