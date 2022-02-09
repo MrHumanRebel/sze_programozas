@@ -37,4 +37,6 @@ Replit: [@MrHumanRebel](https://replit.com/@MrHumanRebel)
 
 ## Linkek
 
+YouTube Kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
+
 // Beta Version //
