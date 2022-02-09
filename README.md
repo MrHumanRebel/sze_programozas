@@ -2,7 +2,7 @@
 
 **Széchenyi István Egyetem // Győr // Programozás**
 
-<img src="https://networks.imdea.org/wp-content/uploads/2021/09/media-file-code-900x500.png" alt="Programozás" width="500" height="277">
+<img src="https://www.educative.io/cdn-cgi/image/f=auto,fit=contain,w=1200/api/page/5393602882568192/image/download/6038586442907648" alt="Programozás" width="500" height="277">
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_programozas)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_programozas)
