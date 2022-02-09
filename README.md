@@ -20,7 +20,7 @@
             <td align="center">
                 <br><b>⚠️ Figyelmeztetés: Megjelenés előtti / Kísérleti ⚠️</b><br><sub>
                 Az anyag nem teljes, még fejlesztés alatt áll!<br>
-                Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel, <a href="https://github.com/MrHumanRebel/sze_programozas/pulls">segítd a projektet!</a>
+                Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel, <a href="https://github.com/login?return_to=%2FMrHumanRebel%2Fsze_programozas">segítd a projektet!</a>
                 <br><img width=1000><br>
                 <br><br>
             </td>
