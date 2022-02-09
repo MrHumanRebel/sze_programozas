@@ -1,4 +1,5 @@
 # Programozás
+
 **Széchenyi István Egyetem // Győr // Programozás**
 
 <img src="https://networks.imdea.org/wp-content/uploads/2021/09/media-file-code-900x500.png" alt="Programozás" width="500" height="277">
@@ -10,7 +11,6 @@
 
 ![GitHub all releases](https://img.shields.io/github/downloads/MrHumanRebel/sze_programozas/total)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MrHumanRebel/sze_programozas)
-
 
 ## Információk
 
@@ -34,9 +34,6 @@
 
 *A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a legoptimálisabbak!*
 
-// Beta Version //
-
-
 #progvizsganebukjmeg
 
 ## Tananyag
@@ -47,13 +44,10 @@ Discord: [Mr_HumanRebel#0023](https://discord.com/users/283988657851990017)
 
 Replit: [@MrHumanRebel](https://replit.com/@MrHumanRebel)
 
-
-// Beta Version //
+Replit: []()
 
 ## Linkek
 
 YouTube Kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
-
-// Beta Version //
