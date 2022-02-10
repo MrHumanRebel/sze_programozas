@@ -51,3 +51,5 @@ Replit: [@CarlosWright](https://replit.com/@CarlosWright)
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
+
+SZE Tananyag és Vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
