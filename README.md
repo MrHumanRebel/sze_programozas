@@ -36,9 +36,7 @@
 
 #progvizsganebukjmeg
 
-## Tananyag
-
-Extra .pdf/.png anyagokért ZH-ra és vizsgára keresd MrHumanRebel-t.
+## Elérhetőségek
 
 Discord: [Mr_HumanRebel#0023](https://discord.com/users/283988657851990017)
 
@@ -48,10 +46,10 @@ Replit: [@CarlosWright](https://replit.com/@CarlosWright)
 
 ## Linkek
 
-Online Programozási Felület: [Replit](https://replit.com)
+Online programozási felület: [Replit](https://replit.com)
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
 
-SZE Tananyag és Vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
+SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
