@@ -10,12 +10,12 @@ int main() {
             ++cnt;
        }
       else {
-        std::cout << currVal << " előfordul " << cnt << " alkalommal" << std::endl;
+        std::cout << currVal << " előfordul " << cnt << " alkalommal\n" << std::endl;
         currVal = val;
         cnt = 1;
       }
     }
-    std::cout << currVal << " előfordul " << cnt << " alkalommal" << std::endl;
+    std::cout << currVal << " előfordul " << cnt << " alkalommal\n" << std::endl;
   }
 
   return 0;
