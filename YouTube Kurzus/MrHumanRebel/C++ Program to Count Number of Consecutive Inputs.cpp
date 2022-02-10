@@ -1,8 +1,8 @@
 #include <iostream>
 
 int main() {
+    std::cout << "Adjon meg számokat /SPACE/-el elválasztva majd nyomjon /CTRL + D/-t a befejezéshez!\n";
   int currVal = 0, val = 0;
-
   if (std::cin >> currVal){
     int cnt = 1;
     while (std::cin >> val) {
