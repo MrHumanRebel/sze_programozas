@@ -2,7 +2,7 @@
 
 **Széchenyi István Egyetem // Győr // Programozás**
 
-<img src="https://github.com/MrHumanRebel/sze_programozas/blob/main/Repo/c%2B%2B.jpg" alt="Programozás" width="500" height="277">
+<img src="https://raw.githubusercontent.com/MrHumanRebel/sze_programozas/main/Repo/c%2B%2B.jpg" alt="Programozás" width="500" height="277">
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_programozas)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_programozas)
