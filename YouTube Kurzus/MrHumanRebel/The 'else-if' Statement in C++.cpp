@@ -7,7 +7,7 @@ int main() {
   if (num > 10) {
     std::cout << "A szám nagyobb mint 10." << std::endl;
   }
-   else if (num == 10)  {
+  else if (num == 10)  {
     std::cout << "A szám pontosan 10." << std::endl;
   }
   else {
