@@ -48,6 +48,8 @@ Replit: [@CarlosWright](https://replit.com/@CarlosWright)
 
 ## Linkek
 
+Online Programozási Felület: [Replit](https://replit.com)
+
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
