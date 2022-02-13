@@ -48,7 +48,7 @@ Replit: [@CarlosWright](https://replit.com/@CarlosWright)
 
 Online programozási felület: [Replit](https://replit.com)
 
-Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/)
+Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
