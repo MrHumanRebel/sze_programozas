@@ -2,7 +2,7 @@
 
 **Széchenyi István Egyetem // Győr // Programozás**
 
-<img src="https://raw.githubusercontent.com/MrHumanRebel/sze_programozas/main/Repo/c%2B%2B.jpg" alt="Programozás" width="200" height="177">
+<img src="docs/c++.jpg" alt="Programozás" width="200" height="177">
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_programozas)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_programozas)
@@ -32,17 +32,20 @@
 
 **A vizsga feladatai jelentősen nehezebbek, mint az itt megtalálható megoldások és minták!**
 
-*A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a legoptimálisabbak!*
+_A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a legoptimálisabbak!_
 
 #progvizsganebukjmeg
 
 ## Elérhetőségek
 
-Discord: [Mr_HumanRebel#0023](https://discord.com/users/283988657851990017)
+### MrHumanRebel
 
-Replit: [@MrHumanRebel](https://replit.com/@MrHumanRebel)
+- [Discord](https://discord.com/users/283988657851990017)
+- [Replit](https://replit.com/@MrHumanRebel)
 
-Replit: [@CarlosWright](https://replit.com/@CarlosWright)
+### CarlosWright
+
+- [Replit](https://replit.com/@CarlosWright)
 
 ## Linkek
 
