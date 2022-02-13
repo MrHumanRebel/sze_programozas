@@ -54,4 +54,6 @@ Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
 
+GitHub.io page: [Programozás](https://mrhumanrebel.github.io/sze_programozas/)
+
 SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
