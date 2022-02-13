@@ -4,7 +4,7 @@ Készítsen programot, ami lehetővé teszi két játékos számára, hogy amőb
 
 ## Feladat
 
-A pálya 10 sorból és 10 oszlopból áll. Jelenítse meg a pályát úgy, hogy a sorokat 1-től kezdve számozza, az oszlopokat betűkkel jelöli (ld. [példa](##Példa))! Az első játékos lépéseit `X`, a másodikét `O` jelöli a pályán, az üres mezőket jelölje `.` karakterrel!
+A pálya 10 sorból és 10 oszlopból áll. Jelenítse meg a pályát úgy, hogy a sorokat 1-től kezdve számozza, az oszlopokat betűkkel jelöli (ld. [példa](#példa))! Az első játékos lépéseit `X`, a másodikét `O` jelöli a pályán, az üres mezőket jelölje `.` karakterrel!
 
 Ezután felváltva olvassa be a játékosok lépéseit (először a sort, aztán az oszlopot külön), és jelenítse meg újra a táblát, ami tartalmazza a játékosok eddigi lépéseit, beleértve az imént megadottat is!
 
