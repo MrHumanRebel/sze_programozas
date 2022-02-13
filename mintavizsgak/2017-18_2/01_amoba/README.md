@@ -1,8 +1,10 @@
 # Amőba
 
+Készítsen programot, ami lehetővé teszi két játékos számára, hogy amőba játékot játsszon!
+
 ## Feladat
 
-Készítsen programot, ami lehetővé teszi két játékos számára, hogy amőba játékot játsszon! A pálya 10 sorból és 10 oszlopból áll. Jelenítse meg a pályát úgy, hogy a sorokat 1-től kezdve számozza, az oszlopokat betűkkel jelöli (ld. [példa](##Példa))! Az első játékos lépéseit `X`, a másodikét `O` jelöli a pályán, az üres mezőket jelölje `.` karakterrel!
+A pálya 10 sorból és 10 oszlopból áll. Jelenítse meg a pályát úgy, hogy a sorokat 1-től kezdve számozza, az oszlopokat betűkkel jelöli (ld. [példa](##Példa))! Az első játékos lépéseit `X`, a másodikét `O` jelöli a pályán, az üres mezőket jelölje `.` karakterrel!
 
 Ezután felváltva olvassa be a játékosok lépéseit (először a sort, aztán az oszlopot külön), és jelenítse meg újra a táblát, ami tartalmazza a játékosok eddigi lépéseit, beleértve az imént megadottat is!
 
@@ -43,11 +45,11 @@ Masodik jatekos lepese, sor: …
 
 Az alapfeladat megoldása **2 pont**. Plusz, illetve mínusz pont adandó a következőkért:
 
-| Pont |                                Feltétel                                                                                                  |
-|------|------------------------------------------------------------------------------------------------------------------------------------------|
-|  -1  | Ha a hibás lépéseket nem kezeli a program az előírtnak megfelelően.                                                                      |
-|  -1  | Ha a program fordítása során egyetlen, szabvány fejfájlok be nem kapcsolásából (#include) adódó, figyelmeztető üzenet is akad.           |
-|  -1  | Ha az alapprogram működése bármiben is eltér a feladatban megfogalmazottól.                                                              |
-|  +1  | Ha a pálya mérete is megadható, mielőtt a tényleges játék elkezdődne. A sorok és oszlopok számának a `[7, 20]` intervallumba kell esnie. |
-|  +1  | Egészítse ki azzal a játékot azzal, hogy a program minden lépés után automatikusan elmenti a játék állását az `amoba.txt` fájlba. Mentendő a pálya mérete és a játékosok eddigi lépései. |
-|  +1  | Amennyiben a programot a betolt parancssori paraméterrel indítják, töltse be a korábban kimentett játékállást, és folytassa onnan a játékot a program! Ellenőrizendő a fájl megléte, de feltételezheti, hogy a fájl szerkezete helyes. |
+| Pont | Feltétel                                                                                                                                                                                                                               |
+| ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -1   | Ha a hibás lépéseket nem kezeli a program az előírtnak megfelelően.                                                                                                                                                                    |
+| -1   | Ha a program fordítása során egyetlen, szabvány fejfájlok be nem kapcsolásából (#include) adódó, figyelmeztető üzenet is akad.                                                                                                         |
+| -1   | Ha az alapprogram működése bármiben is eltér a feladatban megfogalmazottól.                                                                                                                                                            |
+| +1   | Ha a pálya mérete is megadható, mielőtt a tényleges játék elkezdődne. A sorok és oszlopok számának a `[7, 20]` intervallumba kell esnie.                                                                                               |
+| +1   | Egészítse ki azzal a játékot azzal, hogy a program minden lépés után automatikusan elmenti a játék állását az `amoba.txt` fájlba. Mentendő a pálya mérete és a játékosok eddigi lépései.                                               |
+| +1   | Amennyiben a programot a betolt parancssori paraméterrel indítják, töltse be a korábban kimentett játékállást, és folytassa onnan a játékot a program! Ellenőrizendő a fájl megléte, de feltételezheti, hogy a fájl szerkezete helyes. |
