@@ -7,7 +7,7 @@ Ismerkedés az IDÉ-vel
 Közös feladat
 •	Kérjünk be egy számot (int) és írjuk ki a kétszeresét
 
-(Videó)[https://drive.google.com/file/d/14fREgbIdrabdL0zlkqf_A51faiFdB6L5/view]
+[Videó](https://drive.google.com/file/d/14fREgbIdrabdL0zlkqf_A51faiFdB6L5/view)
 
 Önálló feladat
 •	Kérjünk be két számot (int) és írjuk ki az összegüket
@@ -19,7 +19,7 @@ Közös feladat
 •	Ha a szám páros, írjuk ki a felét
 •	Nézzük meg, páratlan szám esetén mi lesz a 2-vel való osztás eredménye
 
-(Videó)[https://drive.google.com/file/d/1UYwQdlbjU9fP7OXVWl_2pEs5utR3vLH2/view]
+[Videó](https://drive.google.com/file/d/1UYwQdlbjU9fP7OXVWl_2pEs5utR3vLH2/view)
 
 Önálló feladat
 •	Kérjünk be két számot, ha az első nagyobb, írjuk ki a különbségüket
@@ -33,7 +33,7 @@ Közös feladat
 •	Csak a páros számokat írjuk ki
 •	Opcionális feladat: kérjünk be két számot, majd soroljuk fel a köztük lévő számokat, ha az első szám nagyobb, akkor csökkenő sorrendben
 
-(Videó)[https://drive.google.com/file/d/12HT0StNkeOSc5aut0H3rf8RXZrAqT_-B/view]
+[Videó](https://drive.google.com/file/d/12HT0StNkeOSc5aut0H3rf8RXZrAqT_-B/view)
 
 Önálló feladat
 •	Kérjük be N értékét, majd írjuk ki a faktoriálisát
