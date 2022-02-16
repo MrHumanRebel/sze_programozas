@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-  int szam, masikszam, szorzat, extra, osszeg = 0;
+  int szam = 0;
   cout << "Adjon meg egy számot!" << endl;
   cin >> szam;
   cout << "A szám abszolút értéke: " << abs(szam) << endl;
