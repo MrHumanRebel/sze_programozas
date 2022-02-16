@@ -5,7 +5,7 @@ int main() {
   int szam, masikszam, szorzat, extra, osszeg = 0;
   cout << "Adjon meg egy számot!" << endl;
   cin >> szam;
-  cout << "Adjon meg egy másiki számot!" << endl;
+  cout << "Adjon meg egy másik számot!" << endl;
   cin >> masikszam;
   osszeg = szam+masikszam;
   szorzat = szam*masikszam;
