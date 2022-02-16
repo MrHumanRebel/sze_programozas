@@ -6,7 +6,7 @@ int main() {
   int N = 0;
   bool beker;
   beker = true;
-  while (beker){
+  while (beker) {
     cin >> N;
     if (N>1)
       beker = false;
