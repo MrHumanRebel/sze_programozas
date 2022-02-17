@@ -10,6 +10,7 @@ int main()
     bool beker, menuker = true;
 
     cout << "Saját vagy randomizált adatokkal szeretné használni a háromszög kalkulátort?\n"
+         << "___________________________________________________________________________________\n\n"
          << "Randomizáláshoz nyomja meg az 1-es gombot!\n"
          << "Adatmegadáshoz nyomja meg a 2-es gombot!" << endl;
     while (menuker)
@@ -17,6 +18,8 @@ int main()
         cin >> menu;
         if (menu >= 1 && menu < 3)
             menuker = false;
+        else
+            cout << "Nem valós menüpont!\n";
     }
 
     if (menu == 1)
