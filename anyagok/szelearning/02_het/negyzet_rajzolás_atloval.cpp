@@ -12,7 +12,7 @@ int main() {
   }
 
   //sor ugrás
-  cout<<"\n";
+  cout<<"\n\n\n";
 
   //közepe print
   for(int i=1;i<=szam-2;i++){
@@ -36,7 +36,7 @@ int main() {
       */
     }
     cout<<"*";
-    cout<<"\n";
+    cout<<"\n\n\n";
   }
 
   //alsó sor print
