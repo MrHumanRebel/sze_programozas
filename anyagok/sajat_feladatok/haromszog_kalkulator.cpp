@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     double a, b, c, x, y, max = 0;
-    double rad, alfa, beta, gamma, id, id2 = 0;
+    double rad, alfa, beta, gamma, kerulet, terulet, bsugar, batmero, m_a, m_b, m_c, id, id2 = 0;
     bool beker = true;
     cout << "Adja meg a háromszög oldalait!\n"
          << "_________________________________\n"
@@ -73,8 +73,33 @@ int main()
     beta = beta * rad;
     gamma = gamma * rad;
 
-    cout << "Az A csúcshoz tartózó szög: " << alfa << "\t A B csúcshoz tartózó szög: " << beta << "\t A C csúcshoz tartózó szög: " << gamma << "\n"
-         << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << endl;
+    cout << "Az A csúcshoz tartózó szög: " << alfa << "\n A B csúcshoz tartózó szög: " << beta << "\n A C csúcshoz tartózó szög: " << gamma << "\n"
+         << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << "\n"
+         << endl;
+
+    kerulet = a + b + c;
+    cout << "A háromszög kerülete: " << kerulet << "\n"
+         << endl;
+
+    //"a" oldalhoz magasság
+    m_a = abs(b * sin(gamma));
+    //"b" oldalhoz magasság
+    m_b = abs(c * sin(alfa));
+    //"c" oldalhoz magasság
+    m_c = abs(a * sin(beta));
+
+    cout << "Az a oldalhoz tartózó magasság: " << m_a << "\n A b oldalhoz tartózó magasság: " << m_b << "\n A c oldalhoz tartózó magasság: " << m_c << "\n"
+         << endl;
+
+    terulet = (b * m_b) / 2;
+    cout << "A háromszög területe: " << terulet << "\n"
+         << endl;
+
+    bsugar = (2 * terulet) / (a + b + c);
+    batmero = bsugar * 2;
+    cout << "A háromszög belső sugara: " << bsugar << "\n"
+         << "A háromszög belső átmérője: " << batmero << "\n"
+         << endl;
 
     return 0;
 }
