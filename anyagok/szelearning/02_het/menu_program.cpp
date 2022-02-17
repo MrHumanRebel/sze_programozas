@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    double menu, szam, masikszam, hatvany, emel, hossz, novekmeny; //a double a hatványozás miatt kell, mivel kicsordul az int tartományából
+    double menu, szam, masikszam, hatvany, emel, hossz, novekmeny; // a double a hatványozás miatt kell, mivel kicsordul az int tartományából
     bool beker;
     beker = true;
     do

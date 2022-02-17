@@ -11,7 +11,7 @@ int main() {
   szorzat = szam*masikszam;
   extra = szorzat-osszeg;
   cout << "A számok összege: " << osszeg << endl;
-  cout << "A számok szorzata: " << szorzat << endl;
+  cout << "A sszámok szorzata: " << szorzat << endl;
   cout << "A számok szorzatának és összegének különbsége: " << extra << endl;
   return 0;
 }
