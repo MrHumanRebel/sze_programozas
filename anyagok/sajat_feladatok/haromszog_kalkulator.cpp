@@ -4,10 +4,11 @@ using namespace std;
 
 int main()
 {
-    int a, b, c, max = 0;
-    double alfa, beta, gamma, id, id2 = 0;
+    double a, b, c, x, y, max = 0;
+    double rad, alfa, beta, gamma, id, id2 = 0;
     bool beker = true;
-    cout << "Adja meg a háromszög oldalait!\n\n"
+    cout << "Adja meg a háromszög oldalait!\n"
+         << "_________________________________\n"
          << endl;
     do
     {
@@ -39,22 +40,41 @@ int main()
     cout << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
          << endl;
 
-    id = ((a * a) + (b * b) - (c * c)) / (2 * a * b);
-    gamma = 100 * acos(id);
+    if (c == max)
+    {
+        x = a;
+        y = b;
+    }
+    if (b == max)
+    {
+        x = a;
+        y = c;
+    }
+    if (a == max)
+    {
+        x = b;
+        y = c;
+    }
 
-    id = a / c;
+    // Koszinusz tétellel leghosszabb oldalhoz tartozó szög kiszámítása
+    id = ((x * x) + (y * y) - (max * max)) / (2 * x * y);
+    gamma = acos(id);
 
-    cout << id;
-    cout << "\n";
+    id = (x / max) * sin(gamma);
+    alfa = (asin(id));
 
+    id = y / max;
     id2 = sin(gamma);
+    beta = (asin(id * id2));
 
-    cout << id2;
-    cout << "\n";
+    // Radián átváltás fokba
+    rad = (180.0 / 3.141592653589793238463);
+    alfa = alfa * rad;
+    beta = beta * rad;
+    gamma = gamma * rad;
 
-    alfa = 100 * sin(id * id2);
-
-    cout << "Az A csúcshoz tartózó szög: " << alfa << "\t A B csúcshoz tartózó szög: " << gamma << endl;
+    cout << "Az A csúcshoz tartózó szög: " << alfa << "\t A B csúcshoz tartózó szög: " << beta << "\t A C csúcshoz tartózó szög: " << gamma << "\n"
+         << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << endl;
 
     return 0;
 }
