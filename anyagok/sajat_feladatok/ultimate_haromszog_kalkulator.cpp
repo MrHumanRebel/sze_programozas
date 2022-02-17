@@ -52,6 +52,8 @@ int main()
              << endl;
     }
 
+    beker = true;
+
     if (menu == 2)
     {
         cout << "Adja meg a háromszög oldalait!\n"
