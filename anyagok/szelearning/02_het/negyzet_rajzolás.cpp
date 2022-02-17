@@ -5,11 +5,30 @@ int main() {
   int szam;
   cout<<"Adjon meg egy számot, amekkora négyzetet szeretne pritelni!!!"<<endl;
   cin>>szam;
+  //felső sor print
   for(int i=1;i<=szam;i++){
-    for (int j=1;j<=szam;j++){
-      cout << "*";
+    cout<<"*";
+    cout<<"\t";
+  }
+
+  //sor ugrás
+  cout<<"\n";
+
+  //közepe print
+  for(int i=1;i<=szam-2;i++){
+    cout<<"*";
+    for(int j=1;j<=szam-1;j++){
+      cout<<"\t";
     }
+    cout<<"*";
     cout<<"\n";
+  }
+
+  //alsó sor print
+
+  for(int i=1;i<=szam;i++){
+    cout<<"*";
+    cout<<"\t";
   }
   return 0;
 }
