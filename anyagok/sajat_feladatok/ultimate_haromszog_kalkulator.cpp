@@ -4,38 +4,78 @@ using namespace std;
 
 int main()
 {
+    int menu;
     double a, b, c, x, y, max = 0;
     double rad, alfa, beta, gamma, kerulet, terulet, bsugar, ksugar, batmero, katmero, m_a, m_b, m_c, id = 0;
-    bool beker = true;
-    cout << "Adja meg a háromszög oldalait!\n"
-         << "_________________________________\n"
-         << endl;
-    do
+    bool beker, menuker = true;
+
+    cout << "Saját vagy randomizált adatokkal szeretné használni a háromszög kalkulátort?\n"
+         << "Randomizáláshoz nyomja meg az 1-es gombot!\n"
+         << "Adatmegadáshoz nyomja meg a 2-es gombot!" << endl;
+    while (menuker)
     {
-        cout << "Adja meg a háromszög első oldalát!" << endl;
-        cin >> a;
-        max = a;
-        cout << "Adja meg a háromszög második oldalát!" << endl;
-        cin >> b;
-        if (b > a)
-            max = b;
-        cout << "Adja meg a háromszög harmadik oldalát!" << endl;
-        cin >> c;
-        if (c > a or c > b)
-            max = c;
-        if (a > 0 and b > 0 and c > 0)
+        cin >> menu;
+        if (menu >= 1 && menu < 3)
+            menuker = false;
+    }
+
+    if (menu == 1)
+    {
+        do
         {
-            if (c < (a + b) && a < (b + c) && b < (a + c))
+            a = rand() % 100 + 1;
+            max = a;
+            b = rand() % 100 + 1;
+            if (b > a)
+                max = b;
+            c = rand() % 100 + 1;
+            if (c > a or c > b)
+                max = c;
+            if (a > 0 and b > 0 and c > 0)
             {
-                cout << "Ez a háromszög megszerkeszthető!\n"
-                     << "Már számoljuk is a jellemzőit...\n"
-                     << endl;
-                beker = false;
+                if (c < (a + b) && a < (b + c) && b < (a + c))
+                {
+                    cout << "A randomizált háromszög megszerkeszthető!\n"
+                         << "Már számoljuk is a jellemzőit...\n"
+                         << endl;
+                    beker = false;
+                }
             }
-            else
-                cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
-        }
-    } while (beker == true);
+        } while (beker == true);
+    }
+
+    if (menu == 2)
+    {
+        cout << "Adja meg a háromszög oldalait!\n"
+             << "_________________________________\n"
+             << endl;
+        do
+        {
+            cout << "Adja meg a háromszög első oldalát!" << endl;
+            cin >> a;
+            max = a;
+            cout << "Adja meg a háromszög második oldalát!" << endl;
+            cin >> b;
+            if (b > a)
+                max = b;
+            cout << "Adja meg a háromszög harmadik oldalát!" << endl;
+            cin >> c;
+            if (c > a or c > b)
+                max = c;
+            if (a > 0 and b > 0 and c > 0)
+            {
+                if (c < (a + b) && a < (b + c) && b < (a + c))
+                {
+                    cout << "Ez a háromszög megszerkeszthető!\n"
+                         << "Már számoljuk is a jellemzőit...\n"
+                         << endl;
+                    beker = false;
+                }
+                else
+                    cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
+            }
+        } while (beker == true);
+    }
 
     cout << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
          << endl;
