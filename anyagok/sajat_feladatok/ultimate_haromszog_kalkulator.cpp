@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
     double a, b, c, x, y, max = 0;
-    double rad, alfa, beta, gamma, kerulet, terulet, bsugar, batmero, m_a, m_b, m_c, id, id2 = 0;
+    double rad, alfa, beta, gamma, kerulet, terulet, bsugar, ksugar, batmero, katmero, m_a, m_b, m_c, id = 0;
     bool beker = true;
     cout << "Adja meg a háromszög oldalait!\n"
          << "_________________________________\n"
@@ -40,6 +40,7 @@ int main()
     cout << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
          << endl;
 
+    //Új adatok a leghosszabb oldal alapján a koszinusz tételhez
     if (c == max)
     {
         x = a;
@@ -60,12 +61,13 @@ int main()
     id = ((x * x) + (y * y) - (max * max)) / (2 * x * y);
     gamma = acos(id);
 
+    // Szinusz tétel
     id = (x / max) * sin(gamma);
     alfa = (asin(id));
 
-    id = y / max;
-    id2 = sin(gamma);
-    beta = (asin(id * id2));
+    // Szinusz tétel
+    id = y / max * sin(gamma);
+    beta = (asin(id));
 
     // Radián átváltás fokba
     rad = (180.0 / 3.141592653589793238463);
@@ -73,32 +75,40 @@ int main()
     beta = beta * rad;
     gamma = gamma * rad;
 
-    cout << "Az A csúcshoz tartózó szög: " << alfa << "\n A B csúcshoz tartózó szög: " << beta << "\n A C csúcshoz tartózó szög: " << gamma << "\n"
+    cout << "Az A csúcshoz tartózó szöge: " << alfa << "\n A B csúcshoz tartózó szöge: " << beta << "\n A C csúcshoz tartózó szöge: " << gamma << "\n"
          << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << "\n"
          << endl;
 
+    // Kerület kiszámítása
     kerulet = a + b + c;
     cout << "A háromszög kerülete: " << kerulet << "\n"
          << endl;
 
-    //"a" oldalhoz magasság
+    // Magasságvonalak kiszámítása
     m_a = abs(b * sin(gamma));
-    //"b" oldalhoz magasság
     m_b = abs(c * sin(alfa));
-    //"c" oldalhoz magasság
     m_c = abs(a * sin(beta));
 
-    cout << "Az a oldalhoz tartózó magasság: " << m_a << "\n A b oldalhoz tartózó magasság: " << m_b << "\n A c oldalhoz tartózó magasság: " << m_c << "\n"
+    cout << "Az a oldalhoz tartózó magassága: " << m_a << "\n A b oldalhoz tartózó magassága: " << m_b << "\n A c oldalhoz tartózó magassága: " << m_c << "\n"
          << endl;
 
+    // Terület kiszámítása
     terulet = (b * m_b) / 2;
     cout << "A háromszög területe: " << terulet << "\n"
          << endl;
 
+    // Belső kör sugár és átmérő kiszámítása
     bsugar = (2 * terulet) / (a + b + c);
     batmero = bsugar * 2;
-    cout << "A háromszög belső sugara: " << bsugar << "\n"
-         << "A háromszög belső átmérője: " << batmero << "\n"
+    cout << "A háromszöghöz tartozó belső kör sugara: " << bsugar << "\n"
+         << "A háromszöghöz tartozó belső kör átmérője: " << batmero << "\n"
+         << endl;
+
+    // Külső kör sugár és átmérő kiszámítása
+    ksugar = (a * b * c) / (4 * terulet);
+    katmero = 2 * ksugar;
+    cout << "A háromszöghöz tartozó külső kör sugara: " << ksugar << "\n"
+         << "A háromszöghöz tartozó külső kör átmérője: " << katmero << "\n"
          << endl;
 
     return 0;
