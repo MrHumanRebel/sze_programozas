@@ -5,6 +5,7 @@ using namespace std;
 int main()
 {
     int menu;
+    int db = 1;
     double a, b, c, x, y, max = 0;
     double rad, alfa, beta, gamma, kerulet, terulet, bsugar, ksugar, batmero, katmero, m_a, m_b, m_c, id = 0;
     bool beker, menuker = true;
@@ -43,8 +44,12 @@ int main()
                          << endl;
                     beker = false;
                 }
+                else
+                    db++;
             }
         } while (beker == true);
+        cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető adatok háromszög állt elő!\n"
+             << endl;
     }
 
     if (menu == 2)
