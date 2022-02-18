@@ -1,11 +1,12 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 int main()
 {
   int menu;
   int db = 1;
-  double a, b, max = 0;
+  double a, b, max, kerulet, terulet, atlo, alfa, beta, id, rad = 0;
   bool beker, menuker = true;
 
   cout << "Saját vagy randomizált adatokkal szeretné használni a téglalap kalkulátort?\n"
@@ -80,6 +81,31 @@ int main()
        << "A téglalap b oldalának hossza: " << b << "\n"
        << "A téglalap leghosszabb oldalának hossza: " << max << "\n"
        << endl;
+
+  atlo = sqrt((a * a) + (b * b));
+  kerulet = 2 * (a + b);
+  terulet = a * b;
+
+  cout << "A téglalap kerülete: " << kerulet << "\n"
+       << "A téglalap területe: " << terulet << "\n"
+       << "A téglalap átlója: " << atlo << "\n"
+       << endl;
+
+  id = (a / atlo);
+  alfa = asin(id);
+  id = (b / atlo);
+  beta = asin(id);
+
+  // Radián átváltás fokba
+  rad = (180.0 / 3.141592653589793238463);
+  alfa = alfa * rad * 2;
+  beta = beta * rad * 2;
+
+  cout << "A téglalap alfa átló által bezárt szöge: " << alfa << "\n"
+       << "A téglalap béta átló által bezárt szöge: " << beta << "\n"
+       << endl;
+
+  cout << "A négy szög összege ellenőrzésképpen: " << 2 * alfa + 2 * beta << endl;
 
   cout << "Minta téglalap printelése...\n"
        << endl;
