@@ -67,7 +67,6 @@ int main()
             y = akt;
         }
     }
-    cout << a << b << c << d << e << f << g << h << x << y << endl;
     atl = ((a + b + c + d + e + f + g + h + x + y) / 10);
     cout << "A tíz szám átlaga: " << atl << endl;
     return 0;
