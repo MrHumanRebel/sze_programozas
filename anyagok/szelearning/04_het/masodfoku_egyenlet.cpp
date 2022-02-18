@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-    int db = 1;
     double a, b, c, id, x1, x2 = 0;
     bool beker = true;
     do
@@ -37,7 +36,6 @@ int main()
             else
             {
                 cout << "Az egyenletnek nincs/nincsenek valós gyöke/gyökei, adjon meg új adatokat!" << endl;
-                db++;
             }
         }
     } while (beker == true);
