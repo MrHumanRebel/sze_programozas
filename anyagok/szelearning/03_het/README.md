@@ -17,7 +17,7 @@ Olvassunk be 10 számot, majd írjuk ki az átlagukat (ehhez még nem kell tömb
 - Írjuk ki a vektorok összegét, különbségét
 - A dimenzió legyen `#define`-nal megadva
 
-## 4feladat
+## 4.feladat
 
 - Olvassunk be 10 számot egy tömbbe
 - Kérjünk be további számokat, és mondjuk meg, hányszor szerepeltek a 10 elemű tömbben
