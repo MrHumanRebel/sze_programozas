@@ -8,11 +8,11 @@ int main()
     bool beker = true;
     do
     {
-        cout << "Adja meg az a együtthatót!" << endl;
+        cout << "Adja meg az \"a\" együtthatót!" << endl;
         cin >> a;
-        cout << "Adja meg az b együtthatót!" << endl;
+        cout << "Adja meg az \"b\" együtthatót!" << endl;
         cin >> b;
-        cout << "Adja meg az c együtthatót!" << endl;
+        cout << "Adja meg az \"c\" együtthatót!" << endl;
         cin >> c;
         if (a != 0 and b != 0 and c != 0)
         {
