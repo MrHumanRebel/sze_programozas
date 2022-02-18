@@ -92,7 +92,10 @@ int main()
              << endl;
     }
 
-    cout << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
+    cout << "A háromszög a oldalának hossza: " << a << "\n"
+         << "A háromszög b oldalának hossza: " << b << "\n"
+         << "A háromszög c oldalának hossza: " << c << "\n"
+         << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
          << endl;
 
     //Új adatok a leghosszabb oldal alapján a koszinusz tételhez
