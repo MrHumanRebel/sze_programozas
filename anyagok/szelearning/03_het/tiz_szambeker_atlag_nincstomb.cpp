@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    int akt, a, b, c, d, e, f, g, h, x, y;
+    double akt, a, b, c, d, e, f, g, h, x, y;
     double atl;
     a = 0;
     b = 0;
@@ -70,7 +70,5 @@ int main()
     cout << a << b << c << d << e << f << g << h << x << y << endl;
     atl = ((a + b + c + d + e + f + g + h + x + y) / 10);
     cout << "A tíz szám átlaga: " << atl << endl;
-    // a program valamiért nem írja ki a tizedesjegyeket
-
     return 0;
 }
