@@ -6,8 +6,8 @@ site_author: MrHumanRebel
 # Repository
 repo_name: sze_programozas
 repo_url: https://github.com/MrHumanRebel/sze_programozas
-edit_uri: https://github.com/MrHumanRebel/sze_programozas/tree/main/docs
-docs_dir: https://github.com/MrHumanRebel/sze_programozas/tree/main/docs
+edit_uri: main/docs
+docs_dir: main/docs
 
 # Navigation
 nav:
