@@ -27,13 +27,13 @@ int main()
     {
         do
         {
-            a = rand() % 100 + 1;
+            a = rand() % 160 + 1;
             max = a;
-            b = rand() % 100 + 1;
-            if (b > a)
+            b = rand() % 140 + 1;
+            if (b > max)
                 max = b;
-            c = rand() % 100 + 1;
-            if (c > a or c > b)
+            c = rand() % 120 + 1;
+            if (c > max or c > max)
                 max = c;
             if (a > 0 and b > 0 and c > 0)
             {
@@ -52,8 +52,6 @@ int main()
              << endl;
     }
 
-    beker = true;
-
     if (menu == 2)
     {
         cout << "Adja meg a háromszög oldalait!\n"
@@ -66,11 +64,11 @@ int main()
             max = a;
             cout << "Adja meg a háromszög második oldalát!" << endl;
             cin >> b;
-            if (b > a)
+            if (b > max)
                 max = b;
             cout << "Adja meg a háromszög harmadik oldalát!" << endl;
             cin >> c;
-            if (c > a or c > b)
+            if (c > max or c > max)
                 max = c;
             if (a > 0 and b > 0 and c > 0)
             {
