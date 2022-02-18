@@ -97,7 +97,8 @@ int main()
   beta = asin(id);
 
   // Radián átváltás fokba
-  rad = (180.0 / 3.141592653589793238463);
+  rad = 57.2957795131; // 180.0 / 3.141592653589793238463
+  cout << rad;
   alfa = alfa * rad * 2;
   beta = beta * rad * 2;
 
