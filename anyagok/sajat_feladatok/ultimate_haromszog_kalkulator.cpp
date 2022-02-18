@@ -82,9 +82,14 @@ int main()
                     beker = false;
                 }
                 else
+                {
                     cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
+                    db++;
+                }
             }
         } while (beker == true);
+        cout << "Az adatok az " << db << ". alkalommal tették lehetővé háromszög megszerkesztését!\n"
+             << endl;
     }
 
     cout << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
