@@ -33,7 +33,7 @@ int main()
             if (b > max)
                 max = b;
             c = rand() % 120 + 1;
-            if (c > max or c > max)
+            if (c > max)
                 max = c;
             if (a > 0 and b > 0 and c > 0)
             {
@@ -68,7 +68,7 @@ int main()
                 max = b;
             cout << "Adja meg a háromszög harmadik oldalát!" << endl;
             cin >> c;
-            if (c > max or c > max)
+            if (c > max)
                 max = c;
             if (a > 0 and b > 0 and c > 0)
             {
