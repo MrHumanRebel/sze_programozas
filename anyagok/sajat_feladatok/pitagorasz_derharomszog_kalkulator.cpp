@@ -64,7 +64,7 @@ int main()
             cin >> b;
             if (b > max)
                 max = b;
-            if (a > 0 and b > 0)
+            if (a != 0 && b != 0)
             {
                 c = sqrt((a * a) + (b * b));
                 if (c > max)
@@ -77,6 +77,12 @@ int main()
                     db++;
                     beker = true;
                 }
+            }
+            else
+            {
+                cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
+                db++;
+                beker = true;
             }
         } while (beker == true);
         cout << "Az adatok az " << db << ". alkalommal tették lehetővé derékszögű háromszög megszerkesztését!\n"
