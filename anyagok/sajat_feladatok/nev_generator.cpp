@@ -5,21 +5,29 @@ using namespace std;
 
 int main()
 {
+    string filename;
+    int i, db = 0;
     ifstream nevek;
     // cin.getline(filename, 50);
-    const char *filename = "E:\Downloads\names.txt";
+    cout << "Hány darab angol nevet szeretne printelni?" << endl;
+    cin >> db;
+    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/names.txt";
     nevek.open(filename);
     if (!nevek.is_open())
     {
+        cout << "Ilyen fájl nem létezik!" << endl;
         exit(EXIT_FAILURE);
     }
 
-    char akt[50];
+    string akt;
+    string elozo;
     nevek >> akt;
-    while (nevek.good())
+    while (i <= db && nevek.good())
     {
-        cout << akt << "\t" << endl;
+        elozo = akt;
         nevek >> akt;
+        cout << akt << " " << elozo << endl;
+        i++;
     }
 
     return 0;
