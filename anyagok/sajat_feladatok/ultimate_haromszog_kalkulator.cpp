@@ -45,7 +45,10 @@ int main()
                     beker = false;
                 }
                 else
+                {
                     db++;
+                    beker = true;
+                }
             }
         } while (beker == true);
         cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető adatok háromszög állt elő!\n"
@@ -83,6 +86,7 @@ int main()
                 {
                     cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
                     db++;
+                    beker = true;
                 }
             }
         } while (beker == true);

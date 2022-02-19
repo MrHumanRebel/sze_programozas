@@ -39,7 +39,10 @@ int main()
         beker = false;
       }
       else
+      {
         db++;
+        beker = true;
+      }
     } while (beker == true);
     cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető téglalap állt elő!\n"
          << endl;
@@ -71,6 +74,7 @@ int main()
       {
         cout << "Ez a téglalap nem szerkeszthető meg, adjon meg új adatokat!" << endl;
         db++;
+        beker = true;
       }
     } while (beker == true);
 
