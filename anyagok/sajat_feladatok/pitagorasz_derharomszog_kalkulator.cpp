@@ -40,7 +40,10 @@ int main()
                 if (c < (a + b) && a < (b + c) && b < (a + c))
                     beker = false;
                 else
+                {
                     db++;
+                    beker = true;
+                }
             }
         } while (beker == true);
         cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető derékszögű háromszög állt elő!\n"
@@ -72,6 +75,7 @@ int main()
                 {
                     cout << "Ez a háromszög nem derékszögű, adjon meg új adatokat!" << endl;
                     db++;
+                    beker = true;
                 }
             }
         } while (beker == true);
