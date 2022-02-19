@@ -26,7 +26,10 @@ int main()
         cout << "Szeretné folytatni a játékot?\n 1-es gomb => IGEN \n 2-es gomb => NEM" << endl;
         cin >> beker;
         if (beker == 1)
+        {
             jatszik = true;
+            ok = false;
+        }
         else if (beker == 2)
             jatszik = false;
         else
