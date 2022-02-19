@@ -90,9 +90,9 @@ int main()
              << endl;
     }
 
-    cout << "A háromszög a oldalának hossza: " << a << "\n"
-         << "A háromszög b oldalának hossza: " << b << "\n"
-         << "A háromszög c oldalának hossza: " << c << "\n"
+    cout << "A háromszög \"a\" oldalának hossza: " << a << "\n"
+         << "A háromszög \"b\" oldalának hossza: " << b << "\n"
+         << "A háromszög \"c\" oldalának hossza: " << c << "\n"
          << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
          << endl;
 
@@ -131,7 +131,7 @@ int main()
     beta = beta * rad;
     gamma = gamma * rad;
 
-    cout << "Az A csúcshoz tartózó szöge: " << alfa << "\n A B csúcshoz tartózó szöge: " << beta << "\n A C csúcshoz tartózó szöge: " << gamma << "\n"
+    cout << "Az \"A\" csúcshoz tartózó szöge: " << alfa << "\n A \"B\" csúcshoz tartózó szöge: " << beta << "\n A \"C\" csúcshoz tartózó szöge: " << gamma << "\n"
          << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << "\n"
          << endl;
 
@@ -145,7 +145,7 @@ int main()
     m_b = abs(c * sin(alfa));
     m_c = abs(a * sin(beta));
 
-    cout << "Az a oldalhoz tartózó magassága: " << m_a << "\n A b oldalhoz tartózó magassága: " << m_b << "\n A c oldalhoz tartózó magassága: " << m_c << "\n"
+    cout << "Az \"a\" oldalhoz tartózó magassága: " << m_a << "\n A \"b\" oldalhoz tartózó magassága: " << m_b << "\n A \"c\" oldalhoz tartózó magassága: " << m_c << "\n"
          << endl;
 
     // Terület kiszámítása

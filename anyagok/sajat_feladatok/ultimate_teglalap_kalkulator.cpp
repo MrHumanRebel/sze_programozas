@@ -77,8 +77,8 @@ int main()
     cout << "Az adatok az " << db << ". alkalommal tették lehetővé téglalap megszerkesztését!\n"
          << endl;
   }
-  cout << "A téglalap a oldalának hossza: " << a << "\n"
-       << "A téglalap b oldalának hossza: " << b << "\n"
+  cout << "A téglalap \"a\" oldalának hossza: " << a << "\n"
+       << "A téglalap \"b\" oldalának hossza: " << b << "\n"
        << "A téglalap leghosszabb oldalának hossza: " << max << "\n"
        << endl;
 
@@ -101,8 +101,8 @@ int main()
   alfa = alfa * rad * 2;
   beta = beta * rad * 2;
 
-  cout << "A téglalap alfa átló által bezárt szöge: " << alfa << "\n"
-       << "A téglalap béta átló által bezárt szöge: " << beta << "\n"
+  cout << "A téglalap \"alfa\" átló által bezárt szöge: " << alfa << "\n"
+       << "A téglalap \"béta\" átló által bezárt szöge: " << beta << "\n"
        << endl;
 
   cout << "A négy szög összege ellenőrzésképpen: " << 2 * alfa + 2 * beta << endl;
