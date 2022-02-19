@@ -22,7 +22,7 @@ int main()
     string akt;
     string elozo;
     nevek >> akt;
-    while (i <= db && nevek.good())
+    while (db < 9118 && i <= db && nevek.good())
     {
         elozo = akt;
         nevek >> akt;
