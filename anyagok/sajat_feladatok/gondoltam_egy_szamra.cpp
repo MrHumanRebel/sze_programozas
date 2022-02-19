@@ -17,7 +17,7 @@ int main()
             cin >> beker;
             if (beker == szam)
             {
-                cout << "Ön sikeresen kitalálta a számot amire gondoltam!\n Program vége... " << endl;
+                cout << "Ön sikeresen kitalálta a számot amire gondoltam!" << endl;
                 ok = true;
             }
             else
