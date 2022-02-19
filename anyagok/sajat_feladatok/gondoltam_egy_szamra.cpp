@@ -27,7 +27,7 @@ int main()
         cin >> beker;
         if (beker == 1)
             jatszik = true;
-        if (beker == 2)
+        else if (beker == 2)
             jatszik = false;
         else
             cout << "Nem valós menüpont!" << endl;
