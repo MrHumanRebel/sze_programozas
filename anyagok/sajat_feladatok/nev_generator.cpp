@@ -8,7 +8,7 @@ int main()
     string filename;
     int i, db = 0;
     ifstream nevek;
-    // cin.getline(filename, 50);
+    // cin.getline(filename);
     cout << "Hány darab angol nevet szeretne printelni?" << endl;
     cin >> db;
     filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/names.txt";
