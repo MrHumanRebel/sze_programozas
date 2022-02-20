@@ -22,10 +22,15 @@ int main(){
                 vizsgal++;            
         }
 
-        if ((rszam[3] == 45)  ||  (rszam[3] == 32))
+        if (rszam[3] == 45)
             {
                 vizsgal++;
-            }   
+            }  
+
+        if (rszam[3] == 32)
+            {
+                vizsgal++;
+            }  
 
         if (vizsgal == 7)
             {
