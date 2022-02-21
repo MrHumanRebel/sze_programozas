@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    double a, b, c, id, x1, x2 = 0;
+    double a, b, c, d, x1, x2 = 0;
     bool beker = true;
     do
     {
@@ -26,21 +26,21 @@ int main()
         }
         else
         {
-            id = (b * b) - (4 * a * c);
-            if (id > 0)
+            d = (b * b) - (4 * a * c);
+            if (d > 0)
             {
                 cout << "Az egyenletnek vannak valós gyökei!" << endl;
                 beker = false;
-                x1 = ((b * -1) + (sqrt(id))) / (2 * a);
-                x2 = ((b * -1) - (sqrt(id))) / (2 * a);
+                x1 = ((b * -1) + (sqrt(d))) / (2 * a);
+                x2 = ((b * -1) - (sqrt(d))) / (2 * a);
                 cout << "x1 = " << x1 << endl;
                 cout << "x2 = " << x2 << endl;
             }
-            else if (id == 0)
+            else if (d == 0)
             {
                 cout << "Az egyenletnek van valós gyöke!" << endl;
                 beker = false;
-                x1 = ((b * -1) + (sqrt(id))) / (2 * a);
+                x1 = ((b * -1) + (sqrt(d))) / (2 * a);
                 cout << "x1 = " << x1 << endl;
             }
             else
