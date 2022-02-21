@@ -7,35 +7,44 @@ int main()
     int x, y;
     double szamok[db];
     double akt;
-    cout << "Adjon meg " << db << " számot!" << endl;
+    bool ok = true;
+    cout << "Adjon meg " << db << " db számot!" << endl;
     for (int k = 1; k <= db; k++)
     {
         cout << "Adja meg az " << k << ". számot!" << endl;
         cin >> akt;
         szamok[k] = akt;
     }
-    cout << "Adja meg a megcserélni kívánt elemek sorszámát!" << endl;
-    cout << "Első elem sorszáma: " << endl;
-    cin >> x;
-    cout << "Második elem sorszáma: " << endl;
-    cin >> y;
-    cout << "\n " << endl;
-    for (int i = 1; i <= db; i++)
+    do
     {
-        if (i == x)
+        cout << "Adja meg a megcserélni kívánt elemek sorszámát!" << endl;
+        cout << "Első elem sorszáma: " << endl;
+        cin >> x;
+        cout << "Második elem sorszáma: " << endl;
+        cin >> y;
+        cout << "\n " << endl;
+        if (x < 1 || x > 10 || y < 1 || y > 10)
         {
-            for (int j = 1; j <= db; j++)
+            ok = false;
+        }
+        for (int i = 1; i <= db; i++)
+        {
+            if (i == x)
             {
-                if (j == y)
+                for (int j = 1; j <= db; j++)
                 {
-                    akt = szamok[i];
-                    szamok[i] = szamok[j];
-                    szamok[j] = akt;
+                    if (j == y)
+                    {
+                        akt = szamok[i];
+                        szamok[i] = szamok[j];
+                        szamok[j] = akt;
+                    }
                 }
             }
+            cout << "A megcserélt " << i << ". szám: "
+                 << szamok[i] << endl;
         }
-        cout << "A megcserélt " << i << ". szám: "
-             << szamok[i] << endl;
-    }
+    } while (ok == true);
+
     return 0;
 }
