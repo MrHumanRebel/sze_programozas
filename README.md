@@ -53,12 +53,14 @@ _A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a le
 
 Online programozási felület: [Replit](https://replit.com)
 
-Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
+Ajánlott programozási és futtató környezet: [VS Code](https://code.visualstudio.com/)
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
 Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
 
+SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
+
 GitHub.io oldal: [Programozás](https://mrhumanrebel.github.io/sze_programozas/)
 
-SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
+Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
