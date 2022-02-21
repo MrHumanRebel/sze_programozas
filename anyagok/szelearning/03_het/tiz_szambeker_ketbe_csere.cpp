@@ -23,7 +23,7 @@ int main()
         cout << "Második elem sorszáma: " << endl;
         cin >> y;
         cout << "\n " << endl;
-        if (x < 1 || x > 10 || y < 1 || y > 10)
+        if (x < 1 || x > db || y < 1 || y > db)
         {
             ok = false;
         }
