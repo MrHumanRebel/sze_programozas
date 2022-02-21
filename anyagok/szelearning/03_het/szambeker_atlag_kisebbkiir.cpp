@@ -25,4 +25,5 @@ int main()
                  << adatok[j] << "\t\t"
                  << "Az adat megadási sorszáma: " << j << endl;
     }
+    return 0;
 }
