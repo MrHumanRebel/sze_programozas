@@ -57,7 +57,7 @@ Ajánlott programozási és futtató környezet: [VS Code](https://code.visualst
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
-Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
+Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki/%231.0-Bevezet%C5%91)
 
 SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
 
