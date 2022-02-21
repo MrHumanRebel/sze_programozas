@@ -7,8 +7,8 @@
 // std => alap/standard névtér //
 // :: => függvény hozzákötése a névtérhez, névtér feloldó operátor //
 
-
-int main() {
+int main()
+{
   std::cout << "\n Szevasz tesó!\n";
   return 0;
 }
