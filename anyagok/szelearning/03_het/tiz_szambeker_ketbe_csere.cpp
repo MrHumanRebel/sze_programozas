@@ -34,7 +34,7 @@ int main()
                 }
             }
         }
-        cout << "A megcserélt " << i << ". szám:"
+        cout << "A megcserélt " << i << ". szám: "
              << szamok[i] << endl;
     }
     return 0;
