@@ -14,7 +14,17 @@ int main()
         cin >> b;
         cout << "Adja meg az \"c\" együtthatót!" << endl;
         cin >> c;
-        if (a != 0 and b != 0 and c != 0)
+        if (a == 0)
+        {
+            cout << "Hiba!\nAz egyenlet nem másodfokú! (0-ás osztó!)";
+            return 0;
+        }
+        else if ((b == 0) && (c == 0))
+        {
+            cout << "x1: 0";
+            return 0;
+        }
+        else
         {
             id = (b * b) - (4 * a * c);
             if (id > 0)
