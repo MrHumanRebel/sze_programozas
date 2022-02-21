@@ -49,6 +49,7 @@ int main()
             }
         }
 
+        // elválasztások nélkül
         if (rszam.length() == 6)
         {
             for (int i = 0; i <= 2; i++)
@@ -63,7 +64,6 @@ int main()
                     vizsgal++;
             }
 
-            // elválasztások nélkül
             if (vizsgal == 6)
             {
                 ok = true;
