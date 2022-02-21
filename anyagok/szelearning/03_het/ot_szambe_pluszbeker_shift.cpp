@@ -28,18 +28,17 @@ int main()
             szamok[1] = akt;
         }
 
-        else // BETA VERSION
+        else // BETA VERSION NOT WORKING
         {
             pluszdb++;
-            for (int i = 1; i <= pluszdb; i++)
+            for (int i = 2; i <= pluszdb; i++)
             {
-                id = szamok[i - 1];
                 szamok[i - 1] = szamok[i];
-                szamok[i] = id;
             }
-            szamok[1] = akt;
+            szamok[0] = akt;
         }
 
+        //ÚJ ADATOK KIÍRÁSA
         for (int j = 1; j <= pluszdb; j++)
         {
             cout << szamok[j] << "\t";
