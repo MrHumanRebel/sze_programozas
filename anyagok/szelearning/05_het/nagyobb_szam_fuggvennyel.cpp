@@ -30,7 +30,7 @@ int main()
         b = szamok[i + 1];
         if (kisnagyobb() == 1)
 
-            cout << "\nAz alábbi elempárokra igaz, hogy az első nagyobb a másodiknál!\n"
+            cout << "\nAz alábbi elempárra igaz, hogy az első szám nagyobb a másodiknál!\n"
                  << szamok[i] << "\t" << szamok[i + 1] << endl;
     }
 
