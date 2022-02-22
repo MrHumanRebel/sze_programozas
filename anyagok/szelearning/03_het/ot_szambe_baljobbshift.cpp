@@ -32,6 +32,7 @@ int main()
             }
         }
         else // shift jobbra
+        //!!!fix needed!!! when + after - bug is present
         {
             for (int i = 0; i <= akt; i++)
             {
