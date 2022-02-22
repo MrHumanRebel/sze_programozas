@@ -31,11 +31,11 @@ int main()
                 }
             }
         }
-        else // !!!!shift jobbra NOT WORKING!!!!!
+        else // shift jobbra
         {
             for (int i = 0; i <= akt; i++)
             {
-                for (int j = 1; j <= DB - 1; j++)
+                for (int j = 2; j <= DB; j++)
                 {
                     id = szamok[j];
                     szamok[j] = szamok[j - 1];
