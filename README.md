@@ -1,6 +1,6 @@
 # Programozás
 
-**Széchenyi István Egyetem // Győr // Programozás**
+**Széchenyi István Egyetem // Győr // Programozás // GKNB_INTM021**
 
 <img src="docs/c++.jpg" alt="Programozás" width="200" height="177">
 
