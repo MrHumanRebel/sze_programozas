@@ -31,7 +31,7 @@ int main()
                 }
             }
         }
-        else // shift jobbra with cheat
+        else // !!!!shift jobbra NOT WORKING!!!!!
         {
             for (int i = 0; i <= akt; i++)
             {
