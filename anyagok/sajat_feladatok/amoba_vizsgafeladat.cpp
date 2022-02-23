@@ -41,7 +41,7 @@ int beker()
         cout << "Sor: ";
         cin >> sor;
         if (sor >= 48 && sor <= 57)
-            bool sor_ok = true;
+            sor_ok = true;
         else
             cout << "Adjon meg 1-10 tartományba tartozó számot! ";
 
@@ -52,7 +52,7 @@ int beker()
         cout << "Oszlop: ";
         cin >> oszl;
         if (oszl >= 65 && oszl <= 90)
-            bool oszl_ok = true;
+            oszl_ok = true;
         else
             cout << "Adjon meg A-J tartományba tartozó angol nagybetűt! ";
 
