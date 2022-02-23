@@ -12,22 +12,28 @@ int max()
 
 int main()
 {
-    int akt, szamlalo, elmax, aktmax;
+    int akt, ujmax, aktmax;
+    int szamlalo = 0;
+    cout << "Adjon meg egy számot! " << endl;
     cin >> akt;
     aktmax = akt;
+    cout << "A jelenlegi számok maximuma: " << aktmax << endl;
     do
     {
+        cout << "Adjon meg másik számot! " << endl;
         cin >> akt;
-        a = elmax;
+
+        a = aktmax;
         b = akt;
-        aktmax = max();
-        if (aktmax > elmax)
+        ujmax = max();
+        if (ujmax >= aktmax)
         {
             szamlalo++;
-            aktmax = elmax;
+            aktmax = ujmax;
+            cout << "A jelenlegi számok maximuma: " << aktmax << endl;
         }
 
-    } while (szamlalo == 3);
+    } while (szamlalo != 3);
 
     return 0;
 }
