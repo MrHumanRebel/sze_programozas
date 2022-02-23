@@ -32,7 +32,7 @@ int main()
             }
         }
         else // shift jobbra
-        //!!!fix needed!!! when + after - bug is present
+        //!!!fix needed!!! először balshift majd jobbshift esetén 1-5-ig tart.ban a 3-as szám helyett 0 lesz pls shiftbal 2 shiftjobb -2
         {
             for (int i = 0; i <= akt; i++)
             {
