@@ -45,6 +45,7 @@ int beker()
             cout << "Adjon meg A-J tartományba tartozó angol nagybetűt! ";
 
     } while (oszl_ok == false);
+
     db = 0;
     for (int i = 65; i <= 90; i++)
     {
@@ -110,6 +111,9 @@ int nyert()
                 jatekos++;
             if (jatekos == 5)
                 cout << "Az első játékos nyert!";
+        }
+        for (int j = 1; j <= DB; j++)
+        {
 
             jatekos = 0;
             if (jatek[i][j] == 'O')
@@ -118,6 +122,7 @@ int nyert()
                 cout << "A második játékos nyert!";
         }
     }
+
     return 0;
 }
 
