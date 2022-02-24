@@ -11,9 +11,9 @@ char oszl;
 
 int alap_palya()
 {
-    for (int i = 1; i <= DB; i++)
+    for (int i = 0; i < DB; i++)
     {
-        for (int j = 1; j <= DB; j++)
+        for (int j = 0; j < DB; j++)
         {
             tabla[i][j] = '.';
         }
@@ -28,7 +28,7 @@ int beker()
     {
         cout << "Sor: ";
         cin >> sor;
-        if (sor >= 48 && sor <= 57) // Számok
+        if (sor >= 1 && sor <= 10) // Számok
             sor_ok = true;
         else
             cout << "Adjon meg 1-" << DB << " tartományba tartozó számot! ";
@@ -64,13 +64,13 @@ int beker()
 int allas()
 {
     cout << "  \tABCDEFGHIJ" << endl;
-    for (int i = 1; i <= DB; i++)
+    for (int i = 0; i < DB; i++)
     {
-        if (i < DB)
-            cout << '0' << i << "\t";
+        if (i < DB - 1)
+            cout << '0' << i + 1 << "\t";
         else
-            cout << i << "\t";
-        for (int j = 1; j <= DB; j++)
+            cout << i + 1 << "\t";
+        for (int j = 0; j < DB; j++)
         {
             cout << tabla[i][j];
         }
@@ -102,9 +102,9 @@ int valaszt()
 int nyert()
 {
     jatekos = 0;
-    for (int i = 1; i <= DB; i++)
+    for (int i = 0; i < DB; i++)
     {
-        for (int j = 1; j <= DB; j++)
+        for (int j = 0; j < DB; j++)
         {
             if (tabla[i][j] == 'X')
                 jatekos++;
@@ -116,9 +116,9 @@ int nyert()
         cout << "Az első játékos nyert!";
     jatekos = 0;
 
-    for (int i = 1; i <= DB; i++)
+    for (int i = 0; i < DB; i++)
     {
-        for (int j = 1; j <= DB; j++)
+        for (int j = 0; j < DB; j++)
         {
             if (tabla[i][j] == 'O')
                 jatekos++;
