@@ -12,7 +12,6 @@ char oszl;
 int alap_palya()
 {
     // Alap állás eltárolása a DB sorhoz
-    cout << "  ABCDEFGHIJ" << endl;
     for (int i = 1; i <= DB; i++)
     {
         for (int j = 1; j <= DB; j++)
@@ -20,8 +19,6 @@ int alap_palya()
             jatek[i][j] = '.';
         }
     }
-    // Alap állás kíírása
-
     van_e_palya = true;
     return 0;
 }
@@ -49,14 +46,16 @@ int beker()
             cout << "Adjon meg A-J tartományba tartozó angol nagybetűt! ";
 
     } while (oszl_ok == false);
+    db = 0;
     for (int i = 65; i <= 90; i++)
     {
         if (oszl == i)
         {
-            c_oszl = (i - (i - 1)) + db;
+            c_oszl = (oszl - (oszl - 1)) + db;
             cout << "Az oszlop sorszáma:\t" << c_oszl << endl;
-            db = db + 1;
         }
+        else
+            db = db + 1;
     }
 
     return 0;
@@ -64,6 +63,7 @@ int beker()
 
 int allas()
 {
+    cout << "  ABCDEFGHIJ" << endl;
     for (int i = 1; i <= DB; i++)
     {
         if (i < DB)
@@ -95,18 +95,19 @@ int main()
     if (van_e_palya == false)
         alap_palya();
 
+    allas();
     do
     {
         cout << "Első játékos lépése:" << endl;
-        allas();
         beker();
         valaszt();
+        allas();
 
         cout << "Második játékos lépése:" << endl;
-        allas();
         beker();
         valaszt();
+        allas();
 
-    } while (vege == false);
+    } while (vege == true);
     return 0;
 }
