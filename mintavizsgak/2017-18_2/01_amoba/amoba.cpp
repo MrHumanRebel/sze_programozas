@@ -3,7 +3,6 @@ using namespace std;
 
 #define MAX 20
 
-
 struct meret
 {
   int sor;
@@ -41,11 +40,6 @@ meret init()
   return palyaMeret;
 }
 
-void jatek(meret palyaMeret)
-{
-  cout << "Amoba jatek" << endl;
-}
-
 void palyaFelallitas(meret palyaMeret)
 {
   // TODO: Implementáld
@@ -64,6 +58,14 @@ void ellenoriz()
 void palyaMegjelenit()
 {
   // TODO: Implementáld
+}
+
+void jatek(meret palyaMeret)
+{
+  cout << "Amoba jatek" << endl;
+
+  string[][] palya 
+
 }
 
 int main(int argc, char const *argv[])
