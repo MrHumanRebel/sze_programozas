@@ -40,9 +40,15 @@ meret init()
   return palyaMeret;
 }
 
-void palyaFelallitas(meret palyaMeret)
+void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
 {
-  // TODO: Implementáld
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    for (int j = 0; j < palyaMeret.oszlop; j++)
+    {
+      palya[i][j] = '.';
+    }
+  }
 }
 
 void lepes()
@@ -55,17 +61,40 @@ void ellenoriz()
   // TODO: Implementáld
 }
 
-void palyaMegjelenit()
+void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
 {
-  // TODO: Implementáld
+  // Fejléc (oszlopok)
+  cout << "  ";
+  char aktKar = 'A';
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    cout << aktKar;
+    aktKar++;
+  }
+  cout << endl;
+
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    // 1 -> 01, 10 -> 10
+    string aktSorszam = to_string(i + 1).length() == 1 ? "0" + to_string(i + 1) : to_string(i + 1);
+    cout << aktSorszam;
+
+    for (int j = 0; j < palyaMeret.oszlop; j++)
+    {
+      cout << palya[i][j];
+    }
+
+    cout << "\n";
+  }
 }
 
 void jatek(meret palyaMeret)
 {
   cout << "Amoba jatek" << endl;
 
-  string[][] palya 
-
+  char palya[MAX][MAX];
+  palyaFelallit(palya, palyaMeret);
+  palyaMegjelenit(palya, palyaMeret);
 }
 
 int main(int argc, char const *argv[])
