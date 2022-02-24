@@ -65,7 +65,6 @@ int beker()
 int allas()
 {
     system("clear"); // Console clear
-    // cout << "  \tABCDEFGHIJ" << endl;
     cout << "  \t";
     for (int i = 65; i < (65 + DB); i++) // 65 => "A" betű ASCII
     {
@@ -172,8 +171,6 @@ int main()
         valaszt();
         allas();
         nyert();
-        if (vege == true)
-            return 0;
 
     } while (!vege);
     return 0;
