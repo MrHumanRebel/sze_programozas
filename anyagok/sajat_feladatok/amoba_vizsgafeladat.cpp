@@ -81,14 +81,43 @@ int allas()
 int valaszt()
 {
     if (jatekos == 1)
-        jatek[sor][c_oszl] = 'X';
+    {
+        if (jatek[sor][c_oszl] != 'O')
+            jatek[sor][c_oszl] = 'X';
+        else
+            cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
+    }
+
     if (jatekos == 2)
-        jatek[sor][c_oszl] = 'O';
+    {
+        if (jatek[sor][c_oszl] != 'X')
+            jatek[sor][c_oszl] = 'O';
+        else
+            cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
+    }
     return 0;
 }
 
 int nyert()
 {
+    for (int i = 1; i <= DB; i++)
+    {
+
+        for (int j = 1; j <= DB; j++)
+        {
+            jatekos = 0;
+            if (jatek[i][j] == 'X')
+                jatekos++;
+            if (jatekos == 5)
+                cout << "Az első játékos nyert!";
+
+            jatekos = 0;
+            if (jatek[i][j] == 'O')
+                jatekos++;
+            if (jatekos == 5)
+                cout << "A második játékos nyert!";
+        }
+    }
     return 0;
 }
 
@@ -111,12 +140,14 @@ int main()
         beker();
         valaszt();
         allas();
+        nyert();
 
         cout << "Második játékos lépése:" << endl;
         jatekos = 2;
         beker();
         valaszt();
         allas();
+        nyert();
 
     } while (!vege);
     return 0;
