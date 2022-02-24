@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
 
+// 553355#29999#334#337777#99996665553#2#333881 1 1
+
 string uzenet;
 string kod;
 char kodtabla[11][5];
@@ -9,6 +11,7 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
+    int ascii;
     int x = 0;
     while (x <= kod.length())
     {
