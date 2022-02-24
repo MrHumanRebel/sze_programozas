@@ -58,7 +58,6 @@ void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-// TOOD: Oldd meg, hogy megfelelő legyen az ellenőrzendő érték
 int koordinataBeker(int meret, string tipus)
 {
   int koordinata;
@@ -91,18 +90,37 @@ bool helyesLepes(koordinata k, koordinata lepesek[LMAX], int lepesekDb)
     i++;
   }
 
-  return i < lepesekDb;
+  return i >= lepesekDb;
 }
 
 void lepes(char palya[MAX][MAX], koordinata lepesek[LMAX], meret palyaMeret, int lepesekDb)
 {
   koordinata k;
 
+  bool hibas = false;
   do
   {
+    if (hibas)
+    {
+      cout << "Nem megfelelő lépés." << endl;
+    }
+
     k.sor = koordinataBeker(palyaMeret.sor, "sor");
     k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
+
+    hibas = true;
+    if (hibas)
+    {
+      cout << "Nem megfelelő lépés." << endl;
+    }
   } while (!helyesLepes(k, lepesek, lepesekDb));
+
+  lepesek[lepesekDb] = k;
+  lepesekDb++;
+
+  palya[k.sor][k.oszlop] = 'X';
+
+  // system("clear");
 }
 
 void ellenoriz()
@@ -145,9 +163,13 @@ void jatek(meret palyaMeret, int lepesekDb)
   koordinata lepesek[LMAX];
 
   palyaFelallit(palya, palyaMeret);
-  palyaMegjelenit(palya, palyaMeret);
 
-  lepes(palya, lepesek, palyaMeret, lepesekDb);
+  do
+  {
+    palyaMegjelenit(palya, palyaMeret);
+    lepes(palya, lepesek, palyaMeret, lepesekDb);
+    system("clear");
+  } while (true);
 }
 
 int main(int argc, char const *argv[])
