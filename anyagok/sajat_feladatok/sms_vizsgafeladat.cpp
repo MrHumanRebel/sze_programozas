@@ -23,10 +23,12 @@ string decode(string kod)
     {
         if (kod[i] == kod[i + 1])
             szamlalo++;
+        else
+            szamlalo = 0;
 
-        for (int j = 0; j <= kodtabla[j].length; j++)
+        for (int j = 0; j <= 6; j++)
         {
-            if (kod.at(j) == kodtabla[j])
+            if (kod[j] == kodtabla[j])
             {
                 cout << "Test";
             }
