@@ -2,7 +2,8 @@
 using namespace std;
 
 #define MAX 20
-#define LMAX 100
+#define J1 'X'
+#define J2 'O'
 
 struct meret
 {
@@ -18,9 +19,9 @@ struct koordinata
 
 int meretBekerese(string tipus)
 {
-  bool helytelenMeret = false;
   int meret;
 
+  bool helytelenMeret = false;
   do
   {
     if (helytelenMeret)
@@ -63,10 +64,10 @@ int koordinataBeker(int meret, string tipus)
   int koordinata;
 
   string rag = tipus == "sor" ? "t" : "ot";
-  bool hibas = false;
+  bool helytelenKoordinata = false;
   do
   {
-    if (hibas)
+    if (helytelenKoordinata)
     {
       cout << "Nem megfelelő " << tipus << "szám" << endl;
     }
@@ -76,51 +77,31 @@ int koordinataBeker(int meret, string tipus)
     cin >> ertek;
 
     koordinata = tipus == "sor" ? stoi(ertek) - 1 : ertek[0] - 'A';
-    hibas = true;
-  } while (koordinata < 0 || koordinata > meret);
+    helytelenKoordinata = koordinata < 0 || koordinata > meret;
+  } while (helytelenKoordinata);
 
   return koordinata;
 }
 
-bool helyesLepes(koordinata k, koordinata lepesek[LMAX], int lepesekDb)
-{
-  int i = 0;
-  while (k.sor != lepesek[i].sor && k.oszlop != lepesek[i].oszlop && i < lepesekDb)
-  {
-    i++;
-  }
-
-  return i >= lepesekDb;
-}
-
-void lepes(char palya[MAX][MAX], koordinata lepesek[LMAX], meret palyaMeret, int lepesekDb)
+void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
   koordinata k;
 
-  bool hibas = false;
+  bool helytelenLepes = false;
   do
   {
-    if (hibas)
+    if (helytelenLepes)
     {
-      cout << "Nem megfelelő lépés." << endl;
+      cout << "Ez a mező már foglalt." << endl;
     }
 
     k.sor = koordinataBeker(palyaMeret.sor, "sor");
     k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
 
-    hibas = true;
-    if (hibas)
-    {
-      cout << "Nem megfelelő lépés." << endl;
-    }
-  } while (!helyesLepes(k, lepesek, lepesekDb));
+    helytelenLepes = palya[k.sor][k.oszlop] != '.';
+  } while (helytelenLepes);
 
-  lepesek[lepesekDb] = k;
-  lepesekDb++;
-
-  palya[k.sor][k.oszlop] = 'X';
-
-  // system("clear");
+  palya[k.sor][k.oszlop] = jatekos;
 }
 
 void ellenoriz()
@@ -143,7 +124,8 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
   for (int i = 0; i < palyaMeret.sor; i++)
   {
     // 1 -> 01, 10 -> 10
-    string aktSorszam = to_string(i + 1).length() == 1 ? "0" + to_string(i + 1) : to_string(i + 1);
+    string aktSorszam = to_string(i + 1);
+    aktSorszam = aktSorszam.length() == 1 ? "0" + aktSorszam : aktSorszam;
     cout << aktSorszam;
 
     for (int j = 0; j < palyaMeret.oszlop; j++)
@@ -160,15 +142,18 @@ void jatek(meret palyaMeret, int lepesekDb)
   cout << "Amoba jatek" << endl;
 
   char palya[MAX][MAX];
-  koordinata lepesek[LMAX];
-
   palyaFelallit(palya, palyaMeret);
-
   do
   {
-    palyaMegjelenit(palya, palyaMeret);
-    lepes(palya, lepesek, palyaMeret, lepesekDb);
-    system("clear");
+    for (int i = 0; i < 2; i++)
+    {
+      char jelenlegiJatekos = i == 0 ? J1 : J2;
+
+      palyaMegjelenit(palya, palyaMeret);
+      lepes(jelenlegiJatekos, palya, palyaMeret);
+      system("clear");
+    }
+
   } while (true);
 }
 
