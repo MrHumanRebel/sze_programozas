@@ -64,7 +64,6 @@ int beker()
 
 int allas()
 {
-    system("clear"); // Console clear
     cout << "  \t";
     for (int i = 65; i < (65 + DB); i++) // 65 => "A" betű ASCII
     {
@@ -156,6 +155,7 @@ int main()
     vege = false;
     do
     {
+        // system("clear"); // Console clear
         cout << "Első játékos lépése:" << endl;
         jatekos = 1;
         beker();
@@ -165,6 +165,7 @@ int main()
         if (vege == true)
             return 0;
 
+        // system("clear"); // Console clear
         cout << "Második játékos lépése:" << endl;
         jatekos = 2;
         beker();
