@@ -3,15 +3,14 @@ using namespace std;
 #define DB 10
 char jatek[DB][DB];
 bool van_e_palya = false;
-bool vege = false;
+bool vege;
 bool sor_ok, oszl_ok = false;
-int sor, c_oszl;
+int sor, c_oszl, jatekos;
 int db = 0;
 char oszl;
 
 int alap_palya()
 {
-    // Alap állás eltárolása a DB sorhoz
     for (int i = 1; i <= DB; i++)
     {
         for (int j = 1; j <= DB; j++)
@@ -63,13 +62,13 @@ int beker()
 
 int allas()
 {
-    cout << "  ABCDEFGHIJ" << endl;
+    cout << "  \tABCDEFGHIJ" << endl;
     for (int i = 1; i <= DB; i++)
     {
         if (i < DB)
-            cout << '0' << i;
+            cout << '0' << i << "\t";
         else
-            cout << i;
+            cout << i << "\t";
         for (int j = 1; j <= DB; j++)
         {
             cout << jatek[i][j];
@@ -81,7 +80,15 @@ int allas()
 
 int valaszt()
 {
-    jatek[sor][c_oszl] = 'X';
+    if (jatekos == 1)
+        jatek[sor][c_oszl] = 'X';
+    if (jatekos == 2)
+        jatek[sor][c_oszl] = 'O';
+    return 0;
+}
+
+int nyert()
+{
     return 0;
 }
 
@@ -96,18 +103,21 @@ int main()
         alap_palya();
 
     allas();
+    vege = false;
     do
     {
         cout << "Első játékos lépése:" << endl;
+        jatekos = 1;
         beker();
         valaszt();
         allas();
 
         cout << "Második játékos lépése:" << endl;
+        jatekos = 2;
         beker();
         valaszt();
         allas();
 
-    } while (vege == true);
+    } while (!vege);
     return 0;
 }
