@@ -146,6 +146,7 @@ int main()
     if (van_e_palya == false)
         alap_palya();
 
+    // Alap állás printelése
     allas();
     vege = false;
     do
@@ -156,14 +157,13 @@ int main()
         valaszt();
         allas();
         nyert();
-        /*
-                cout << "Második játékos lépése:" << endl;
-                jatekos = 2;
-                beker();
-                valaszt();
-                allas();
-                nyert();
-                */
+
+        cout << "Második játékos lépése:" << endl;
+        jatekos = 2;
+        beker();
+        valaszt();
+        allas();
+        nyert();
 
     } while (!vege);
     return 0;
