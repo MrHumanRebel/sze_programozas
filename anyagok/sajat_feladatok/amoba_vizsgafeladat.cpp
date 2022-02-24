@@ -83,16 +83,16 @@ int valaszt()
 {
     if (jatekos == 1)
     {
-        if (tabla[sor][c_oszl] != 'O')
-            tabla[sor][c_oszl] = 'X';
+        if (tabla[sor - 1][c_oszl - 1] != 'O')
+            tabla[sor - 1][c_oszl - 1] = 'X';
         else
             cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
     }
 
     if (jatekos == 2)
     {
-        if (tabla[sor][c_oszl] != 'X')
-            tabla[sor][c_oszl] = 'O';
+        if (tabla[sor - 1][c_oszl - 1] != 'X')
+            tabla[sor - 1][c_oszl - 1] = 'O';
         else
             cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
     }
