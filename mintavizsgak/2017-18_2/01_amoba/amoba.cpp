@@ -9,6 +9,12 @@ struct meret
   int oszlop;
 };
 
+struct koordinata
+{
+  int sor;
+  int oszlop;
+};
+
 int meretBekerese(string tipus)
 {
   bool helytelenMeret = false;
@@ -24,8 +30,8 @@ int meretBekerese(string tipus)
     cout << "Kérem adja meg a pálya " << tipus << " a számát: ";
     cin >> meret;
 
-    helytelenMeret = true;
-  } while (meret < 7 || meret > 20);
+    helytelenMeret = meret < 7 || meret > 20;
+  } while (helytelenMeret);
 
   return meret;
 }
@@ -51,9 +57,33 @@ void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-void lepes()
+// TOOD: Oldd meg, hogy megfelelő legyen az ellenőrzendő érték
+int koordinataBeker(int meret, string tipus)
 {
-  // TODO: Implementáld
+  int koordinata;
+
+  do
+  {
+    cout << "Kérem adjon meg egy " << tipus << "(o)t: ";
+    string ertek;
+    cin >> ertek;
+
+    koordinata = tipus == "sor" ? stoi(ertek) : 10;
+    cout << koordinata << endl;
+
+  } while (koordinata < 0 || koordinata > meret);
+
+  return koordinata;
+}
+
+void lepes(char palya[MAX][MAX], meret palyaMeret)
+{
+  koordinata k;
+
+  k.sor = koordinataBeker(palyaMeret.sor, "sor");
+  k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
+
+  cout << k.sor << ". sor, " << k.oszlop << ". oszlop";
 }
 
 void ellenoriz()
@@ -95,6 +125,8 @@ void jatek(meret palyaMeret)
   char palya[MAX][MAX];
   palyaFelallit(palya, palyaMeret);
   palyaMegjelenit(palya, palyaMeret);
+
+  lepes(palya, palyaMeret);
 }
 
 int main(int argc, char const *argv[])
