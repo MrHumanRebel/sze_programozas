@@ -1,35 +1,27 @@
 #include <iostream>
 using namespace std;
-string jatek[10];
+#define DB 10
+char jatek[DB][DB];
 bool van_e_palya = false;
 bool vege = false;
 bool sor_ok, oszl_ok = false;
-int sor;
+int sor, c_oszl;
+int db = 0;
 char oszl;
 
 int alap_palya()
 {
-    // Alap állás eltárolása a 10 sorhoz
+    // Alap állás eltárolása a DB sorhoz
     cout << "  ABCDEFGHIJ" << endl;
-    for (int i = 1; i <= 10; i++)
+    for (int i = 1; i <= DB; i++)
     {
-        if (i <= 10)
+        for (int j = 1; j <= DB; j++)
         {
-            jatek[i] = "..........";
+            jatek[i][j] = '.';
         }
     }
     // Alap állás kíírása
-    for (int i = 1; i <= 10; i++)
-    {
-        if (i < 10)
-        {
-            cout << "0" << i << jatek[i] << endl;
-        }
-        else
-        {
-            cout << i << jatek[i] << endl;
-        }
-    }
+
     van_e_palya = true;
     return 0;
 }
@@ -40,10 +32,10 @@ int beker()
     {
         cout << "Sor: ";
         cin >> sor;
-        if (sor >= 48 && sor <= 57)
+        if (sor >= 48 && sor <= 57) // Számok
             sor_ok = true;
         else
-            cout << "Adjon meg 1-10 tartományba tartozó számot! ";
+            cout << "Adjon meg 1-" << DB << " tartományba tartozó számot! ";
 
     } while (sor_ok == false);
 
@@ -51,12 +43,45 @@ int beker()
     {
         cout << "Oszlop: ";
         cin >> oszl;
-        if (oszl >= 65 && oszl <= 90)
+        if (oszl >= 65 && oszl <= 90) // Betűk
             oszl_ok = true;
         else
             cout << "Adjon meg A-J tartományba tartozó angol nagybetűt! ";
 
     } while (oszl_ok == false);
+    for (int i = 65; i <= 90; i++)
+    {
+        if (oszl == i)
+        {
+            c_oszl = (i - (i - 1)) + db;
+            cout << "Az oszlop sorszáma:\t" << c_oszl << endl;
+            db = db + 1;
+        }
+    }
+
+    return 0;
+}
+
+int allas()
+{
+    for (int i = 1; i <= DB; i++)
+    {
+        if (i < DB)
+            cout << '0' << i;
+        else
+            cout << i;
+        for (int j = 1; j <= DB; j++)
+        {
+            cout << jatek[i][j];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+int valaszt()
+{
+    jatek[sor][c_oszl] = 'X';
     return 0;
 }
 
@@ -70,16 +95,18 @@ int main()
     if (van_e_palya == false)
         alap_palya();
 
-    cout << "Első játékos lépése:" << endl;
-    beker();
-    // Módosító fg
-
-    cout << "Második játékos lépése:" << endl;
-    beker();
-    // Módosító fg
-
     do
     {
+        cout << "Első játékos lépése:" << endl;
+        allas();
+        beker();
+        valaszt();
 
-    } while (vege == true);
+        cout << "Második játékos lépése:" << endl;
+        allas();
+        beker();
+        valaszt();
+
+    } while (vege == false);
+    return 0;
 }
