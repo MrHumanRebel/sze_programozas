@@ -21,8 +21,16 @@ string decode(string kod)
     };
     for (unsigned int i = 0; i < kod.length(); i++)
     {
-        for (int j = 0; kodtabla[i].length; j++)
-            if (kod.at(i) == kodtabla[j])
+        if (kod[i] == kod[i + 1])
+            szamlalo++;
+
+        for (int j = 0; j <= kodtabla[j].length; j++)
+        {
+            if (kod.at(j) == kodtabla[j])
+            {
+                cout << "Test";
+            }
+        }
     }
 
     return uzenet;
