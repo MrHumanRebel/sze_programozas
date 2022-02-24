@@ -2,6 +2,7 @@
 using namespace std;
 
 #define MAX 20
+#define LMAX 100
 
 struct meret
 {
@@ -62,28 +63,46 @@ int koordinataBeker(int meret, string tipus)
 {
   int koordinata;
 
+  string rag = tipus == "sor" ? "t" : "ot";
+  bool hibas = false;
   do
   {
-    cout << "Kérem adjon meg egy " << tipus << "(o)t: ";
+    if (hibas)
+    {
+      cout << "Nem megfelelő " << tipus << "szám" << endl;
+    }
+
+    cout << "Kérem adjon meg egy " << tipus << rag << ": ";
     string ertek;
     cin >> ertek;
 
-    koordinata = tipus == "sor" ? stoi(ertek) : 10;
-    cout << koordinata << endl;
-
+    koordinata = tipus == "sor" ? stoi(ertek) - 1 : ertek[0] - 'A';
+    hibas = true;
   } while (koordinata < 0 || koordinata > meret);
 
   return koordinata;
 }
 
-void lepes(char palya[MAX][MAX], meret palyaMeret)
+bool helyesLepes(koordinata k, koordinata lepesek[LMAX], int lepesekDb)
+{
+  int i = 0;
+  while (k.sor != lepesek[i].sor && k.oszlop != lepesek[i].oszlop && i < lepesekDb)
+  {
+    i++;
+  }
+
+  return i < lepesekDb;
+}
+
+void lepes(char palya[MAX][MAX], koordinata lepesek[LMAX], meret palyaMeret, int lepesekDb)
 {
   koordinata k;
 
-  k.sor = koordinataBeker(palyaMeret.sor, "sor");
-  k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
-
-  cout << k.sor << ". sor, " << k.oszlop << ". oszlop";
+  do
+  {
+    k.sor = koordinataBeker(palyaMeret.sor, "sor");
+    k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
+  } while (!helyesLepes(k, lepesek, lepesekDb));
 }
 
 void ellenoriz()
@@ -118,21 +137,24 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-void jatek(meret palyaMeret)
+void jatek(meret palyaMeret, int lepesekDb)
 {
   cout << "Amoba jatek" << endl;
 
   char palya[MAX][MAX];
+  koordinata lepesek[LMAX];
+
   palyaFelallit(palya, palyaMeret);
   palyaMegjelenit(palya, palyaMeret);
 
-  lepes(palya, palyaMeret);
+  lepes(palya, lepesek, palyaMeret, lepesekDb);
 }
 
 int main(int argc, char const *argv[])
 {
   meret palyaMeret = init();
-  jatek(palyaMeret);
+  int lepesekDb = 0;
+  jatek(palyaMeret, lepesekDb);
 
   return 0;
 }
