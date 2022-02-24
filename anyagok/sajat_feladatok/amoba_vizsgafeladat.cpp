@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 #define DB 10
 char tabla[DB][DB];
@@ -63,7 +64,15 @@ int beker()
 
 int allas()
 {
-    cout << "  \tABCDEFGHIJ" << endl;
+    system("clear"); // Console clear
+    // cout << "  \tABCDEFGHIJ" << endl;
+    cout << "  \t";
+    for (int i = 65; i < (65 + DB); i++) // 65 => "A" betű ASCII
+    {
+        cout << char(i);
+    }
+    cout << endl;
+
     for (int i = 0; i < DB; i++)
     {
         if (i < DB - 1)
@@ -76,6 +85,7 @@ int allas()
         }
         cout << endl;
     }
+
     return 0;
 }
 
