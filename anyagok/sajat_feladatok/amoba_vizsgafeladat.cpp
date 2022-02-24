@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 #define DB 10
-char jatek[DB][DB];
+char tabla[DB][DB];
 bool van_e_palya = false;
 bool vege;
 bool sor_ok, oszl_ok = false;
@@ -15,7 +15,7 @@ int alap_palya()
     {
         for (int j = 1; j <= DB; j++)
         {
-            jatek[i][j] = '.';
+            tabla[i][j] = '.';
         }
     }
     van_e_palya = true;
@@ -72,7 +72,7 @@ int allas()
             cout << i << "\t";
         for (int j = 1; j <= DB; j++)
         {
-            cout << jatek[i][j];
+            cout << tabla[i][j];
         }
         cout << endl;
     }
@@ -83,16 +83,16 @@ int valaszt()
 {
     if (jatekos == 1)
     {
-        if (jatek[sor][c_oszl] != 'O')
-            jatek[sor][c_oszl] = 'X';
+        if (tabla[sor][c_oszl] != 'O')
+            tabla[sor][c_oszl] = 'X';
         else
             cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
     }
 
     if (jatekos == 2)
     {
-        if (jatek[sor][c_oszl] != 'X')
-            jatek[sor][c_oszl] = 'O';
+        if (tabla[sor][c_oszl] != 'X')
+            tabla[sor][c_oszl] = 'O';
         else
             cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
     }
@@ -107,7 +107,7 @@ int nyert()
         for (int j = 1; j <= DB; j++)
         {
 
-            if (jatek[i][j] == 'X')
+            if (tabla[i][j] == 'X')
                 jatekos++;
             if (jatekos == 5)
                 vege = true;
@@ -124,7 +124,7 @@ int nyert()
         {
 
             jatekos = 0;
-            if (jatek[i][j] == 'O')
+            if (tabla[i][j] == 'O')
                 jatekos++;
             if (jatekos == 5)
                 vege = true;
