@@ -153,7 +153,7 @@ int main()
         valaszt();
         allas();
         nyert();
-        if (vege = true)
+        if (vege == true)
             return 0;
 
         cout << "Második játékos lépése:" << endl;
@@ -162,7 +162,7 @@ int main()
         valaszt();
         allas();
         nyert();
-        if (vege = true)
+        if (vege == true)
             return 0;
 
     } while (!vege);
