@@ -63,46 +63,46 @@ string kodtablazat()
     kodtabla[0][4] = '!';
     kodtabla[0][5] = '1';
     // 2
-    kodtabla[1][0] = 'A';
-    kodtabla[1][1] = 'B';
-    kodtabla[1][2] = 'C';
+    kodtabla[1][0] = 'a';
+    kodtabla[1][1] = 'b';
+    kodtabla[1][2] = 'c';
     kodtabla[1][3] = '2';
     // 3
-    kodtabla[2][0] = 'D';
-    kodtabla[2][1] = 'E';
-    kodtabla[2][2] = 'F';
+    kodtabla[2][0] = 'd';
+    kodtabla[2][1] = 'e';
+    kodtabla[2][2] = 'f';
     kodtabla[2][3] = '3';
     // 4
-    kodtabla[3][0] = 'G';
-    kodtabla[3][1] = 'H';
-    kodtabla[3][2] = 'I';
+    kodtabla[3][0] = 'g';
+    kodtabla[3][1] = 'h';
+    kodtabla[3][2] = 'i';
     kodtabla[3][3] = '4';
     // 5
-    kodtabla[4][0] = 'J';
-    kodtabla[4][1] = 'K';
-    kodtabla[4][2] = 'L';
+    kodtabla[4][0] = 'j';
+    kodtabla[4][1] = 'k';
+    kodtabla[4][2] = 'l';
     kodtabla[4][3] = '5';
     // 6
-    kodtabla[5][0] = 'M';
-    kodtabla[5][1] = 'N';
-    kodtabla[5][2] = 'O';
+    kodtabla[5][0] = 'm';
+    kodtabla[5][1] = 'n';
+    kodtabla[5][2] = 'o';
     kodtabla[5][3] = '6';
     // 7
-    kodtabla[6][0] = 'P';
-    kodtabla[6][1] = 'Q';
-    kodtabla[6][2] = 'R';
-    kodtabla[6][3] = 'S';
+    kodtabla[6][0] = 'p';
+    kodtabla[6][1] = 'q';
+    kodtabla[6][2] = 'r';
+    kodtabla[6][3] = 's';
     kodtabla[6][4] = '7';
     // 8
-    kodtabla[7][0] = 'T';
-    kodtabla[7][1] = 'U';
-    kodtabla[7][2] = 'V';
+    kodtabla[7][0] = 't';
+    kodtabla[7][1] = 'u';
+    kodtabla[7][2] = 'v';
     kodtabla[7][3] = '8';
     // 9
-    kodtabla[8][0] = 'W';
-    kodtabla[8][1] = 'X';
-    kodtabla[8][2] = 'Y';
-    kodtabla[8][3] = 'Z';
+    kodtabla[8][0] = 'w';
+    kodtabla[8][1] = 'x';
+    kodtabla[8][2] = 'y';
+    kodtabla[8][3] = 'z';
     kodtabla[8][4] = '9';
     // 10
     kodtabla[9][0] = '*'; // Nagybetű
