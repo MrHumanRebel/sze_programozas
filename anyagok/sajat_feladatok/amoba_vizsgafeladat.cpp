@@ -101,12 +101,11 @@ int valaszt()
 
 int nyert()
 {
+    jatekos = 0;
     for (int i = 1; i <= DB; i++)
     {
-        jatekos = 0;
         for (int j = 1; j <= DB; j++)
         {
-
             if (tabla[i][j] == 'X')
                 jatekos++;
             if (jatekos == 5)
@@ -119,11 +118,8 @@ int nyert()
 
     for (int i = 1; i <= DB; i++)
     {
-
         for (int j = 1; j <= DB; j++)
         {
-
-            jatekos = 0;
             if (tabla[i][j] == 'O')
                 jatekos++;
             if (jatekos == 5)
@@ -157,6 +153,8 @@ int main()
         valaszt();
         allas();
         nyert();
+        if (vege = true)
+            return 0;
 
         cout << "Második játékos lépése:" << endl;
         jatekos = 2;
@@ -164,6 +162,8 @@ int main()
         valaszt();
         allas();
         nyert();
+        if (vege = true)
+            return 0;
 
     } while (!vege);
     return 0;
