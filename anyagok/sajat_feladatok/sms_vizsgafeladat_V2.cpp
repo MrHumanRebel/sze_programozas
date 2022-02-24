@@ -11,8 +11,7 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
-    int ascii;
-    int x = 0;
+    long unsigned int x = 0;
     while (x <= kod.length())
     {
         if (kod[x] == '1')
