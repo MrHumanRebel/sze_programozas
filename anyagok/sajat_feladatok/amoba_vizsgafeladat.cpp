@@ -103,15 +103,20 @@ int nyert()
 {
     for (int i = 1; i <= DB; i++)
     {
-
+        jatekos = 0;
         for (int j = 1; j <= DB; j++)
         {
-            jatekos = 0;
+
             if (jatek[i][j] == 'X')
                 jatekos++;
             if (jatekos == 5)
+            {
+                vege = true;
                 cout << "Az első játékos nyert!";
+            }
         }
+
+        jatekos = 0;
         for (int j = 1; j <= DB; j++)
         {
 
@@ -119,7 +124,10 @@ int nyert()
             if (jatek[i][j] == 'O')
                 jatekos++;
             if (jatekos == 5)
+            {
+                vege = true;
                 cout << "A második játékos nyert!";
+            }
         }
     }
 
