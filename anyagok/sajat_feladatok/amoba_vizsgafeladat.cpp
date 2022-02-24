@@ -110,13 +110,16 @@ int nyert()
             if (jatek[i][j] == 'X')
                 jatekos++;
             if (jatekos == 5)
-            {
                 vege = true;
-                cout << "Az első játékos nyert!";
-            }
         }
+    }
+    if (jatekos == 5)
+        cout << "Az első játékos nyert!";
+    jatekos = 0;
 
-        jatekos = 0;
+    for (int i = 1; i <= DB; i++)
+    {
+
         for (int j = 1; j <= DB; j++)
         {
 
@@ -124,12 +127,11 @@ int nyert()
             if (jatek[i][j] == 'O')
                 jatekos++;
             if (jatekos == 5)
-            {
                 vege = true;
-                cout << "A második játékos nyert!";
-            }
         }
     }
+    if (jatekos == 5)
+        cout << "A második játékos nyert!";
 
     return 0;
 }
@@ -154,13 +156,14 @@ int main()
         valaszt();
         allas();
         nyert();
-
-        cout << "Második játékos lépése:" << endl;
-        jatekos = 2;
-        beker();
-        valaszt();
-        allas();
-        nyert();
+        /*
+                cout << "Második játékos lépése:" << endl;
+                jatekos = 2;
+                beker();
+                valaszt();
+                allas();
+                nyert();
+                */
 
     } while (!vege);
     return 0;
