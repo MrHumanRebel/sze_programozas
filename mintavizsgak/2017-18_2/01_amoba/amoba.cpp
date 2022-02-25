@@ -2,6 +2,7 @@
 using namespace std;
 
 #define MAX 20
+#define TAL 5 // A győzelemhez szükséges mezők száma
 #define J1 'X'
 #define J2 'O'
 
@@ -104,9 +105,38 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
   palya[m.sor][m.oszlop] = jatekos;
 }
 
-void ellenoriz()
+bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
-  // TODO: Implementáld
+  // Horizontális
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    int talalat = 0;
+
+    int kezdOszlop = 0;
+    int vegOszlop = kezdOszlop + TAL - 1;
+    while (vegOszlop < palyaMeret.oszlop)
+    {
+      talalat = 0;
+
+      for (int j = kezdOszlop; j <= vegOszlop; j++)
+      {
+        if (palya[i][j] == jatekos)
+        {
+          talalat++;
+        }
+      }
+
+      kezdOszlop++;
+      vegOszlop++;
+    }
+
+    if (talalat == 5)
+    {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
@@ -143,18 +173,27 @@ void jatek(meret palyaMeret)
 
   char palya[MAX][MAX];
   palyaFelallit(palya, palyaMeret);
+
+  char jelenlegiJatekos;
+  bool gyozelem = false;
   do
   {
     for (int i = 0; i < 2; i++)
     {
-      char jelenlegiJatekos = i == 0 ? J1 : J2;
+      jelenlegiJatekos = i == 0 ? J1 : J2;
 
       palyaMegjelenit(palya, palyaMeret);
       lepes(jelenlegiJatekos, palya, palyaMeret);
-      system("clear");
+      gyozelem = ellenoriz(jelenlegiJatekos, palya, palyaMeret);
+      // system("clear");
     }
+  } while (!gyozelem);
 
-  } while (true);
+  if (gyozelem)
+  {
+    string gyoztesNeve = jelenlegiJatekos == J1 ? "első" : "második";
+    cout << "A(z) " << gyoztesNeve << " játékos győzött.";
+  }
 }
 
 int main(int argc, char const *argv[])
