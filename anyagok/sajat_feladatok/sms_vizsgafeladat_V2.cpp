@@ -11,7 +11,6 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
-    string kisnagy;
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
         if (kod[i] == '1')
