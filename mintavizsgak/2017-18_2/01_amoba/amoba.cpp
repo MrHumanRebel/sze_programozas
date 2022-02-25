@@ -11,7 +11,7 @@ struct meret
   int oszlop;
 };
 
-struct koordinata
+struct mezo
 {
   int sor;
   int oszlop;
@@ -59,15 +59,15 @@ void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-int koordinataBeker(int meret, string tipus)
+int mezoBeker(int meret, string tipus)
 {
-  int koordinata;
+  int mezo;
 
   string rag = tipus == "sor" ? "t" : "ot";
-  bool helytelenKoordinata = false;
+  bool helytelenMezo = false;
   do
   {
-    if (helytelenKoordinata)
+    if (helytelenMezo)
     {
       cout << "Nem megfelelő " << tipus << "szám" << endl;
     }
@@ -76,16 +76,16 @@ int koordinataBeker(int meret, string tipus)
     string ertek;
     cin >> ertek;
 
-    koordinata = tipus == "sor" ? stoi(ertek) - 1 : ertek[0] - 'A';
-    helytelenKoordinata = koordinata < 0 || koordinata > meret;
-  } while (helytelenKoordinata);
+    mezo = tipus == "sor" ? stoi(ertek) - 1 : ertek[0] - 'A';
+    helytelenMezo = mezo < 0 || mezo > meret;
+  } while (helytelenMezo);
 
-  return koordinata;
+  return mezo;
 }
 
 void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
-  koordinata k;
+  mezo m;
 
   bool helytelenLepes = false;
   do
@@ -95,13 +95,13 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
       cout << "Ez a mező már foglalt." << endl;
     }
 
-    k.sor = koordinataBeker(palyaMeret.sor, "sor");
-    k.oszlop = koordinataBeker(palyaMeret.oszlop, "oszlop");
+    m.sor = mezoBeker(palyaMeret.sor, "sor");
+    m.oszlop = mezoBeker(palyaMeret.oszlop, "oszlop");
 
-    helytelenLepes = palya[k.sor][k.oszlop] != '.';
+    helytelenLepes = palya[m.sor][m.oszlop] != '.';
   } while (helytelenLepes);
 
-  palya[k.sor][k.oszlop] = jatekos;
+  palya[m.sor][m.oszlop] = jatekos;
 }
 
 void ellenoriz()
