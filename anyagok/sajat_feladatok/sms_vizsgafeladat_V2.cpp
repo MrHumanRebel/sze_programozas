@@ -11,49 +11,45 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
-    long unsigned int x = 0;
-    while (x <= kod.length())
+    for (long unsigned int i = 0; i <= kod.length(); i++)
     {
-        if (kod[x] == '1')
+        if (kod[i] == '1')
             akt = 0;
-        else if (kod[x] == '2')
+        else if (kod[i] == '2')
             akt = 1;
-        else if (kod[x] == '3')
+        else if (kod[i] == '3')
             akt = 2;
-        else if (kod[x] == '4')
+        else if (kod[i] == '4')
             akt = 3;
-        else if (kod[x] == '5')
+        else if (kod[i] == '5')
             akt = 4;
-        else if (kod[x] == '6')
+        else if (kod[i] == '6')
             akt = 5;
-        else if (kod[x] == '7')
+        else if (kod[i] == '7')
             akt = 6;
-        else if (kod[x] == '8')
+        else if (kod[i] == '8')
             akt = 7;
-        else if (kod[x] == '9')
+        else if (kod[i] == '9')
             akt = 8;
-        else if (kod[x] == '*')
+        else if (kod[i] == '*')
             akt = 9;
-        else if (kod[x] == '0')
+        else if (kod[i] == '0')
             akt = 10;
         else
             akt = 11;
 
-        if (kod[x] == kod[x + 1])
+        if (kod[i] == kod[i + 1])
         {
             szamlalo++;
-            x++;
         }
         else
         {
             cout << kodtabla[akt][szamlalo];
             szamlalo = 0;
-            x++;
         }
     }
     return "";
 }
-
 string kodtablazat()
 {
 
