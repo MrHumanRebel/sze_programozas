@@ -7,8 +7,6 @@ bool van_e_palya = false;
 bool oszl_ok = false;
 char be;
 int oszlszam, jatekos;
-int jatekos_1_db = SOR;
-int jatekos_2_db = SOR;
 
 int alappalya()
 {
@@ -76,25 +74,30 @@ int allas()
 
 int valaszt()
 {
-    if (jatekos == 1)
+    int oszldb[SOR]{0, 0, 0, 0, 0, 0};
+
+    for (int j = 0; j <= SOR; j++)
     {
-        for (int i = SOR; i <= jatekos_1_db; i++)
+        if (jatekos == 1)
         {
-            if (tabla[jatekos_2_db-1][oszlszam - 1] == '.')
+            for (int i = SOR; i >= oszldb[j]; i--)
             {
-                tabla[jatekos_2_db-1][oszlszam - 1] = 'X';
-                jatekos_1_db--;
+                if (tabla[i - 1][oszlszam - 1] == '.')
+                {
+                    tabla[i - 1][oszlszam - 1] = 'X';
+                    oszldb[j]++;
+                }
             }
         }
-    }
-    if (jatekos == 2)
-    {
-        for (int i = SOR; i <= jatekos_2_db; i++)
+        if (jatekos == 2)
         {
-            if (tabla[jatekos_2_db-1][oszlszam - 1] == '.')
+            for (int i = SOR; i >= oszldb[j]; i--)
             {
-                tabla[jatekos_2_db-1][oszlszam - 1] = 'O';
-                jatekos_2_db--;
+                if (tabla[i - 1][oszlszam - 1] == '.')
+                {
+                    tabla[i - 1][oszlszam - 1] = 'O';
+                    oszldb[j]++;
+                }
             }
         }
     }
