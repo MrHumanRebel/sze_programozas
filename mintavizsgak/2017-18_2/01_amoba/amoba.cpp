@@ -137,7 +137,7 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-void jatek(meret palyaMeret, int lepesekDb)
+void jatek(meret palyaMeret)
 {
   cout << "Amoba jatek" << endl;
 
@@ -160,8 +160,7 @@ void jatek(meret palyaMeret, int lepesekDb)
 int main(int argc, char const *argv[])
 {
   meret palyaMeret = init();
-  int lepesekDb = 0;
-  jatek(palyaMeret, lepesekDb);
+  jatek(palyaMeret);
 
   return 0;
 }
