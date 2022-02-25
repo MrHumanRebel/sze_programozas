@@ -6,7 +6,9 @@ char tabla[SOR][OSZL];
 bool van_e_palya = false;
 bool oszl_ok = false;
 char be;
-int oszlszam;
+int oszlszam, jatekos;
+int jatekos_1_db = SOR;
+int jatekos_2_db = SOR;
 
 int alappalya()
 {
@@ -72,15 +74,36 @@ int allas()
     return 0;
 }
 
+int valaszt()
+{
+    if (jatekos == 1)
+    {
+        for (int i = SOR; i <= jatekos_1_db; i++)
+        {
+            cout << "TEST";
+            if (tabla[i-6][oszlszam-1] == '.')
+            {
+                tabla[i-6][oszlszam-1] = 'X';
+                jatekos_1_db--;
+            }
+        }
+    }
+}
+
 int main()
 {
     if (van_e_palya == false)
         alappalya();
+    allas();
     cout << "Első játékos lépése:" << endl;
+    jatekos = 1;
     beker();
+    valaszt();
     allas();
     cout << "Második játékos lépése:" << endl;
+    jatekos = 1;
     beker();
+    valaszt();
     allas();
     return 0;
 }
