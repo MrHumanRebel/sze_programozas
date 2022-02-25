@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
 
-// 553355#29999#334#337777#99996665553#2#333881 1 1
+// 55*3355#29999#334#337777#99996665553#2#333881 1 1
 
-string uzenet;
+string uzenet = "";
 string kod;
 char kodtabla[11][5];
 
@@ -11,6 +11,7 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
+    string kisnagy;
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
         if (kod[i] == '1')
@@ -44,9 +45,16 @@ string decode()
         }
         else
         {
-            cout << kodtabla[akt][szamlalo];
+            // cout << kodtabla[akt][szamlalo];
+            uzenet = uzenet + kodtabla[akt][szamlalo];
             szamlalo = 0;
         }
+    }
+    if ((kod[0] != kod[1] && kod[1] == '*') or (kod[0] == kod[1] && kod[2] == '*') or (kod[0] == kod[1] == kod[2] && kod[3] == '*'))
+    {
+        akt = uzenet[0];
+        akt = akt - 32;
+        uzenet[0] = char(akt);
     }
     return "";
 }
@@ -103,7 +111,7 @@ string kodtablazat()
     kodtabla[8][3] = 'z';
     kodtabla[8][4] = '9';
     // 10
-    kodtabla[9][0] = '*'; // Nagybetű
+    kodtabla[9][0] = 0; // Nagybetű
     // 11
     kodtabla[10][0] = '+';
     kodtabla[10][1] = '0';
@@ -121,6 +129,7 @@ int main()
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
     cin >> kod;
     kodtablazat();
+    cout << uzenet;
 
     return 0;
 }
