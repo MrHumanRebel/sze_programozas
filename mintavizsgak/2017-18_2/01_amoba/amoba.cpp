@@ -60,11 +60,11 @@ void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
   }
 }
 
-int mezoBeker(int meret, string tipus)
+int mezoBeker(char jatekos, int meret, string tipus)
 {
   int mezo;
 
-  string rag = tipus == "sor" ? "t" : "ot";
+  string jatekosNeve = jatekos == J1 ? "Elso" : "Masodik";
   bool helytelenMezo = false;
   do
   {
@@ -73,7 +73,7 @@ int mezoBeker(int meret, string tipus)
       cout << "Nem megfelelő " << tipus << "szám" << endl;
     }
 
-    cout << "Kérem adjon meg egy " << tipus << rag << ": ";
+    cout << jatekosNeve << " jatekos lepese, " << tipus << ": ";
     string ertek;
     cin >> ertek;
 
@@ -96,8 +96,8 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
       cout << "Ez a mező már foglalt." << endl;
     }
 
-    m.sor = mezoBeker(palyaMeret.sor, "sor");
-    m.oszlop = mezoBeker(palyaMeret.oszlop, "oszlop");
+    m.sor = mezoBeker(jatekos, palyaMeret.sor, "sor");
+    m.oszlop = mezoBeker(jatekos, palyaMeret.oszlop, "oszlop");
 
     helytelenLepes = palya[m.sor][m.oszlop] != '.';
   } while (helytelenLepes);
@@ -114,7 +114,7 @@ bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 
     int kezdOszlop = 0;
     int vegOszlop = kezdOszlop + TAL - 1;
-    while (vegOszlop < palyaMeret.oszlop)
+    while (vegOszlop < palyaMeret.oszlop && talalat < TAL)
     {
       talalat = 0;
 
@@ -130,7 +130,7 @@ bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
       vegOszlop++;
     }
 
-    if (talalat == 5)
+    if (talalat == TAL)
     {
       return true;
     }
@@ -174,25 +174,27 @@ void jatek(meret palyaMeret)
   char palya[MAX][MAX];
   palyaFelallit(palya, palyaMeret);
 
-  char jelenlegiJatekos;
+  char aktJatekos = J2;
   bool gyozelem = false;
   do
   {
-    for (int i = 0; i < 2; i++)
-    {
-      jelenlegiJatekos = i == 0 ? J1 : J2;
+    aktJatekos = aktJatekos == J1 ? J2 : J1;
 
-      palyaMegjelenit(palya, palyaMeret);
-      lepes(jelenlegiJatekos, palya, palyaMeret);
-      gyozelem = ellenoriz(jelenlegiJatekos, palya, palyaMeret);
-      // system("clear");
+    palyaMegjelenit(palya, palyaMeret);
+    lepes(aktJatekos, palya, palyaMeret);
+    gyozelem = ellenoriz(aktJatekos, palya, palyaMeret);
+
+    if (!gyozelem)
+    {
+      system("clear");
     }
+
   } while (!gyozelem);
 
   if (gyozelem)
   {
-    string gyoztesNeve = jelenlegiJatekos == J1 ? "első" : "második";
-    cout << "A(z) " << gyoztesNeve << " játékos győzött.";
+    string gyoztesNeve = aktJatekos == J1 ? "elso" : "masodik";
+    cout << "A(z) " << gyoztesNeve << " jatekos gyozott.";
   }
 }
 
