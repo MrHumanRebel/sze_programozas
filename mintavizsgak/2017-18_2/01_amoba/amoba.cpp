@@ -105,29 +105,34 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
   palya[m.sor][m.oszlop] = jatekos;
 }
 
-bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
+bool tengelyEllenoriz(char tengely, char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
-  // Horizontális
-  for (int i = 0; i < palyaMeret.sor; i++)
-  {
-    int talalat = 0;
+  int fixTengely = tengely == 'h' ? palyaMeret.sor : palyaMeret.oszlop;  // Külső ciklus
+  int valtTengely = tengely == 'v' ? palyaMeret.oszlop : palyaMeret.sor; // Belső ciklus
 
-    int kezdOszlop = 0;
-    int vegOszlop = kezdOszlop + TAL - 1;
-    while (vegOszlop < palyaMeret.oszlop && talalat < TAL)
+  for (int i = 0; i < fixTengely; i++)
+  {
+    int kezd = 0;
+    int veg = kezd + TAL - 1;
+
+    int talalat = 0;
+    while (veg < valtTengely && talalat < TAL)
     {
       talalat = 0;
 
-      for (int j = kezdOszlop; j <= vegOszlop; j++)
+      for (int j = kezd; j <= veg; j++)
       {
-        if (palya[i][j] == jatekos)
+        int sor = fixTengely == palyaMeret.sor ? i : j;
+        int oszlop = fixTengely == palyaMeret.oszlop ? j : i;
+
+        if (palya[sor][oszlop] == jatekos)
         {
           talalat++;
         }
       }
 
-      kezdOszlop++;
-      vegOszlop++;
+      kezd++;
+      veg++;
     }
 
     if (talalat == TAL)
@@ -137,6 +142,21 @@ bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
   }
 
   return false;
+}
+
+bool atlosanEllenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
+{
+  return false;
+}
+
+bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
+{
+
+  bool hGyozelem = tengelyEllenoriz('h', jatekos, palya, palyaMeret);
+  bool vGyozelem = tengelyEllenoriz('v', jatekos, palya, palyaMeret);
+  bool atlosGyozelem = atlosanEllenoriz(jatekos, palya, palyaMeret);
+
+  return hGyozelem || vGyozelem || atlosGyozelem;
 }
 
 void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
