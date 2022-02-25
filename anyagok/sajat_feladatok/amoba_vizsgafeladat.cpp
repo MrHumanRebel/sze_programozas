@@ -94,7 +94,11 @@ int valaszt()
         if (tabla[sor - 1][c_oszl - 1] != 'O')
             tabla[sor - 1][c_oszl - 1] = 'X';
         else
-            cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
+        {
+            cout << "Ez a hely már foglalt, Ön csalni akart!" << endl;
+            beker();
+            valaszt();
+        }
     }
 
     if (jatekos == 2)
@@ -102,7 +106,11 @@ int valaszt()
         if (tabla[sor - 1][c_oszl - 1] != 'X')
             tabla[sor - 1][c_oszl - 1] = 'O';
         else
-            cout << "Ez a hely már foglalt, Ön csalni akart, ezért ebből a körből kimarad!" << endl;
+        {
+            cout << "Ez a hely már foglalt, Ön csalni akart!" << endl;
+            beker();
+            valaszt();
+        }
     }
     return 0;
 }
