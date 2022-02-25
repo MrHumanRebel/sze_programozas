@@ -195,7 +195,9 @@ void jatek(meret palyaMeret)
   palyaFelallit(palya, palyaMeret);
 
   char aktJatekos = J2;
+
   bool gyozelem = false;
+  int elerhetoMezok = palyaMeret.sor * palyaMeret.oszlop;
   do
   {
     aktJatekos = aktJatekos == J1 ? J2 : J1;
@@ -204,17 +206,22 @@ void jatek(meret palyaMeret)
     lepes(aktJatekos, palya, palyaMeret);
     gyozelem = ellenoriz(aktJatekos, palya, palyaMeret);
 
-    if (!gyozelem)
+    elerhetoMezok--;
+    if (!gyozelem && elerhetoMezok > 0)
     {
       system("clear");
     }
 
-  } while (!gyozelem);
+  } while (!gyozelem && elerhetoMezok > 0);
 
   if (gyozelem)
   {
     string gyoztesNeve = aktJatekos == J1 ? "elso" : "masodik";
     cout << "A(z) " << gyoztesNeve << " jatekos gyozott.";
+  }
+  else
+  {
+    cout << "Döntetlen.";
   }
 }
 
