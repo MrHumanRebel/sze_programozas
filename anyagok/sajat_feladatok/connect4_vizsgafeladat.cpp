@@ -80,11 +80,21 @@ int valaszt()
     {
         for (int i = SOR; i <= jatekos_1_db; i++)
         {
-            cout << "TEST";
-            if (tabla[i-6][oszlszam-1] == '.')
+            if (tabla[i - 1][oszlszam - 1] == '.')
             {
-                tabla[i-6][oszlszam-1] = 'X';
+                tabla[i - 1][oszlszam - 1] = 'X';
                 jatekos_1_db--;
+            }
+        }
+    }
+    if (jatekos == 2)
+    {
+        for (int i = SOR; i <= jatekos_2_db; i++)
+        {
+            if (tabla[i - 1][oszlszam - 1] == '.')
+            {
+                tabla[i - 1][oszlszam - 1] = 'O';
+                jatekos_2_db--;
             }
         }
     }
@@ -101,7 +111,7 @@ int main()
     valaszt();
     allas();
     cout << "Második játékos lépése:" << endl;
-    jatekos = 1;
+    jatekos = 2;
     beker();
     valaszt();
     allas();
