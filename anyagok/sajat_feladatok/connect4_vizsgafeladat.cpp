@@ -80,9 +80,9 @@ int valaszt()
     {
         for (int i = SOR; i <= jatekos_1_db; i++)
         {
-            if (tabla[i - 1][oszlszam - 1] == '.')
+            if (tabla[jatekos_2_db-1][oszlszam - 1] == '.')
             {
-                tabla[i - 1][oszlszam - 1] = 'X';
+                tabla[jatekos_2_db-1][oszlszam - 1] = 'X';
                 jatekos_1_db--;
             }
         }
@@ -91,9 +91,9 @@ int valaszt()
     {
         for (int i = SOR; i <= jatekos_2_db; i++)
         {
-            if (tabla[i - 1][oszlszam - 1] == '.')
+            if (tabla[jatekos_2_db-1][oszlszam - 1] == '.')
             {
-                tabla[i - 1][oszlszam - 1] = 'O';
+                tabla[jatekos_2_db-1][oszlszam - 1] = 'O';
                 jatekos_2_db--;
             }
         }
@@ -102,18 +102,22 @@ int valaszt()
 
 int main()
 {
+    bool vege = false;
     if (van_e_palya == false)
         alappalya();
     allas();
-    cout << "Első játékos lépése:" << endl;
-    jatekos = 1;
-    beker();
-    valaszt();
-    allas();
-    cout << "Második játékos lépése:" << endl;
-    jatekos = 2;
-    beker();
-    valaszt();
-    allas();
+    do
+    {
+        cout << "Első játékos lépése:" << endl;
+        jatekos = 1;
+        beker();
+        valaszt();
+        allas();
+        cout << "Második játékos lépése:" << endl;
+        jatekos = 2;
+        beker();
+        valaszt();
+        allas();
+    } while (!vege);
     return 0;
 }
