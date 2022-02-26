@@ -107,37 +107,34 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 
 bool tengelyEllenoriz(char tengely, char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
-  int fixTengely = tengely == 'h' ? palyaMeret.sor : palyaMeret.oszlop;  // Külső ciklus
-  int valtTengely = tengely == 'v' ? palyaMeret.oszlop : palyaMeret.sor; // Belső ciklus
+  int allTengely = tengely == 'h' ? palyaMeret.sor : palyaMeret.oszlop;                      // Külső ciklus
+  int valtTengely = tengely == 'v' ? palyaMeret.oszlop - TAL + 1 : palyaMeret.sor - TAL + 1; // Belső ciklus
 
-  for (int i = 0; i < fixTengely; i++)
+  for (int i = 0; i < allTengely; i++)
   {
-    int kezd = 0;
-    int veg = kezd + TAL - 1;
-
-    int talalat = 0;
-    while (veg < valtTengely && talalat < TAL)
+    for (int j = 0; j < valtTengely; j++)
     {
-      talalat = 0;
-
-      for (int j = kezd; j <= veg; j++)
+      int talalat = 0;
+      int aktEltolas = 0;
+      while (aktEltolas < TAL && talalat < TAL)
       {
-        int sor = fixTengely == palyaMeret.sor ? i : j;
-        int oszlop = fixTengely == palyaMeret.oszlop ? j : i;
+        int aktAll = i;
+        int aktMellek = j + aktEltolas;
 
-        if (palya[sor][oszlop] == jatekos)
+        char aktMezo = tengely == 'h' ? palya[aktAll][aktMellek] : palya[aktMellek][aktAll];
+
+        if (aktMezo == jatekos)
         {
           talalat++;
         }
+
+        aktEltolas++;
       }
 
-      kezd++;
-      veg++;
-    }
-
-    if (talalat == TAL)
-    {
-      return true;
+      if (talalat == TAL)
+      {
+        return true;
+      }
     }
   }
 
@@ -242,7 +239,7 @@ void jatek(meret palyaMeret)
     elerhetoMezok--;
     if (!gyozelem && elerhetoMezok > 0)
     {
-      system("clear");
+      // system("clear");
     }
 
   } while (!gyozelem && elerhetoMezok > 0);
