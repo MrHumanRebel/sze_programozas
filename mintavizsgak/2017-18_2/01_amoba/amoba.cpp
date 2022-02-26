@@ -144,8 +144,49 @@ bool tengelyEllenoriz(char tengely, char jatekos, char palya[MAX][MAX], meret pa
   return false;
 }
 
-bool atlosanEllenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
+bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
+  int sorHatar = palyaMeret.sor - TAL + 1;
+  int oszlopHatar = palyaMeret.oszlop - TAL + 1;
+
+  // TODO: Keresztátló ellenőrzése is
+  for (int i = 0; i < sorHatar; i++)
+  {
+    int sor = i;
+
+    for (int j = 0; j < oszlopHatar; j++)
+    {
+      int oszlop = j;
+
+      int talalat = 0;
+      int aktEltolas = 0;
+
+      while (aktEltolas < TAL && talalat < TAL)
+      {
+        int aktSor = sor + aktEltolas;
+        int aktOszlop = oszlop + aktEltolas;
+
+        cout << "(" << aktSor + 1 << ", " << aktOszlop + 1 << ") ";
+
+        if (palya[aktSor][aktOszlop] == jatekos)
+        {
+          talalat++;
+        }
+
+        aktEltolas++;
+      }
+
+      if (talalat == TAL)
+      {
+        return true;
+      }
+
+      cout << endl;
+    }
+
+    cout << endl;
+  }
+
   return false;
 }
 
@@ -154,7 +195,7 @@ bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 
   bool hGyozelem = tengelyEllenoriz('h', jatekos, palya, palyaMeret);
   bool vGyozelem = tengelyEllenoriz('v', jatekos, palya, palyaMeret);
-  bool atlosGyozelem = atlosanEllenoriz(jatekos, palya, palyaMeret);
+  bool atlosGyozelem = atlosanEllenoriz('n', jatekos, palya, palyaMeret);
 
   return hGyozelem || vGyozelem || atlosGyozelem;
 }
@@ -209,7 +250,7 @@ void jatek(meret palyaMeret)
     elerhetoMezok--;
     if (!gyozelem && elerhetoMezok > 0)
     {
-      system("clear");
+      // system("clear");
     }
 
   } while (!gyozelem && elerhetoMezok > 0);
