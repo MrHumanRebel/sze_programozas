@@ -2,7 +2,8 @@
 using namespace std;
 
 #define MAX 20
-#define TAL 5 // A győzelemhez szükséges mezők száma
+#define TAL 5           // A győzelemhez szükséges mezők száma
+#define ELL_MOD TAL + 1 // ellenorzes() függvényben használt
 #define J1 'X'
 #define J2 'O'
 
@@ -27,10 +28,10 @@ int meretBekerese(string tipus)
   {
     if (helytelenMeret)
     {
-      cout << "Nem megfelelő méret, a pálya " << tipus << " a [7, 20] intervallumba kell esni." << endl;
+      cout << "Nem megfelelo meret, a palya " << tipus << " a [7, 20] intervallumba kell esni." << endl;
     }
 
-    cout << "Kérem adja meg a pálya " << tipus << " a számát: ";
+    cout << "Kerem adja meg a palya " << tipus << " a szamat: ";
     cin >> meret;
 
     helytelenMeret = meret < 7 || meret > 20;
@@ -70,7 +71,7 @@ int mezoBeker(char jatekos, int meret, string tipus)
   {
     if (helytelenMezo)
     {
-      cout << "Nem megfelelő " << tipus << "szám" << endl;
+      cout << "Nem megfelelo " << tipus << endl;
     }
 
     cout << jatekosNeve << " jatekos lepese, " << tipus << ": ";
@@ -93,7 +94,7 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
   {
     if (helytelenLepes)
     {
-      cout << "Ez a mező már foglalt." << endl;
+      cout << "Ez a mezo mar foglalt." << endl;
     }
 
     m.sor = mezoBeker(jatekos, palyaMeret.sor, "sor");
@@ -105,64 +106,39 @@ void lepes(char jatekos, char palya[MAX][MAX], meret palyaMeret)
   palya[m.sor][m.oszlop] = jatekos;
 }
 
-bool tengelyEllenoriz(char tengely, char jatekos, char palya[MAX][MAX], meret palyaMeret)
+bool iranyEllenoriz(char tengely, char atlo, char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
-  int allTengely = tengely == 'h' ? palyaMeret.sor : palyaMeret.oszlop;                      // Külső ciklus
-  int valtTengely = tengely == 'v' ? palyaMeret.oszlop - TAL + 1 : palyaMeret.sor - TAL + 1; // Belső ciklus
+  int allTengely;  // Külső ciklus
+  int valtTengely; // Belső ciklus
+
+  if (tengely != '-')
+  {
+    allTengely = tengely == 'h' ? palyaMeret.sor : palyaMeret.oszlop;
+    valtTengely = tengely == 'h' ? palyaMeret.oszlop - ELL_MOD : palyaMeret.sor - ELL_MOD;
+  }
+  else
+  {
+    allTengely = palyaMeret.sor - ELL_MOD;
+    valtTengely = palyaMeret.oszlop - ELL_MOD;
+  }
 
   for (int i = 0; i < allTengely; i++)
   {
     for (int j = 0; j < valtTengely; j++)
     {
-      int talalat = 0;
-      int aktEltolas = 0;
-      while (aktEltolas < TAL && talalat < TAL)
-      {
-        int aktAll = i;
-        int aktMellek = j + aktEltolas;
-
-        char aktMezo = tengely == 'h' ? palya[aktAll][aktMellek] : palya[aktMellek][aktAll];
-
-        if (aktMezo == jatekos)
-        {
-          talalat++;
-        }
-
-        aktEltolas++;
-      }
-
-      if (talalat == TAL)
-      {
-        return true;
-      }
-    }
-  }
-
-  return false;
-}
-
-bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palyaMeret)
-{
-  int sorHatar = palyaMeret.sor - TAL + 1;
-  int oszlopHatar = palyaMeret.oszlop - TAL + 1;
-
-  for (int i = 0; i < sorHatar; i++)
-  {
-    int sor = i;
-
-    for (int j = 0; j < oszlopHatar; j++)
-    {
+      // Csak átló esetén
       int oszlop = atlo == 'k' ? (palyaMeret.oszlop - 1) - j : j;
 
       int talalat = 0;
       int aktEltolas = 0;
-
       while (aktEltolas < TAL && talalat < TAL)
       {
-        int aktSor = sor + aktEltolas;
-        int aktOszlop = atlo == 'k' ? oszlop - aktEltolas : oszlop + aktEltolas;
+        int aktAll = atlo != '-' ? i + aktEltolas : i;
+        int aktMellek = atlo == 'k' ? oszlop - aktEltolas : j + aktEltolas;
 
-        if (palya[aktSor][aktOszlop] == jatekos)
+        char aktMezo = tengely == 'h' || atlo != '-' ? palya[aktAll][aktMellek] : palya[aktMellek][aktAll];
+
+        if (aktMezo == jatekos)
         {
           talalat++;
         }
@@ -183,14 +159,16 @@ bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palya
 bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
 
-  bool tengelyGyozelem = tengelyEllenoriz('h', jatekos, palya, palyaMeret) || tengelyEllenoriz('v', jatekos, palya, palyaMeret);
-  bool atlosGyozelem = atlosanEllenoriz('n', jatekos, palya, palyaMeret) || atlosanEllenoriz('k', jatekos, palya, palyaMeret);
+  bool tengelyGyozelem = iranyEllenoriz('h', '-', jatekos, palya, palyaMeret) || iranyEllenoriz('v', '-', jatekos, palya, palyaMeret);
+  bool atlosGyozelem = iranyEllenoriz('-', 'n', jatekos, palya, palyaMeret) || iranyEllenoriz('-', 'k', jatekos, palya, palyaMeret);
 
   return tengelyGyozelem || atlosGyozelem;
 }
 
 void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
 {
+  cout << "Amoba jatek" << endl;
+
   // Fejléc (oszlopok)
   cout << "  ";
   char aktKar = 'A';
@@ -219,8 +197,6 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
 
 void jatek(meret palyaMeret)
 {
-  cout << "Amoba jatek" << endl;
-
   char palya[MAX][MAX];
   palyaFelallit(palya, palyaMeret);
 
@@ -239,7 +215,7 @@ void jatek(meret palyaMeret)
     elerhetoMezok--;
     if (!gyozelem && elerhetoMezok > 0)
     {
-      // system("clear");
+      system("clear");
     }
 
   } while (!gyozelem && elerhetoMezok > 0);
