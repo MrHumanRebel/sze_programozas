@@ -149,14 +149,13 @@ bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palya
   int sorHatar = palyaMeret.sor - TAL + 1;
   int oszlopHatar = palyaMeret.oszlop - TAL + 1;
 
-  // TODO: Keresztátló ellenőrzése is
   for (int i = 0; i < sorHatar; i++)
   {
     int sor = i;
 
     for (int j = 0; j < oszlopHatar; j++)
     {
-      int oszlop = j;
+      int oszlop = atlo == 'k' ? (palyaMeret.oszlop - 1) - j : j;
 
       int talalat = 0;
       int aktEltolas = 0;
@@ -164,9 +163,7 @@ bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palya
       while (aktEltolas < TAL && talalat < TAL)
       {
         int aktSor = sor + aktEltolas;
-        int aktOszlop = oszlop + aktEltolas;
-
-        cout << "(" << aktSor + 1 << ", " << aktOszlop + 1 << ") ";
+        int aktOszlop = atlo == 'k' ? oszlop - aktEltolas : oszlop + aktEltolas;
 
         if (palya[aktSor][aktOszlop] == jatekos)
         {
@@ -180,11 +177,7 @@ bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palya
       {
         return true;
       }
-
-      cout << endl;
     }
-
-    cout << endl;
   }
 
   return false;
@@ -193,11 +186,10 @@ bool atlosanEllenoriz(char atlo, char jatekos, char palya[MAX][MAX], meret palya
 bool ellenoriz(char jatekos, char palya[MAX][MAX], meret palyaMeret)
 {
 
-  bool hGyozelem = tengelyEllenoriz('h', jatekos, palya, palyaMeret);
-  bool vGyozelem = tengelyEllenoriz('v', jatekos, palya, palyaMeret);
-  bool atlosGyozelem = atlosanEllenoriz('n', jatekos, palya, palyaMeret);
+  bool tengelyGyozelem = tengelyEllenoriz('h', jatekos, palya, palyaMeret) || tengelyEllenoriz('v', jatekos, palya, palyaMeret);
+  bool atlosGyozelem = atlosanEllenoriz('n', jatekos, palya, palyaMeret) || atlosanEllenoriz('k', jatekos, palya, palyaMeret);
 
-  return hGyozelem || vGyozelem || atlosGyozelem;
+  return tengelyGyozelem || atlosGyozelem;
 }
 
 void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
@@ -250,7 +242,7 @@ void jatek(meret palyaMeret)
     elerhetoMezok--;
     if (!gyozelem && elerhetoMezok > 0)
     {
-      // system("clear");
+      system("clear");
     }
 
   } while (!gyozelem && elerhetoMezok > 0);
