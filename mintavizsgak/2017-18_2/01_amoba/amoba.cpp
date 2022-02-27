@@ -1,11 +1,13 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 #define MAX 20
-#define TAL 5           // A győzelemhez szükséges mezők száma
-#define ELL_MOD TAL + 1 // ellenorzes() függvényben használt
 #define J1 'X'
 #define J2 'O'
+#define TAL 5           // A győzelemhez szükséges mezők száma
+#define ELL_MOD TAL + 1 // ellenorzes() függvényben használt
+#define F "amoba.txt"
 
 struct meret
 {
@@ -190,9 +192,24 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
     {
       cout << palya[i][j];
     }
-
-    cout << "\n";
+    cout << endl;
   }
+}
+
+void palyaMentes(char palya[MAX][MAX], meret palyaMeret)
+{
+  ofstream fajl(F);
+  
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    for (int j = 0; j < palyaMeret.oszlop; j++)
+    {
+      fajl << palya[i][j];
+    }
+    fajl << endl;
+  }
+
+  fajl.close();
 }
 
 void jatek(meret palyaMeret)
@@ -209,6 +226,7 @@ void jatek(meret palyaMeret)
     aktJatekos = aktJatekos == J1 ? J2 : J1;
 
     palyaMegjelenit(palya, palyaMeret);
+    palyaMentes(palya, palyaMeret);
     lepes(aktJatekos, palya, palyaMeret);
     gyozelem = ellenoriz(aktJatekos, palya, palyaMeret);
 
@@ -223,7 +241,7 @@ void jatek(meret palyaMeret)
   if (gyozelem)
   {
     string gyoztesNeve = aktJatekos == J1 ? "elso" : "masodik";
-    cout << "A(z) " << gyoztesNeve << " jatekos gyozott.";
+    cout << "A(z) " << gyoztesNeve << " jatekos gyozott." << endl;
   }
   else
   {
