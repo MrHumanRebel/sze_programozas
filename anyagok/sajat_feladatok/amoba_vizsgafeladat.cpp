@@ -6,11 +6,12 @@ char tabla[DB][DB];
 bool van_e_palya = false;
 bool vege;
 bool sor_ok, oszl_ok = false;
-int sor, c_oszl, jatekos;
+int sor, c_oszl, jatekos, szamlalo;
 int db = 0;
 char oszl;
+char aktjel;
 
-int alap_palya()
+void alap_palya()
 {
     for (int i = 0; i < DB; i++)
     {
@@ -20,10 +21,9 @@ int alap_palya()
         }
     }
     van_e_palya = true;
-    return 0;
 }
 
-int beker()
+void beker()
 {
     do
     {
@@ -58,11 +58,9 @@ int beker()
         else
             db = db + 1;
     }
-
-    return 0;
 }
 
-int allas()
+void allas()
 {
     cout << "  \t";
     for (int i = 65; i < (65 + DB); i++) // 65 => "A" betű ASCII
@@ -83,11 +81,9 @@ int allas()
         }
         cout << endl;
     }
-
-    return 0;
 }
 
-int valaszt()
+void valaszt()
 {
     if (jatekos == 1)
     {
@@ -112,40 +108,41 @@ int valaszt()
             valaszt();
         }
     }
-    return 0;
 }
 
-int nyert()
+void ellenoriz()
 {
-    jatekos = 0;
     for (int i = 0; i < DB; i++)
     {
         for (int j = 0; j < DB; j++)
         {
-            if (tabla[i][j] == 'X')
-                jatekos++;
-            if (jatekos == 5)
+            if (tabla[i][j] == aktjel)
+                szamlalo++;
+            if (szamlalo == 5)
                 vege = true;
         }
     }
-    if (jatekos == 5)
-        cout << "Az első játékos nyert!";
-    jatekos = 0;
+}
 
-    for (int i = 0; i < DB; i++)
+void nyert()
+{
+    if (jatekos == 1)
     {
-        for (int j = 0; j < DB; j++)
-        {
-            if (tabla[i][j] == 'O')
-                jatekos++;
-            if (jatekos == 5)
-                vege = true;
-        }
+        szamlalo = 0;
+        aktjel = 'X';
+        ellenoriz();
+        if (jatekos == 5)
+            cout << "Az első játékos nyert!";
     }
-    if (jatekos == 5)
-        cout << "A második játékos nyert!";
 
-    return 0;
+    if (jatekos == 2)
+    {
+        szamlalo = 0;
+        aktjel = 'O';
+        ellenoriz();
+        if (jatekos == 5)
+            cout << "A második játékos nyert!";
+    }
 }
 
 int main()
