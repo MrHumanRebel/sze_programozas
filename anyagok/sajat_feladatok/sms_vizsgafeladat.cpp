@@ -7,7 +7,7 @@ string uzenet = "";
 string kod;
 char kodtabla[11][5];
 
-string decode()
+void decode()
 {
     int szamlalo = 0;
     int akt;
@@ -70,72 +70,43 @@ string decode()
         akt = akt - 32;
         uzenet[0] = char(akt);
     }
-    return "";
 }
-string kodtablazat()
+void kodtablazat()
 {
-
-    // 1
-    kodtabla[0][0] = '.';
-    kodtabla[0][1] = ',';
-    kodtabla[0][2] = '-';
-    kodtabla[0][3] = '?';
-    kodtabla[0][4] = '!';
-    kodtabla[0][5] = '1';
-    // 2
-    kodtabla[1][0] = 'a';
-    kodtabla[1][1] = 'b';
-    kodtabla[1][2] = 'c';
-    kodtabla[1][3] = '2';
-    // 3
-    kodtabla[2][0] = 'd';
-    kodtabla[2][1] = 'e';
-    kodtabla[2][2] = 'f';
-    kodtabla[2][3] = '3';
-    // 4
-    kodtabla[3][0] = 'g';
-    kodtabla[3][1] = 'h';
-    kodtabla[3][2] = 'i';
-    kodtabla[3][3] = '4';
-    // 5
-    kodtabla[4][0] = 'j';
-    kodtabla[4][1] = 'k';
-    kodtabla[4][2] = 'l';
-    kodtabla[4][3] = '5';
-    // 6
-    kodtabla[5][0] = 'm';
-    kodtabla[5][1] = 'n';
-    kodtabla[5][2] = 'o';
-    kodtabla[5][3] = '6';
-    // 7
-    kodtabla[6][0] = 'p';
-    kodtabla[6][1] = 'q';
-    kodtabla[6][2] = 'r';
-    kodtabla[6][3] = 's';
-    kodtabla[6][4] = '7';
-    // 8
-    kodtabla[7][0] = 't';
-    kodtabla[7][1] = 'u';
-    kodtabla[7][2] = 'v';
-    kodtabla[7][3] = '8';
-    // 9
-    kodtabla[8][0] = 'w';
-    kodtabla[8][1] = 'x';
-    kodtabla[8][2] = 'y';
-    kodtabla[8][3] = 'z';
-    kodtabla[8][4] = '9';
-    // 10
-    kodtabla[9][0] = 0; // Nagybetű
-    // 11
-    kodtabla[10][0] = '+';
-    kodtabla[10][1] = '0';
-    // 12
-    kodtabla[11][0] = ' ';
-    kodtabla[11][1] = '#';
+    string aktstring;
+    for (int i = 0; i <= 11; i++)
+    {
+        if (i == 0)
+            aktstring = ".,-?!1";
+        if (i == 1)
+            aktstring = "abc2";
+        if (i == 2)
+            aktstring = "def3";
+        if (i == 3)
+            aktstring = "ghi4";
+        if (i == 4)
+            aktstring = "jkl5";
+        if (i == 5)
+            aktstring = "mno6";
+        if (i == 6)
+            aktstring = "pqrs7";
+        if (i == 7)
+            aktstring = "tuv8";
+        if (i == 8)
+            aktstring = "wxyz9";
+        if (i == 9)
+            aktstring = "\0";
+        if (i == 10)
+            aktstring = "+0";
+        if (i == 11)
+            aktstring = " #";
+        for (int j = 0; j <= aktstring.length(); j++)
+        {
+            kodtabla[i][j] = aktstring[j];
+        }
+    }
 
     decode();
-
-    return "";
 }
 
 int main()
