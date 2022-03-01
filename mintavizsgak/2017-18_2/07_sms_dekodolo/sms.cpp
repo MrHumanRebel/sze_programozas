@@ -11,11 +11,11 @@ struct kodPar
 
 string betolt(string fajlnev)
 {
-  ifstream inputFajl(fajlnev);
+  ifstream fajl(fajlnev);
 
   string sor;
-  getline(inputFajl, sor);
-  inputFajl.close();
+  getline(fajl, sor);
+  fajl.close();
 
   return sor;
 }
@@ -32,7 +32,7 @@ char ertekKeres(char billentyu, int db)
       {'7', {'P', 'Q', 'R', 'S', '7'}, 5},
       {'8', {'T', 'U', 'V', '8'}, 4},
       {'9', {'W', 'X', 'Y', 'Z', '9'}, 5},
-      {'*', {'k', 'n', '*'}, 3},  // k == kisbetű, n == nagybetű
+      {'*', {'k', 'n', '*'}, 3}, // k == kisbetű, n == nagybetű
       {'0', {'+', '0'}, 2},
       {'#', {' ', '#'}, 2},
   };
@@ -94,6 +94,14 @@ string dekodol(string kodoltSzoveg)
   return dekodoltSzoveg;
 }
 
+void mentes(string uzenet, string fajlnev)
+{
+  ofstream fajl(fajlnev);
+
+  fajl << uzenet.c_str() << endl;
+  fajl.close();
+}
+
 int main(int argc, char const *argv[])
 {
   string inputFajlnev = argv[1];
@@ -102,6 +110,9 @@ int main(int argc, char const *argv[])
 
   string dekodoltSzoveg = dekodol(input);
   cout << "Output: " << dekodoltSzoveg << endl;
+
+  string outputFajlnev = argv[2];
+  mentes(dekodoltSzoveg, outputFajlnev);
 
   return 0;
 }
