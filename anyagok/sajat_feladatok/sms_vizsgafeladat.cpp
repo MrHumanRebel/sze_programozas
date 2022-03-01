@@ -3,8 +3,7 @@ using namespace std;
 
 // 55*3355#29999#334#337777#99996665553#2#333881 1 1
 
-string uzenet = "";
-string kod;
+string kod, uzenet;
 char kodtabla[11][5];
 
 void decode()
@@ -59,7 +58,6 @@ void decode()
         }
         else
         {
-            // cout << kodtabla[akt][szamlalo];
             uzenet = uzenet + kodtabla[akt][szamlalo];
             szamlalo = 0;
         }
@@ -115,6 +113,5 @@ int main()
     cin >> kod;
     kodtablazat();
     cout << uzenet;
-
     return 0;
 }
