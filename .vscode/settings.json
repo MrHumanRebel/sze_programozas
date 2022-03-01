@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "*.toml": "toml",
+    "string": "cpp"
+  }
+}
