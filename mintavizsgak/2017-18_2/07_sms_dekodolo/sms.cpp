@@ -2,8 +2,6 @@
 #include <fstream>
 using namespace std;
 
-#define MAX 12
-
 struct kodPar
 {
   char billentyu;
@@ -22,25 +20,7 @@ string betolt(string fajlnev)
   return sor;
 }
 
-char ertekKeres(char billentyu, int db, kodPar kodtabla[MAX])
-{
-  int i = 0;
-  while (i < MAX && kodtabla[i].billentyu != billentyu)
-  {
-    i++;
-  }
-
-  int keresettIndex = db - 1;
-  if (i < MAX && db < kodtabla[i].ertekDb)
-  {
-    return kodtabla[i].ertekek[keresettIndex];
-  }
-
-  // Hibás billentyű/billentyűlenyomások esetén
-  return NULL;
-}
-
-string dekodol(string kodoltSzoveg)
+char ertekKeres(char billentyu, int db)
 {
   kodPar kodtabla[] = {
       {'1', {'.', ',', '-', '?', '!', '1'}, 6},
@@ -52,11 +32,30 @@ string dekodol(string kodoltSzoveg)
       {'7', {'P', 'Q', 'R', 'S', '7'}, 5},
       {'8', {'T', 'U', 'V', '8'}, 4},
       {'9', {'W', 'X', 'Y', 'Z', '9'}, 5},
-      {'*', {'k', 'n', '*'}, 3}, // k == kisbetű, n == nagybetű
+      {'*', {'k', 'n', '*'}, 3},  // k == kisbetű, n == nagybetű
       {'0', {'+', '0'}, 2},
       {'#', {' ', '#'}, 2},
   };
+  int kodtablaHossz = sizeof(kodtabla) / sizeof(kodtabla[0]);
 
+  int i = 0;
+  while (i < kodtablaHossz && kodtabla[i].billentyu != billentyu)
+  {
+    i++;
+  }
+
+  int keresettIndex = db - 1;
+  if (i < kodtablaHossz && db < kodtabla[i].ertekDb)
+  {
+    return kodtabla[i].ertekek[keresettIndex];
+  }
+
+  // Hibás billentyű/billentyűlenyomások esetén
+  return NULL;
+}
+
+string dekodol(string kodoltSzoveg)
+{
   string dekodoltSzoveg = "";
   bool nagybetus = true;
 
@@ -72,8 +71,7 @@ string dekodol(string kodoltSzoveg)
     }
     else
     {
-
-      char aktErtek = ertekKeres(aktKar, aktKarDb, kodtabla);
+      char aktErtek = ertekKeres(aktKar, aktKarDb);
       switch (aktErtek)
       {
       case 'k':
