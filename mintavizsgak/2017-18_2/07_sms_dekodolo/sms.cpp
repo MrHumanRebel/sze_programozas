@@ -1,12 +1,32 @@
 #include <iostream>
 using namespace std;
 
+#define MAX 12
+
 struct kodPar
 {
   char billentyu;
   char ertekek[6];
   int ertekDb;
 };
+
+char ertekKeres(char billentyu, int db, kodPar kodtabla[MAX])
+{
+  int i = 0;
+  while (i < MAX && kodtabla[i].billentyu != billentyu)
+  {
+    i++;
+  }
+
+  int keresettIndex = db - 1;
+  if (i < MAX && db < kodtabla[i].ertekDb)
+  {
+    return kodtabla[i].ertekek[keresettIndex];
+  }
+
+  // Hibás billentyű/billentyűlenyomások esetén 
+  return NULL;
+}
 
 string dekodol(string kodoltSzoveg)
 {
@@ -26,6 +46,43 @@ string dekodol(string kodoltSzoveg)
   };
 
   string dekodoltSzoveg = "";
+  bool nagybetus = true;
+
+  char aktKar = kodoltSzoveg[0];
+  int aktKarDb = 1;
+
+  size_t i = 1;
+  while (i <= kodoltSzoveg.length())
+  {
+    if (kodoltSzoveg[i] == aktKar && kodoltSzoveg[i] != ' ')
+    {
+      aktKarDb++;
+    }
+    else
+    {
+
+      char aktErtek = ertekKeres(aktKar, aktKarDb, kodtabla);
+      switch (aktErtek)
+      {
+      case 'k':
+      case 'n':
+        nagybetus = aktErtek == 'n';
+        break;
+
+      default:
+        dekodoltSzoveg += nagybetus ? aktErtek : tolower(aktErtek);
+        break;
+      };
+
+      cout << aktKar << " (" << aktKarDb << " db) "
+           << "-> " << aktErtek << endl;
+
+      aktKar = kodoltSzoveg[i];
+      aktKarDb = 1;
+    }
+
+    i++;
+  }
 
   return dekodoltSzoveg;
 }
@@ -33,7 +90,9 @@ string dekodol(string kodoltSzoveg)
 int main(int argc, char const *argv[])
 {
   string tesztSzoveg = "55*3355#29999#334#337777#99996665553#2#333881 1 1";
-  dekodol(tesztSzoveg);
+  string dekodoltSzoveg = dekodol(tesztSzoveg);
+
+  cout << dekodoltSzoveg << endl;
 
   return 0;
 }
