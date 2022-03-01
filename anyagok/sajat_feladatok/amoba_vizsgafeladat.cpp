@@ -112,11 +112,44 @@ void valaszt()
 
 void ellenoriz()
 {
+    // Sima jobbra balra le fel
     for (int i = 0; i < DB; i++)
     {
         for (int j = 0; j < DB; j++)
         {
             if (tabla[i][j] == aktjel)
+            {
+                szamlalo++;
+                if (szamlalo == 5)
+                    vege = true;
+            }
+            szamlalo == 0;
+            if (vege == true)
+                szamlalo = 5;
+        }
+    }
+    // Balrol jobbra atló
+    for (int i = 0; i < DB; i++)
+    {
+        for (int j = 0; j < DB; j++)
+        {
+            if (tabla[i][j] == aktjel && i == j)
+            {
+                szamlalo++;
+                if (szamlalo == 5)
+                    vege = true;
+            }
+            szamlalo == 0;
+            if (vege == true)
+                szamlalo = 5;
+        }
+    }
+    // Jobbról balra atló
+    for (int i = 0; i < DB; i++)
+    {
+        for (int j = DB; j > DB; j--)
+        {
+            if (tabla[i][j] == aktjel && i == j)
             {
                 szamlalo++;
                 if (szamlalo == 5)
