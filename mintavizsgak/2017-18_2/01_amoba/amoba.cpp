@@ -42,16 +42,6 @@ int meretBekerese(string tipus)
   return meret;
 }
 
-meret init()
-{
-  meret palyaMeret;
-  palyaMeret.sor = meretBekerese("sorainak");
-  palyaMeret.oszlop = meretBekerese("oszlopainak");
-
-  system("clear");
-  return palyaMeret;
-}
-
 void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
 {
   for (int i = 0; i < palyaMeret.sor; i++)
@@ -61,6 +51,44 @@ void palyaFelallit(char palya[MAX][MAX], meret palyaMeret)
       palya[i][j] = '.';
     }
   }
+}
+
+void palyaBetolt(char palya[MAX][MAX], meret &palyaMeret, int &elerhetoMezok)
+{
+  // TODO: Implementáld
+  ifstream mentettPalya(F);
+
+  mentettPalya.close();
+}
+
+bool letezikMentett()
+{
+  ifstream mentettPalya(F);
+
+  bool letezik = mentettPalya.good();
+
+  mentettPalya.close();
+
+  return letezik;
+}
+
+void init(char palya[MAX][MAX], meret &palyaMeret, int &elerhetoMezok, bool folytat)
+{
+  if (folytat)
+  {
+    palyaBetolt(palya, palyaMeret, elerhetoMezok);
+  }
+  else
+  {
+    palyaMeret.sor = meretBekerese("sorainak");
+    palyaMeret.oszlop = meretBekerese("oszlopainak");
+
+    elerhetoMezok = palyaMeret.sor * palyaMeret.oszlop;
+
+    palyaFelallit(palya, palyaMeret);
+  }
+
+  // system("clear");
 }
 
 int mezoBeker(char jatekos, int meret, string tipus)
@@ -199,7 +227,7 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
 void palyaMentes(char palya[MAX][MAX], meret palyaMeret)
 {
   ofstream fajl(F);
-  
+
   for (int i = 0; i < palyaMeret.sor; i++)
   {
     for (int j = 0; j < palyaMeret.oszlop; j++)
@@ -212,15 +240,11 @@ void palyaMentes(char palya[MAX][MAX], meret palyaMeret)
   fajl.close();
 }
 
-void jatek(meret palyaMeret)
+void jatek(char palya[MAX][MAX], meret palyaMeret, int elerhetoMezok)
 {
-  char palya[MAX][MAX];
-  palyaFelallit(palya, palyaMeret);
-
   char aktJatekos = J2;
 
   bool gyozelem = false;
-  int elerhetoMezok = palyaMeret.sor * palyaMeret.oszlop;
   do
   {
     aktJatekos = aktJatekos == J1 ? J2 : J1;
@@ -251,8 +275,12 @@ void jatek(meret palyaMeret)
 
 int main(int argc, char const *argv[])
 {
-  meret palyaMeret = init();
-  jatek(palyaMeret);
+  char palya[MAX][MAX];
+  meret palyaMeret;
+  int elerhetoMezok;
+
+  init(palya, palyaMeret, elerhetoMezok, false);
+  jatek(palya, palyaMeret, elerhetoMezok);
 
   return 0;
 }
