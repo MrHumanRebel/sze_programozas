@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 #define MAX 12
@@ -9,6 +10,17 @@ struct kodPar
   char ertekek[6];
   int ertekDb;
 };
+
+string betolt(string fajlnev)
+{
+  ifstream inputFajl(fajlnev);
+
+  string sor;
+  getline(inputFajl, sor);
+  inputFajl.close();
+
+  return sor;
+}
 
 char ertekKeres(char billentyu, int db, kodPar kodtabla[MAX])
 {
@@ -24,7 +36,7 @@ char ertekKeres(char billentyu, int db, kodPar kodtabla[MAX])
     return kodtabla[i].ertekek[keresettIndex];
   }
 
-  // Hibás billentyű/billentyűlenyomások esetén 
+  // Hibás billentyű/billentyűlenyomások esetén
   return NULL;
 }
 
@@ -74,9 +86,6 @@ string dekodol(string kodoltSzoveg)
         break;
       };
 
-      cout << aktKar << " (" << aktKarDb << " db) "
-           << "-> " << aktErtek << endl;
-
       aktKar = kodoltSzoveg[i];
       aktKarDb = 1;
     }
@@ -89,10 +98,12 @@ string dekodol(string kodoltSzoveg)
 
 int main(int argc, char const *argv[])
 {
-  string tesztSzoveg = "55*3355#29999#334#337777#99996665553#2#333881 1 1";
-  string dekodoltSzoveg = dekodol(tesztSzoveg);
+  string inputFajlnev = argv[1];
+  string input = betolt(inputFajlnev);
+  cout << "Input: " << input << endl;
 
-  cout << dekodoltSzoveg << endl;
+  string dekodoltSzoveg = dekodol(input);
+  cout << "Output: " << dekodoltSzoveg << endl;
 
   return 0;
 }
