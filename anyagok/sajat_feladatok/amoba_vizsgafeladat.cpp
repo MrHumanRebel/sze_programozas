@@ -117,9 +117,14 @@ void ellenoriz()
         for (int j = 0; j < DB; j++)
         {
             if (tabla[i][j] == aktjel)
+            {
                 szamlalo++;
-            if (szamlalo == 5)
-                vege = true;
+                if (szamlalo == 5)
+                    vege = true;
+            }
+            szamlalo == 0;
+            if (vege == true)
+                szamlalo = 5;
         }
     }
 }
@@ -131,7 +136,7 @@ void nyert()
         szamlalo = 0;
         aktjel = 'X';
         ellenoriz();
-        if (jatekos == 5)
+        if (szamlalo == 5)
             cout << "Az első játékos nyert!";
     }
 
@@ -140,7 +145,7 @@ void nyert()
         szamlalo = 0;
         aktjel = 'O';
         ellenoriz();
-        if (jatekos == 5)
+        if (szamlalo == 5)
             cout << "A második játékos nyert!";
     }
 }
