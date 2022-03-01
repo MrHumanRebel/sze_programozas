@@ -123,11 +123,12 @@ void ellenoriz()
                 if (szamlalo == 5)
                     vege = true;
             }
-            szamlalo == 0;
+            szamlalo = 0;
             if (vege == true)
                 szamlalo = 5;
         }
     }
+    szamlalo = 0;
     // Balrol jobbra atló
     for (int i = 0; i < DB; i++)
     {
@@ -139,25 +140,26 @@ void ellenoriz()
                 if (szamlalo == 5)
                     vege = true;
             }
-            szamlalo == 0;
-            if (vege == true)
-                szamlalo = 5;
         }
     }
+    szamlalo = 0;
     // Jobbról balra atló
     for (int i = 0; i < DB; i++)
     {
-        for (int j = DB; j > DB; j--)
+        for (int j = DB; j > 0; j--)
         {
-            if (tabla[i][j] == aktjel && i == j)
+            if (j == DB)
+                if (tabla[i][DB] == aktjel)
+                    szamlalo++;
+            if (j != DB)
             {
-                szamlalo++;
-                if (szamlalo == 5)
-                    vege = true;
+                if (tabla[i][j] == aktjel)
+                {
+                    szamlalo++;
+                    if (szamlalo == 5)
+                        vege = true;
+                }
             }
-            szamlalo == 0;
-            if (vege == true)
-                szamlalo = 5;
         }
     }
 }
