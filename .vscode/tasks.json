@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "g++ run active file",
+      "command": "${fileDirname}/${fileBasenameNoExtension}",
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true },
+      "dependsOn": ["g++ build active file"]
+    },
+    {
+      "type": "shell",
+      "label": "g++ build active file",
+      "command": "/usr/bin/g++",
+      "args": ["-Wall", "-fno-stack-protector", "-g", "${file}", "-o", "${fileDirname}/${fileBasenameNoExtension}", "&&", "clear"],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": "build"
+    }
+  ]
+}
