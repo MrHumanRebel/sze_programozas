@@ -121,7 +121,10 @@ void ellenoriz()
             {
                 szamlalo++;
                 if (szamlalo == 5)
+                {
                     vege = true;
+                    cout << "Vízszintes vagy függőleges irányban nyert!" << endl;
+                }
             }
             szamlalo = 0;
             if (vege == true)
@@ -140,7 +143,10 @@ void ellenoriz()
                 {
                     szamlalo++;
                     if (szamlalo == 5)
+                    {
                         vege = true;
+                        cout << "Balról jobbra atlóval nyert!" << endl;
+                    }
                 }
             }
         }
@@ -162,7 +168,10 @@ void ellenoriz()
                     {
                         szamlalo++;
                         if (szamlalo == 5)
+                        {
                             vege = true;
+                            cout << "Jobbról balra atlóval nyert!" << endl;
+                        }
                     }
                 }
             }
