@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 #define MAX 20
@@ -58,6 +59,30 @@ void palyaBetolt(char palya[MAX][MAX], meret &palyaMeret, int &elerhetoMezok)
   // TODO: Implementáld
   ifstream mentettPalya(F);
 
+  string aktSor;
+
+  // A fájl első két sora a pálya sorainak és az oszlopainak száma
+  getline(mentettPalya, aktSor);
+  palyaMeret.sor = stoi(aktSor);
+
+  getline(mentettPalya, aktSor);
+  palyaMeret.oszlop = stoi(aktSor);
+
+  for (int i = 0; i < palyaMeret.sor; i++)
+  {
+    getline(mentettPalya, aktSor);
+
+    for (int j = 0; j < palyaMeret.oszlop; j++)
+    {
+      palya[i][j] = aktSor[j];
+
+      if (aktSor[j] == '.')
+      {
+        elerhetoMezok++;
+      }
+    }
+  }
+
   mentettPalya.close();
 }
 
@@ -76,6 +101,7 @@ void init(char palya[MAX][MAX], meret &palyaMeret, int &elerhetoMezok, bool foly
 {
   if (folytat)
   {
+    cout << "Most ez jó?" << endl;
     palyaBetolt(palya, palyaMeret, elerhetoMezok);
   }
   else
@@ -88,7 +114,7 @@ void init(char palya[MAX][MAX], meret &palyaMeret, int &elerhetoMezok, bool foly
     palyaFelallit(palya, palyaMeret);
   }
 
-  // system("clear");
+  system("clear");
 }
 
 int mezoBeker(char jatekos, int meret, string tipus)
@@ -226,18 +252,22 @@ void palyaMegjelenit(char palya[MAX][MAX], meret palyaMeret)
 
 void palyaMentes(char palya[MAX][MAX], meret palyaMeret)
 {
-  ofstream fajl(F);
+  ofstream mentes(F);
+
+  // A pálya méretének mentése, a betöltés megkönnyítésért
+  mentes << palyaMeret.sor << endl;
+  mentes << palyaMeret.oszlop << endl;
 
   for (int i = 0; i < palyaMeret.sor; i++)
   {
     for (int j = 0; j < palyaMeret.oszlop; j++)
     {
-      fajl << palya[i][j];
+      mentes << palya[i][j];
     }
-    fajl << endl;
+    mentes << endl;
   }
 
-  fajl.close();
+  mentes.close();
 }
 
 void jatek(char palya[MAX][MAX], meret palyaMeret, int elerhetoMezok)
@@ -279,7 +309,9 @@ int main(int argc, char const *argv[])
   meret palyaMeret;
   int elerhetoMezok;
 
-  init(palya, palyaMeret, elerhetoMezok, false);
+  bool folytat = argc == 2 && argv[1] == string("betolt");
+  init(palya, palyaMeret, elerhetoMezok, folytat);
+
   jatek(palya, palyaMeret, elerhetoMezok);
 
   return 0;
