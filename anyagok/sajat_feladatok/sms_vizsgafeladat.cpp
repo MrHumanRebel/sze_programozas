@@ -13,30 +13,45 @@ string decode()
     int akt;
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
-        if (kod[i] == '1')
+        switch (kod[i])
+        {
+        case ('1'):
             akt = 0;
-        else if (kod[i] == '2')
+            break;
+        case ('2'):
             akt = 1;
-        else if (kod[i] == '3')
+            break;
+        case ('3'):
             akt = 2;
-        else if (kod[i] == '4')
+            break;
+        case ('4'):
             akt = 3;
-        else if (kod[i] == '5')
+            break;
+        case ('5'):
             akt = 4;
-        else if (kod[i] == '6')
+            break;
+        case ('6'):
             akt = 5;
-        else if (kod[i] == '7')
+            break;
+        case ('7'):
             akt = 6;
-        else if (kod[i] == '8')
+            break;
+        case ('8'):
             akt = 7;
-        else if (kod[i] == '9')
+            break;
+        case ('9'):
             akt = 8;
-        else if (kod[i] == '*')
+            break;
+        case ('*'):
             akt = 9;
-        else if (kod[i] == '0')
+            break;
+        case ('0'):
             akt = 10;
-        else
+            break;
+        case ('#'):
             akt = 11;
+            break;
+        }
 
         if (kod[i] == kod[i + 1])
         {
