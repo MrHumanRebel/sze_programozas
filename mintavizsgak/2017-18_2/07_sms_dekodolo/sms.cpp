@@ -2,6 +2,8 @@
 #include <fstream>
 using namespace std;
 
+#define HIBAS_KAR '>'
+
 struct kodPar
 {
   char billentyu;
@@ -51,7 +53,32 @@ char ertekKeres(char billentyu, int db)
   }
 
   // Hibás billentyű/billentyűlenyomások esetén
-  return NULL;
+  return HIBAS_KAR;
+}
+
+string ertekHozzafuz(char kar, int karDb, string szoveg, bool &nagybetus)
+{
+  char aktErtek = ertekKeres(kar, karDb);
+  switch (aktErtek)
+  {
+  case 'k':
+  case 'n':
+    nagybetus = aktErtek == 'n';
+    break;
+
+  default:
+    szoveg += nagybetus ? aktErtek : tolower(aktErtek);
+    break;
+  };
+
+  return szoveg;
+}
+
+string csoportEllenoriz(string szoveg)
+{
+  bool helyes = szoveg.find(HIBAS_KAR) >= szoveg.length();
+
+  return helyes ? szoveg : "";
 }
 
 string dekodol(string kodoltSzoveg)
@@ -65,27 +92,16 @@ string dekodol(string kodoltSzoveg)
   size_t i = 1;
   while (i <= kodoltSzoveg.length())
   {
-    if (kodoltSzoveg[i] == aktKar && kodoltSzoveg[i] != ' ')
+    if (aktKar != kodoltSzoveg[i])
     {
-      aktKarDb++;
-    }
-    else
-    {
-      char aktErtek = ertekKeres(aktKar, aktKarDb);
-      switch (aktErtek)
-      {
-      case 'k':
-      case 'n':
-        nagybetus = aktErtek == 'n';
-        break;
-
-      default:
-        dekodoltSzoveg += nagybetus ? aktErtek : tolower(aktErtek);
-        break;
-      };
+      dekodoltSzoveg = aktKar == ' ' ? csoportEllenoriz(dekodoltSzoveg) : ertekHozzafuz(aktKar, aktKarDb, dekodoltSzoveg, nagybetus);
 
       aktKar = kodoltSzoveg[i];
       aktKarDb = 1;
+    }
+    else
+    {
+      aktKarDb++;
     }
 
     i++;
