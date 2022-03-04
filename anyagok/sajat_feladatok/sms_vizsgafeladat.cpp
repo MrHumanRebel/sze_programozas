@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+//Teszt kódsorozat
 // 55*3355#29999#334#337777#99996665553#2#333881 1 1
 
 string kod, uzenet;
