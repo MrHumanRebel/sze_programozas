@@ -9,7 +9,7 @@ void dekod()
 {
     for (long unsigned int i = 0; i <= input.length(); i++)
     {
-        uzenet = uzenet + input[i];
+
         if (input[i] == '$')
         {
             if (input[i + 1] == 'n' && input[i + 2] == 'e' && input[i + 3] == 'v' && input[i + 4] == '$')
@@ -17,6 +17,8 @@ void dekod()
                 uzenet + tabla[1];
             }
         }
+        else
+            uzenet = uzenet + input[i];
     }
 }
 
