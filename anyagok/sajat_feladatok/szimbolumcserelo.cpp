@@ -2,8 +2,8 @@
 using namespace std;
 
 string tabla[5]{"Gizi", "piros", "kutya", "bicikli", "Karakoszorcsog"};
-string input;
-string uzenet = 0;
+string input = "";
+string uzenet = "";
 
 void dekod()
 {
@@ -14,11 +14,11 @@ void dekod()
         {
             if (input[i + 1] == 'n' && input[i + 2] == 'e' && input[i + 3] == 'v' && input[i + 4] == '$')
             {
-                uzenet + tabla[1];
+                uzenet += tabla[0];
             }
         }
         else
-            uzenet = uzenet + input[i];
+            uzenet += input[i + 4];
     }
 }
 
