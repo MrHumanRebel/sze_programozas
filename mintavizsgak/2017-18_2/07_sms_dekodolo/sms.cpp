@@ -3,6 +3,7 @@
 using namespace std;
 
 #define HIBAS_KAR '>'
+#define TESZT_INPUT "55*3355#29999#334#337777#99996665553#2#333881 1 1"
 
 struct kodPar
 {
@@ -120,15 +121,18 @@ void mentes(string uzenet, string fajlnev)
 
 int main(int argc, char const *argv[])
 {
-  string inputFajlnev = argv[1];
-  string input = betolt(inputFajlnev);
+  // Első argumentum az inputot tartalmazó szöveges fájl
+  string input = argc == 3 ? betolt(argv[1]) : TESZT_INPUT;
   cout << "Input: " << input << endl;
 
   string dekodoltSzoveg = dekodol(input);
-  cout << "Output: " << dekodoltSzoveg << endl;
 
-  string outputFajlnev = argv[2];
-  mentes(dekodoltSzoveg, outputFajlnev);
+  if (argc == 3)
+  {
+    string outputFajlnev = argv[2];
+    mentes(dekodoltSzoveg, outputFajlnev);
+  }
+  cout << "Output: " << dekodoltSzoveg << endl;
 
   return 0;
 }
