@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 int main()
@@ -8,7 +9,7 @@ int main()
     do
     {
         cout << "Adjon meg egy magyar rendszámot!" << endl;
-        cin >> rszam;
+        getline(cin, rszam); // cin.getline(INPUT),MAXIMUM MÉRET)
         int vizsgal = 0;
 
         // elválasztásokkal
