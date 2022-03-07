@@ -2,7 +2,7 @@
 using namespace std;
 
 string tabla[5]{"Gizi", "piros", "kutya", "bicikli", "Karakoszorcsog"};
-string input = 0;
+string input;
 string uzenet = 0;
 
 void dekod()
