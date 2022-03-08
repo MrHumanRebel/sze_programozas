@@ -3,11 +3,6 @@
 #include <cstdlib>
 using namespace std;
 
-// Teszt kódsorozatok
-//  55*3355#29999#334#337777#99996665553#2#333881 1 1
-//  55*3355#29999#334#337777#9999*6665553#2#333881 1 1
-//  <<""<<>55*3355#29999#334#337777#99996665553#2#333881 1 1
-
 string kod, uzenet;
 char kodtabla[12][6]{
     {'.', ',', '-', '?', '!', '1'},
@@ -27,7 +22,6 @@ void decode()
 {
     int szamlalo = 0;
     int akt;
-
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
         bool nemjo = false;
@@ -59,10 +53,7 @@ void decode()
         { // bug protection only
         }
         else
-        {
             nemjo = true;
-            uzenet += "\0";
-        }
 
         if (nemjo == false)
         {
@@ -101,10 +92,8 @@ void olvasas()
     ifstream kodsorozat;
     kodsorozat >> std::noskipws;
     filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
-    /*
-    cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
-    getline(cin, filename);
-    */
+    /*cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
+    getline(cin, filename);*/
     kodsorozat.open(filename);
     if (!kodsorozat.is_open())
     {
@@ -122,10 +111,8 @@ void iras()
 {
     ofstream uzenetki;
     string irashely;
-    /*
-    cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
-    getline(cin, irashely);
-    */
+    /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
+    getline(cin, irashely); */
     irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
     uzenetki.open(irashely);
     uzenetki << uzenet;
