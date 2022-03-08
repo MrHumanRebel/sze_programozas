@@ -159,6 +159,7 @@ void beker()
 int main()
 {
     olvasas();
+    // beker();
     kodtablazat();
     decode();
     cout << uzenet;
