@@ -1,5 +1,10 @@
 #include <iostream>
+#include <fstream>
+#include <cstdlib>
 using namespace std;
+
+string filename;
+ifstream kodsorozat;
 
 // Teszt kódsorozatok
 //  55*3355#29999#334#337777#99996665553#2#333881 1 1
@@ -113,10 +118,34 @@ void kodtablazat()
     }
 }
 
-int main()
+void olvasas()
+{
+    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
+    /*
+    cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
+    getline(cin, filename);
+    */
+    kodsorozat.open(filename);
+    if (!kodsorozat.is_open())
+    {
+        cout << "Ilyen fájl nem létezik!" << endl;
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        kodsorozat >> kod;
+    }
+}
+
+void beker()
 {
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
     getline(cin, kod);
+}
+
+int main()
+{
+    olvasas();
     kodtablazat();
     decode();
     cout << uzenet;
