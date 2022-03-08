@@ -140,8 +140,8 @@ void beker()
 
 int main()
 {
-    // olvasas();
-    beker();
+    olvasas();
+    //beker();
     decode();
     cout << uzenet;
     iras();
