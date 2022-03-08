@@ -6,7 +6,7 @@ using namespace std;
 // Teszt kódsorozatok
 //  55*3355#29999#334#337777#99996665553#2#333881 1 1
 //  55*3355#29999#334#337777#9999*6665553#2#333881 1 1
-//  55*3355#29999#334#337777#99996665553#2#333*881 1 1
+//  <<""<<>55*3355#29999#334#337777#99996665553#2#333881 1 1
 
 string kod, uzenet;
 char kodtabla[12][6]{
@@ -27,8 +27,10 @@ void decode()
 {
     int szamlalo = 0;
     int akt;
+
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
+        bool nemjo = false;
         if (kod[i] == '1')
             akt = 0;
         else if (kod[i] == '2')
@@ -53,32 +55,41 @@ void decode()
             akt = 10;
         else if (kod[i] == '#')
             akt = 11;
-
-        if (kod[i] == kod[i + 1])
-        {
-            szamlalo++;
-        }
-        else if (szamlalo > 4)
-            uzenet += ">";
-        else if (kod[i + 1] == ' ')
-        {
-            uzenet += "\0";
-            szamlalo = 0;
+        else if (kod[i] == ' ')
+        { // bug protection only
         }
         else
         {
-            if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
-                (kod[i] == kod[i + 1] && kod[i + 2] == '*') or
-                (kod[i] == kod[i + 1] == kod[i + 2] && kod[i + 3] == '*') or
-                (kod[i] == kod[i + 1] == kod[i + 2] == kod[i + 3] && kod[i + 4] == '*'))
+            nemjo = true;
+            uzenet += "\0";
+        }
+
+        if (nemjo == false)
+        {
+            if (kod[i] == kod[i + 1]) // karakter db számláló
             {
-                uzenet += kodtabla[akt][szamlalo];
+                szamlalo++;
+            }
+            else if (kod[i + 1] == ' ') // space karakterek lekezelése
+            {
+                uzenet += "\0";
                 szamlalo = 0;
             }
             else
             {
-                uzenet += tolower(kodtabla[akt][szamlalo]);
-                szamlalo = 0;
+                if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
+                    (kod[i] == kod[i + 1] && kod[i + 2] == '*') or
+                    (kod[i] == kod[i + 1] == kod[i + 2] && kod[i + 3] == '*') or
+                    (kod[i] == kod[i + 1] == kod[i + 2] == kod[i + 3] && kod[i + 4] == '*')) // nagybetűs kondíciók max 5 hosszú
+                {
+                    uzenet += kodtabla[akt][szamlalo];
+                    szamlalo = 0;
+                }
+                else
+                {
+                    uzenet += tolower(kodtabla[akt][szamlalo]);
+                    szamlalo = 0;
+                }
             }
         }
     }
@@ -129,8 +140,8 @@ void beker()
 
 int main()
 {
-    olvasas();
-    // beker();
+    // olvasas();
+    beker();
     decode();
     cout << uzenet;
     iras();
