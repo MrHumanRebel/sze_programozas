@@ -1,7 +1,9 @@
 #include <iostream>
 using namespace std;
+
 #define SOR 6
 #define OSZL 7
+
 char tabla[SOR][OSZL];
 bool van_e_palya = false;
 bool oszl_ok = false;
