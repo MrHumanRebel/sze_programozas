@@ -124,17 +124,47 @@ string iras()
 
 string beker()
 {
-    cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
-    getline(cin, kod);
+    uzenet = "\0";
+    cout << "\nAdja meg a kódolandó szöveget!" << endl;
+    getline(cin, uzenet);
+    return uzenet;
+}
+
+string code()
+{
+    kod = "\0";
+    int szamlalo = 0;
+    for (long unsigned int i = 0; i <= uzenet.length(); i++)
+    {
+        for (long unsigned int j = 0; j <= sizeof(kodtabla[i]); j++)
+        {
+            if (uzenet[i] == kodtabla[i][j])
+            {
+                if (j != 0)
+                {
+                    szamlalo = j + 1;
+                    for (int k = 0; k <= szamlalo; k++)
+                    {
+                        kod += to_string(i);
+                    }
+                }
+                else
+                    kod += to_string(i);
+                cout << kod;
+            }
+        }
+    }
     return kod;
 }
 
 int main()
 {
     olvasas();
-    // beker();
     decode();
     cout << uzenet;
     iras();
+    beker();
+    code();
+
     return 0;
 }
