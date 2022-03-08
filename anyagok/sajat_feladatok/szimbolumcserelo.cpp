@@ -48,7 +48,7 @@ int dekod()
             if (input[i + 1] == '$')
             {
                 rszam = rand() % 9999;
-                uzenet += rszam;
+                uzenet += to_string(rszam);
                 i += sizeof(rszam);
             }
         }
