@@ -3,9 +3,6 @@
 #include <cstdlib>
 using namespace std;
 
-string filename;
-ifstream kodsorozat;
-
 // Teszt kódsorozatok
 //  55*3355#29999#334#337777#99996665553#2#333881 1 1
 //  55*3355#29999#334#337777#9999*6665553#2#333881 1 1
@@ -120,7 +117,9 @@ void kodtablazat()
 
 void olvasas()
 {
-    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
+    string filename;
+    ifstream kodsorozat;
+    filename = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
     /*
     cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
     getline(cin, filename);
@@ -137,6 +136,20 @@ void olvasas()
     }
 }
 
+void iras()
+{
+    ofstream uzenetki;
+    string irashely;
+    /*
+    cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
+    getline(cin, irashely);
+    */
+    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
+    uzenetki.open(irashely);
+    uzenetki << uzenet;
+    uzenetki.close();
+}
+
 void beker()
 {
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
@@ -149,5 +162,6 @@ int main()
     kodtablazat();
     decode();
     cout << uzenet;
+    iras();
     return 0;
 }
