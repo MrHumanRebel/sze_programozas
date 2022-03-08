@@ -133,24 +133,24 @@ string beker()
 string code()
 {
     kod = "\0";
-    int szamlalo = 0;
     for (long unsigned int i = 0; i <= uzenet.length(); i++)
     {
-        for (long unsigned int j = 0; j <= sizeof(kodtabla[i]); j++)
+        for (long unsigned int l = 0; l < 12; l++)
         {
-            if (uzenet[i] == kodtabla[i][j])
+            for (long unsigned int j = 0; j < 6; j++)
             {
-                if (j != 0)
+                if (uzenet[i] == kodtabla[l][j])
                 {
-                    szamlalo = j + 1;
-                    for (int k = 0; k <= szamlalo; k++)
+                    if (j != 0)
                     {
-                        kod += to_string(i);
+                        for (long unsigned int k = 0; k <= j; k++)
+                        {
+                            kod += to_string(l);
+                        }
                     }
+                    else
+                        kod += to_string(l);
                 }
-                else
-                    kod += to_string(i);
-                cout << kod;
             }
         }
     }
@@ -165,6 +165,7 @@ int main()
     iras();
     beker();
     code();
+    cout << kod;
 
     return 0;
 }
