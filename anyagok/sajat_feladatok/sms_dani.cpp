@@ -135,21 +135,22 @@ string code()
     kod = "\0";
     for (long unsigned int i = 0; i <= uzenet.length(); i++)
     {
-        for (long unsigned int l = 0; l < 12; l++)
+        for (long unsigned int j = 0; j < 12; j++)
         {
-            for (long unsigned int j = 0; j < 6; j++)
+            for (long unsigned int k = 0; k < 6; k++)
             {
-                if (uzenet[i] == kodtabla[l][j])
+                if (uzenet[i] == kodtabla[j][k])
                 {
-                    if (j != 0)
+                    cout << "Talált";
+                    if (k != 0)
                     {
-                        for (long unsigned int k = 0; k <= j; k++)
+                        for (long unsigned int l = 0; l <= k; l++)
                         {
-                            kod += to_string(l);
+                            kod += to_string(j);
                         }
                     }
                     else
-                        kod += to_string(l);
+                        kod += to_string(j);                    
                 }
             }
         }
