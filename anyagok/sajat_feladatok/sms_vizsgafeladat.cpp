@@ -66,12 +66,12 @@ void decode()
                 (kod[i] == kod[i + 1] == kod[i + 2] && kod[i + 3] == '*') or
                 (kod[i] == kod[i + 1] == kod[i + 2] == kod[i + 3] && kod[i + 4] == '*'))
             {
-                uzenet += toupper(kodtabla[akt][szamlalo]);
+                uzenet += kodtabla[akt][szamlalo];
                 szamlalo = 0;
             }
             else
             {
-                uzenet += kodtabla[akt][szamlalo];
+                uzenet += tolower(kodtabla[akt][szamlalo]);
                 szamlalo = 0;
             }
         }
@@ -85,21 +85,21 @@ void kodtablazat()
         if (i == 0)
             aktstring = ".,-?!1";
         if (i == 1)
-            aktstring = "abc2";
+            aktstring = "ABC2";
         if (i == 2)
-            aktstring = "def3";
+            aktstring = "DEF3";
         if (i == 3)
-            aktstring = "ghi4";
+            aktstring = "GHI4";
         if (i == 4)
-            aktstring = "jkl5";
+            aktstring = "JKL5";
         if (i == 5)
-            aktstring = "mno6";
+            aktstring = "MNO6";
         if (i == 6)
-            aktstring = "pqrs7";
+            aktstring = "PQRS7";
         if (i == 7)
-            aktstring = "tuv8";
+            aktstring = "TUV8";
         if (i == 8)
-            aktstring = "wxyz9";
+            aktstring = "WXYZ9";
         if (i == 9)
             aktstring = "";
         if (i == 10)
