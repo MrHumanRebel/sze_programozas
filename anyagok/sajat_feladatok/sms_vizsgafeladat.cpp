@@ -9,7 +9,19 @@ using namespace std;
 //  55*3355#29999#334#337777#99996665553#2#333*881 1 1
 
 string kod, uzenet;
-char kodtabla[11][5];
+char kodtabla[12][6]{
+    {'.', ',', '-', '?', '!', '1'},
+    {'A', 'B', 'C', '2'},
+    {'D', 'E', 'F', '3'},
+    {'G', 'H', 'I', '4'},
+    {'J', 'K', 'L', '5'},
+    {'M', 'N', 'O', '6'},
+    {'P', 'Q', 'R', 'S', '7'},
+    {'T', 'U', 'V', '8'},
+    {'W', 'X', 'Y', 'Z', '9'},
+    {'\0'},
+    {'+', '0'},
+    {' ', '#'}};
 
 void decode()
 {
@@ -17,45 +29,30 @@ void decode()
     int akt;
     for (long unsigned int i = 0; i <= kod.length(); i++)
     {
-        switch (kod[i])
-        {
-        case ('1'):
+        if (kod[i] == '1')
             akt = 0;
-            break;
-        case ('2'):
+        else if (kod[i] == '2')
             akt = 1;
-            break;
-        case ('3'):
+        else if (kod[i] == '3')
             akt = 2;
-            break;
-        case ('4'):
+        else if (kod[i] == '4')
             akt = 3;
-            break;
-        case ('5'):
+        else if (kod[i] == '5')
             akt = 4;
-            break;
-        case ('6'):
+        else if (kod[i] == '6')
             akt = 5;
-            break;
-        case ('7'):
+        else if (kod[i] == '7')
             akt = 6;
-            break;
-        case ('8'):
+        else if (kod[i] == '8')
             akt = 7;
-            break;
-        case ('9'):
+        else if (kod[i] == '9')
             akt = 8;
-            break;
-        case ('*'):
+        else if (kod[i] == '*')
             akt = 9;
-            break;
-        case ('0'):
+        else if (kod[i] == '0')
             akt = 10;
-            break;
-        case ('#'):
+        else if (kod[i] == '#')
             akt = 11;
-            break;
-        }
 
         if (kod[i] == kod[i + 1])
         {
@@ -86,48 +83,13 @@ void decode()
         }
     }
 }
-void kodtablazat()
-{
-    string aktstring;
-    for (int i = 0; i <= 11; i++)
-    {
-        if (i == 0)
-            aktstring = ".,-?!1";
-        if (i == 1)
-            aktstring = "ABC2";
-        if (i == 2)
-            aktstring = "DEF3";
-        if (i == 3)
-            aktstring = "GHI4";
-        if (i == 4)
-            aktstring = "JKL5";
-        if (i == 5)
-            aktstring = "MNO6";
-        if (i == 6)
-            aktstring = "PQRS7";
-        if (i == 7)
-            aktstring = "TUV8";
-        if (i == 8)
-            aktstring = "WXYZ9";
-        if (i == 9)
-            aktstring = "";
-        if (i == 10)
-            aktstring = "+0";
-        if (i == 11)
-            aktstring = " #";
-        for (long unsigned int j = 0; j <= aktstring.length(); j++)
-        {
-            kodtabla[i][j] = aktstring[j];
-        }
-    }
-}
 
 void olvasas()
 {
     string filename;
     ifstream kodsorozat;
     kodsorozat >> std::noskipws;
-    filename = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
+    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
     /*
     cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
     getline(cin, filename);
@@ -153,7 +115,7 @@ void iras()
     cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
     getline(cin, irashely);
     */
-    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
+    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
     uzenetki.open(irashely);
     uzenetki << uzenet;
     uzenetki.close();
@@ -165,21 +127,10 @@ void beker()
     getline(cin, kod);
 }
 
-void ellenoriz()
-{
-    for (int i = 0; i <= kod.length(); i++)
-    {
-        if (isalpha(kod[i]))
-        {
-        }
-    }
-}
-
 int main()
 {
     olvasas();
     // beker();
-    kodtablazat();
     decode();
     cout << uzenet;
     iras();
