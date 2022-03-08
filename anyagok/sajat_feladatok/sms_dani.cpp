@@ -18,7 +18,7 @@ char kodtabla[12][6]{
     {'+', '0'},
     {' ', '#'}};
 
-void decode()
+string decode()
 {
     int szamlalo = 0;
     int akt;
@@ -84,9 +84,10 @@ void decode()
             }
         }
     }
+    return uzenet;
 }
 
-void olvasas()
+string olvasas()
 {
     string filename;
     ifstream kodsorozat;
@@ -105,9 +106,10 @@ void olvasas()
         getline(kodsorozat, kod);
         kodsorozat.close();
     }
+    return kod;
 }
 
-void iras()
+string iras()
 {
     ofstream uzenetki;
     string irashely;
@@ -117,18 +119,20 @@ void iras()
     uzenetki.open(irashely);
     uzenetki << uzenet;
     uzenetki.close();
+    return uzenet;
 }
 
-void beker()
+string beker()
 {
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
     getline(cin, kod);
+    return kod;
 }
 
 int main()
 {
     olvasas();
-    //beker();
+    // beker();
     decode();
     cout << uzenet;
     iras();
