@@ -61,6 +61,13 @@ void decode()
         {
             szamlalo++;
         }
+        else if (szamlalo > 4)
+            uzenet += ">";
+        else if (kod[i + 1] == ' ')
+        {
+            uzenet += "\0";
+            szamlalo = 0;
+        }
         else
         {
             if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
@@ -119,6 +126,7 @@ void olvasas()
 {
     string filename;
     ifstream kodsorozat;
+    kodsorozat >> std::noskipws;
     filename = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
     /*
     cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
@@ -132,7 +140,8 @@ void olvasas()
     }
     else
     {
-        kodsorozat >> kod;
+        getline(kodsorozat, kod);
+        kodsorozat.close();
     }
 }
 
@@ -154,6 +163,16 @@ void beker()
 {
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
     getline(cin, kod);
+}
+
+void ellenoriz()
+{
+    for (int i = 0; i <= kod.length(); i++)
+    {
+        if (isalpha(kod[i]))
+        {
+        }
+    }
 }
 
 int main()
