@@ -1,8 +1,10 @@
 #include <iostream>
 using namespace std;
 
-//Teszt kódsorozat
-// 55*3355#29999#334#337777#99996665553#2#333881 1 1
+// Teszt kódsorozatok
+//  55*3355#29999#334#337777#99996665553#2#333881 1 1
+//  55*3355#29999#334#337777#9999*6665553#2#333881 1 1
+//  55*3355#29999#334#337777#99996665553#2#333*881 1 1
 
 string kod, uzenet;
 char kodtabla[11][5];
@@ -59,15 +61,20 @@ void decode()
         }
         else
         {
-            uzenet = uzenet + kodtabla[akt][szamlalo];
-            szamlalo = 0;
+            if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
+                (kod[i] == kod[i + 1] && kod[i + 2] == '*') or
+                (kod[i] == kod[i + 1] == kod[i + 2] && kod[i + 3] == '*') or
+                (kod[i] == kod[i + 1] == kod[i + 2] == kod[i + 3] && kod[i + 4] == '*'))
+            {
+                uzenet += toupper(kodtabla[akt][szamlalo]);
+                szamlalo = 0;
+            }
+            else
+            {
+                uzenet += kodtabla[akt][szamlalo];
+                szamlalo = 0;
+            }
         }
-    }
-    if ((kod[0] != kod[1] && kod[1] == '*') or (kod[0] == kod[1] && kod[2] == '*') or (kod[0] == kod[1] == kod[2] && kod[3] == '*'))
-    {
-        akt = uzenet[0];
-        akt = akt - 32;
-        uzenet[0] = char(akt);
     }
 }
 void kodtablazat()
@@ -94,25 +101,24 @@ void kodtablazat()
         if (i == 8)
             aktstring = "wxyz9";
         if (i == 9)
-            aktstring = "\0";
+            aktstring = "";
         if (i == 10)
             aktstring = "+0";
         if (i == 11)
             aktstring = " #";
-        for (int j = 0; j <= aktstring.length(); j++)
+        for (long unsigned int j = 0; j <= aktstring.length(); j++)
         {
             kodtabla[i][j] = aktstring[j];
         }
     }
-
-    decode();
 }
 
 int main()
 {
     cout << "Adja meg a dekódolandó kódsorozatot!" << endl;
-    cin >> kod;
+    getline(cin, kod);
     kodtablazat();
+    decode();
     cout << uzenet;
     return 0;
 }
