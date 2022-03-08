@@ -105,7 +105,7 @@ string billentyuKeres(char ertek, bool &nagybetus, bool ujCsoport, kodPar kodtab
 
      A sima összehasonlítás nem működik,
      hisz nem 0/1-et vagy true/false értéket ad vissza,
-     hanem egy konkrét int-et (0-t, ha nagybetűs)
+     hanem egy konkrét int-et (0-t, ha nem nagybetűs)
   */
   if (nagybetus && isupper(ertek) == 0)
   {
