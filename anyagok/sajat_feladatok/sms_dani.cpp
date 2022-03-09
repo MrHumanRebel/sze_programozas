@@ -3,7 +3,7 @@
 #include <cstdlib>
 using namespace std;
 
-string kod, uzenet;
+string kod, uzenet, ujkod, ujuzenet;
 char kodtabla[12][6]{
     {'.', ',', '-', '?', '!', '1'},
     {'A', 'B', 'C', '2'},
@@ -126,47 +126,54 @@ string beker()
 {
     uzenet = "\0";
     cout << "\nAdja meg a kódolandó szöveget!" << endl;
-    getline(cin, uzenet);
-    return uzenet;
+    getline(cin, ujuzenet);
+    return ujuzenet;
 }
 
 string code()
 {
-    kod = "\0";
-    for (long unsigned int i = 0; i <= uzenet.length(); i++)
+    long unsigned int i = 0;
+    while (i <= ujuzenet.length())
     {
         for (long unsigned int j = 0; j < 12; j++)
         {
-            for (long unsigned int k = 0; k < 6; k++)
+            for (long unsigned int k = 0; k < sizeof(kodtabla[j]); k++)
             {
-                if (uzenet[i] == kodtabla[j][k])
+                // cout << kodtabla[j][k];
+                if (ujuzenet[i] == kodtabla[j][k])
                 {
-                    cout << "Talált";
                     if (k != 0)
                     {
-                        for (long unsigned int l = 0; l <= k; l++)
+                        for (long unsigned int l = 0; l < k; l++)
                         {
-                            kod += to_string(j);
+                            ujkod += to_string(j);
                         }
                     }
                     else
-                        kod += to_string(j);                    
+                        ujkod += to_string(j);
+                }
+                else
+                {
+                    i++;
                 }
             }
         }
     }
-    return kod;
+    return ujkod;
 }
 
 int main()
 {
+    // Decode
     olvasas();
     decode();
     cout << uzenet;
     iras();
+    // Code
     beker();
     code();
-    cout << kod;
+    cout << "\n"
+         << ujkod;
 
     return 0;
 }
