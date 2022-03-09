@@ -147,14 +147,19 @@ string code()
                         for (long unsigned int l = 0; l < k; l++)
                         {
                             ujkod += to_string(j);
+                            i++;
                         }
                     }
                     else
+                    {
                         ujkod += to_string(j);
+                        i++;
+                    }
                 }
                 else
                 {
-                    i++;
+                    if (j == 11 && k == (sizeof(kodtabla[j]) - 1))
+                        i++;
                 }
             }
         }
