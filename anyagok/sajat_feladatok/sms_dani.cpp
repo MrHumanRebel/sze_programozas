@@ -67,7 +67,7 @@ string decode()
                 uzenet += "\0";
                 szamlalo = 0;
             }
-            else if (szamlalo >= kodtablameret[akt]) // több ugyan olyan karakter egymás után
+            else if (szamlalo >= kodtablameret[akt]) // több ugyan olyan karakter egymás után BETA
             {
                 int id = szamlalo / kodtablameret[akt];
                 if (id % 2 == 0)
