@@ -136,6 +136,9 @@ string code()
     bool megvan = false;
     for (long unsigned int i = 0; i < ujuzenet.length(); i++)
     {
+        if (isupper(uzenet[i]))
+            
+            
         megvan = false;
         for (int j = 0; j < 12; j++)
         {
@@ -155,6 +158,8 @@ string code()
                     {
                         ujkod += to_string(j + 1);
                     }
+                    if (isupper(ujuzenet[i]))
+                        ujkod += '*';
                 }
             }
         }
