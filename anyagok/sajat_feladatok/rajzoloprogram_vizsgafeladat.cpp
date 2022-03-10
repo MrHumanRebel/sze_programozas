@@ -47,7 +47,7 @@ void mozog()
             x++;
         if (akt == DOWN)
             x--;
-        }
+    }
 }
 
 void alapvaszon()
