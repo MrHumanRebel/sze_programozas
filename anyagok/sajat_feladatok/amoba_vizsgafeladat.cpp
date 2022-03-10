@@ -40,10 +40,11 @@ void beker()
     {
         cout << "Oszlop: ";
         cin >> oszl;
-        if (oszl >= 65 && oszl <= 90) // Betűk
+        oszl = toupper(oszl);
+        if ((oszl >= 'a' && oszl <= 'z') or (oszl >= 'A' && oszl <= 'Z')) // Betűk
             oszl_ok = true;
         else
-            cout << "Adjon meg A-J tartományba tartozó angol nagybetűt! ";
+            cout << "Adjon meg A-J tartományba tartozó betűt! ";
 
     } while (oszl_ok == false);
 
@@ -110,7 +111,7 @@ void valaszt()
     }
 }
 
-void ellenoriz() //BETA VERSION
+void ellenoriz() // ALL BETA VERSION
 {
     // Sima jobbra balra le fel
     for (int i = 0; i < DB; i++)
