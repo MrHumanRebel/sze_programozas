@@ -10,6 +10,8 @@ bool oszl_ok = false;
 char be;
 int oszlszam, jatekos;
 
+//BETA VERSION!
+
 int alappalya()
 {
     for (int i = 0; i <= SOR; i++)
