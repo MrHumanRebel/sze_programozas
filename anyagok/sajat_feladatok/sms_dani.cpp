@@ -6,17 +6,17 @@ using namespace std;
 string kod, uzenet, ujkod, ujuzenet;
 char kodtabla[12][6]{
     {'.', ',', '-', '?', '!', '1'},
-    {'A', 'B', 'C', '2', '\0', '\0'},
-    {'D', 'E', 'F', '3', '\0', '\0'},
-    {'G', 'H', 'I', '4', '\0', '\0'},
-    {'J', 'K', 'L', '5', '\0', '\0'},
-    {'M', 'N', 'O', '6', '\0', '\0'},
-    {'P', 'Q', 'R', 'S', '7', '\0'},
-    {'T', 'U', 'V', '8', '\0', '\0'},
-    {'W', 'X', 'Y', 'Z', '9', '\0'},
-    {'\0', '\0', '\0', '\0', '\0', '\0'},
-    {'+', '0', '\0', '\0', '\0', '\0'},
-    {' ', '#', '\0', '\0', '\0', '\0'}};
+    {'A', 'B', 'C', '2'},
+    {'D', 'E', 'F', '3'},
+    {'G', 'H', 'I', '4'},
+    {'J', 'K', 'L', '5'},
+    {'M', 'N', 'O', '6'},
+    {'P', 'Q', 'R', 'S', '7'},
+    {'T', 'U', 'V', '8'},
+    {'W', 'X', 'Y', 'Z', '9'},
+    {'\0'},
+    {'+', '0'},
+    {' ', '#'}};
 
 string decode()
 {
@@ -69,9 +69,9 @@ string decode()
             else
             {
                 if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
-                    (kod[i] == kod[i + 1] && kod[i + 2] == '*') or
-                    (kod[i] == kod[i + 1] == kod[i + 2] && kod[i + 3] == '*') or
-                    (kod[i] == kod[i + 1] == kod[i + 2] == kod[i + 3] && kod[i + 4] == '*')) // nagybetűs kondíciók max 5 hosszú
+                    (szamlalo == 2 && kod[i + 2] == '*') or
+                    (szamlalo == 3 && kod[i + 3] == '*') or
+                    (szamlalo == 4 && kod[i + 4] == '*')) // nagybetűs kondíciók
                 {
                     uzenet += kodtabla[akt][szamlalo];
                     szamlalo = 0;
@@ -92,7 +92,7 @@ string olvasas()
     string filename;
     ifstream kodsorozat;
     kodsorozat >> std::noskipws;
-    filename = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //
+    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
     /*cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
     getline(cin, filename);*/
     kodsorozat.open(filename);
@@ -115,7 +115,7 @@ string iras()
     string irashely;
     /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
     getline(cin, irashely); */
-    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"";
+    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
     uzenetki.open(irashely);
     uzenetki << uzenet;
     uzenetki.close();
@@ -127,14 +127,12 @@ string beker()
     uzenet = "\0";
     cout << "\nAdja meg a kódolandó szöveget!" << endl;
     getline(cin, ujuzenet);
-    // cout << ujuzenet << endl;
     return ujuzenet;
 }
 
 string code()
 {
     bool megvan = false;
-
     for (long unsigned int i = 0; i < ujuzenet.length(); i++)
     {
         bool lower = false;
@@ -181,7 +179,6 @@ int main()
     // Code
     beker();
     code();
-    cout << "\n"
-         << ujkod;
+    cout << ujkod;
     return 0;
 }
