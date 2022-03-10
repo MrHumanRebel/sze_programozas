@@ -113,6 +113,7 @@ void valaszt()
 
 void ellenoriz() // ALL BETA VERSION
 {
+    int sorszamlal = 0, oszlszamlal = 0;
     // Sima jobbra balra le fel
     for (int i = 0; i < DB; i++)
     {
@@ -120,16 +121,31 @@ void ellenoriz() // ALL BETA VERSION
         {
             if (tabla[i][j] == aktjel)
             {
-                szamlalo++;
-                if (szamlalo == 5)
+                sorszamlal++;
+                if (sorszamlal == 5)
                 {
                     vege = true;
-                    cout << "Vízszintes vagy függőleges irányban nyert!" << endl;
+                    cout << "Vízszintes irányban nyert!" << endl;
                 }
             }
-            szamlalo = 0;
+            if (tabla[j][i] == aktjel)
+            {
+                oszlszamlal++;
+                if (oszlszamlal == 5)
+                {
+                    vege = true;
+                    cout << "Függőleges irányban nyert!" << endl;
+                }
+            }
             if (vege == true)
-                szamlalo = 5;
+            {
+                sorszamlal = 5;
+                oszlszamlal = 5;
+            }
+            if (j == DB - 1)
+                sorszamlal = 0;
+            if (i == DB - 1)
+                oszlszamlal = 0;
         }
     }
     if (vege != true)
@@ -138,7 +154,7 @@ void ellenoriz() // ALL BETA VERSION
         // Balrol jobbra atló
         for (int i = 0; i < DB; i++)
         {
-            for (int j = 0; j < DB; j++)
+            for (int j = 0; j < DB - 4; j++) //"G" sornál álljon le
             {
                 if (tabla[i][j] == aktjel && i == j)
                 {
@@ -158,21 +174,15 @@ void ellenoriz() // ALL BETA VERSION
         // Jobbról balra atló
         for (int i = 0; i < DB; i++)
         {
-            for (int j = DB; j > 0; j--)
+            for (int j = DB - 4; j > 0; j--) //"D" sornál álljon le
             {
-                if (j == DB)
-                    if (tabla[i][DB] == aktjel)
-                        szamlalo++;
-                if (j != DB)
+                if (tabla[i][j] == aktjel && ((DB + 1) - i) == j)
                 {
-                    if (tabla[i][j] == aktjel)
+                    szamlalo++;
+                    if (szamlalo == 5)
                     {
-                        szamlalo++;
-                        if (szamlalo == 5)
-                        {
-                            vege = true;
-                            cout << "Jobbról balra atlóval nyert!" << endl;
-                        }
+                        vege = true;
+                        cout << "Jobbról jobbra atlóval nyert!" << endl;
                     }
                 }
             }
@@ -184,7 +194,7 @@ void nyert()
 {
     if (jatekos == 1)
     {
-        szamlalo = 0;
+        // szamlalo = 0;
         aktjel = 'X';
         ellenoriz();
         if (szamlalo == 5)
@@ -193,7 +203,7 @@ void nyert()
 
     if (jatekos == 2)
     {
-        szamlalo = 0;
+        // szamlalo = 0;
         aktjel = 'O';
         ellenoriz();
         if (szamlalo == 5)
