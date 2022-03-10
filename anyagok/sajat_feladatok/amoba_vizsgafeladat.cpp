@@ -110,7 +110,7 @@ void valaszt()
     }
 }
 
-void ellenoriz()
+void ellenoriz() //BETA VERSION
 {
     // Sima jobbra balra le fel
     for (int i = 0; i < DB; i++)
