@@ -17,6 +17,7 @@ char kodtabla[12][6]{
     {'\0'},
     {'+', '0'},
     {' ', '#'}};
+int kodtablameret[12]{6, 4, 4, 4, 4, 4, 5, 4, 5, 1, 2, 2};
 
 string decode()
 {
@@ -64,6 +65,26 @@ string decode()
             else if (kod[i + 1] == ' ') // space karakterek lekezelése
             {
                 uzenet += "\0";
+                szamlalo = 0;
+            }
+            else if (szamlalo >= kodtablameret[akt]) // több ugyan olyan karakter egymás után
+            {
+                int id = szamlalo / kodtablameret[akt];
+                if (id % 2 == 0)
+                {
+                    for (int i = 0; i <= id; i++)
+                    {
+                        uzenet += tolower(kodtabla[akt][id]);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i <= id; i++)
+                    {
+                        uzenet += tolower(kodtabla[akt][id+1]);
+                    }
+                }
+
                 szamlalo = 0;
             }
             else
