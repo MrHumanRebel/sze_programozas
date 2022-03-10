@@ -150,19 +150,24 @@ string code()
                 if (ujuzenet[i] == kodtabla[j][k] && megvan == false)
                 {
                     megvan = true;
-                    if (k != 0)
+                    if (ujuzenet[i] == ' ')
+                        ujkod += '#';
+                    else
                     {
-                        for (int l = 0; l <= k; l++)
+                        if (k != 0)
+                        {
+                            for (int l = 0; l <= k; l++)
+                            {
+                                ujkod += to_string(j + 1);
+                            }
+                        }
+                        else
                         {
                             ujkod += to_string(j + 1);
                         }
+                        if (isupper(ujuzenet[i]) && lower == false)
+                            ujkod += '*';
                     }
-                    else
-                    {
-                        ujkod += to_string(j + 1);
-                    }
-                    if (isupper(ujuzenet[i]) && lower == false)
-                        ujkod += '*';
                 }
             }
         }
