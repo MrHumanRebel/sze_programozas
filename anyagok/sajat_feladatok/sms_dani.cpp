@@ -141,23 +141,19 @@ string code()
         {
             for (int k = 0; k < 6; k++)
             {
-                // cout << "Kezdő" << i << j << k;
-                if (ujuzenet[i] == kodtabla[j][k] && megvan == false && i <= ujuzenet.length())
+                if (ujuzenet[i] == kodtabla[j][k] && megvan == false)
                 {
                     megvan = true;
-                    // cout << "Megvan! " << i << j << k << "\t";
                     if (k != 0)
                     {
                         for (int l = 0; l <= k; l++)
                         {
                             ujkod += to_string(j + 1);
                         }
-                        // cout << "Az elem NEM az első helyen van " << i << j << k << "\t";
                     }
                     else
                     {
                         ujkod += to_string(j + 1);
-                        // cout << "Az elem az első helyen van " << i << j << k << "\t";
                     }
                 }
             }
