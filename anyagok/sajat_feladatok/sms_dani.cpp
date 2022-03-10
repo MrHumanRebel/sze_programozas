@@ -6,17 +6,17 @@ using namespace std;
 string kod, uzenet, ujkod, ujuzenet;
 char kodtabla[12][6]{
     {'.', ',', '-', '?', '!', '1'},
-    {'A', 'B', 'C', '2'},
-    {'D', 'E', 'F', '3'},
-    {'G', 'H', 'I', '4'},
-    {'J', 'K', 'L', '5'},
-    {'M', 'N', 'O', '6'},
-    {'P', 'Q', 'R', 'S', '7'},
-    {'T', 'U', 'V', '8'},
-    {'W', 'X', 'Y', 'Z', '9'},
-    {'\0'},
-    {'+', '0'},
-    {' ', '#'}};
+    {'A', 'B', 'C', '2', '\0', '\0'},
+    {'D', 'E', 'F', '3', '\0', '\0'},
+    {'G', 'H', 'I', '4', '\0', '\0'},
+    {'J', 'K', 'L', '5', '\0', '\0'},
+    {'M', 'N', 'O', '6', '\0', '\0'},
+    {'P', 'Q', 'R', 'S', '7', '\0'},
+    {'T', 'U', 'V', '8', '\0', '\0'},
+    {'W', 'X', 'Y', 'Z', '9', '\0'},
+    {'\0', '\0', '\0', '\0', '\0', '\0'},
+    {'+', '0', '\0', '\0', '\0', '\0'},
+    {' ', '#', '\0', '\0', '\0', '\0'}};
 
 string decode()
 {
@@ -92,7 +92,7 @@ string olvasas()
     string filename;
     ifstream kodsorozat;
     kodsorozat >> std::noskipws;
-    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
+    filename = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //
     /*cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
     getline(cin, filename);*/
     kodsorozat.open(filename);
@@ -115,7 +115,7 @@ string iras()
     string irashely;
     /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
     getline(cin, irashely); */
-    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
+    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"";
     uzenetki.open(irashely);
     uzenetki << uzenet;
     uzenetki.close();
@@ -127,39 +127,38 @@ string beker()
     uzenet = "\0";
     cout << "\nAdja meg a kódolandó szöveget!" << endl;
     getline(cin, ujuzenet);
+    // cout << ujuzenet << endl;
     return ujuzenet;
 }
 
 string code()
 {
-    long unsigned int i = 0;
-    while (i <= ujuzenet.length())
+    bool megvan = false;
+    for (long unsigned int i = 0; i < ujuzenet.length(); i++)
     {
-        for (long unsigned int j = 0; j < 12; j++)
+        megvan = false;
+        for (int j = 0; j < 12; j++)
         {
-            for (long unsigned int k = 0; k < sizeof(kodtabla[j]); k++)
+            for (int k = 0; k < 6; k++)
             {
-                // cout << kodtabla[j][k];
-                if (ujuzenet[i] == kodtabla[j][k])
+                // cout << "Kezdő" << i << j << k;
+                if (ujuzenet[i] == kodtabla[j][k] && megvan == false && i <= ujuzenet.length())
                 {
+                    megvan = true;
+                    // cout << "Megvan! " << i << j << k << "\t";
                     if (k != 0)
                     {
-                        for (long unsigned int l = 0; l < k; l++)
+                        for (int l = 0; l <= k; l++)
                         {
-                            ujkod += to_string(j);
-                            i++;
+                            ujkod += to_string(j + 1);
                         }
+                        // cout << "Az elem NEM az első helyen van " << i << j << k << "\t";
                     }
                     else
                     {
-                        ujkod += to_string(j);
-                        i++;
+                        ujkod += to_string(j + 1);
+                        // cout << "Az elem az első helyen van " << i << j << k << "\t";
                     }
-                }
-                else
-                {
-                    if (j == 11 && k == (sizeof(kodtabla[j]) - 1))
-                        i++;
                 }
             }
         }
