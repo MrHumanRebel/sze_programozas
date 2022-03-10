@@ -3,6 +3,7 @@
 using namespace std;
 
 // Szia $nev$! Lattalak $telepules$ fele menet, amint hajtottad a $szin$ $jarmu$det, a $allat$ pedig kergetett. Sok $$-t adtam volna akkor es ott egy fenykepezogepert :) [vege]
+// Szevasz $nev$!!! Néztem tegnap este a $allat$-ról szóló kisfilmet a Duna TV-n, $telepules$-en egy $jarmu$ elütötte a $szin$ színű buzit. Sok $$-t adtam volna hogy felvegyem, a $allat$t. [vege]
 
 string tabla[5]{"Gizi", "piros", "kutya", "bicikli", "Karakoszorcsog"};
 string input = "";
