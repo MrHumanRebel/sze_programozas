@@ -69,9 +69,10 @@ string decode()
             else
             {
                 if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
-                    (szamlalo == 2 && kod[i + 2] == '*') or
-                    (szamlalo == 3 && kod[i + 3] == '*') or
-                    (szamlalo == 4 && kod[i + 4] == '*')) // nagybetűs kondíciók
+                    (szamlalo == 1 && kod[i + 2] == '*') or
+                    (szamlalo == 2 && kod[i + 3] == '*') or
+                    (szamlalo == 3 && kod[i + 4] == '*') or
+                    (szamlalo == 4 && kod[i + 5] == '*')) // nagybetűs kondíciók
                 {
                     uzenet += kodtabla[akt][szamlalo];
                     szamlalo = 0;
