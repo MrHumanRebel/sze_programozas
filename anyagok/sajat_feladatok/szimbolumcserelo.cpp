@@ -2,6 +2,8 @@
 #include <cstring>
 using namespace std;
 
+// Szia $nev$! Lattalak $telepules$ fele menet, amint hajtottad a $szin$ $jarmu$det, a $allat$ pedig kergetett. Sok $$-t adtam volna akkor es ott egy fenykepezogepert :) [vege]
+
 string tabla[5]{"Gizi", "piros", "kutya", "bicikli", "Karakoszorcsog"};
 string input = "";
 string uzenet = "";
@@ -30,26 +32,26 @@ int dekod()
             if (input[i + 1] == 'a' && input[i + 2] == 'l' && input[i + 3] == 'l' && input[i + 4] == 'a' && input[i + 5] == 't' && input[i + 6] == '$')
             {
                 uzenet += tabla[2];
-                i += tabla[2].length();
+                i += tabla[2].length()+1;
             }
             // jarmu
             if (input[i + 1] == 'j' && input[i + 2] == 'a' && input[i + 3] == 'r' && input[i + 4] == 'm' && input[i + 5] == 'u' && input[i + 6] == '$')
             {
                 uzenet += tabla[3];
-                i += tabla[3].length();
+                i += tabla[3].length()-1;
             }
             // telepules
             if (input[i + 1] == 't' && input[i + 2] == 'e' && input[i + 3] == 'l' && input[i + 4] == 'e' && input[i + 5] == 'p' && input[i + 6] == 'u' && input[i + 7] == 'l' && input[i + 8] == 'e' && input[i + 9] == 's' && input[i + 10] == '$')
             {
                 uzenet += tabla[4];
-                i += tabla[4].length();
+                i += tabla[4].length()-4;
             }
             // randomszam
             if (input[i + 1] == '$')
             {
                 rszam = rand() % 9999;
                 uzenet += to_string(rszam);
-                i += sizeof(rszam);
+                i += sizeof(rszam)-3;
             }
         }
         else if (input[i] == '[' && input[i + 1] == 'v' && input[i + 2] == 'e' && input[i + 3] == 'g' && input[i + 4] == 'e' && input[i + 5] == ']')
