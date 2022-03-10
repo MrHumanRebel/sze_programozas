@@ -67,26 +67,6 @@ string decode()
                 uzenet += "\0";
                 szamlalo = 0;
             }
-            else if (szamlalo >= kodtablameret[akt]) // több ugyan olyan karakter egymás után BETA
-            {
-                int id = szamlalo / kodtablameret[akt];
-                if (id % 2 == 0)
-                {
-                    for (int i = 0; i <= id; i++)
-                    {
-                        uzenet += tolower(kodtabla[akt][id]);
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i <= id; i++)
-                    {
-                        uzenet += tolower(kodtabla[akt][id+1]);
-                    }
-                }
-
-                szamlalo = 0;
-            }
             else
             {
                 if ((kod[i] != kod[i + 1] && kod[i + 1] == '*') or
@@ -189,6 +169,8 @@ string code()
                         if (isupper(ujuzenet[i]) && lower == false)
                             ujkod += '*';
                     }
+                    if (ujuzenet[i] == ujuzenet[i + 1])
+                        ujkod += ' ';
                 }
             }
         }
