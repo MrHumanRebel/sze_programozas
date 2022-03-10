@@ -134,11 +134,15 @@ string beker()
 string code()
 {
     bool megvan = false;
+
     for (long unsigned int i = 0; i < ujuzenet.length(); i++)
     {
-        if (isupper(uzenet[i]))
-            
-            
+        bool lower = false;
+        if (islower(ujuzenet[i]))
+        {
+            lower = true;
+            ujuzenet[i] = toupper(ujuzenet[i]);
+        }
         megvan = false;
         for (int j = 0; j < 12; j++)
         {
@@ -158,7 +162,7 @@ string code()
                     {
                         ujkod += to_string(j + 1);
                     }
-                    if (isupper(ujuzenet[i]))
+                    if (isupper(ujuzenet[i]) && lower == false)
                         ujkod += '*';
                 }
             }
@@ -179,6 +183,5 @@ int main()
     code();
     cout << "\n"
          << ujkod;
-
     return 0;
 }
