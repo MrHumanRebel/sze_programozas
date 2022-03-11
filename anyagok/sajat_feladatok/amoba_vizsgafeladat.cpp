@@ -1,15 +1,15 @@
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
+
 #define DB 10
+
 char tabla[DB][DB];
-bool van_e_palya = false;
-bool vege;
-bool sor_ok, oszl_ok = false;
+
+bool sor_ok = false, oszl_ok = false, vege = false, van_e_palya = false;
 int sor, c_oszl, jatekos, szamlalo;
 int db = 0;
-char oszl;
-char aktjel;
+char oszl, aktjel;
 
 void alap_palya()
 {
@@ -29,7 +29,7 @@ void beker()
     {
         cout << "Sor: ";
         cin >> sor;
-        if (sor >= 1 && sor <= 10) // Számok
+        if (sor >= 1 && sor <= 10)
             sor_ok = true;
         else
             cout << "Adjon meg 1-" << DB << " tartományba tartozó számot! ";
@@ -41,30 +41,34 @@ void beker()
         cout << "Oszlop: ";
         cin >> oszl;
         oszl = toupper(oszl);
-        if ((oszl >= 'a' && oszl <= 'z') or (oszl >= 'A' && oszl <= 'Z')) // Betűk
+        if ((oszl >= 'a' && oszl <= 'z') or (oszl >= 'A' && oszl <= 'Z'))
             oszl_ok = true;
         else
             cout << "Adjon meg A-J tartományba tartozó betűt! ";
 
     } while (oszl_ok == false);
 
-    db = 0;
-    for (int i = 65; i <= 90; i++)
+    if (oszl_ok == true)
     {
-        if (oszl == i)
+        db = 0;
+        for (int i = 65; i <= 90; i++)
         {
-            c_oszl = (oszl - (oszl - 1)) + db;
-            cout << "Az oszlop sorszáma:\t" << c_oszl << endl;
+            if (oszl == i)
+            {
+                c_oszl = (oszl - (oszl - 1)) + db;
+                cout << "Az oszlop sorszáma: " << c_oszl << "\n"
+                     << endl;
+            }
+            else
+                db = db + 1;
         }
-        else
-            db = db + 1;
     }
 }
 
 void allas()
 {
     cout << "  \t";
-    for (int i = 65; i < (65 + DB); i++) // 65 => "A" betű ASCII
+    for (int i = 'A'; i < ('A' + DB); i++)
     {
         cout << char(i);
     }
@@ -202,7 +206,6 @@ void nyert()
 {
     if (jatekos == 1)
     {
-        // szamlalo = 0;
         aktjel = 'X';
         ellenoriz();
         if (szamlalo == 5)
@@ -211,7 +214,6 @@ void nyert()
 
     if (jatekos == 2)
     {
-        // szamlalo = 0;
         aktjel = 'O';
         ellenoriz();
         if (szamlalo == 5)
@@ -225,16 +227,13 @@ int main()
     cout << "Amőba játék\n"
          << endl;
 
-    // Ha még nincs nincs pálya generáljuk egyet
     if (van_e_palya == false)
         alap_palya();
 
-    // Alap állás printelése
     allas();
     vege = false;
     do
     {
-        // system("clear"); // Console clear
         cout << "Első játékos lépése:" << endl;
         jatekos = 1;
         beker();
@@ -244,7 +243,6 @@ int main()
         if (vege == true)
             return 0;
 
-        // system("clear"); // Console clear
         cout << "Második játékos lépése:" << endl;
         jatekos = 2;
         beker();
