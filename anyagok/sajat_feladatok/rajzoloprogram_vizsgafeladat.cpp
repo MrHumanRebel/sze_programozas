@@ -23,14 +23,19 @@ string beker;
 void mozog()
 {
     string akt;
+    string db;
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
         bool stop = false;
         while (stop == false)
         {
-            if (beker[i] != ' ')
+            if (beker[i] != ' ' && isalpha(beker[i]))
             {
                 akt += beker[i];
+            }
+            else if (beker[i] != ' ' && isdigit(beker[i]))
+            {
+                db += beker[i];
             }
             else
                 stop = true;
@@ -40,13 +45,35 @@ void mozog()
         if (akt == FEL)
             rajzol = false;
         if (akt == LEFT)
-            y++;
+            for (int j = 0; j < stoi(db); j++)
+            {
+                y++;
+                if (rajzol == true)
+                    vaszon[x][y] = 'X';
+            }
         if (akt == RIGHT)
-            y--;
+            for (int j = 0; j < stoi(db); j++)
+            {
+                y--;
+                if (rajzol == true)
+                    vaszon[x][y] = 'X';
+            }
         if (akt == UP)
-            x++;
+            for (int j = 0; j < stoi(db); j++)
+            {
+                x++;
+                if (rajzol == true)
+                    vaszon[x][y] = 'X';
+            }
         if (akt == DOWN)
-            x--;
+            for (int j = 0; j < stoi(db); j++)
+            {
+                x--;
+                if (rajzol == true)
+                    vaszon[x][y] = 'X';
+            }
+        akt = "\0";
+        db = "\0";
     }
 }
 
