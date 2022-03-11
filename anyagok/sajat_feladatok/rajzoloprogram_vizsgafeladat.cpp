@@ -72,8 +72,11 @@ void mozog()
                 if (rajzol == true)
                     vaszon[x][y] = 'X';
             }
-        akt = "\0";
-        db = "\0";
+        if (beker[i] == ' ')
+        {
+            akt = "\0";
+            db = "\0";
+        }
     }
 }
 
