@@ -182,15 +182,15 @@ void ellenoriz() // ALL BETA VERSION
         // Jobbról balra atló
         for (int i = 0; i < DB; i++)
         {
-            for (int j = DB - 4; j > 0; j--) //"D" sornál álljon le
+            for (int j = DB - 1; j > 4; j--) //"D" sornál álljon le
             {
-                if (tabla[i][j] == aktjel && ((DB + 1) - i) == j)
+                if (tabla[i][j] == aktjel && (DB - (i + 1) == j))
                 {
                     szamlalo++;
                     if (szamlalo == 5)
                     {
                         vege = true;
-                        cout << "Jobbról jobbra atlóval nyert!" << endl;
+                        cout << "Jobbról balra atlóval nyert!" << endl;
                     }
                 }
             }
