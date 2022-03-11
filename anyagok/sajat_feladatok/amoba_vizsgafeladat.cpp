@@ -119,19 +119,27 @@ void ellenoriz() // ALL BETA VERSION
     {
         for (int j = 0; j < DB; j++)
         {
-            if (tabla[i][j] == aktjel)
+            if (tabla[i][j] == aktjel && vege == false)
             {
                 sorszamlal++;
-                if (sorszamlal == 5)
+                if (sorszamlal == 5 &&
+                    tabla[i][j] == tabla[i][j + 1] &&
+                    tabla[i][j + 1] == tabla[i][j + 2] &&
+                    tabla[i][j + 2] == tabla[i][j + 3] &&
+                    tabla[i][j + 3] == tabla[i][j + 4])
                 {
                     vege = true;
                     cout << "Vízszintes irányban nyert!" << endl;
                 }
             }
-            if (tabla[j][i] == aktjel)
+            if (tabla[j][i] == aktjel && vege == false)
             {
                 oszlszamlal++;
-                if (oszlszamlal == 5)
+                if (oszlszamlal == 5 &&
+                    tabla[i][j] == tabla[i + 1][j] &&
+                    tabla[i + 1][j] == tabla[i + 2][j] &&
+                    tabla[i + 2][j] == tabla[i + 3][j] &&
+                    tabla[i + 3][j] == tabla[i + 4][j])
                 {
                     vege = true;
                     cout << "Függőleges irányban nyert!" << endl;
