@@ -126,7 +126,7 @@ void ellenoriz() // ALL BETA VERSION
             if (tabla[i][j] == aktjel && vege == false)
             {
                 sorszamlal++;
-                if (sorszamlal == 5 &&
+                if (sorszamlal >= 5 &&
                     tabla[i][j] == tabla[i][j + 1] &&
                     tabla[i][j + 1] == tabla[i][j + 2] &&
                     tabla[i][j + 2] == tabla[i][j + 3] &&
@@ -136,10 +136,10 @@ void ellenoriz() // ALL BETA VERSION
                     cout << "Vízszintes irányban nyert!" << endl;
                 }
             }
-            if (tabla[j][i] == aktjel && vege == false)
+            if (tabla[i][j] == aktjel && vege == false)
             {
                 oszlszamlal++;
-                if (oszlszamlal == 5 &&
+                if (oszlszamlal >= 5 &&
                     tabla[i][j] == tabla[i + 1][j] &&
                     tabla[i + 1][j] == tabla[i + 2][j] &&
                     tabla[i + 2][j] == tabla[i + 3][j] &&
@@ -171,7 +171,7 @@ void ellenoriz() // ALL BETA VERSION
                 if (tabla[i][j] == aktjel && i == j)
                 {
                     szamlalo++;
-                    if (szamlalo == 5)
+                    if (szamlalo >= 5)
                     {
                         vege = true;
                         cout << "Balról jobbra atlóval nyert!" << endl;
@@ -191,7 +191,7 @@ void ellenoriz() // ALL BETA VERSION
                 if (tabla[i][j] == aktjel && (DB - (i + 1) == j))
                 {
                     szamlalo++;
-                    if (szamlalo == 5)
+                    if (szamlalo >= 5)
                     {
                         vege = true;
                         cout << "Jobbról balra atlóval nyert!" << endl;
