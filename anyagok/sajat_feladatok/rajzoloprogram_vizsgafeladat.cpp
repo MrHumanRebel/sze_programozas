@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+
 using namespace std;
 
 // Vászon mérete
@@ -33,10 +35,12 @@ void mozog()
         }
         else
         {
-            // String to int konverzió STOI használata nélkül => STOI nem működik!
-            int hossz = aktdb.length();
-            for (int i = 0; i < hossz; i++)
-                db = db * 10 + (int(beker[i]) - 48);
+            // String to int konverzió STOI használata nélkül => STOI nem működik! Plusz fejléc: #include <sstream>
+            cout << "RÉGI DARAB: " << db << "\t";
+            db = 0;
+            stringstream darab(aktdb);
+            darab >> db;
+            cout << "ÚJ DARAB: " << db << endl;
         }
 
         // A SPACE
@@ -44,7 +48,6 @@ void mozog()
         {
             aktdb = "\0";
             akt = "\0";
-            db = 0;
         }
 
         if (akt == "LEENGED")
@@ -56,6 +59,7 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
+                cout << "IN FOR CYCLE..." << endl;
                 if (y >= 0 && y <= OSZL)
                 {
                     cout << "y OK!!!" << endl;
