@@ -27,16 +27,13 @@ void mozog()
     int db;
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
-        // Ha betű
+        // BETŰ
         if (beker[i] != ' ' && isalpha(beker[i]))
         {
             akt += beker[i];
             cout << "BETŰ\t" << akt << endl;
         }
-        else
-            akt = "\0";
-
-        // Ha szám
+        // SZÁM
         if (beker[i] != ' ' && isdigit(beker[i]))
         {
             aktdb += beker[i];
@@ -48,7 +45,14 @@ void mozog()
             int hossz = aktdb.length();
             for (int i = 0; i < hossz; i++)
                 db = db * 10 + (int(beker[i]) - 48);
+        }
+
+        // A SPACE
+        if (beker[i] == ' ')
+        {
             aktdb = "\0";
+            akt = "\0";
+            db = 0;
         }
 
         if (akt == LE)
