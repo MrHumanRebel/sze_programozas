@@ -36,11 +36,8 @@ void mozog()
         else
         {
             // String to int konverzió STOI használata nélkül => STOI nem működik! Plusz fejléc: #include <sstream>
-            cout << "RÉGI DARAB: " << db << "\t";
-            db = 0;
             stringstream darab(aktdb);
             darab >> db;
-            cout << "ÚJ DARAB: " << db << endl;
         }
 
         // A SPACE
