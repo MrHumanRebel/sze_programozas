@@ -34,10 +34,7 @@ void mozog()
             cout << "BETŰ\t" << akt << endl;
         }
         else
-        {
-
             akt = "\0";
-        }
 
         // Ha szám
         if (beker[i] != ' ' && isdigit(beker[i]))
@@ -47,6 +44,7 @@ void mozog()
         }
         else
         {
+            // String to int konverzió STOI használata nélkül => STOI nem működik!
             int hossz = aktdb.length();
             for (int i = 0; i < hossz; i++)
                 db = db * 10 + (int(beker[i]) - 48);
@@ -131,7 +129,8 @@ string input()
             beker[i] = toupper(beker[i]);
         }
     }
-    cout << "A BEMENET: " << beker << endl;
+    cout << "\nA BEMENET: " << beker << "\n"
+         << endl;
 
     return beker;
 }
