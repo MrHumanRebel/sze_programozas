@@ -64,36 +64,48 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                y++;
-                if (rajzol == true)
-                    vaszon[x][y] = 'X';
+                if (y <= 0 && y <= OSZL)
+                {
+                    y++;
+                    if (rajzol == true)
+                        vaszon[x][y] = 'X';
+                }
             }
         }
         if (akt == RIGHT)
         {
             for (int j = 0; j < db; j++)
             {
-                y--;
-                if (rajzol == true)
-                    vaszon[x][y] = 'X';
+                if (y <= 0 && y <= OSZL)
+                {
+                    y--;
+                    if (rajzol == true)
+                        vaszon[x][y] = 'X';
+                }
             }
         }
         if (akt == UP)
         {
             for (int j = 0; j < db; j++)
             {
-                x++;
-                if (rajzol == true)
-                    vaszon[x][y] = 'X';
+                if (x <= 0 && x <= OSZL)
+                {
+                    x++;
+                    if (rajzol == true)
+                        vaszon[x][y] = 'X';
+                }
             }
         }
         if (akt == DOWN)
         {
             for (int j = 0; j < db; j++)
             {
-                x--;
-                if (rajzol == true)
-                    vaszon[x][y] = 'X';
+                if (x <= 0 && x <= OSZL)
+                {
+                    x--;
+                    if (rajzol == true)
+                        vaszon[x][y] = 'X';
+                }
             }
         }
     }
