@@ -182,6 +182,8 @@ string input()
 
 int main()
 {
+    cout << "Alap CMD rajzolóprogram indul...\n"
+         << endl;
     if (van_e_alap == false)
         alapvaszon();
     megjelenit();
