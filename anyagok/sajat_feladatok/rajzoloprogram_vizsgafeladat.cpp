@@ -54,13 +54,13 @@ void mozog()
             cout << "Rajzol? => NEM!" << endl;
         }
 
-        if (akt == "BALRA")
+        if (akt == "BALRA" && beker[i + 1] == ' ')
         {
             for (int j = 0; j < db; j++)
             {
                 if (y >= 0 && y <= OSZL)
                 {
-                    cout << "BALRA OK!!!" << endl;
+                    cout << "BALRA" << endl;
                     y--;
                     if (rajzol == true)
                     {
@@ -70,13 +70,13 @@ void mozog()
                 }
             }
         }
-        if (akt == "JOBBRA")
+        if (akt == "JOBBRA" && beker[i + 1] == ' ')
         {
             for (int j = 0; j < db; j++)
             {
                 if (y >= 0 && y <= OSZL)
                 {
-                    cout << "JOBBRA OK!!!" << endl;
+                    cout << "JOBBRA" << endl;
                     y++;
                     if (rajzol == true)
                     {
@@ -86,13 +86,13 @@ void mozog()
                 }
             }
         }
-        if (akt == "FEL")
+        if (akt == "FEL" && beker[i + 1] == ' ')
         {
             for (int j = 0; j < db; j++)
             {
                 if (x >= 0 && x <= OSZL)
                 {
-                    cout << "FEL OK!!!" << endl;
+                    cout << "FEL" << endl;
                     x--;
                     if (rajzol == true)
                     {
@@ -102,13 +102,13 @@ void mozog()
                 }
             }
         }
-        if (akt == "LE")
+        if (akt == "LE" && beker[i + 1] == ' ')
         {
             for (int j = 0; j < db; j++)
             {
                 if (x >= 0 && x <= OSZL)
                 {
-                    cout << "LE OK!!!" << endl;
+                    cout << "LE" << endl;
                     x++;
                     if (rajzol == true)
                     {
@@ -127,7 +127,7 @@ void mozog()
         }
 
         // SPACE
-        if (beker[i] == ' ' && !isdigit(beker[i + 1]))
+        if (beker[i] == ' ' && (!isdigit(beker[i + 1]) && beker[i + 1] != ' ')) // Mostani elem SPACE, következő elem nem szám vagy nem space
         {
             cout << "A következő elem NEM szám, szó buffer ürítés..." << endl;
             akt = "\0";
