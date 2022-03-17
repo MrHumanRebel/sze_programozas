@@ -1,6 +1,5 @@
 #include <iostream>
 #include <sstream>
-
 using namespace std;
 
 // Vászon mérete
@@ -11,7 +10,11 @@ using namespace std;
 bool van_e_alap = false;
 bool rajzol = false;
 char vaszon[SOR][OSZL];
-int x = 0, y = 0; //"X" Függőleges "Y" Vízszintes
+
+//"X" Vízszintes "Y" Függőleges
+int x = 0;
+int y = 0;
+
 string beker;
 
 void mozog()
@@ -40,13 +43,6 @@ void mozog()
             darab >> db;
         }
 
-        // A SPACE
-        if (beker[i] == ' ')
-        {
-            aktdb = "\0";
-            akt = "\0";
-        }
-
         if (akt == "LEENGED")
             rajzol = true;
         if (akt == "FELEMEL")
@@ -56,10 +52,9 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                cout << "IN FOR CYCLE..." << endl;
                 if (y >= 0 && y <= OSZL)
                 {
-                    cout << "y OK!!!" << endl;
+                    cout << "BALRA OK!!!" << endl;
                     y++;
                     if (rajzol == true)
                     {
@@ -75,7 +70,7 @@ void mozog()
             {
                 if (y >= 0 && y <= OSZL)
                 {
-                    cout << "y OK!!!" << endl;
+                    cout << "JOBBRA OK!!!" << endl;
                     y--;
                     if (rajzol == true)
                     {
@@ -91,7 +86,7 @@ void mozog()
             {
                 if (x >= 0 && x <= OSZL)
                 {
-                    cout << "x OK!!!" << endl;
+                    cout << "FEL OK!!!" << endl;
                     x++;
                     if (rajzol == true)
                     {
@@ -107,7 +102,7 @@ void mozog()
             {
                 if (x >= 0 && x <= OSZL)
                 {
-                    cout << "x OK!!!" << endl;
+                    cout << "LE OK!!!" << endl;
                     x--;
                     if (rajzol == true)
                     {
@@ -116,6 +111,18 @@ void mozog()
                     }
                 }
             }
+        }
+
+        // SPACE
+        if (beker[i] == ' ' && !isdigit(beker[i + 1]))
+        {
+            cout << "A következő elem NEM szám, szó buffer ürítés..." << endl;
+            akt = "\0";
+        }
+        if (beker[i] == ' ')
+        {
+            cout << "A mostani elem space, szám buffer ürítés..." << endl;
+            aktdb = "\0";
         }
     }
 }
