@@ -16,7 +16,7 @@ void mozog()
 {
     string akt;
     string aktdb;
-    int db;
+    int db = 0;
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
         // BETŰ
