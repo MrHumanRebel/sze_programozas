@@ -12,8 +12,8 @@ bool rajzol = false;
 char vaszon[SOR][OSZL];
 
 //"X" Vízszintes "Y" Függőleges
-int x = 0;
-int y = 0;
+int x = 1;
+int y = 1;
 
 string beker;
 
@@ -44,9 +44,15 @@ void mozog()
         }
 
         if (akt == "LEENGED")
+        {
             rajzol = true;
+            cout << "Rajzol => IGEN!" << endl;
+        }
         if (akt == "FELEMEL")
+        {
             rajzol = false;
+            cout << "Rajzol => NEM!" << endl;
+        }
 
         if (akt == "BALRA")
         {
@@ -55,7 +61,7 @@ void mozog()
                 if (y >= 0 && y <= OSZL)
                 {
                     cout << "BALRA OK!!!" << endl;
-                    y++;
+                    y--;
                     if (rajzol == true)
                     {
                         cout << "BALRA RAJZOLT!" << endl;
@@ -71,7 +77,7 @@ void mozog()
                 if (y >= 0 && y <= OSZL)
                 {
                     cout << "JOBBRA OK!!!" << endl;
-                    y--;
+                    y++;
                     if (rajzol == true)
                     {
                         cout << "JOBBRA RAJZOLT!" << endl;
@@ -113,6 +119,11 @@ void mozog()
             }
         }
 
+        if (rajzol == true)
+        {
+            cout << "RAJZOLT!" << endl;
+            vaszon[x][y] = 'X';
+        }
         // SPACE
         if (beker[i] == ' ' && !isdigit(beker[i + 1]))
         {
