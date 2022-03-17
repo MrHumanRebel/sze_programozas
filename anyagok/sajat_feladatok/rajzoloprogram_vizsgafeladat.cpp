@@ -46,12 +46,12 @@ void mozog()
         if (akt == "LEENGED")
         {
             rajzol = true;
-            cout << "Rajzol => IGEN!" << endl;
+            cout << "Rajzol? => IGEN!" << endl;
         }
         if (akt == "FELEMEL")
         {
             rajzol = false;
-            cout << "Rajzol => NEM!" << endl;
+            cout << "Rajzol? => NEM!" << endl;
         }
 
         if (akt == "BALRA")
@@ -93,7 +93,7 @@ void mozog()
                 if (x >= 0 && x <= OSZL)
                 {
                     cout << "FEL OK!!!" << endl;
-                    x++;
+                    x--;
                     if (rajzol == true)
                     {
                         cout << "FEL RAJZOLT!" << endl;
@@ -109,7 +109,7 @@ void mozog()
                 if (x >= 0 && x <= OSZL)
                 {
                     cout << "LE OK!!!" << endl;
-                    x--;
+                    x++;
                     if (rajzol == true)
                     {
                         cout << "LE RAJZOLT!" << endl;
@@ -119,11 +119,13 @@ void mozog()
             }
         }
 
-        if (rajzol == true)
+        // Pozíció független rajzolás
+        if (rajzol == true && vaszon[x][y] != 'X')
         {
             cout << "RAJZOLT!" << endl;
             vaszon[x][y] = 'X';
         }
+
         // SPACE
         if (beker[i] == ' ' && !isdigit(beker[i + 1]))
         {
