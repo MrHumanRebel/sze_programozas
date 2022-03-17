@@ -23,59 +23,76 @@ string beker;
 void mozog()
 {
     string akt;
-    string db;
+    string aktdb;
+    int db;
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
-        bool stop = false;
-        while (stop == false)
+        // Ha betű
+        if (beker[i] != ' ' && isalpha(beker[i]))
         {
-            if (beker[i] != ' ' && isalpha(beker[i]))
-            {
-                akt += beker[i];
-            }
-            else if (beker[i] != ' ' && isdigit(beker[i]))
-            {
-                db += beker[i];
-            }
-            else
-                stop = true;
+            akt += beker[i];
+            cout << "BETŰ\t" << akt << endl;
         }
+        else
+        {
+
+            akt = "\0";
+        }
+
+        // Ha szám
+        if (beker[i] != ' ' && isdigit(beker[i]))
+        {
+            aktdb += beker[i];
+            cout << "SZÁM\t" << aktdb << endl;
+        }
+        else
+        {
+            int hossz = aktdb.length();
+            for (int i = 0; i < hossz; i++)
+                db = db * 10 + (int(beker[i]) - 48);
+            aktdb = "\0";
+        }
+
         if (akt == LE)
             rajzol = true;
         if (akt == FEL)
             rajzol = false;
+
         if (akt == LEFT)
-            for (int j = 0; j < stoi(db); j++)
+        {
+            for (int j = 0; j < db; j++)
             {
                 y++;
                 if (rajzol == true)
                     vaszon[x][y] = 'X';
             }
+        }
         if (akt == RIGHT)
-            for (int j = 0; j < stoi(db); j++)
+        {
+            for (int j = 0; j < db; j++)
             {
                 y--;
                 if (rajzol == true)
                     vaszon[x][y] = 'X';
             }
+        }
         if (akt == UP)
-            for (int j = 0; j < stoi(db); j++)
+        {
+            for (int j = 0; j < db; j++)
             {
                 x++;
                 if (rajzol == true)
                     vaszon[x][y] = 'X';
             }
+        }
         if (akt == DOWN)
-            for (int j = 0; j < stoi(db); j++)
+        {
+            for (int j = 0; j < db; j++)
             {
                 x--;
                 if (rajzol == true)
                     vaszon[x][y] = 'X';
             }
-        if (beker[i] == ' ')
-        {
-            akt = "\0";
-            db = "\0";
         }
     }
 }
@@ -104,10 +121,28 @@ void megjelenit()
     }
 }
 
+string input()
+{
+    getline(cin, beker);
+    for (long unsigned int i = 0; i <= beker.length(); i++)
+    {
+        if (isalpha(beker[i]))
+        {
+            beker[i] = toupper(beker[i]);
+        }
+    }
+    cout << "A BEMENET: " << beker << endl;
+
+    return beker;
+}
+
 int main()
 {
     if (van_e_alap == false)
         alapvaszon();
+    megjelenit();
+    input();
+    mozog();
     megjelenit();
     return 0;
 }
