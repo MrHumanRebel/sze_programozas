@@ -54,7 +54,6 @@ void mozog()
 
         if (akt == "BALRA")
         {
-            cout << "BALRA!" << endl;
             for (int j = 0; j < db; j++)
             {
                 if (y >= 0 && y <= OSZL)
@@ -71,7 +70,6 @@ void mozog()
         }
         if (akt == "JOBBRA")
         {
-            cout << "JOBBRA!" << endl;
             for (int j = 0; j < db; j++)
             {
                 if (y >= 0 && y <= OSZL)
@@ -88,7 +86,6 @@ void mozog()
         }
         if (akt == "FEL")
         {
-            cout << "FEL!" << endl;
             for (int j = 0; j < db; j++)
             {
                 if (x >= 0 && x <= OSZL)
@@ -105,8 +102,6 @@ void mozog()
         }
         if (akt == "LE")
         {
-            cout << "LE!" << endl;
-
             for (int j = 0; j < db; j++)
             {
                 if (x >= 0 && x <= OSZL)
