@@ -4,14 +4,6 @@ using namespace std;
 // Vászon mérete
 #define SOR 10
 #define OSZL 10
-// Ceruza le-fel
-#define FEL "FELEMEL"
-#define LE "LEENGED"
-// Ceruza mozgatás
-#define LEFT "BALRA"
-#define RIGHT "JOBBRA"
-#define UP "FEL"
-#define DOWN "LE"
 
 // Globális változók
 bool van_e_alap = false;
@@ -55,56 +47,77 @@ void mozog()
             db = 0;
         }
 
-        if (akt == LE)
+        if (akt == "LEENGED")
             rajzol = true;
-        if (akt == FEL)
+        if (akt == "FELEMEL")
             rajzol = false;
 
-        if (akt == LEFT)
+        if (akt == "BALRA")
         {
+            cout << "BALRA!" << endl;
             for (int j = 0; j < db; j++)
             {
-                if (y <= 0 && y <= OSZL)
+                if (y >= 0 && y <= OSZL)
                 {
+                    cout << "y OK!!!" << endl;
                     y++;
                     if (rajzol == true)
+                    {
+                        cout << "BALRA RAJZOLT!" << endl;
                         vaszon[x][y] = 'X';
+                    }
                 }
             }
         }
-        if (akt == RIGHT)
+        if (akt == "JOBBRA")
         {
+            cout << "JOBBRA!" << endl;
             for (int j = 0; j < db; j++)
             {
-                if (y <= 0 && y <= OSZL)
+                if (y >= 0 && y <= OSZL)
                 {
+                    cout << "y OK!!!" << endl;
                     y--;
                     if (rajzol == true)
+                    {
+                        cout << "JOBBRA RAJZOLT!" << endl;
                         vaszon[x][y] = 'X';
+                    }
                 }
             }
         }
-        if (akt == UP)
+        if (akt == "FEL")
         {
+            cout << "FEL!" << endl;
             for (int j = 0; j < db; j++)
             {
-                if (x <= 0 && x <= OSZL)
+                if (x >= 0 && x <= OSZL)
                 {
+                    cout << "x OK!!!" << endl;
                     x++;
                     if (rajzol == true)
+                    {
+                        cout << "FEL RAJZOLT!" << endl;
                         vaszon[x][y] = 'X';
+                    }
                 }
             }
         }
-        if (akt == DOWN)
+        if (akt == "LE")
         {
+            cout << "LE!" << endl;
+
             for (int j = 0; j < db; j++)
             {
-                if (x <= 0 && x <= OSZL)
+                if (x >= 0 && x <= OSZL)
                 {
+                    cout << "x OK!!!" << endl;
                     x--;
                     if (rajzol == true)
+                    {
+                        cout << "LE RAJZOLT!" << endl;
                         vaszon[x][y] = 'X';
+                    }
                 }
             }
         }
