@@ -150,9 +150,9 @@ void mozog()
 
 void alapvaszon()
 {
-    for (int i = 0; i <= SOR; i++)
+    for (int i = 0; i < SOR; i++)
     {
-        for (int j = 0; j <= OSZL; j++)
+        for (int j = 0; j < OSZL; j++)
         {
             vaszon[i][j] = '.';
         }
