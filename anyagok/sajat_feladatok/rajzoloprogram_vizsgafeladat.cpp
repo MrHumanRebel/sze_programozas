@@ -22,10 +22,11 @@ void mozog()
     string akt;
     string aktdb;
     int db = 0;
+    bool ok = false;
 
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
-        bool ok = false;
+        ok = false;
         // BETŰ
         if (beker[i] != ' ' && isalpha(beker[i]))
         {
@@ -43,8 +44,10 @@ void mozog()
             // String to int konverzió STOI használata nélkül => STOI nem működik! Plusz fejléc: #include <sstream>
             stringstream darab(aktdb);
             darab >> db;
-            ok = true;
         }
+
+        if (aktdb != "\0" && !isdigit(beker[i + 1]))
+            ok = true;
 
         if (akt == "LEENGED")
         {
@@ -59,7 +62,7 @@ void mozog()
 
         if (akt == "BALRA" && beker[i + 1] == ' ' && ok == true)
         {
-            cout << "BALRA" << endl;
+
             for (int j = 0; j <= db; j++)
             {
                 if (y > OSZL - 1)
@@ -68,6 +71,7 @@ void mozog()
                     y = OSZL - y;
 
                 y--;
+                cout << "!!!BALRA!!!" << endl;
                 if (rajzol == true)
                 {
                     cout << "BALRA RAJZOLT!" << endl;
@@ -77,7 +81,7 @@ void mozog()
         }
         if (akt == "JOBBRA" && beker[i + 1] == ' ' && ok == true)
         {
-            cout << "JOBBRA" << endl;
+
             for (int j = 0; j <= db; j++)
             {
                 if (y > OSZL - 1)
@@ -86,6 +90,7 @@ void mozog()
                     y = OSZL - y;
 
                 y++;
+                cout << "!!!JOBBRA!!!" << endl;
                 if (rajzol == true)
                 {
                     cout << "JOBBRA RAJZOLT!" << endl;
@@ -95,7 +100,7 @@ void mozog()
         }
         if (akt == "FEL" && beker[i + 1] == ' ' && ok == true)
         {
-            cout << "FEL" << endl;
+
             for (int j = 0; j <= db; j++)
             {
                 if (x > OSZL - 1)
@@ -104,6 +109,7 @@ void mozog()
                     x = OSZL - x;
 
                 x--;
+                cout << "!!!FEL!!!" << endl;
                 if (rajzol == true)
                 {
                     cout << "FEL RAJZOLT!" << endl;
@@ -113,7 +119,7 @@ void mozog()
         }
         if (akt == "LE" && beker[i + 1] == ' ' && ok == true)
         {
-            cout << "LE" << endl;
+
             for (int j = 0; j <= db; j++)
             {
                 if (x > OSZL - 1)
@@ -122,6 +128,7 @@ void mozog()
                     x = OSZL - x;
 
                 x++;
+                cout << "!!!LE!!!" << endl;
                 if (rajzol == true)
                 {
                     cout << "LE RAJZOLT!" << endl;
@@ -148,6 +155,11 @@ void mozog()
             cout << "A következő elem szám, szám buffer ürítés..." << endl;
             aktdb = "\0";
         }
+        /*if (isalpha(beker[i]) && beker[i + 1] == ' ' && isalpha(beker[i + 2]))
+        {
+            cout << "A következő elemek szavak, szám buffer ürítés..." << endl;
+            aktdb = "\0";
+        }*/
     }
 }
 
