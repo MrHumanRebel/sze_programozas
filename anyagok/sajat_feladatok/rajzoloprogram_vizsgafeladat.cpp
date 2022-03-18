@@ -11,7 +11,7 @@ bool van_e_alap = false;
 bool rajzol = false;
 char vaszon[SOR][OSZL];
 
-//"X" Vízszintes "Y" Függőleges
+//"X" Vízszintes "Y" Függőleges  JOBBRA 2 LEENGED LE 5 FELEMEL
 int x = 0;
 int y = 0;
 
@@ -50,7 +50,7 @@ void mozog()
         if (aktdb != "\0" && !isdigit(beker[i + 1]))
         {
             ok = true;
-            //cout << "Megvan a teljes szám!" << endl;
+            // cout << "Megvan a teljes szám!" << endl;
         }
 
         if (akt == "LEENGED")
@@ -78,6 +78,7 @@ void mozog()
                         vaszon[x][y] = 'X';
                     }
                 }
+                ok = false;
             }
             if (akt == "JOBBRA" && beker[i + 1] == ' ')
             {
@@ -97,6 +98,7 @@ void mozog()
                         vaszon[x][y] = 'X';
                     }
                 }
+                ok = false;
             }
             if (akt == "FEL" && beker[i + 1] == ' ')
             {
@@ -116,6 +118,7 @@ void mozog()
                         vaszon[x][y] = 'X';
                     }
                 }
+                ok = false;
             }
             if (akt == "LE" && beker[i + 1] == ' ')
             {
@@ -135,6 +138,7 @@ void mozog()
                         vaszon[x][y] = 'X';
                     }
                 }
+                ok = false;
             }
         }
 
