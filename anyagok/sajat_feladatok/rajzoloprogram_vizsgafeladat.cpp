@@ -12,8 +12,8 @@ bool rajzol = false;
 char vaszon[SOR][OSZL];
 
 //"X" Vízszintes "Y" Függőleges
-int x = 1;
-int y = 1;
+int x = 0;
+int y = 0;
 
 string beker;
 
@@ -22,8 +22,10 @@ void mozog()
     string akt;
     string aktdb;
     int db = 0;
+
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
+        bool ok = false;
         // BETŰ
         if (beker[i] != ' ' && isalpha(beker[i]))
         {
@@ -41,6 +43,7 @@ void mozog()
             // String to int konverzió STOI használata nélkül => STOI nem működik! Plusz fejléc: #include <sstream>
             stringstream darab(aktdb);
             darab >> db;
+            ok = true;
         }
 
         if (akt == "LEENGED")
@@ -56,73 +59,73 @@ void mozog()
 
         if (akt == "BALRA" && beker[i + 1] == ' ')
         {
-            for (int j = 0; j < db; j++)
+            cout << "BALRA" << endl;
+            for (int j = 0; j <= db; j++)
             {
-                if (y == OSZL)
-                    y -= OSZL;
-                if (y >= 0)
+                if (y > OSZL - 1)
+                    y -= (OSZL - 1);
+                if (y < 0)
+                    y = (OSZL - 1) - y;
+
+                y--;
+                if (rajzol == true && ok == true)
                 {
-                    cout << "BALRA" << endl;
-                    y--;
-                    if (rajzol == true)
-                    {
-                        cout << "BALRA RAJZOLT!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    cout << "BALRA RAJZOLT!" << endl;
+                    vaszon[x][y] = 'X';
                 }
             }
         }
         if (akt == "JOBBRA" && beker[i + 1] == ' ')
         {
-            for (int j = 0; j < db; j++)
+            cout << "JOBBRA" << endl;
+            for (int j = 0; j <= db; j++)
             {
-                if (y == OSZL)
-                    y -= OSZL;
-                if (y >= 0)
+                if (y > OSZL - 1)
+                    y -= (OSZL - 1);
+                if (y < 0)
+                    y = (OSZL - 1) - y;
+
+                y++;
+                if (rajzol == true && ok == true)
                 {
-                    cout << "JOBBRA" << endl;
-                    y++;
-                    if (rajzol == true)
-                    {
-                        cout << "JOBBRA RAJZOLT!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    cout << "JOBBRA RAJZOLT!" << endl;
+                    vaszon[x][y] = 'X';
                 }
             }
         }
         if (akt == "FEL" && beker[i + 1] == ' ')
         {
-            for (int j = 0; j < db; j++)
+            cout << "FEL" << endl;
+            for (int j = 0; j <= db; j++)
             {
-                if (x == OSZL)
-                    x -= OSZL;
-                if (x >= 0)
+                if (x > OSZL - 1)
+                    x -= (OSZL - 1);
+                if (x < 0)
+                    x = (OSZL - 1) - y;
+
+                x--;
+                if (rajzol == true && ok == true)
                 {
-                    cout << "FEL" << endl;
-                    x--;
-                    if (rajzol == true)
-                    {
-                        cout << "FEL RAJZOLT!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    cout << "FEL RAJZOLT!" << endl;
+                    vaszon[x][y] = 'X';
                 }
             }
         }
         if (akt == "LE" && beker[i + 1] == ' ')
         {
-            for (int j = 0; j < db; j++)
+            cout << "LE" << endl;
+            for (int j = 0; j <= db; j++)
             {
-                if (x == OSZL)
-                    x -= OSZL;
-                if (x >= 0)
+                if (x > OSZL - 1)
+                    x -= (OSZL - 1);
+                if (x < 0)
+                    x = (OSZL - 1) - y;
+
+                x++;
+                if (rajzol == true && ok == true)
                 {
-                    cout << "LE" << endl;
-                    x++;
-                    if (rajzol == true)
-                    {
-                        cout << "LE RAJZOLT!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    cout << "LE RAJZOLT!" << endl;
+                    vaszon[x][y] = 'X';
                 }
             }
         }
@@ -135,7 +138,7 @@ void mozog()
         }
 
         // SPACE
-        if (beker[i] == ' ' && (isalpha(beker[i + 1]))) // Mostani elem SPACE, következő elem nem szám vagy nem space
+        if (beker[i] == ' ' && (isalpha(beker[i + 1])))
         {
             cout << "A következő elem betű, szó buffer ürítés..." << endl;
             akt = "\0";
@@ -183,9 +186,6 @@ string input()
             beker[i] = toupper(beker[i]);
         }
     }
-    cout << "\nA BEMENET: " << beker << "\n"
-         << endl;
-
     return beker;
 }
 
