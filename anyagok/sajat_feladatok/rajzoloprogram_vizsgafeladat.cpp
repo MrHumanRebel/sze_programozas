@@ -49,80 +49,80 @@ void mozog()
         if (akt == "LEENGED")
         {
             rajzol = true;
-            cout << "Rajzol? => IGEN!" << endl;
+            // cout << "Rajzol? => IGEN!" << endl;
         }
         if (akt == "FELEMEL")
         {
             rajzol = false;
-            cout << "Rajzol? => NEM!" << endl;
+            // cout << "Rajzol? => NEM!" << endl;
         }
 
-        if (akt == "BALRA" && beker[i + 1] == ' ')
+        if (akt == "BALRA" && beker[i + 1] == ' ' && ok == true)
         {
             cout << "BALRA" << endl;
             for (int j = 0; j <= db; j++)
             {
                 if (y > OSZL - 1)
-                    y -= (OSZL - 1);
+                    y -= OSZL;
                 if (y < 0)
-                    y = (OSZL - 1) - y;
+                    y = OSZL - y;
 
                 y--;
-                if (rajzol == true && ok == true)
+                if (rajzol == true)
                 {
                     cout << "BALRA RAJZOLT!" << endl;
                     vaszon[x][y] = 'X';
                 }
             }
         }
-        if (akt == "JOBBRA" && beker[i + 1] == ' ')
+        if (akt == "JOBBRA" && beker[i + 1] == ' ' && ok == true)
         {
             cout << "JOBBRA" << endl;
             for (int j = 0; j <= db; j++)
             {
                 if (y > OSZL - 1)
-                    y -= (OSZL - 1);
+                    y -= OSZL;
                 if (y < 0)
-                    y = (OSZL - 1) - y;
+                    y = OSZL - y;
 
                 y++;
-                if (rajzol == true && ok == true)
+                if (rajzol == true)
                 {
                     cout << "JOBBRA RAJZOLT!" << endl;
                     vaszon[x][y] = 'X';
                 }
             }
         }
-        if (akt == "FEL" && beker[i + 1] == ' ')
+        if (akt == "FEL" && beker[i + 1] == ' ' && ok == true)
         {
             cout << "FEL" << endl;
             for (int j = 0; j <= db; j++)
             {
                 if (x > OSZL - 1)
-                    x -= (OSZL - 1);
+                    x -= OSZL;
                 if (x < 0)
-                    x = (OSZL - 1) - y;
+                    x = OSZL - x;
 
                 x--;
-                if (rajzol == true && ok == true)
+                if (rajzol == true)
                 {
                     cout << "FEL RAJZOLT!" << endl;
                     vaszon[x][y] = 'X';
                 }
             }
         }
-        if (akt == "LE" && beker[i + 1] == ' ')
+        if (akt == "LE" && beker[i + 1] == ' ' && ok == true)
         {
             cout << "LE" << endl;
             for (int j = 0; j <= db; j++)
             {
                 if (x > OSZL - 1)
-                    x -= (OSZL - 1);
+                    x -= OSZL;
                 if (x < 0)
-                    x = (OSZL - 1) - y;
+                    x = OSZL - x;
 
                 x++;
-                if (rajzol == true && ok == true)
+                if (rajzol == true)
                 {
                     cout << "LE RAJZOLT!" << endl;
                     vaszon[x][y] = 'X';
