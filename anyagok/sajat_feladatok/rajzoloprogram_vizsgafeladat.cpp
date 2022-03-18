@@ -28,13 +28,13 @@ void mozog()
         if (beker[i] != ' ' && isalpha(beker[i]))
         {
             akt += beker[i];
-            cout << "BETŰ\t" << akt << endl;
+            cout << akt << endl;
         }
         // SZÁM
         if (beker[i] != ' ' && isdigit(beker[i]))
         {
             aktdb += beker[i];
-            cout << "SZÁM\t" << aktdb << endl;
+            cout << aktdb << endl;
         }
         else
         {
@@ -58,7 +58,9 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                if (y >= 0 && y <= OSZL)
+                if (y == OSZL)
+                    y -= OSZL;
+                if (y >= 0)
                 {
                     cout << "BALRA" << endl;
                     y--;
@@ -74,7 +76,9 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                if (y >= 0 && y <= OSZL)
+                if (y == OSZL)
+                    y -= OSZL;
+                if (y >= 0)
                 {
                     cout << "JOBBRA" << endl;
                     y++;
@@ -90,7 +94,9 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                if (x >= 0 && x <= OSZL)
+                if (x == OSZL)
+                    x -= OSZL;
+                if (x >= 0)
                 {
                     cout << "FEL" << endl;
                     x--;
@@ -106,7 +112,9 @@ void mozog()
         {
             for (int j = 0; j < db; j++)
             {
-                if (x >= 0 && x <= OSZL)
+                if (x == OSZL)
+                    x -= OSZL;
+                if (x >= 0)
                 {
                     cout << "LE" << endl;
                     x++;
@@ -122,19 +130,19 @@ void mozog()
         // Pozíció független rajzolás
         if (rajzol == true && vaszon[x][y] != 'X')
         {
-            cout << "RAJZOLT!" << endl;
+            cout << "POZ. FÜGG. RAJZOLT!" << endl;
             vaszon[x][y] = 'X';
         }
 
         // SPACE
-        if (beker[i] == ' ' && (!isdigit(beker[i + 1]) && beker[i + 1] != ' ')) // Mostani elem SPACE, következő elem nem szám vagy nem space
+        if (beker[i] == ' ' && (isalpha(beker[i + 1]))) // Mostani elem SPACE, következő elem nem szám vagy nem space
         {
-            cout << "A következő elem NEM szám, szó buffer ürítés..." << endl;
+            cout << "A következő elem betű, szó buffer ürítés..." << endl;
             akt = "\0";
         }
-        if (beker[i] == ' ')
+        if (beker[i] == ' ' && (isdigit(beker[i + 1])))
         {
-            cout << "A mostani elem space, szám buffer ürítés..." << endl;
+            cout << "A következő elem szám, szám buffer ürítés..." << endl;
             aktdb = "\0";
         }
     }
@@ -166,6 +174,7 @@ void megjelenit()
 
 string input()
 {
+    cout << "Adja meg a vezérlő parancssort..." << endl;
     getline(cin, beker);
     for (long unsigned int i = 0; i <= beker.length(); i++)
     {
@@ -182,7 +191,7 @@ string input()
 
 int main()
 {
-    cout << "Alap CMD rajzolóprogram indul...\n"
+    cout << "CMD rajzolóprogram indul...\n"
          << endl;
     if (van_e_alap == false)
         alapvaszon();
