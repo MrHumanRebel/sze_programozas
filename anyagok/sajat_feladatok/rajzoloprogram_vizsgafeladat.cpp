@@ -48,7 +48,10 @@ void mozog()
 
         // Van-e már szám és kétjegyű-e, ha már van és kétjegyű további feltételek bekapcsolása
         if (aktdb != "\0" && !isdigit(beker[i + 1]))
+        {
             ok = true;
+            //cout << "Megvan a teljes szám!" << endl;
+        }
 
         if (akt == "LEENGED")
             rajzol = true;
@@ -152,12 +155,8 @@ void mozog()
         {
             cout << "A következő elem szám, szám buffer ürítés..." << endl;
             aktdb = "\0";
+            ok = false;
         }
-        /*if (isalpha(beker[i]) && beker[i + 1] == ' ' && isalpha(beker[i + 2]))
-        {
-            cout << "A következő elemek szavak, szám buffer ürítés..." << endl;
-            aktdb = "\0";
-        }*/
     }
 }
 
