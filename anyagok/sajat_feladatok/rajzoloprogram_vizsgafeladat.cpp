@@ -41,26 +41,21 @@ void mozog()
         }
         else
         {
-            // String to int konverzió STOI használata nélkül => STOI nem működik! Plusz fejléc: #include <sstream>
+            // String to int konverzió, STOI nem működik... Plusz fejléc kell, => #include <sstream>
             stringstream darab(aktdb);
             darab >> db;
         }
 
+        // Van-e már szám és kétjegyű-e, ha már van és kétjegyű további feltételek bekapcsolása
         if (aktdb != "\0" && !isdigit(beker[i + 1]))
             ok = true;
 
         if (akt == "LEENGED")
-        {
             rajzol = true;
-            // cout << "Rajzol? => IGEN!" << endl;
-        }
         if (akt == "FELEMEL")
-        {
             rajzol = false;
-            // cout << "Rajzol? => NEM!" << endl;
-        }
 
-        if (akt == "BALRA" && beker[i + 1] == ' ' && ok == true)
+        if (ok == true && akt == "BALRA" && beker[i + 1] == ' ')
         {
 
             for (int j = 0; j <= db; j++)
@@ -79,7 +74,7 @@ void mozog()
                 }
             }
         }
-        if (akt == "JOBBRA" && beker[i + 1] == ' ' && ok == true)
+        if (ok == true && akt == "JOBBRA" && beker[i + 1] == ' ')
         {
 
             for (int j = 0; j <= db; j++)
@@ -98,7 +93,7 @@ void mozog()
                 }
             }
         }
-        if (akt == "FEL" && beker[i + 1] == ' ' && ok == true)
+        if (ok == true && akt == "FEL" && beker[i + 1] == ' ')
         {
 
             for (int j = 0; j <= db; j++)
@@ -117,7 +112,7 @@ void mozog()
                 }
             }
         }
-        if (akt == "LE" && beker[i + 1] == ' ' && ok == true)
+        if (ok == true && akt == "LE" && beker[i + 1] == ' ')
         {
 
             for (int j = 0; j <= db; j++)
