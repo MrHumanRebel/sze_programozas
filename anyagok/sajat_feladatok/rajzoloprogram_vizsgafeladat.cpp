@@ -40,7 +40,6 @@ void mozog()
         {
             aktdb += beker[i];
             cout << aktdb << endl;
-<<<<<<< HEAD:anyagok/sajat_feladatok/rajzoloprogram_vizsgafeladat_V2.cpp
             if (!isdigit(beker[i + 1]))
             {
                 stringstream darab(aktdb);
@@ -49,21 +48,6 @@ void mozog()
                 cout << "\nSzám OK!\n"
                      << endl;
             }
-=======
-        }
-        else
-        {
-            // String to int konverzió, STOI nem működik... Plusz fejléc kell, => #include <sstream>
-            stringstream darab(aktdb);
-            darab >> db;
-        }
-
-        // Van-e már szám és kétjegyű-e, ha már van és kétjegyű további feltételek bekapcsolása
-        if (aktdb != "\0" && !isdigit(beker[i + 1]))
-        {
-            ok = true;
-            // cout << "Megvan a teljes szám!" << endl;
->>>>>>> cf722f5beed0056707e103fdb06e9acd59b22dc3:anyagok/sajat_feladatok/rajzoloprogram_vizsgafeladat.cpp
         }
 
         if (akt == "LEENGED")
