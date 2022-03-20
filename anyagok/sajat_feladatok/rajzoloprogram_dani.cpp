@@ -19,6 +19,30 @@ string beker;
 // JOBBRA 2 LEENGED LE 5 FELEMEL
 // JOBBRA 4 LEENGED LE 20 FELEMEL BALRA 20 FEL 5 LEENGED JOBBRA 10
 
+void y_ell()
+{
+    if (y >= OSZL)
+        y -= OSZL;
+    if (y < 0)
+        y = OSZL - 1;
+}
+
+void x_ell()
+{
+    if (x >= SOR)
+        x -= SOR;
+    if (x < 0)
+        x = SOR - 1;
+}
+
+void if_rajzol()
+{
+    if (rajzol == true)
+    {
+        vaszon[x][y] = 'X';
+    }
+}
+
 void mozog()
 {
     string akt;      // Aktuális vezérlőszó
@@ -45,8 +69,6 @@ void mozog()
                 stringstream darab(aktdb);
                 darab >> db;
                 ok = true;
-                cout << "\nSzám OK!\n"
-                     << endl;
             }
         }
 
@@ -61,93 +83,51 @@ void mozog()
                 for (int j = 0; j < db; j++)
                 {
                     y--;
-                    if (y >= OSZL)
-                        y -= OSZL;
-                    if (y < 0)
-                        y = OSZL - 1;
-                    cout << "Balra léptünk..." << endl;
-                    if (rajzol == true)
-                    {
-                        cout << "Balra rajzolt!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    y_ell();
+                    if_rajzol();
                 }
-                ok = false;
             }
             else if (akt == "JOBBRA" && !isalpha(beker[i + 1]))
             {
                 for (int j = 0; j < db; j++)
                 {
                     y++;
-                    if (y >= OSZL)
-                        y -= OSZL;
-                    if (y < 0)
-                        y = OSZL - 1;
-                    cout << "Jobbra léptünk..." << endl;
-                    if (rajzol == true)
-                    {
-                        cout << "Jobbra rajzolt!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    y_ell();
+                    if_rajzol();
                 }
-                ok = false;
             }
             else if (akt == "FEL" && !isalpha(beker[i + 1]))
             {
                 for (int j = 0; j < db; j++)
                 {
                     x--;
-                    if (x >= SOR)
-                        x -= SOR;
-                    if (x < 0)
-                        x = SOR - 1;
-                    cout << "Fel léptünk..." << endl;
-                    if (rajzol == true)
-                    {
-                        cout << "Fel rajzolt!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    x_ell();
+                    if_rajzol();
                 }
-                ok = false;
             }
             else if (akt == "LE" && !isalpha(beker[i + 1]))
             {
                 for (int j = 0; j < db; j++)
                 {
                     x++;
-                    if (x >= SOR)
-                        x -= SOR;
-                    if (x < 0)
-                        x = SOR - 1;
-                    cout << "Le léptünk..." << endl;
-                    if (rajzol == true)
-                    {
-                        cout << "Le rajzolt!" << endl;
-                        vaszon[x][y] = 'X';
-                    }
+                    x_ell();
+                    if_rajzol();
                 }
-                ok = false;
             }
         }
 
         if (rajzol == true && vaszon[x][y] != 'X')
         {
-            cout << "\nMozgás függetlenül rajzolt!\n"
-                 << endl;
             vaszon[x][y] = 'X';
         }
 
         // SPACE
         if (beker[i] == ' ' && isalpha(beker[i + 1]))
         {
-            cout << "\nA következő elem betű, szó buffer ürítés...\n"
-                 << endl;
             akt = "\0";
         }
         if (beker[i] == ' ' && isdigit(beker[i + 1]))
         {
-            cout << "\nA következő elem szám, szám buffer ürítés...\n"
-                 << endl;
             aktdb = "\0";
             db = 0;
         }
