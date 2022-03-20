@@ -2,21 +2,17 @@
 #include <sstream>
 using namespace std;
 
-// Vászon mérete
 #define SOR 10
 #define OSZL 10
 
-// Globális változók
 bool van_e_alap = false;
 bool rajzol = false;
 char vaszon[SOR][OSZL];
 
-//"X" Vízszintes "Y" Függőleges  JOBBRA 2 LEENGED LE 5 FELEMEL
 int x = 0;
 int y = 0;
 string beker;
 
-// JOBBRA 2 LEENGED LE 5 FELEMEL
 // JOBBRA 4 LEENGED LE 20 FELEMEL BALRA 20 FEL 5 LEENGED JOBBRA 10
 
 void y_ell()
