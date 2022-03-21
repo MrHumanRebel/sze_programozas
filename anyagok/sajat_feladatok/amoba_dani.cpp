@@ -221,37 +221,54 @@ void nyert()
             cout << "A második játékos nyert!";
     }
 }
-/*
+
 string olvasas()
 {
     string olvashely;
     ifstream olvas;
-    olvas >> std::noskipws;
+    char akt;
     olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba_allas.txt";
-    cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
-    getline(cin, filename);
     olvas.open(olvashely);
     if (!olvas.is_open())
     {
-        cout << "Ilyen fájl nem létezik!" << endl;
-        exit(EXIT_FAILURE);
+        cout << "Nincs mentett játékállás!\n"
+             << endl;
+        van_e_palya = false;
     }
     else
     {
-        olvas>>s tabla);
+        cout << "Van mentett játékállás, betöltés...\n"
+             << endl;
+        van_e_palya = true;
+        for (int i = 0; i <= DB; i++)
+        {
+            for (int j = 0; j <= DB; j++)
+            {
+                olvas >> akt;
+                tabla[i][j] = akt;
+            }
+        }
         olvas.close();
     }
-}*/
+}
 
 void iras()
 {
     ofstream allaski;
     string irashely;
-    /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
-    getline(cin, irashely); */
+    string akt;
     irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba_allas.txt";
     allaski.open(irashely);
-    allaski << tabla;
+    for (int i = 0; i <= DB; i++)
+    {
+        for (int j = 0; j <= DB; j++)
+        {
+            akt = tabla[i][j];
+            if (j == 10)
+                allaski << "\n";
+            allaski << akt;
+        }
+    }
     allaski.close();
     cout << "Játék állás sikeresen mentve!" << endl;
 }
@@ -262,6 +279,7 @@ int main()
     cout << "Amőba játék\n"
          << endl;
 
+    olvasas();
     if (van_e_palya == false)
         alap_palya();
 
