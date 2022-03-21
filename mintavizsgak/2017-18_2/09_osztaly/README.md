@@ -1,4 +1,5 @@
 # Osztály
+**⚠️ Láncolt listás feladat! ⚠️**
 
 Írjon C++ programot az alábbi feladatokra! A program indulásakor jelezze ki, hogy mit csinál! Az input adatok bekérését és az eredmények közlését lássa el tájékoztató szövegekkel!
 
