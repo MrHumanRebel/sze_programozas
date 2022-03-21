@@ -150,7 +150,7 @@ void ellenoriz()
         // Balrol jobbra atló
         for (int i = 0; i < SOR; i++)
         {
-            for (int j = 0; j < OSZL - 0; j++) //"G" sornál álljon le
+            for (int j = 0; j < OSZL; j++) //"G" sornál álljon le
             {
                 if (tabla[i][j] == aktjel && i == j)
                 {
@@ -211,7 +211,8 @@ void olvasas()
     ifstream olvas;
     int tovabb = 0;
     char akt;
-    olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    //olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    olvashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     olvas.open(olvashely);
     if (!olvas.is_open())
     {
@@ -245,7 +246,8 @@ void iras()
     ofstream allaski;
     string irashely;
     string akt;
-    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    //irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     allaski.open(irashely);
     for (int i = 0; i <= SOR; i++)
     {
