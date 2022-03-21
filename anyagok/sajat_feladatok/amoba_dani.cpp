@@ -149,7 +149,7 @@ void ellenoriz() // ALL BETA VERSION
         // Balrol jobbra atló
         for (int i = 0; i < DB; i++)
         {
-            for (int j = 0; j < DB - 4; j++) //"G" sornál álljon le
+            for (int j = 0; j < DB - 0; j++) //"G" sornál álljon le
             {
                 if (tabla[i][j] == aktjel && i == j)
                 {
@@ -167,11 +167,11 @@ void ellenoriz() // ALL BETA VERSION
     {
         szamlalo = 0;
         // Jobbról balra atló
-        for (int i = 0; i < DB; i++)
+        for (int i = DB - 1; i >= 0; i--)
         {
-            for (int j = DB - 1; j > 4; j--) //"D" sornál álljon le
+            for (int j = DB - 1; j >= 0; j--) //"D" sornál álljon le
             {
-                if (tabla[i][j] == aktjel && (DB - (i + 1) == j))
+                if (tabla[i][j] == aktjel && i == (DB - 1 - j))
                 {
                     szamlalo++;
                     if (szamlalo >= 5)
