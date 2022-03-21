@@ -3,9 +3,10 @@
 #include <fstream>
 using namespace std;
 
-#define DB 10
+#define SOR 10
+#define OSZL 10
 
-char tabla[DB][DB];
+char tabla[SOR][OSZL];
 
 bool sor_ok = false, oszl_ok = false, vege = false, van_e_palya = false;
 int sor, c_oszl, jatekos, szamlalo;
@@ -14,9 +15,9 @@ char oszl, aktjel;
 
 void alap_palya()
 {
-    for (int i = 0; i < DB; i++)
+    for (int i = 0; i < SOR; i++)
     {
-        for (int j = 0; j < DB; j++)
+        for (int j = 0; j < OSZL; j++)
         {
             tabla[i][j] = '.';
         }
@@ -33,7 +34,7 @@ void beker()
         if (sor >= 1 && sor <= 10)
             sor_ok = true;
         else
-            cout << "Adjon meg 1-" << DB << " tartományba tartozó számot! ";
+            cout << "Adjon meg 1-" << SOR << " tartományba tartozó számot! ";
 
     } while (sor_ok == false);
 
@@ -69,19 +70,19 @@ void beker()
 void allas()
 {
     cout << "  \t";
-    for (int i = 'A'; i < ('A' + DB); i++)
+    for (int i = 'A'; i < ('A' + SOR); i++)
     {
         cout << char(i);
     }
     cout << endl;
 
-    for (int i = 0; i < DB; i++)
+    for (int i = 0; i < SOR; i++)
     {
-        if (i < DB - 1)
+        if (i < SOR - 1)
             cout << '0' << i + 1 << "\t";
         else
             cout << i + 1 << "\t";
-        for (int j = 0; j < DB; j++)
+        for (int j = 0; j < OSZL; j++)
         {
             cout << tabla[i][j];
         }
@@ -116,12 +117,12 @@ void valaszt()
     }
 }
 
-void ellenoriz() // ALL BETA VERSION
+void ellenoriz()
 {
     // Sima jobbra balra le fel
-    for (int i = 0; i < DB; i++)
+    for (int i = 0; i < SOR; i++)
     {
-        for (int j = 0; j < DB; j++)
+        for (int j = 0; j < OSZL; j++)
         {
             if (tabla[i][j] == aktjel &&
                 tabla[i][j + 1] == aktjel &&
@@ -147,9 +148,9 @@ void ellenoriz() // ALL BETA VERSION
     {
         szamlalo = 0;
         // Balrol jobbra atló
-        for (int i = 0; i < DB; i++)
+        for (int i = 0; i < SOR; i++)
         {
-            for (int j = 0; j < DB - 0; j++) //"G" sornál álljon le
+            for (int j = 0; j < OSZL - 0; j++) //"G" sornál álljon le
             {
                 if (tabla[i][j] == aktjel && i == j)
                 {
@@ -167,11 +168,11 @@ void ellenoriz() // ALL BETA VERSION
     {
         szamlalo = 0;
         // Jobbról balra atló
-        for (int i = DB - 1; i >= 0; i--)
+        for (int i = SOR - 1; i >= 0; i--)
         {
-            for (int j = DB - 1; j >= 0; j--) //"D" sornál álljon le
+            for (int j = OSZL - 1; j >= 0; j--) //"D" sornál álljon le
             {
-                if (tabla[i][j] == aktjel && i == (DB - 1 - j))
+                if (tabla[i][j] == aktjel && i == (OSZL - 1 - j))
                 {
                     szamlalo++;
                     if (szamlalo >= 5)
@@ -226,9 +227,9 @@ void olvasas()
         if (tovabb == 1)
         {
             van_e_palya = true;
-            for (int i = 0; i <= DB; i++)
+            for (int i = 0; i <= SOR; i++)
             {
-                for (int j = 0; j <= DB; j++)
+                for (int j = 0; j <= OSZL; j++)
                 {
                     olvas >> akt;
                     tabla[i][j] = akt;
@@ -246,9 +247,9 @@ void iras()
     string akt;
     irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     allaski.open(irashely);
-    for (int i = 0; i <= DB; i++)
+    for (int i = 0; i <= SOR; i++)
     {
-        for (int j = 0; j <= DB; j++)
+        for (int j = 0; j <= OSZL; j++)
         {
             akt = tabla[i][j];
             if (j == 10)
