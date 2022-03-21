@@ -42,7 +42,7 @@ void beker()
         cout << "Oszlop: ";
         cin >> oszl;
         oszl = toupper(oszl);
-        if ((oszl >= 'a' && oszl <= 'z') or (oszl >= 'A' && oszl <= 'Z'))
+        if ((oszl >= 'a' && oszl <= 'j') or (oszl >= 'A' && oszl <= 'J'))
             oszl_ok = true;
         else
             cout << "Adjon meg A-J tartományba tartozó betűt! ";
@@ -124,41 +124,24 @@ void ellenoriz() // ALL BETA VERSION
     {
         for (int j = 0; j < DB; j++)
         {
-            if (tabla[i][j] == aktjel && vege == false)
+            if (tabla[i][j] == aktjel &&
+                tabla[i][j + 1] == aktjel &&
+                tabla[i][j + 2] == aktjel &&
+                tabla[i][j + 3] == aktjel &&
+                tabla[i][j + 4] == aktjel)
             {
-                sorszamlal++;
-                if (sorszamlal >= 5 &&
-                    tabla[i][j] == tabla[i][j + 1] &&
-                    tabla[i][j + 1] == tabla[i][j + 2] &&
-                    tabla[i][j + 2] == tabla[i][j + 3] &&
-                    tabla[i][j + 3] == tabla[i][j + 4])
-                {
-                    vege = true;
-                    cout << "Vízszintes irányban nyert!" << endl;
-                }
+                vege = true;
+                cout << "Vízszintes irányban nyert!" << endl;
             }
-            if (tabla[i][j] == aktjel && vege == false)
+            if (tabla[i][j] == aktjel &&
+                tabla[i + 1][j] == aktjel &&
+                tabla[i + 2][j] == aktjel &&
+                tabla[i + 3][j] == aktjel &&
+                tabla[i + 4][j] == aktjel)
             {
-                oszlszamlal++;
-                if (oszlszamlal >= 5 &&
-                    tabla[i][j] == tabla[i + 1][j] &&
-                    tabla[i + 1][j] == tabla[i + 2][j] &&
-                    tabla[i + 2][j] == tabla[i + 3][j] &&
-                    tabla[i + 3][j] == tabla[i + 4][j])
-                {
-                    vege = true;
-                    cout << "Függőleges irányban nyert!" << endl;
-                }
+                vege = true;
+                cout << "Függőleges irányban nyert!" << endl;
             }
-            if (vege == true)
-            {
-                sorszamlal = 5;
-                oszlszamlal = 5;
-            }
-            if (j == DB - 1)
-                sorszamlal = 0;
-            if (i == DB - 1)
-                oszlszamlal = 0;
         }
     }
     if (vege != true)
