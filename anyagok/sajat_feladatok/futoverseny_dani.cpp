@@ -3,18 +3,33 @@
 #include <fstream>
 using namespace std;
 
-#define MAX 20
+#define FUTOMAX 10
+#define IDOMAX 20
+
+struct futoadat
+{
+    string sorszam[FUTOMAX];
+    string nev[FUTOMAX];
+};
+
+struct idoadat
+{
+    string sorszam[FUTOMAX];
+    int ellszam[IDOMAX];
+    int ora[IDOMAX];
+    int perc[IDOMAX];
+    int masodperc[IDOMAX];
+};
+
+string filename_futo;
+string filename_ido;
 
 void olvasas()
 {
-    string futoadat[MAX][MAX]; // Futó sorszáma, Futó neve
-    string filename;           // Fájl elérési útja
-
-    string idoadat[MAX][MAX][MAX][MAX][MAX]; // Futó sorszáma, Ellenőrző pont sorszáma, Óra, Perc, Másodperc
-    string filename_2;                       // Fájl elérési útja
-
-    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    filename_2 = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    struct futoadat fu;
+    struct idoadat id;
+    filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
 
     /* cout<<"Adja meg a \"futok_nevei.txt\" elérési útját!"<<endl;
     cin.getline(filename);
@@ -23,7 +38,7 @@ void olvasas()
     cin.getline(filename_2);*/
 
     ifstream futok;
-    futok.open(filename);
+    futok.open(filename_futo);
 
     if (!futok.is_open())
     {
@@ -32,25 +47,29 @@ void olvasas()
     }
 
     string akt;
-    futok >> akt;
-    int aktszam;
-    long unsigned int i = 0;
-    int j = 0;
-
-    while (i <= sizeof(futok) && futok.good())
+    int i = 0;
+    while (i <= FUTOMAX && futok.good())
     {
-        stringstream darab(akt);
-        darab >> aktszam;
-        if (isdigit(aktszam))
+        futok >> akt;
+        if (isalpha(akt))
+            fu.sorszam[i] = akt;
+    }
+}
+
+void teszt()
+{
+    for (int i = 0; i <= FUTOMAX; i++)
+    {
+        for (int j = 0; j <= FUTOMAX; j++)
         {
-            futoadat[i][j] += akt;
-            j++;
+            cout << "Adat: " << endl;
         }
-        i++;
     }
 }
 
 int main()
 {
+    olvasas();
+    teszt();
     return 0;
 }
