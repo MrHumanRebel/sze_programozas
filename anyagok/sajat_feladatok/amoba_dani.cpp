@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
 using namespace std;
 
 #define DB 10
@@ -220,6 +221,40 @@ void nyert()
             cout << "A második játékos nyert!";
     }
 }
+/*
+string olvasas()
+{
+    string olvashely;
+    ifstream olvas;
+    olvas >> std::noskipws;
+    olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba_allas.txt";
+    cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
+    getline(cin, filename);
+    olvas.open(olvashely);
+    if (!olvas.is_open())
+    {
+        cout << "Ilyen fájl nem létezik!" << endl;
+        exit(EXIT_FAILURE);
+    }
+    else
+    {
+        olvas>>s tabla);
+        olvas.close();
+    }
+}*/
+
+void iras()
+{
+    ofstream allaski;
+    string irashely;
+    /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
+    getline(cin, irashely); */
+    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba_allas.txt";
+    allaski.open(irashely);
+    allaski << tabla;
+    allaski.close();
+    cout << "Játék állás sikeresen mentve!" << endl;
+}
 
 int main()
 {
@@ -242,6 +277,7 @@ int main()
         nyert();
         if (vege == true)
             return 0;
+        iras();
 
         cout << "Második játékos lépése:" << endl;
         jatekos = 2;
@@ -249,6 +285,7 @@ int main()
         valaszt();
         allas();
         nyert();
+        iras();
 
     } while (!vege);
     return 0;
