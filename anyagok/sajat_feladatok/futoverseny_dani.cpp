@@ -47,13 +47,26 @@ void olvasas()
     }
 
     string akt;
-    int i = 0;
-    while (i <= FUTOMAX && futok.good())
+    int x = 0;
+    int y = 0;
+    while (x <= FUTOMAX && futok.good())
     {
-        futok >> akt;
-        if (isalpha(akt))
-            fu.sorszam[i] = akt;
+        getline(futok, akt);
+        for (long unsigned int i = 0; i <= akt.length(); i++)
+        {
+            if (isdigit(akt[i]))
+            {
+                fu.sorszam[x] += akt[i];
+                x++;
+            }
+            if (isalpha(akt[i]))
+            {
+                fu.nev[y] += akt[i];
+                y++;
+            }
+        }
     }
+    futok.close();
 }
 
 void teszt()
