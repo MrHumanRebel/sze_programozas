@@ -222,7 +222,7 @@ void nyert()
     }
 }
 
-string olvasas()
+void olvasas()
 {
     string olvashely;
     ifstream olvas;
