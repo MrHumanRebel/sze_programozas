@@ -1,4 +1,6 @@
 # Bináris fa
+**⚠️ Bináris fa feladat! ⚠️**
+
 
 Készítsen egy olyan C/C++ programot, amely a szabványos bemenetről érkező szöveget dolgozza fel! 
 
