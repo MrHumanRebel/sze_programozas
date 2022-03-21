@@ -118,7 +118,6 @@ void valaszt()
 
 void ellenoriz() // ALL BETA VERSION
 {
-    int sorszamlal = 0, oszlszamlal = 0;
     // Sima jobbra balra le fel
     for (int i = 0; i < DB; i++)
     {
