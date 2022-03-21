@@ -226,6 +226,7 @@ void olvasas()
 {
     string olvashely;
     ifstream olvas;
+    int tovabb = 0;
     char akt;
     olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba_allas.txt";
     olvas.open(olvashely);
@@ -237,15 +238,19 @@ void olvasas()
     }
     else
     {
-        cout << "Van mentett játékállás, betöltés...\n"
-             << endl;
-        van_e_palya = true;
-        for (int i = 0; i <= DB; i++)
+        cout << "Van mentett játékállás!\n"
+             << "Ha szeretné betölteni az előző játékállást, nyomja meg az \"1\"-es gombot!" << endl;
+        cin >> tovabb;
+        if (tovabb == 1)
         {
-            for (int j = 0; j <= DB; j++)
+            van_e_palya = true;
+            for (int i = 0; i <= DB; i++)
             {
-                olvas >> akt;
-                tabla[i][j] = akt;
+                for (int j = 0; j <= DB; j++)
+                {
+                    olvas >> akt;
+                    tabla[i][j] = akt;
+                }
             }
         }
         olvas.close();
