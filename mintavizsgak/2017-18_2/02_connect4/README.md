@@ -9,7 +9,8 @@ A Connect4 játékban a játékosok fentről ejtik korongjaikat egy **6 sor** é
 Jelenítse meg a pályát úgy, hogy a sorokat 1-től kezdve számozza, az oszlopokat betűkkel jelöli (lásd a példát)! Az első játékos lépéseit `X`, a másodikét `O` jelöli a pályán, az üres mezőket jelölje `.` karakterrel!
 
 Ezután felváltva olvassa be a játékosok lépéseit (az oszlopokat), és jelenítse meg újra a táblát, ami tartalmazza a játékosok eddigi lépéseit, beleértve az imént megadottat is! (A korong leesését nem kell animálni, elég a kialakult végső állapotot mutatni.)
-Hibás lépés (a táblán kívülre mutató, vagy megtelt oszlop) esetén ismételtesse az adatbevitelt! A játéknak akkor van vége, ha valamelyik játékos függőlegesen, vízszintesen vagy átlós irányban képes volt pontosan 4 mezőt elfoglalni, vagy betelt a tábla (ebben az esetben a játék döntetlennel végződik). 
+
+Hibás lépés (a táblán kívülre mutató, vagy megtelt oszlop) esetén **ismételtesse** az adatbevitelt! A játéknak akkor van vége, ha valamelyik játékos függőlegesen, vízszintesen vagy átlós irányban képes volt pontosan 4 mezőt elfoglalni, vagy betelt a tábla (ebben az esetben a játék döntetlennel végződik). 
 
 ## Példa
 
