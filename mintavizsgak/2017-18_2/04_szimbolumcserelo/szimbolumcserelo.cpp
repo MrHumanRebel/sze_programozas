@@ -3,6 +3,7 @@ using namespace std;
 
 #define MAX 10
 #define KERESETT_KAR '$'
+#define INPUT_VEGE "[vege]"
 
 struct szimbolum
 {
@@ -17,18 +18,8 @@ string szovegBekerese()
   string bemenet;
   getline(cin, bemenet);
 
-  // TODO: Refaktor, mert így nem túl biztos
-  char keresettKar = ' ';
-  int i = bemenet.length() - 1;
-  while (i >= 0 && bemenet[i] != keresettKar)
-  {
-    i--;
-  }
-
-  if (i < 0)
-  {
-    cout << "Hibás input" << endl;
-  }
+  int vegeHely = bemenet.find(INPUT_VEGE);
+  bemenet = vegeHely != -1 ? bemenet.substr(0, vegeHely) : "";
 
   return bemenet;
 }
@@ -51,6 +42,7 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
 
   int k = 0;
   int szimbolumokSzama = sizeof(szimbolumok[0]) / sizeof(szimbolumok);
+
   while (k < szimbolumokSzama && szimbolumok[k].helyorzo != aktHelyorzo)
   {
     k++;
@@ -61,10 +53,9 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
     return szo;
 
   string keresettErtek = szimbolumok[k].ertek;
-  string toldalek = i > 0 ? szo.substr(0, helyorzoKezdet - 1) : szo.substr(j + 1);
-  string keresettCsere = i > 0 ? toldalek + keresettErtek : keresettErtek + toldalek;
+  string csereltSzo = szo.replace(i, j + 1, keresettErtek);
 
-  return keresettCsere;
+  return csereltSzo;
 }
 
 string csere(string bemenet, szimbolum szimbolumok[MAX])
