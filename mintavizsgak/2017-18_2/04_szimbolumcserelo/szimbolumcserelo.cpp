@@ -68,8 +68,7 @@ string csere(string bemenet, szimbolum szimbolumok[MAX])
   {
     if (bemenet[i] == ' ')
     {
-      bool csereSzukseges = vanHelyorzo;
-      szoveg += csereSzukseges ? helyorzoCsere(aktSzo, szimbolumok) + ' ' : aktSzo + ' ';
+      szoveg += vanHelyorzo ? helyorzoCsere(aktSzo, szimbolumok) + ' ' : aktSzo + ' ';
 
       vanHelyorzo = false;
       aktSzo = "";
