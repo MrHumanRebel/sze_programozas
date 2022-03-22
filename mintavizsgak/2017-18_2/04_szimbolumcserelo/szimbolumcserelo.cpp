@@ -30,35 +30,23 @@ string szovegBekerese()
     cout << "Hibás input" << endl;
   }
 
-  bemenet = bemenet.substr(0, i);
   return bemenet;
 }
 
 string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
 {
   // Első releváns karakter megkeresése
-  size_t i = 0;
-  while (i < szo.length() && szo[i] != KERESETT_KAR)
-  {
-    i++;
-  }
-
-  if (i >= szo.length())
-    return szo;
+  int i = szo.find(KERESETT_KAR);
 
   // Utolsó releváns karakter megkeresése
-  size_t j = szo.length() - 1;
-  while (j > i && szo[j] != KERESETT_KAR)
-  {
-    j--;
-  }
+  int j = szo.find_last_of(KERESETT_KAR);
 
-  if (j <= i)
-    return szo;
+  // "$$" kezelése
+  if (j - i == 1)
+    return szo.substr(1);
 
   int helyorzoKezdet = i + 1;
   int helyorzoVeg = i > 0 ? (j - 1) - i : j - 1;
-
   string aktHelyorzo = szo.substr(helyorzoKezdet, helyorzoVeg);
 
   int k = 0;
@@ -68,6 +56,7 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
     k++;
   }
 
+  // Ismeretlen helyőrző esetén
   if (k >= szimbolumokSzama)
     return szo;
 
@@ -86,7 +75,6 @@ string csere(string bemenet, szimbolum szimbolumok[MAX])
   bool vanHelyorzo = false;
   for (size_t i = 0; i < bemenet.length(); i++)
   {
-    // TODO: Utolsó rész (":)") hozzáadása
     if (bemenet[i] == ' ')
     {
       bool csereSzukseges = vanHelyorzo;
