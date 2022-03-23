@@ -46,7 +46,7 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
     // Az srand() meghívásával mindig más seedet kapunk, így minden futásnál eltérő értéket kapunk
     srand((unsigned)time(NULL));
 
-    int randErtek = rand() % VEL_MAX;
+    int randErtek = rand() % VEL_MAX + 1;
     string csereltSzo = szo.replace(i, j + 1, to_string(randErtek));
 
     return csereltSzo;
