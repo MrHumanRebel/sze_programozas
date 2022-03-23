@@ -2,8 +2,9 @@
 using namespace std;
 
 #define MAX 10
-#define KERESETT_KAR '$'
+#define SZIMB_DELIM '$'
 #define INPUT_VEGE "[vege]"
+#define VEL_MAX 9999 // VEL_MAX, mert a RAND_MAX már foglalt
 
 struct szimbolum
 {
@@ -27,10 +28,10 @@ string szovegBekerese()
 string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
 {
   // Első releváns karakter megkeresése
-  int i = szo.find(KERESETT_KAR);
+  int i = szo.find(SZIMB_DELIM);
 
   // Utolsó releváns karakter megkeresése
-  int j = szo.find_last_of(KERESETT_KAR);
+  int j = szo.find_last_of(SZIMB_DELIM);
 
   // "$$" kezelése
   if (j - i == 1)
@@ -40,9 +41,19 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
   int helyorzoVeg = i > 0 ? (j - 1) - i : j - 1;
   string aktHelyorzo = szo.substr(helyorzoKezdet, helyorzoVeg);
 
+  if (aktHelyorzo == "vel")
+  {
+    // Az srand() meghívásával mindig más seedet kapunk, így minden futásnál eltérő értéket kapunk
+    srand((unsigned)time(NULL));
+
+    int randErtek = rand() % VEL_MAX;
+    string csereltSzo = szo.replace(i, j + 1, to_string(randErtek));
+
+    return csereltSzo;
+  }
+
   int k = 0;
   int szimbolumokSzama = sizeof(szimbolumok[0]) / sizeof(szimbolumok);
-
   while (k < szimbolumokSzama && szimbolumok[k].helyorzo != aktHelyorzo)
   {
     k++;
@@ -75,7 +86,7 @@ string csere(string bemenet, szimbolum szimbolumok[MAX])
     }
     else
     {
-      vanHelyorzo = vanHelyorzo || bemenet[i] == KERESETT_KAR;
+      vanHelyorzo = vanHelyorzo || bemenet[i] == SZIMB_DELIM;
       aktSzo += bemenet[i];
     }
   }
