@@ -131,7 +131,7 @@ void ellenoriz()
                 tabla[i][j + 4] == aktjel)
             {
                 vege = true;
-                cout << "Vízszintes irányban nyert!" << endl;
+                cout << "Vízszintes irányban ";
             }
             if (tabla[i][j] == aktjel &&
                 tabla[i + 1][j] == aktjel &&
@@ -140,7 +140,7 @@ void ellenoriz()
                 tabla[i + 4][j] == aktjel)
             {
                 vege = true;
-                cout << "Függőleges irányban nyert!" << endl;
+                cout << "Függőleges irányban ";
                 return;
             }
         }
@@ -165,7 +165,7 @@ void ellenoriz()
                     if (szamlalo >= 5)
                     {
                         vege = true;
-                        cout << "Balról jobbra atlóval nyert!" << endl;
+                        cout << "Balról jobbra atlóval ";
                         return;
                     }
                 }
@@ -189,7 +189,7 @@ void ellenoriz()
                     if (szamlalo >= 5)
                     {
                         vege = true;
-                        cout << "Jobbról balra atlóval nyert!" << endl;
+                        cout << "Jobbról balra atlóval, ";
                         return;
                     }
                 }
@@ -205,7 +205,7 @@ void nyert()
         aktjel = 'X';
         ellenoriz();
         if (szamlalo >= 5)
-            cout << "Az első játékos nyert!";
+            cout << "az első játékos nyert!";
     }
 
     if (jatekos == 2)
@@ -213,7 +213,7 @@ void nyert()
         aktjel = 'O';
         ellenoriz();
         if (szamlalo >= 5)
-            cout << "A második játékos nyert!";
+            cout << "a második játékos nyert!";
     }
 }
 
