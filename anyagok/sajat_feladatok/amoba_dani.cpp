@@ -141,45 +141,52 @@ void ellenoriz()
             {
                 vege = true;
                 cout << "Függőleges irányban nyert!" << endl;
+                return;
             }
         }
     }
-    if (vege != true)
+
+    // Balrol jobbra atló
+    for (int i = 0; i < SOR; i++)
     {
-        szamlalo = 0;
-        // Balrol jobbra atló
-        for (int i = 0; i < SOR; i++)
+        for (int j = 0; j < OSZL; j++) //"G" sornál álljon le
         {
-            for (int j = 0; j < OSZL; j++) //"G" sornál álljon le
+            if (tabla[i][j] == aktjel)
             {
-                if (tabla[i][j] == aktjel && i == j)
+                szamlalo = 0;
+                for (int k = 0; k < 5; k++)
                 {
-                    szamlalo++;
+                    /*cout << "i:" << i << endl;
+                    cout << "j:" << j << endl;
+                    cout << "k:" << k << endl;*/
+                    if (tabla[i + k][j + k] == aktjel)
+                        szamlalo++;
+
                     if (szamlalo >= 5)
                     {
                         vege = true;
                         cout << "Balról jobbra atlóval nyert!" << endl;
+                        return;
                     }
                 }
             }
         }
     }
-    if (vege != true)
+
+    szamlalo = 0;
+    // Jobbról balra atló
+    for (int i = SOR - 1; i >= 0; i--)
     {
-        szamlalo = 0;
-        // Jobbról balra atló
-        for (int i = SOR - 1; i >= 0; i--)
+        for (int j = OSZL - 1; j >= 0; j--) //"D" sornál álljon le
         {
-            for (int j = OSZL - 1; j >= 0; j--) //"D" sornál álljon le
+            if (tabla[i][j] == aktjel && i == (OSZL - 1 - j))
             {
-                if (tabla[i][j] == aktjel && i == (OSZL - 1 - j))
+                szamlalo++;
+                if (szamlalo >= 5)
                 {
-                    szamlalo++;
-                    if (szamlalo >= 5)
-                    {
-                        vege = true;
-                        cout << "Jobbról balra atlóval nyert!" << endl;
-                    }
+                    vege = true;
+                    cout << "Jobbról balra atlóval nyert!" << endl;
+                    return;
                 }
             }
         }
@@ -192,7 +199,7 @@ void nyert()
     {
         aktjel = 'X';
         ellenoriz();
-        if (szamlalo == 5)
+        if (szamlalo >= 5)
             cout << "Az első játékos nyert!";
     }
 
@@ -200,7 +207,7 @@ void nyert()
     {
         aktjel = 'O';
         ellenoriz();
-        if (szamlalo == 5)
+        if (szamlalo >= 5)
             cout << "A második játékos nyert!";
     }
 }
@@ -211,7 +218,7 @@ void olvasas()
     ifstream olvas;
     int tovabb = 0;
     char akt;
-    //olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    // olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     olvashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     olvas.open(olvashely);
     if (!olvas.is_open())
@@ -246,7 +253,7 @@ void iras()
     ofstream allaski;
     string irashely;
     string akt;
-    //irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    // irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
     allaski.open(irashely);
     for (int i = 0; i <= SOR; i++)
