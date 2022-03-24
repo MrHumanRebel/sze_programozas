@@ -147,9 +147,9 @@ void ellenoriz()
     }
 
     // Balrol jobbra atló
-    for (int i = 0; i < SOR; i++)
+    for (int i = 0; i < SOR - 4; i++)
     {
-        for (int j = 0; j < OSZL; j++) //"G" sornál álljon le
+        for (int j = 0; j < OSZL - 4; j++) //"G" sornál álljon le
         {
             if (tabla[i][j] == aktjel)
             {
@@ -173,20 +173,25 @@ void ellenoriz()
         }
     }
 
-    szamlalo = 0;
     // Jobbról balra atló
-    for (int i = SOR - 1; i >= 0; i--)
+    for (int i = SOR - 1; i >= 4; i--)
     {
-        for (int j = OSZL - 1; j >= 0; j--) //"D" sornál álljon le
+        for (int j = 0; j < OSZL - 4; j++) //"G" sornál álljon le
         {
-            if (tabla[i][j] == aktjel && i == (OSZL - 1 - j))
+            if (tabla[i][j] == aktjel)
             {
-                szamlalo++;
-                if (szamlalo >= 5)
+                szamlalo = 0;
+                for (int k = 0; k < 5; k++)
                 {
-                    vege = true;
-                    cout << "Jobbról balra atlóval nyert!" << endl;
-                    return;
+                    if (tabla[i - k][j + k] == aktjel)
+                        szamlalo++;
+
+                    if (szamlalo >= 5)
+                    {
+                        vege = true;
+                        cout << "Jobbról balra atlóval nyert!" << endl;
+                        return;
+                    }
                 }
             }
         }
