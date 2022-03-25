@@ -43,9 +43,11 @@ int karbeker(char KEZD, char VEG)
     return akt;
 }
 
-char palya_gen(int SORMAX, int OSZLMAX, char tabla[][])
+// Pálya generáló függvény
+// BETA VERSION
+char palya_gen(int SORMAX, int OSZLMAX, char tabla[][], bool van_palya)
 {
-    bool van_palya = false;
+
     for (int i = 0; i < SORMAX; i++)
     {
         for (int j = 0; j < OSZLMAX; j++)
@@ -55,6 +57,36 @@ char palya_gen(int SORMAX, int OSZLMAX, char tabla[][])
     }
     van_palya = true;
     return tabla[][];
+}
+
+// Alap karakter olvasó függvény
+// BETA VERSION
+char olvasas(int SORMAX, int OSZLMAX, string olvashely, char tabla[][], bool van_palya)
+{
+    string olvashely;
+    ifstream olvas;
+    int tovabb = 0;
+    char akt;
+    olvas.open(olvashely);
+    if (!olvas.is_open())
+    {
+        TELL "Nincs mentett állás, vagy a fájl nem elérhető!\n"
+            << endl;
+        van_palya = false;
+    }
+    else
+    {
+        van_palya = true;
+        for (int i = 0; i <= SORMAX; i++)
+        {
+            for (int j = 0; j <= OSZLMAX; j++)
+            {
+                olvas >> akt;
+                tabla[i][j] = akt;
+            }
+        }
+    }
+    olvas.close();
 }
 
 int main()
@@ -74,7 +106,12 @@ int main()
     // Pálya generáló függvény tesztelő
     int SORMAX = 10;
     int OSZLMAX = 10;
-    char tabla[SORMAX][OSZLMAX] = palya_gen(SORMAX, OSZLMAX, tabla[][]);
+    bool van_palya = false;
+    char tabla[SORMAX][OSZLMAX] = palya_gen(SORMAX, OSZLMAX, tabla[][], van_palya);
+
+    // Alap karakter olvasó függvény tesztelő
+    string olvashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    char tabla[SORMAX][OSZLMAX] = olvasas(SORMAX, OSZLMAX, olvashely, tabla[][], van_palya);
 
     return 0;
 }
