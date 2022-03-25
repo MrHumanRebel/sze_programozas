@@ -43,6 +43,20 @@ int karbeker(char KEZD, char VEG)
     return akt;
 }
 
+char palya_gen(int SORMAX, int OSZLMAX, char tabla[][])
+{
+    bool van_palya = false;
+    for (int i = 0; i < SORMAX; i++)
+    {
+        for (int j = 0; j < OSZLMAX; j++)
+        {
+            tabla[i][j] = '.';
+        }
+    }
+    van_palya = true;
+    return tabla[][];
+}
+
 int main()
 {
     // Szám bekerő függvény tesztelő
@@ -56,5 +70,11 @@ int main()
     char VEG = 'D';
     char kar_akt = karbeker(KEZD, VEG);
     TELL kar_akt << endl;
+
+    // Pálya generáló függvény tesztelő
+    int SORMAX = 10;
+    int OSZLMAX = 10;
+    char tabla[SORMAX][OSZLMAX] = palya_gen(SORMAX, OSZLMAX, tabla[][]);
+
     return 0;
 }
