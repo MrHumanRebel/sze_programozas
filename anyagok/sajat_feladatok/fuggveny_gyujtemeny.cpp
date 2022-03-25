@@ -14,12 +14,12 @@ int szambeker(int MIN, int MAX)
     int akt;
     do
     {
-        TELL "Adja meg a számot!";
+        TELL "Adja meg a számot!" << endl;
         ASK akt;
         if (akt >= MIN && akt <= MAX)
             szambe_ok = true;
         else
-            TELL "Adjon meg " << MIN << "-től " << MAX << "-ig tartományba tartozó számot! ";
+            TELL "Adjon meg " << MIN << "-től " << MAX << "-ig tartományba tartozó számot!" << endl;
     } while (szambe_ok == false);
     return akt;
 }
@@ -31,14 +31,14 @@ int karbeker(char KEZD, char VEG)
     char akt;
     do
     {
-        TELL "Adja meg a karaktert!";
+        TELL "Adja meg a karaktert!" << endl;
         ASK akt;
         // akt = tolower(akt);
         // akt = toupper(akt);
         if (akt >= KEZD && akt <= VEG)
             karbe_ok = true;
         else
-            TELL "Adjon meg " << KEZD << "-től " << VEG << "-ig tartományba tartozó karaktert! ";
+            TELL "Adjon meg " << KEZD << "-től " << VEG << "-ig tartományba tartozó karaktert!" << endl;
     } while (karbe_ok == false);
     return akt;
 }
@@ -48,12 +48,13 @@ int main()
     // Szám bekerő függvény tesztelő
     int MAX = 10;
     int MIN = 1;
-    int akt;
-    szambeker(MIN, MAX);
+    int szam_akt = szambeker(MIN, MAX);
+    TELL szam_akt << endl;
 
     // Karakter bekerő függvény tesztelő
     char KEZD = 'A';
     char VEG = 'D';
-    karbeker(KEZD, VEG);
+    char kar_akt = karbeker(KEZD, VEG);
+    TELL kar_akt << endl;
     return 0;
 }
