@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 
-#define MAX 10
+#define DEF_FAJLNEV "szimbolumok.txt"
 #define SZIMB_DELIM '$'
 #define INPUT_VEGE "[vege]"
 #define VEL_MAX 9999 // VEL_MAX, mert a RAND_MAX már foglalt
@@ -154,7 +154,8 @@ int main(int argc, char const *argv[])
   cout << "Szimbolumcserelo" << endl;
 
   szimbolum *horgony = NULL;
-  horgony = szimbolumBetolt(horgony, "szimbolumok.txt");
+  string fajlnev = argc == 2 ? argv[1] : DEF_FAJLNEV;
+  horgony = szimbolumBetolt(horgony, fajlnev);
 
   string bemenet = szovegBeker();
   string szoveg = szovegCsere(bemenet, horgony);
