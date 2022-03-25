@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+#define TELL cout <<
+#define ASK cin >>
 
 int main()
 {
@@ -10,17 +12,17 @@ int main()
     double a, b, c, x, y, max = 0;
     double rad, alfa, beta, gamma, id = 0;
     bool beker, menuker = true;
-    cout << "Saját vagy randomizált adatokkal szeretné használni a háromszög kalkulátort?\n"
+    TELL "Saját vagy randomizált adatokkal szeretné használni a háromszög kalkulátort?\n"
          << "___________________________________________________________________________________\n\n"
          << "Randomizáláshoz nyomja meg az 1-es gombot!\n"
          << "Adatmegadáshoz nyomja meg a 2-es gombot!" << endl;
     while (menuker)
     {
-        cin >> menu;
+        ASK menu;
         if (menu >= 1 && menu < 3)
             menuker = false;
         else
-            cout << "Nem valós menüpont!\n";
+            TELL "Nem valós menüpont!\n";
     }
 
     if (menu == 1)
@@ -46,22 +48,22 @@ int main()
                 }
             }
         } while (beker == true);
-        cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető derékszögű háromszög állt elő!\n"
+        TELL "A randomizátor " << db << "-szer futott le mire megszerkeszthető derékszögű háromszög állt elő!\n"
              << endl;
     }
 
     if (menu == 2)
     {
-        cout << "Adja meg a derékszögű háromszög két oldalát!\n"
+        TELL "Adja meg a derékszögű háromszög két oldalát!\n"
              << "_________________________________\n"
              << endl;
         do
         {
-            cout << "Adja meg a derékszögű háromszög egyik oldalát!" << endl;
-            cin >> a;
+            TELL "Adja meg a derékszögű háromszög egyik oldalát!" << endl;
+            ASK a;
             max = a;
-            cout << "Adja meg a derékszögű háromszög másik oldalát!" << endl;
-            cin >> b;
+            TELL "Adja meg a derékszögű háromszög másik oldalát!" << endl;
+            ASK b;
             if (b > max)
                 max = b;
             if (a != 0 && b != 0)
@@ -73,19 +75,19 @@ int main()
                     beker = false;
                 else
                 {
-                    cout << "Ez a háromszög nem derékszögű, adjon meg új adatokat!" << endl;
+                    TELL "Ez a háromszög nem derékszögű, adjon meg új adatokat!" << endl;
                     db++;
                     beker = true;
                 }
             }
             else
             {
-                cout << "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
+                TELL "Ez a háromszög nem szerkeszthető meg, adjon meg új adatokat!" << endl;
                 db++;
                 beker = true;
             }
         } while (beker == true);
-        cout << "Az adatok az " << db << ". alkalommal tették lehetővé derékszögű háromszög megszerkesztését!\n"
+        TELL "Az adatok az " << db << ". alkalommal tették lehetővé derékszögű háromszög megszerkesztését!\n"
              << endl;
     }
 
@@ -105,10 +107,10 @@ int main()
         y = c;
     }
 
-    cout << "Ez a derékszögű háromszög megszerkeszthető!\n"
+    TELL "Ez a derékszögű háromszög megszerkeszthető!\n"
          << endl;
 
-    cout << "A háromszög \"a\" oldalának hossza: " << a << "\n"
+    TELL "A háromszög \"a\" oldalának hossza: " << a << "\n"
          << "A háromszög \"b\" oldalának hossza: " << b << "\n"
          << "A háromszög \"c\" oldalának hossza: " << c << "\n"
          << "A háromszög leghosszabb oldalának hossza: " << max << "\n"
@@ -132,7 +134,7 @@ int main()
     beta = beta * rad;
     gamma = gamma * rad;
 
-    cout << "Az \"A\" csúcshoz tartózó szöge: " << alfa << "\n A \"B\" csúcshoz tartózó szöge: " << beta << "\n A \"C\" csúcshoz tartózó szöge: " << gamma << "\n"
+    TELL "Az \"A\" csúcshoz tartózó szöge: " << alfa << "\n A \"B\" csúcshoz tartózó szöge: " << beta << "\n A \"C\" csúcshoz tartózó szöge: " << gamma << "\n"
          << "A három szög összege ellenőrzésképpen: " << alfa + beta + gamma << "\n"
          << endl;
 

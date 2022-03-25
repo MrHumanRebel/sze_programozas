@@ -3,7 +3,7 @@
 using namespace std;
 
 #define TELL cout <<
-#define ASK cin >>
+#define ASK ASK
 
 // Szia $nev$! Lattalak $telepules$ fele menet, amint hajtottad a $szin$ $jarmu$det, a $allat$ pedig kergetett. Sok $$-t adtam volna akkor es ott egy fenykepezogepert :) [vege]
 // Szevasz $nev$!!! Néztem tegnap este a $allat$-ról szóló kisfilmet a Duna TV-n, $telepules$-en egy $jarmu$ elütötte a $szin$ színű buzit. Sok $$-t adtam volna hogy felvegyem, a $allat$t. [vege] ksufhkuhfhk

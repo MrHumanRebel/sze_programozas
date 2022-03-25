@@ -1,23 +1,25 @@
 #include <iostream>
 using namespace std;
 #define db 5
+#define TELL cout <<
+#define ASK cin >>
 
 int main()
 {
     double szamok[db * db];
     int pluszdb = db;
     double akt;
-    cout << "Adjon meg " << db << " db számot!" << endl;
+    TELL "Adjon meg " << db << " db számot!" << endl;
     for (int k = 1; k <= db; k++)
     {
-        cout << "Adja meg az " << k << ". számot!" << endl;
-        cin >> akt;
+        TELL "Adja meg az " << k << ". számot!" << endl;
+        ASK akt;
         szamok[k] = akt;
     }
     do
     {
-        cout << "\nAdja meg a számot amit be szeretne illeszteni!" << endl;
-        cin >> akt;
+        TELL "\nAdja meg a számot amit be szeretne illeszteni!" << endl;
+        ASK akt;
         // if (akt >= 0)
         //{
         pluszdb++;
@@ -42,7 +44,7 @@ int main()
         //ÚJ ADATOK KIÍRÁSA
         for (int j = 0; j <= pluszdb; j++)
         {
-            cout << szamok[j] << "\t";
+            TELL szamok[j] << "\t";
         }
     } while (akt != 0);
 

@@ -2,6 +2,9 @@
 #include <cmath>
 using namespace std;
 
+#define TELL cout <<
+#define ASK cin >>
+
 int main()
 {
   int menu;
@@ -9,17 +12,17 @@ int main()
   double a, b, max, kerulet, terulet, atlo, alfa, beta, id, rad = 0;
   bool beker, menuker = true;
 
-  cout << "Saját vagy randomizált adatokkal szeretné használni a téglalap kalkulátort?\n"
+  TELL "Saját vagy randomizált adatokkal szeretné használni a téglalap kalkulátort?\n"
        << "___________________________________________________________________________________\n\n"
        << "Randomizáláshoz nyomja meg az 1-es gombot!\n"
        << "Adatmegadáshoz nyomja meg a 2-es gombot!" << endl;
   while (menuker)
   {
-    cin >> menu;
+    ASK menu;
     if (menu >= 1 && menu < 3)
       menuker = false;
     else
-      cout << "Nem valós menüpont!\n";
+      TELL "Nem valós menüpont!\n";
   }
 
   if (menu == 1)
@@ -33,7 +36,7 @@ int main()
         max = b;
       if (a > 0 and b > 0)
       {
-        cout << "A randomizált téglalap megszerkeszthető!\n"
+        TELL "A randomizált téglalap megszerkeszthető!\n"
              << "Már számoljuk is a jellemzőit...\n"
              << endl;
         beker = false;
@@ -44,44 +47,44 @@ int main()
         beker = true;
       }
     } while (beker == true);
-    cout << "A randomizátor " << db << "-szer futott le mire megszerkeszthető téglalap állt elő!\n"
+    TELL "A randomizátor " << db << "-szer futott le mire megszerkeszthető téglalap állt elő!\n"
          << endl;
   }
 
   if (menu == 2)
   {
-    cout << "Adja meg a téglalap oldalait!\n"
+    TELL "Adja meg a téglalap oldalait!\n"
          << "_________________________________\n"
          << endl;
     do
     {
-      cout << "Adja meg a téglalap első oldalát!" << endl;
-      cin >> a;
+      TELL "Adja meg a téglalap első oldalát!" << endl;
+      ASK a;
       max = a;
-      cout << "Adja meg a téglalap második oldalát!" << endl;
-      cin >> b;
+      TELL "Adja meg a téglalap második oldalát!" << endl;
+      ASK b;
       if (b > max)
         max = b;
       if (a > 0 and b > 0)
       {
 
-        cout << "Ez a téglalap megszerkeszthető!\n"
+        TELL "Ez a téglalap megszerkeszthető!\n"
              << "Már számoljuk is a jellemzőit...\n"
              << endl;
         beker = false;
       }
       else
       {
-        cout << "Ez a téglalap nem szerkeszthető meg, adjon meg új adatokat!" << endl;
+        TELL "Ez a téglalap nem szerkeszthető meg, adjon meg új adatokat!" << endl;
         db++;
         beker = true;
       }
     } while (beker == true);
 
-    cout << "Az adatok az " << db << ". alkalommal tették lehetővé téglalap megszerkesztését!\n"
+    TELL "Az adatok az " << db << ". alkalommal tették lehetővé téglalap megszerkesztését!\n"
          << endl;
   }
-  cout << "A téglalap \"a\" oldalának hossza: " << a << "\n"
+  TELL "A téglalap \"a\" oldalának hossza: " << a << "\n"
        << "A téglalap \"b\" oldalának hossza: " << b << "\n"
        << "A téglalap leghosszabb oldalának hossza: " << max << "\n"
        << endl;
@@ -90,7 +93,7 @@ int main()
   kerulet = 2 * (a + b);
   terulet = a * b;
 
-  cout << "A téglalap kerülete: " << kerulet << "\n"
+  TELL "A téglalap kerülete: " << kerulet << "\n"
        << "A téglalap területe: " << terulet << "\n"
        << "A téglalap átlója: " << atlo << "\n"
        << endl;
@@ -105,43 +108,43 @@ int main()
   alfa = alfa * rad * 2;
   beta = beta * rad * 2;
 
-  cout << "A téglalap \"alfa\" átló által bezárt szöge: " << alfa << "\n"
+  TELL "A téglalap \"alfa\" átló által bezárt szöge: " << alfa << "\n"
        << "A téglalap \"béta\" átló által bezárt szöge: " << beta << "\n"
        << endl;
 
-  cout << "A négy szög összege ellenőrzésképpen: " << 2 * alfa + 2 * beta << endl;
+  TELL "A négy szög összege ellenőrzésképpen: " << 2 * alfa + 2 * beta << endl;
 
-  cout << "Minta téglalap printelése...\n"
+  TELL "Minta téglalap printelése...\n"
        << endl;
 
   // felső sor print
   for (int i = 1; i <= b; i++)
   {
-    cout << "*";
-    cout << "\t";
+    TELL "*";
+    TELL "\t";
   }
 
   // sor ugrás
-  cout << "\n";
+  TELL "\n";
 
   // közepe print
   for (int i = 1; i <= a - 2; i++)
   {
-    cout << "*";
+    TELL "*";
     for (int j = 1; j <= b - 1; j++)
     {
-      cout << "\t";
+      TELL "\t";
     }
-    cout << "*";
-    cout << "\n";
+    TELL "*";
+    TELL "\n";
   }
 
   // alsó sor print
 
   for (int i = 1; i <= b; i++)
   {
-    cout << "*";
-    cout << "\t";
+    TELL "*";
+    TELL "\t";
   }
   return 0;
 }

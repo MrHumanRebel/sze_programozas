@@ -2,6 +2,8 @@
 #include <fstream>
 #include <cstdlib>
 using namespace std;
+#define TELL cout <<
+#define ASK cin >>
 
 int main()
 {
@@ -9,13 +11,13 @@ int main()
     int i, db = 0;
     ifstream nevek;
     // cin.getline(filename);
-    cout << "Hány darab angol nevet szeretne printelni?" << endl;
-    cin >> db;
+    TELL "Hány darab angol nevet szeretne printelni?" << endl;
+    ASK db;
     filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/names.txt";
     nevek.open(filename);
     if (!nevek.is_open())
     {
-        cout << "Ilyen fájl nem létezik!" << endl;
+        TELL "Ilyen fájl nem létezik!" << endl;
         exit(EXIT_FAILURE);
     }
 
@@ -26,7 +28,7 @@ int main()
     {
         elozo = akt;
         nevek >> akt;
-        cout << akt << " " << elozo << endl;
+        TELL akt << " " << elozo << endl;
         i++;
     }
 

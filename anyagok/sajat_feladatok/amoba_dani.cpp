@@ -3,6 +3,8 @@
 #include <fstream>
 using namespace std;
 
+#define TELL cout <<
+#define ASK cin >>
 #define SOR 10
 #define OSZL 10
 
@@ -29,24 +31,24 @@ void beker()
 {
     do
     {
-        cout << "Sor: ";
-        cin >> sor;
+        TELL "Sor: ";
+        ASK sor;
         if (sor >= 1 && sor <= 10)
             sor_ok = true;
         else
-            cout << "Adjon meg 1-" << SOR << " tartományba tartozó számot! ";
+            TELL "Adjon meg 1-" << SOR << " tartományba tartozó számot! ";
 
     } while (sor_ok == false);
 
     do
     {
-        cout << "Oszlop: ";
-        cin >> oszl;
+        TELL "Oszlop: ";
+        ASK oszl;
         oszl = toupper(oszl);
         if ((oszl >= 'a' && oszl <= 'j') or (oszl >= 'A' && oszl <= 'J'))
             oszl_ok = true;
         else
-            cout << "Adjon meg A-J tartományba tartozó betűt! ";
+            TELL "Adjon meg A-J tartományba tartozó betűt! ";
 
     } while (oszl_ok == false);
 
@@ -58,7 +60,7 @@ void beker()
             if (oszl == i)
             {
                 c_oszl = (oszl - (oszl - 1)) + db;
-                cout << "Az oszlop sorszáma: " << c_oszl << "\n"
+                TELL "Az oszlop sorszáma: " << c_oszl << "\n"
                      << endl;
             }
             else
@@ -69,24 +71,24 @@ void beker()
 
 void allas()
 {
-    cout << "  \t";
+    TELL "  \t";
     for (int i = 'A'; i < ('A' + SOR); i++)
     {
-        cout << char(i);
+        TELL char(i);
     }
-    cout << endl;
+    TELL endl;
 
     for (int i = 0; i < SOR; i++)
     {
         if (i < SOR - 1)
-            cout << '0' << i + 1 << "\t";
+            TELL '0' << i + 1 << "\t";
         else
-            cout << i + 1 << "\t";
+            TELL i + 1 << "\t";
         for (int j = 0; j < OSZL; j++)
         {
-            cout << tabla[i][j];
+            TELL tabla[i][j];
         }
-        cout << endl;
+        TELL endl;
     }
 }
 
@@ -98,7 +100,7 @@ void valaszt()
             tabla[sor - 1][c_oszl - 1] = 'X';
         else
         {
-            cout << "Ez a hely már foglalt, Ön csalni akart!" << endl;
+            TELL "Ez a hely már foglalt, Ön csalni akart!" << endl;
             beker();
             valaszt();
         }
@@ -110,7 +112,7 @@ void valaszt()
             tabla[sor - 1][c_oszl - 1] = 'O';
         else
         {
-            cout << "Ez a hely már foglalt, Ön csalni akart!" << endl;
+            TELL "Ez a hely már foglalt, Ön csalni akart!" << endl;
             beker();
             valaszt();
         }
@@ -131,7 +133,8 @@ void ellenoriz()
                 tabla[i][j + 4] == aktjel)
             {
                 vege = true;
-                cout << "Vízszintes irányban ";
+                TELL "Vízszintes irányban ";
+                return;
             }
             if (tabla[i][j] == aktjel &&
                 tabla[i + 1][j] == aktjel &&
@@ -140,7 +143,7 @@ void ellenoriz()
                 tabla[i + 4][j] == aktjel)
             {
                 vege = true;
-                cout << "Függőleges irányban ";
+                TELL "Függőleges irányban ";
                 return;
             }
         }
@@ -156,16 +159,13 @@ void ellenoriz()
                 szamlalo = 0;
                 for (int k = 0; k < 5; k++)
                 {
-                    /*cout << "i:" << i << endl;
-                    cout << "j:" << j << endl;
-                    cout << "k:" << k << endl;*/
                     if (tabla[i + k][j + k] == aktjel)
                         szamlalo++;
 
                     if (szamlalo >= 5)
                     {
                         vege = true;
-                        cout << "Balról jobbra atlóval ";
+                        TELL "Balról jobbra atlóval ";
                         return;
                     }
                 }
@@ -189,7 +189,7 @@ void ellenoriz()
                     if (szamlalo >= 5)
                     {
                         vege = true;
-                        cout << "Jobbról balra atlóval, ";
+                        TELL "Jobbról balra atlóval, ";
                         return;
                     }
                 }
@@ -205,7 +205,7 @@ void nyert()
         aktjel = 'X';
         ellenoriz();
         if (szamlalo >= 5)
-            cout << "az első játékos nyert!";
+            TELL "az első játékos nyert!";
     }
 
     if (jatekos == 2)
@@ -213,7 +213,7 @@ void nyert()
         aktjel = 'O';
         ellenoriz();
         if (szamlalo >= 5)
-            cout << "a második játékos nyert!";
+            TELL "a második játékos nyert!";
     }
 }
 
@@ -228,15 +228,15 @@ void olvasas()
     olvas.open(olvashely);
     if (!olvas.is_open())
     {
-        cout << "Nincs mentett játékállás!\n"
+        TELL "Nincs mentett játékállás!\n"
              << endl;
         van_e_palya = false;
     }
     else
     {
-        cout << "Van mentett játékállás!\n"
+        TELL "Van mentett játékállás!\n"
              << "Ha szeretné betölteni az előző játékállást, nyomja meg az \"1\"-es gombot!" << endl;
-        cin >> tovabb;
+        ASK tovabb;
         if (tovabb == 1)
         {
             van_e_palya = true;
@@ -272,13 +272,13 @@ void iras()
         }
     }
     allaski.close();
-    cout << "Játék állás sikeresen mentve!" << endl;
+    TELL "Játék állás sikeresen mentve!" << endl;
 }
 
 int main()
 {
 
-    cout << "Amőba játék\n"
+    TELL "Amőba játék\n"
          << endl;
 
     olvasas();
@@ -289,7 +289,7 @@ int main()
     vege = false;
     do
     {
-        cout << "Első játékos lépése:" << endl;
+        TELL "Első játékos lépése:" << endl;
         jatekos = 1;
         beker();
         valaszt();
@@ -299,7 +299,7 @@ int main()
             return 0;
         iras();
 
-        cout << "Második játékos lépése:" << endl;
+        TELL "Második játékos lépése:" << endl;
         jatekos = 2;
         beker();
         valaszt();
