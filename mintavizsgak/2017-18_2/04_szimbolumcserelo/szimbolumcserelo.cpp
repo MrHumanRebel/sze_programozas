@@ -43,14 +43,6 @@ szimbolum *szimbolumBetolt(szimbolum *horgony, string fajlnev)
     szimbolum *aktSzimb = NULL;
     while (getline(fajl, aktSor))
     {
-      /* Windowsos új sor karakter ellenőrzése (WSL alatt probléma)
-
-         A bemeneti fájl (szimbolumok.txt) CRLF sorvégi karakterekkel ("\r\n") rendelkezik,
-         míg Linux alatt csak LF ('\n')
-      */
-      if (aktSor[aktSor.length() - 1] == '\r')
-        aktSor.replace(aktSor.length() - 1, 1, "");
-
       int szokozHelye = aktSor.find(' ');
       string helyorzo = aktSor.substr(0, szokozHelye);
       string ertek = aktSor.substr(szokozHelye + 1);
