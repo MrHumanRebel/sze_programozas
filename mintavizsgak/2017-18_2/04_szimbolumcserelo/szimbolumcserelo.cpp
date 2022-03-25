@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 #define MAX 10
@@ -10,9 +11,72 @@ struct szimbolum
 {
   string helyorzo;
   string ertek;
+  szimbolum *kov;
 };
 
-string szovegBekerese()
+szimbolum *szimbolumBeszur(string helyorzo, string ertek, szimbolum *elozoSzimb)
+{
+  szimbolum *ujSzimb = new szimbolum;
+
+  ujSzimb->helyorzo = helyorzo;
+  ujSzimb->ertek = ertek;
+
+  if (elozoSzimb)
+  {
+    ujSzimb->kov = elozoSzimb->kov;
+    elozoSzimb->kov = ujSzimb;
+  }
+  else
+  {
+    ujSzimb->kov = NULL;
+  }
+
+  return ujSzimb;
+}
+
+szimbolum *szimbolumBetolt(szimbolum *horgony, string fajlnev)
+{
+  ifstream fajl(fajlnev);
+  if (fajl.is_open())
+  {
+    string aktSor;
+    szimbolum *aktSzimb = NULL;
+    while (getline(fajl, aktSor))
+    {
+      /* Windowsos új sor karakter ellenőrzése (WSL alatt probléma)
+
+         A bemeneti fájl (szimbolumok.txt) CRLF sorvégi karakterekkel ("\r\n") rendelkezik,
+         míg Linux alatt csak LF ('\n')
+      */
+      if (aktSor[aktSor.length() - 1] == '\r')
+        aktSor.replace(aktSor.length() - 1, 1, "");
+
+      int szokozHelye = aktSor.find(' ');
+      string helyorzo = aktSor.substr(0, szokozHelye);
+      string ertek = aktSor.substr(szokozHelye + 1);
+
+      aktSzimb = szimbolumBeszur(helyorzo, ertek, aktSzimb);
+      if (!horgony)
+        horgony = aktSzimb;
+    }
+  }
+  fajl.close();
+
+  return horgony;
+}
+
+void szimbolumTorol(szimbolum *aktSzimb)
+{
+  szimbolum *kovSzimb;
+  while (aktSzimb)
+  {
+    kovSzimb = aktSzimb->kov;
+    delete aktSzimb;
+    aktSzimb = kovSzimb;
+  }
+}
+
+string szovegBeker()
 {
   cout << "Adja meg az uzenet szavait [vege] vegjelig!" << endl;
 
@@ -25,7 +89,7 @@ string szovegBekerese()
   return bemenet;
 }
 
-string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
+string helyorzoCsere(string szo, szimbolum *horgony)
 {
   // Első releváns karakter megkeresése
   int i = szo.find(SZIMB_DELIM);
@@ -52,24 +116,23 @@ string helyorzoCsere(string szo, szimbolum szimbolumok[MAX])
     return csereltSzo;
   }
 
-  int k = 0;
-  int szimbolumokSzama = sizeof(szimbolumok[0]) / sizeof(szimbolumok);
-  while (k < szimbolumokSzama && szimbolumok[k].helyorzo != aktHelyorzo)
+  szimbolum *aktSzimb = horgony;
+  while (aktSzimb && aktSzimb->helyorzo != aktHelyorzo)
   {
-    k++;
+    aktSzimb = aktSzimb->kov;
   }
 
   // Ismeretlen helyőrző esetén
-  if (k >= szimbolumokSzama)
+  if (!aktSzimb)
     return szo;
 
-  string keresettErtek = szimbolumok[k].ertek;
+  string keresettErtek = string(aktSzimb->ertek);
   string csereltSzo = szo.replace(i, j + 1, keresettErtek);
 
   return csereltSzo;
 }
 
-string csere(string bemenet, szimbolum szimbolumok[MAX])
+string szovegCsere(string bemenet, szimbolum *kezdo)
 {
   string szoveg;
 
@@ -79,7 +142,7 @@ string csere(string bemenet, szimbolum szimbolumok[MAX])
   {
     if (bemenet[i] == ' ')
     {
-      szoveg += vanHelyorzo ? helyorzoCsere(aktSzo, szimbolumok) + ' ' : aktSzo + ' ';
+      szoveg += vanHelyorzo ? helyorzoCsere(aktSzo, kezdo) + ' ' : aktSzo + ' ';
 
       vanHelyorzo = false;
       aktSzo = "";
@@ -96,20 +159,16 @@ string csere(string bemenet, szimbolum szimbolumok[MAX])
 
 int main(int argc, char const *argv[])
 {
-  szimbolum szimbolumok[MAX] = {
-      {"nev", "Gizi"},
-      {"szin", "piros"},
-      {"allat", "kutya"},
-      {"jarmu", "bicikli"},
-      {"telepules", "Karakoszorcsog"},
-  };
-
   cout << "Szimbolumcserelo" << endl;
 
-  string bemenet = szovegBekerese();
-  string szoveg = csere(bemenet, szimbolumok);
+  szimbolum *horgony = NULL;
+  horgony = szimbolumBetolt(horgony, "szimbolumok.txt");
 
+  string bemenet = szovegBeker();
+  string szoveg = szovegCsere(bemenet, horgony);
   cout << szoveg << endl;
+
+  szimbolumTorol(horgony);
 
   return 0;
 }
