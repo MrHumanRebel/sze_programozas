@@ -3,35 +3,42 @@
 #include <fstream>
 using namespace std;
 
+#define TELL cout <<
+#define ASK cin >>
+
 #define FUTOMAX 10
 #define IDOMAX 20
 
-struct futoadat
+struct futo
 {
-    string sorszam[FUTOMAX];
-    string nev[FUTOMAX];
+    int sorszam;
+    string nev;
+};
+
+struct ido
+{
+    int ora;
+    int perc;
+    int masodperc;
 };
 
 struct idoadat
 {
-    string sorszam[FUTOMAX];
-    int ellszam[IDOMAX];
-    int ora[IDOMAX];
-    int perc[IDOMAX];
-    int masodperc[IDOMAX];
+    string sorszam;
+    int ellszam;
+    ido befido;
 };
 
 string filename_futo;
 string filename_ido;
 
-void olvasas()
+int olvasas(futo futok[FUTOMAX])
 {
-    struct futoadat fu;
     struct idoadat id;
-    //filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    //filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
-    filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    // filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    // filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
 
     /* cout<<"Adja meg a \"futok_nevei.txt\" elérési útját!"<<endl;
     cin.getline(filename);
@@ -39,52 +46,43 @@ void olvasas()
     cout<<"Adja meg a \"idomeres_nevei.txt\" elérési útját!"<<endl;
     cin.getline(filename_2);*/
 
-    ifstream futok;
-    futok.open(filename_futo);
+    ifstream futokInput;
+    futokInput.open(filename_futo);
 
-    if (!futok.is_open())
+    if (!futokInput.is_open())
     {
         cout << "Ilyen fájl nem létezik!" << endl;
         exit(EXIT_FAILURE);
     }
 
     string akt;
-    int x = 0;
-    int y = 0;
-    while (x <= FUTOMAX && futok.good())
+    int db = 0;
+    while (getline(futokInput, akt))
     {
-        getline(futok, akt);
-        for (long unsigned int i = 0; i <= akt.length(); i++)
-        {
-            if (isdigit(akt[i]))
-            {
-                fu.sorszam[x] += akt[i];
-                x++;
-            }
-            if (isalpha(akt[i]))
-            {
-                fu.nev[y] += akt[i];
-                y++;
-            }
-        }
+        int szokozHelye = akt.find(' ');
+        int aktSorszam = stoi(akt.substr(0, szokozHelye));
+        string aktNev = akt.substr(szokozHelye + 1);
+        futok[db].sorszam = aktSorszam;
+        futok[db].nev = aktNev;
+        db++;
     }
-    futok.close();
+    futokInput.close();
+    return db;
 }
 
-void teszt()
+void teszt(futo futok[FUTOMAX], int db)
 {
-    for (int i = 0; i <= FUTOMAX; i++)
+    for (int i = 0; i < db; i++)
     {
-        for (int j = 0; j <= FUTOMAX; j++)
-        {
-            cout << "Adat: " << endl;
-        }
+        TELL futok[i].sorszam << ' ' << futok[i].nev << endl;
     }
 }
 
 int main()
 {
-    olvasas();
-    teszt();
+    futo futok[FUTOMAX];
+
+    int db = olvasas(futok);
+    teszt(futok, db);
     return 0;
 }
