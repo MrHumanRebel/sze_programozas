@@ -1,0 +1,99 @@
+4910_szemelyvonat
+Budapest-Deli	99:99	04:30
+Budapest-Kelenfold	04:36	04:38
+Budaors	04:42	04:43
+Torokbalint	04:47	04:47
+Biatorbagy	04:51	04:52
+Herceghalom	04:56	04:57
+Bicske_also	05:02	05:02
+Bicske	05:04	05:05
+Szar	05:09	05:09
+Szarliget	05:12	05:13
+Alsogalla	05:18	05:18
+Tatabanya	05:23	05:24
+Vertesszolos	05:27	05:27
+Tovaroskert	05:30	05:30
+Tata	05:32	05:33
+Almasfuzito	05:40	05:44
+Almasfuzito_felso	05:48	05:49
+Szony	05:52	05:52
+Komarom	05:56	05:57
+Acs	06:02	06:03
+Nagyszentjanos	06:08	06:09
+Gyorszentivan	06:14	06:15
+Gyor-Gyarvaros	06:19	06:19
+Gyor	06:23	99:99
+---
+912_Claudius_IC
+Budapest-Keleti	99:99	08:10
+Budapest-Kelenfold	08:23	08:25
+Tatabanya	08:55	08:56
+Tata	09:03	09:04
+Komarom	09:16	09:17
+Gyor	09:35	09:38
+Csorna	09:58	09:59
+Repcelak	10:18	10:19
+Szombathely	10:49	99:99
+---
+9306_szemelyvonat
+Budapest-Keleti	99:99	16:53
+Ferencvaros	17:01	17:02
+Budapest-Kelenfold	17:09	17:10
+Biatorbagy	17:19	17:20
+Bicske_also	17:29	17:29
+Bicske	17:31	17:32
+Alsogalla	17:44	17:44
+Tatabanya	17:47	17:48
+Tovaroskert	17:54	17:54
+Tata	17:56	17:57
+Komarom	18:09	18:10
+Acs	18:15	18:16
+Gyor-Gyarvaros	18:28	18:28
+Gyor	18:31	99:99
+---
+9696_InterRegio
+Balatonszentgyorgy	99:99	16:00
+Keszthely	16:11	16:12
+Gyenesdias	16:16	16:16
+Vonyarcvashegy	16:19	16:20
+Balatongyorok	16:23	16:24
+Balatonederics	16:29	16:30
+Tapolca	16:40	16:41
+Sumeg	16:58	17:01
+Janoshaza	17:15	17:15
+Celldomolk	17:29	17:37
+Papa	18:00	18:02
+Vaszar	18:09	18:09
+Szerecseny	18:17	18:17
+Gyomore-Tet	18:22	18:23
+Gyorszabadhegy	18:38	18:39
+Gyor-Gyarvaros	18:42	18:42
+Gyor	18:47	99:99
+---
+4945_szemelyvonat
+Gyor	99:99	12:40
+Gyor-Gyarvaros	12:42	12:42
+Gyorszentivan	12:46	12:47
+Nagyszentjanos	12:52	12:53
+Acs	12:58	12:59
+Komarom	13:04	13:05
+Szony	13:09	13:09
+Almasfuzito_felso	13:11	13:12
+Almasfuzito	13:16	13:23
+Tata	13:29	13:30
+Tovaroskert	13:33	13:33
+Vertesszolos	13:36	13:36
+Tatabanya	13:39	13:40
+Alsogalla	13:43	13:43
+Szarliget	13:48	13:49
+Szar	13:52	13:52
+Bicske	13:57	13:58
+Bicske_also	14:00	14:00
+Herceghalom	14:04	14:05
+Biatorbagy	14:09	14:10
+Torokbalint	14:15	14:15
+Budaors	14:19	14:20
+Budapest-Kelenfold	14:27	14:32
+Budapest-Deli	14:39	99:99
+---
+vege
