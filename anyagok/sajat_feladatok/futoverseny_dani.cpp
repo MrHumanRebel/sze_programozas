@@ -113,19 +113,67 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
     int versenyzoDb = 0;
     while (versenyzoDb < db)
     {
-        int kezdEllpont = 0;
-        string aktIdo = "\0";
+        int kezdEllpont = -1;
+        int aktOra = 0;
+        int aktPerc = 0;
+        int aktMperc = 0;
+        int aktOraKezd = 0;
+        int aktPercKezd = 0;
+        int aktMpercKezd = 0;
+        int id = 0;
         for (int i = 0; i <= db_2; i++)
         {
             if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
             {
-                if (kezdEllpont != 0)
+                // Kezdőpont meghatározása
+                if (kezdEllpont == -1)
                     kezdEllpont = idoadatok[i].ellszam;
-                aktIdo += csakido[i].ora;
-                aktIdo += csakido[i].perc;
-                aktIdo += csakido[i].masodperc;
+
+                // Óra
+                if (aktOraKezd == 0)
+                    aktOraKezd += csakido[i].ora;
+                else
+                {
+                    id = csakido[i].ora;
+                    aktOra = id - aktOraKezd;
+                }
+
+                // Perc
+                if (aktPercKezd == 0)
+                    aktPercKezd += csakido[i].perc;
+                else
+                {
+                    id = csakido[i].perc;
+                    aktPerc = id - aktPercKezd;
+                }
+
+                // Mperc
+                if (aktMpercKezd == 0)
+                    aktMpercKezd += csakido[i].masodperc;
+                else
+                {
+                    id = csakido[i].masodperc;
+                    aktMperc = id - aktMpercKezd;
+                }
+
+                // Óra protections
+                if (aktPerc >= 60)
+                {
+                    aktPerc -= 60;
+                    aktOra += 1;
+                }
+                if (aktMperc >= 60)
+                {
+                    aktMperc -= 60;
+                    aktPerc += 1;
+                }
+                // aktOra = csakido[i].ora - aktOraKezd;
+                // aktPerc = csakido[i].perc - aktPercKezd;
+                // aktMperc = csakido[i].masodperc - aktMpercKezd;
             }
         }
+        TELL futok[versenyzoDb].sorszam << " Kezdő ellpontja: " << kezdEllpont << endl;
+        TELL aktOra << ":" << aktPerc << ":" << aktMperc << endl;
         versenyzoDb++;
     }
 }
