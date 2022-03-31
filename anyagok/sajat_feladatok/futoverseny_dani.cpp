@@ -108,6 +108,28 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
     return db;
 }
 
+void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db, int db_2)
+{
+    int versenyzoDb = 0;
+    while (versenyzoDb < db)
+    {
+        int kezdEllpont = 0;
+        string aktIdo = "\0";
+        for (int i = 0; i <= db_2; i++)
+        {
+            if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
+            {
+                if (kezdEllpont != 0)
+                    kezdEllpont = idoadatok[i].ellszam;
+                aktIdo += csakido[i].ora;
+                aktIdo += csakido[i].perc;
+                aktIdo += csakido[i].masodperc;
+            }
+        }
+        versenyzoDb++;
+    }
+}
+
 void teszt(futo futok[FUTOMAX], int db, ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
 {
     TELL "A versenyzők:" << endl;
@@ -132,5 +154,6 @@ int main()
     int db = futo_olvasas(futok);
     int db_2 = ido_olvasas(csakido, idoadatok);
     teszt(futok, db, csakido, idoadatok, db_2);
+    szamol(futok, csakido, idoadatok, db, db_2);
     return 0;
 }
