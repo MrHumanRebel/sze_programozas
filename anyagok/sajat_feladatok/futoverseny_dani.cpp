@@ -172,27 +172,41 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                 }
 
                 // Eltelt idő
-                ora += (aktOra - elozoOra);
-                perc += (aktPerc - elozoPerc);
-                mperc += (aktMperc - elozoMperc);
-
-                // Óra protections
-                if (perc >= 60)
-                {
-                    perc -= 60;
-                    ora += 1;
-                }
-                if (mperc >= 60)
-                {
-                    mperc -= 60;
-                    perc += 1;
-                }
+                ora += aktOra - elozoOra;
+                perc += aktPerc - elozoPerc;
+                mperc += aktMperc - elozoMperc;
             }
             idoadatok[versenyzoDb].ellszamdb = ellpontDb;
         }
         ora -= kezdOra;
         perc -= kezdPerc;
         mperc -= kezdMperc;
+        // Lower protections
+        if (perc < 0)
+        {
+            TELL "Perc < 0" << endl;
+            perc = abs(perc);
+            ora += 1;
+        }
+        if (mperc < 0)
+        {
+            TELL "Mperc < 0" << endl;
+            mperc = abs(mperc);
+            perc += 1;
+        }
+        // Upper protections
+        if (perc >= 60)
+        {
+            TELL "Perc > 60" << endl;
+            perc -= 60;
+            ora += 1;
+        }
+        if (mperc >= 60)
+        {
+            TELL "Mperc > 60" << endl;
+            mperc -= 60;
+            perc += 1;
+        }
         idoadatok[versenyzoDb].befido += to_string(ora);
         idoadatok[versenyzoDb].befido += ':';
         idoadatok[versenyzoDb].befido += to_string(perc);
