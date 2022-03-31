@@ -26,7 +26,7 @@ struct idoadat
 {
     int sorszam;
     int ellszam;
-    // ido befido;
+    string befido;
 };
 
 string filename_futo;
@@ -34,8 +34,8 @@ string filename_ido;
 
 int futo_olvasas(futo futok[FUTOMAX])
 {
-    filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    // filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    // filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
 
     ifstream futokInput;
     futokInput.open(filename_futo);
@@ -63,8 +63,8 @@ int futo_olvasas(futo futok[FUTOMAX])
 
 int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
 {
-    filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
-    // filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    // filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
 
     ifstream idoInput;
     idoInput.open(filename_ido);
@@ -92,7 +92,6 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
             int aktPerc = stoi(akt.substr(szokozHelye, 2));
             szokozHelye += 3;
             int aktMperc = stoi(akt.substr(szokozHelye, 2));
-            // int aktBefido = 0;
 
             csakido[db].ora = aktOra;
             csakido[db].perc = aktPerc;
@@ -100,7 +99,6 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
 
             idoadatok[db].ellszam = aktEllszam;
             idoadatok[db].sorszam = aktSorszam;
-            // idoadatok[db].befido = aktBefido;
             db++;
         }
     }
@@ -170,7 +168,12 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
             }
         }
         TELL futok[versenyzoDb].sorszam << " Kezdő ellpontja: " << kezdEllpont << endl;
-        TELL aktOra << ":" << aktPerc << ":" << aktMperc << endl;
+        idoadatok[versenyzoDb].befido += to_string(aktOra);
+        idoadatok[versenyzoDb].befido += ':';
+        idoadatok[versenyzoDb].befido += to_string(aktPerc);
+        idoadatok[versenyzoDb].befido += ':';
+        idoadatok[versenyzoDb].befido += to_string(aktMperc);
+        TELL idoadatok[versenyzoDb].befido << endl;
         versenyzoDb++;
     }
 }
