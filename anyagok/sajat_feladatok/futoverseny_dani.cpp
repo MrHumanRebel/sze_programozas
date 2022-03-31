@@ -24,7 +24,7 @@ struct ido
 
 struct idoadat
 {
-    string sorszam;
+    int sorszam;
     int ellszam;
     // ido befido;
 };
@@ -103,24 +103,23 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
             // idoadatok[db].befido = aktBefido;
             db++;
         }
-        }
+    }
     idoInput.close();
     return db;
 }
 
 void teszt(futo futok[FUTOMAX], int db, ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
 {
+    TELL "A versenyzők:" << endl;
     for (int i = 0; i < db; i++)
     {
         TELL futok[i].sorszam << ' ' << futok[i].nev << endl;
     }
+    TELL endl;
     for (int i = 0; i < db_2; i++)
     {
-        TELL csakido[i].ora << ' ' << csakido[i].perc << ' ' << csakido[i].masodperc << endl;
-    }
-    for (int i = 0; i < db_2; i++)
-    {
-        TELL idoadatok[i].sorszam << ' ' << idoadatok[i].ellszam << endl;
+        TELL "Versenyző sorszám: " << idoadatok[i].sorszam << " Ellenőrző pont: " << idoadatok[i].ellszam << endl;
+        TELL csakido[i].ora << ':' << csakido[i].perc << ':' << csakido[i].masodperc << endl;
     }
 }
 
