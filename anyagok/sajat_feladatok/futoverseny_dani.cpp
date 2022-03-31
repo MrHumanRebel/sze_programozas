@@ -19,7 +19,7 @@ struct ido
 {
     int ora;
     int perc;
-    int masodperc;
+    int mperc;
 };
 
 struct idoadat
@@ -96,7 +96,7 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
 
             csakido[db].ora = aktOra;
             csakido[db].perc = aktPerc;
-            csakido[db].masodperc = aktMperc;
+            csakido[db].mperc = aktMperc;
 
             idoadatok[db].ellszam = aktEllszam;
             idoadatok[db].sorszam = aktSorszam;
@@ -117,9 +117,15 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
         int aktOra = 0;
         int aktPerc = 0;
         int aktMperc = 0;
-        int aktOraKezd = 0;
-        int aktPercKezd = 0;
-        int aktMpercKezd = 0;
+        int elozoOra = 0;
+        int elozoPerc = 0;
+        int elozoMperc = 0;
+        int kezdOra = 0;
+        int kezdPerc = 0;
+        int kezdMperc = 0;
+        int ora = 0;
+        int perc = 0;
+        int mperc = 0;
         for (int i = 0; i <= db_2; i++)
         {
             if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
@@ -130,52 +136,68 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     kezdEllpont = idoadatok[i].ellszam;
 
                 // Óra
-                if (aktOraKezd == 0)
-                    aktOraKezd += csakido[i].ora;
+                if (aktOra == 0)
+                {
+                    aktOra = csakido[i].ora;
+                    kezdOra = csakido[i].ora;
+                }
                 else
                 {
-                    aktOra += csakido[i].ora;
+                    elozoOra = aktOra;
+                    aktOra = csakido[i].ora;
                 }
 
                 // Perc
-                if (aktPercKezd == 0)
-                    aktPercKezd += csakido[i].perc;
+                if (aktPerc == 0)
+                {
+                    aktPerc = csakido[i].perc;
+                    kezdPerc = csakido[i].perc;
+                }
                 else
                 {
-                    aktPerc += csakido[i].perc;
+                    elozoPerc = aktPerc;
+                    aktPerc = csakido[i].perc;
                 }
 
                 // Mperc
-                if (aktMpercKezd == 0)
-                    aktMpercKezd += csakido[i].masodperc;
+                if (aktMperc == 0)
+                {
+                    aktMperc = csakido[i].mperc;
+                    kezdMperc = csakido[i].mperc;
+                }
                 else
                 {
-                    aktMperc += csakido[i].masodperc;
+                    elozoMperc = aktMperc;
+                    aktMperc = csakido[i].mperc;
                 }
 
+                // Eltelt idő
+                ora += (aktOra - elozoOra);
+                perc += (aktPerc - elozoPerc);
+                mperc += (aktMperc - elozoMperc);
+
                 // Óra protections
-                if (aktPerc >= 60)
+                if (perc >= 60)
                 {
-                    aktPerc -= 60;
-                    aktOra += 1;
+                    perc -= 60;
+                    ora += 1;
                 }
-                if (aktMperc >= 60)
+                if (mperc >= 60)
                 {
-                    aktMperc -= 60;
-                    aktPerc += 1;
+                    mperc -= 60;
+                    perc += 1;
                 }
-                // Eltelt idő  !!BETA!!
-                /*aktOra = csakido[i].ora - aktOraKezd;
-                aktPerc = csakido[i].perc - aktPercKezd;
-                aktMperc = csakido[i].masodperc - aktMpercKezd;*/
             }
             idoadatok[versenyzoDb].ellszamdb = ellpontDb;
         }
-        idoadatok[versenyzoDb].befido += to_string(aktOra);
+        ora -= kezdOra;
+        perc -= kezdPerc;
+        mperc -= kezdMperc;
+        idoadatok[versenyzoDb].befido += to_string(ora);
         idoadatok[versenyzoDb].befido += ':';
-        idoadatok[versenyzoDb].befido += to_string(aktPerc);
+        idoadatok[versenyzoDb].befido += to_string(perc);
         idoadatok[versenyzoDb].befido += ':';
-        idoadatok[versenyzoDb].befido += to_string(aktMperc);
+        idoadatok[versenyzoDb].befido += to_string(mperc);
         versenyzoDb++;
     }
 }
