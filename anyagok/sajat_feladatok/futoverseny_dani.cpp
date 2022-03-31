@@ -26,6 +26,7 @@ struct idoadat
 {
     int sorszam;
     int ellszam;
+    int ellszamdb;
     string befido;
 };
 
@@ -112,6 +113,7 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
     while (versenyzoDb < db)
     {
         int kezdEllpont = -1;
+        int ellpontDb = 0;
         int aktOra = 0;
         int aktPerc = 0;
         int aktMperc = 0;
@@ -122,6 +124,7 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
         {
             if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
             {
+                ellpontDb++;
                 // Kezdőpont meghatározása
                 if (kezdEllpont == -1)
                     kezdEllpont = idoadatok[i].ellszam;
@@ -161,36 +164,37 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     aktMperc -= 60;
                     aktPerc += 1;
                 }
-                // Eltelt idő - kezdő idő
-                aktOra = csakido[i].ora - aktOraKezd;
+                // Eltelt idő  !!BETA!!
+                /*aktOra = csakido[i].ora - aktOraKezd;
                 aktPerc = csakido[i].perc - aktPercKezd;
-                aktMperc = csakido[i].masodperc - aktMpercKezd;
+                aktMperc = csakido[i].masodperc - aktMpercKezd;*/
             }
+            idoadatok[versenyzoDb].ellszamdb = ellpontDb;
         }
-        TELL futok[versenyzoDb].sorszam << " Kezdő ellpontja: " << kezdEllpont << endl;
         idoadatok[versenyzoDb].befido += to_string(aktOra);
         idoadatok[versenyzoDb].befido += ':';
         idoadatok[versenyzoDb].befido += to_string(aktPerc);
         idoadatok[versenyzoDb].befido += ':';
         idoadatok[versenyzoDb].befido += to_string(aktMperc);
-        TELL idoadatok[versenyzoDb].befido << endl;
         versenyzoDb++;
     }
 }
 
-void teszt(futo futok[FUTOMAX], int db, ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
+void kiir(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db, int db_2)
 {
-    TELL "A versenyzők:" << endl;
+    TELL "A versenyzők:\n"
+        << endl;
     for (int i = 0; i < db; i++)
     {
         TELL futok[i].sorszam << ' ' << futok[i].nev << endl;
+        if (idoadatok[i].ellszamdb >= 6)
+            TELL idoadatok[i].befido << "\n"
+                                     << endl;
+        else
+            TELL "DNF\n"
+                << endl;
     }
     TELL endl;
-    for (int i = 0; i < db_2; i++)
-    {
-        TELL "Versenyző sorszám: " << idoadatok[i].sorszam << " Ellenőrző pont: " << idoadatok[i].ellszam << endl;
-        TELL csakido[i].ora << ':' << csakido[i].perc << ':' << csakido[i].masodperc << endl;
-    }
 }
 
 int main()
@@ -199,9 +203,10 @@ int main()
     ido csakido[IDOMAX];
     idoadat idoadatok[IDOMAX];
 
-    int db = futo_olvasas(futok);
-    int db_2 = ido_olvasas(csakido, idoadatok);
-    teszt(futok, db, csakido, idoadatok, db_2);
+    int db = futo_olvasas(futok);               // DB => Versenyzők száma
+    int db_2 = ido_olvasas(csakido, idoadatok); // DB_2 => Időadat .txt sorok száma
     szamol(futok, csakido, idoadatok, db, db_2);
+    kiir(futok, csakido, idoadatok, db, db_2);
+
     return 0;
 }
