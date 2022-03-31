@@ -120,7 +120,6 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
         int aktOraKezd = 0;
         int aktPercKezd = 0;
         int aktMpercKezd = 0;
-        int id = 0;
         for (int i = 0; i <= db_2; i++)
         {
             if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
@@ -134,8 +133,7 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     aktOraKezd += csakido[i].ora;
                 else
                 {
-                    id = csakido[i].ora;
-                    aktOra = id - aktOraKezd;
+                    aktOra += csakido[i].ora;
                 }
 
                 // Perc
@@ -143,8 +141,7 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     aktPercKezd += csakido[i].perc;
                 else
                 {
-                    id = csakido[i].perc;
-                    aktPerc = id - aktPercKezd;
+                    aktPerc += csakido[i].perc;
                 }
 
                 // Mperc
@@ -152,8 +149,7 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     aktMpercKezd += csakido[i].masodperc;
                 else
                 {
-                    id = csakido[i].masodperc;
-                    aktMperc = id - aktMpercKezd;
+                    aktMperc += csakido[i].masodperc;
                 }
 
                 // Óra protections
@@ -167,9 +163,10 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     aktMperc -= 60;
                     aktPerc += 1;
                 }
-                // aktOra = csakido[i].ora - aktOraKezd;
-                // aktPerc = csakido[i].perc - aktPercKezd;
-                // aktMperc = csakido[i].masodperc - aktMpercKezd;
+                // Eltelt idő - kezdő idő
+                aktOra = csakido[i].ora - aktOraKezd;
+                aktPerc = csakido[i].perc - aktPercKezd;
+                aktMperc = csakido[i].masodperc - aktMpercKezd;
             }
         }
         TELL futok[versenyzoDb].sorszam << " Kezdő ellpontja: " << kezdEllpont << endl;
