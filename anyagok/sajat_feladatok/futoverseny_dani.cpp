@@ -32,19 +32,10 @@ struct idoadat
 string filename_futo;
 string filename_ido;
 
-int olvasas(futo futok[FUTOMAX])
+int futo_olvasas(futo futok[FUTOMAX])
 {
-    struct idoadat id;
     filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
     // filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    // filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
-
-    /* cout<<"Adja meg a \"futok_nevei.txt\" elérési útját!"<<endl;
-    cin.getline(filename);
-
-    cout<<"Adja meg a \"idomeres_nevei.txt\" elérési útját!"<<endl;
-    cin.getline(filename_2);*/
 
     ifstream futokInput;
     futokInput.open(filename_futo);
@@ -70,19 +61,71 @@ int olvasas(futo futok[FUTOMAX])
     return db;
 }
 
-void teszt(futo futok[FUTOMAX], int db)
+int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
+{
+    filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    // filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+
+    ifstream idoInput;
+    idoInput.open(filename_ido);
+
+    if (!idoInput.is_open())
+    {
+        cout << "Ilyen fájl nem létezik!" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    string akt;
+    int db = 0;
+    while (getline(idoInput, akt))
+    {
+        int szokozHelye = akt.find(' ');
+
+        int aktSorszam = stoi(akt.substr(0, szokozHelye));
+        int aktEllszam = stoi(akt.substr(szokozHelye, 1));
+        szokozHelye += 2;
+        int aktOra = stoi(akt.substr(szokozHelye, 2));
+        szokozHelye += 3;
+        int aktPerc = stoi(akt.substr(szokozHelye, 2));
+        szokozHelye += 3;
+        int aktMperc = stoi(akt.substr(szokozHelye, 2));
+        int aktBefido = 0; // BETA
+
+        csakido[db].ora = aktOra;
+        csakido[db].perc = aktPerc;
+        csakido[db].masodperc = aktMperc;
+        idoadatok[db].ellszam = aktEllszam;
+        idoadatok[db].sorszam = aktSorszam;
+        db++;
+    }
+    idoInput.close();
+    return db;
+}
+
+void teszt(futo futok[FUTOMAX], int db, ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
 {
     for (int i = 0; i < db; i++)
     {
         TELL futok[i].sorszam << ' ' << futok[i].nev << endl;
+    }
+    for (int i = 0; i < db_2; i++)
+    {
+        TELL csakido[i].ora << ' ' << csakido[i].perc << ' ' << csakido[i].masodperc << endl;
+    }
+    for (int i = 0; i < db_2; i++)
+    {
+        TELL idoadatok[i].sorszam << ' ' << idoadatok[i].ellszam << ' ' << idoadatok[i].befido << endl;
     }
 }
 
 int main()
 {
     futo futok[FUTOMAX];
+    ido csakido[IDOMAX];
+    idoadat idoadatok[IDOMAX];
 
-    int db = olvasas(futok);
-    teszt(futok, db);
+    int db = futo_olvasas(futok);
+    int db_2 = ido_olvasas(csakido, idoadatok);
+    teszt(futok, db, csakido, idoadatok, db_2);
     return 0;
 }
