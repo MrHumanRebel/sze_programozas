@@ -26,7 +26,7 @@ struct idoadat
 {
     string sorszam;
     int ellszam;
-    ido befido;
+    // ido befido;
 };
 
 string filename_futo;
@@ -79,25 +79,31 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
     int db = 0;
     while (getline(idoInput, akt))
     {
-        int szokozHelye = akt.find(' ');
+        if (akt.length() != 1)
+        {
+            int szokozHelye = akt.find(' ');
 
-        int aktSorszam = stoi(akt.substr(0, szokozHelye));
-        int aktEllszam = stoi(akt.substr(szokozHelye, 1));
-        szokozHelye += 2;
-        int aktOra = stoi(akt.substr(szokozHelye, 2));
-        szokozHelye += 3;
-        int aktPerc = stoi(akt.substr(szokozHelye, 2));
-        szokozHelye += 3;
-        int aktMperc = stoi(akt.substr(szokozHelye, 2));
-        int aktBefido = 0; // BETA
+            int aktSorszam = stoi(akt.substr(0, szokozHelye));
+            szokozHelye += 1;
+            int aktEllszam = stoi(akt.substr(szokozHelye, 1));
+            szokozHelye += 2;
+            int aktOra = stoi(akt.substr(szokozHelye, 2));
+            szokozHelye += 3;
+            int aktPerc = stoi(akt.substr(szokozHelye, 2));
+            szokozHelye += 3;
+            int aktMperc = stoi(akt.substr(szokozHelye, 2));
+            // int aktBefido = 0;
 
-        csakido[db].ora = aktOra;
-        csakido[db].perc = aktPerc;
-        csakido[db].masodperc = aktMperc;
-        idoadatok[db].ellszam = aktEllszam;
-        idoadatok[db].sorszam = aktSorszam;
-        db++;
-    }
+            csakido[db].ora = aktOra;
+            csakido[db].perc = aktPerc;
+            csakido[db].masodperc = aktMperc;
+
+            idoadatok[db].ellszam = aktEllszam;
+            idoadatok[db].sorszam = aktSorszam;
+            // idoadatok[db].befido = aktBefido;
+            db++;
+        }
+        }
     idoInput.close();
     return db;
 }
@@ -114,7 +120,7 @@ void teszt(futo futok[FUTOMAX], int db, ido csakido[IDOMAX], idoadat idoadatok[I
     }
     for (int i = 0; i < db_2; i++)
     {
-        TELL idoadatok[i].sorszam << ' ' << idoadatok[i].ellszam << ' ' << idoadatok[i].befido << endl;
+        TELL idoadatok[i].sorszam << ' ' << idoadatok[i].ellszam << endl;
     }
 }
 
