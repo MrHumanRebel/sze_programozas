@@ -223,8 +223,8 @@ void olvasas()
     ifstream olvas;
     int tovabb = 0;
     char akt;
-    // olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
-    olvashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    // olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/amoba.txt";
+    olvashely = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/amoba.txt";
     olvas.open(olvashely);
     if (!olvas.is_open())
     {
@@ -258,8 +258,8 @@ void iras()
     ofstream allaski;
     string irashely;
     string akt;
-    // irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
-    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
+    // irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/amoba.txt";
+    irashely = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/amoba.txt";
     allaski.open(irashely);
     for (int i = 0; i <= SOR; i++)
     {

@@ -94,7 +94,7 @@ string olvasas()
     string filename;
     ifstream kodsorozat;
     kodsorozat >> std::noskipws;
-    filename = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/smskod.txt";
+    filename = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/smskod.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/smskod.txt";
     /*cout << "Adja meg a dekódolandó kódsorozatot tartalmazó fájl elérési útját! " << endl;
     getline(cin, filename);*/
     kodsorozat.open(filename);
@@ -117,7 +117,7 @@ string iras()
     string irashely;
     /*cout << "Adja meg a dekodolt üzenetet tartalmazó fájl kívánt elérési útját! " << endl;
     getline(cin, irashely); */
-    irashely = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/szoveg.txt";
+    irashely = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/szoveg.txt"; //"/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/szoveg.txt";
     uzenetki.open(irashely);
     uzenetki << uzenet;
     uzenetki.close();

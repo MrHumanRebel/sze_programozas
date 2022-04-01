@@ -30,8 +30,8 @@ string filename_futo, filename_ido;
 
 int futo_olvasas(futo futok[FUTOMAX])
 {
-    // filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
-    filename_futo = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/futok_nevei.txt";
+    // filename_futo = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/futok_nevei.txt";
+    filename_futo = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/futok_nevei.txt";
 
     ifstream futokInput;
     futokInput.open(filename_futo);
@@ -59,8 +59,8 @@ int futo_olvasas(futo futok[FUTOMAX])
 
 int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
 {
-    // filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
-    filename_ido = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/idomeres.txt";
+    // filename_ido = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/idomeres.txt";
+    filename_ido = "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/idomeres.txt";
 
     ifstream idoInput;
     idoInput.open(filename_ido);
