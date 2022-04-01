@@ -107,6 +107,46 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
     return db;
 }
 
+void rendez(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
+{
+    string befcsere;
+    int csere;
+    for (int i = 0; i <= db_2; i++)
+    {
+        for (int j = 0; j <= db_2; j++)
+        {
+            if (idoadatok[j].ellszam >= idoadatok[j + 1].ellszam)
+            {
+                TELL "CSERE!" << endl;
+                // Ellszám csere
+                csere = idoadatok[j].ellszam;
+                idoadatok[j].ellszam = idoadatok[j + 1].ellszam;
+                idoadatok[j + 1].ellszam = csere;
+                // Ellszámdb csere
+                csere = idoadatok[j].ellszamdb;
+                idoadatok[j].ellszamdb = idoadatok[j + 1].ellszamdb;
+                idoadatok[j + 1].ellszamdb = csere;
+                // Sorszám csere
+                csere = idoadatok[j].sorszam;
+                idoadatok[j].sorszam = idoadatok[j + 1].sorszam;
+                idoadatok[j + 1].sorszam = csere;
+                //Óra csere
+                csere = csakido[j].ora;
+                csakido[j].ora = csakido[j + 1].ora;
+                csakido[j + 1].ora = csere;
+                // Perc csere
+                csere = csakido[j].perc;
+                csakido[j].perc = csakido[j + 1].perc;
+                csakido[j + 1].perc = csere;
+                // Mperc csere
+                csere = csakido[j].mperc;
+                csakido[j].mperc = csakido[j + 1].mperc;
+                csakido[j + 1].mperc = csere;
+            }
+        }
+    }
+}
+
 void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db, int db_2)
 {
     int versenyzoDb = 0;
@@ -217,6 +257,7 @@ int main()
 
     int db = futo_olvasas(futok);               // DB => Versenyzők száma
     int db_2 = ido_olvasas(csakido, idoadatok); // DB_2 => Időadat .txt sorok száma
+    rendez(csakido, idoadatok, db_2);
     szamol(futok, csakido, idoadatok, db, db_2);
     kiir(futok, csakido, idoadatok, db, db_2);
 
