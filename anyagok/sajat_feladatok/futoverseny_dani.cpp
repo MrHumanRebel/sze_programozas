@@ -17,21 +17,16 @@ struct futo
 
 struct ido
 {
-    int ora;
-    int perc;
-    int mperc;
+    int ora, perc, mperc;
 };
 
 struct idoadat
 {
-    int sorszam;
-    int ellszam;
-    int ellszamdb;
+    int sorszam, ellszam, ellszamdb;
     string befido;
 };
 
-string filename_futo;
-string filename_ido;
+string filename_futo, filename_ido;
 
 int futo_olvasas(futo futok[FUTOMAX])
 {
@@ -109,7 +104,6 @@ int ido_olvasas(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX])
 
 void rendez(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
 {
-    string befcsere;
     int csere;
     for (int i = 0; i <= db_2; i++)
     {
@@ -117,7 +111,6 @@ void rendez(ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db_2)
         {
             if (idoadatok[j].ellszam >= idoadatok[j + 1].ellszam)
             {
-                TELL "CSERE!" << endl;
                 // Ellszám csere
                 csere = idoadatok[j].ellszam;
                 idoadatok[j].ellszam = idoadatok[j + 1].ellszam;
@@ -193,41 +186,31 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
                     mperc = aktMperc - kezdMperc;
                 }
             }
-
             // Lower protections
             while (perc < 0)
             {
-                TELL "Perc < 0" << endl;
                 perc += 60;
                 ora -= 1;
             }
             while (mperc < 0)
             {
-                TELL "Mperc < 0" << endl;
                 mperc += 60;
                 perc -= 1;
             }
-
             // Upper protections
             while (perc >= 60)
             {
-                TELL "Perc > 60" << endl;
                 perc -= 60;
                 ora += 1;
             }
             while (mperc >= 60)
             {
-                TELL "Mperc > 60" << endl;
                 mperc -= 60;
                 perc += 1;
             }
             idoadatok[versenyzoDb].ellszamdb = ellpontDb; // Ellenőrző pontok
         }
-        idoadatok[versenyzoDb].befido += to_string(ora);
-        idoadatok[versenyzoDb].befido += ':';
-        idoadatok[versenyzoDb].befido += to_string(perc);
-        idoadatok[versenyzoDb].befido += ':';
-        idoadatok[versenyzoDb].befido += to_string(mperc);
+        idoadatok[versenyzoDb].befido += to_string(ora) + ':' + to_string(perc) + ':' + to_string(mperc); // Kész adat tárolása kiírásra
         versenyzoDb++;
     }
 }
