@@ -16,7 +16,7 @@ int random(int tol, int db)
 
 string jelszogen(int db, int hossz)
 {
-    int aktdb = 0;
+    int aktdb = 0, jelhossz = 0;
     string jelszo;
     char kisbetu, nagybetu;
     int szam;
@@ -25,9 +25,22 @@ string jelszogen(int db, int hossz)
         for (int i = 0; i < hossz; i++)
         {
             kisbetu = random(97, 25);
+            jelszo += kisbetu;
+            jelhossz++;
+            if (jelhossz >= hossz)
+                return jelszo;
+
             nagybetu = random(65, 25);
+            jelszo += nagybetu;
+            jelhossz++;
+            if (jelhossz >= hossz)
+                return jelszo;
+
             szam = random(9, 0);
-            TELL kisbetu << nagybetu << szam << endl;
+            jelszo += szam;
+            jelhossz++;
+            if (jelhossz >= hossz)
+                return jelszo;
         }
 
         aktdb++;
@@ -43,7 +56,6 @@ int szamBeker(int min, int max)
     int akt;
     do
     {
-        TELL "Adja meg a számot!" << endl;
         ASK akt;
         if (akt >= min && akt <= max)
             szambe_ok = true;
@@ -56,10 +68,12 @@ int szamBeker(int min, int max)
 int main()
 {
     int db, hossz;
+    string jelszo;
     TELL "Hány karakterből álljon a jelszó?" << endl;
     hossz = szamBeker(5, 20);
     TELL "Hány darab jelszót generáljunk?" << endl;
     db = szamBeker(1, 500);
-    jelszogen(db, hossz);
+    jelszo = jelszogen(db, hossz);
+    TELL jelszo;
     return 0;
 }
