@@ -117,9 +117,6 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
         int aktOra = 0;
         int aktPerc = 0;
         int aktMperc = 0;
-        int elozoOra = 0;
-        int elozoPerc = 0;
-        int elozoMperc = 0;
         int kezdOra = 0;
         int kezdPerc = 0;
         int kezdMperc = 0;
@@ -137,75 +134,59 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
 
                 // Óra
                 if (aktOra == 0)
-                {
-                    aktOra = csakido[i].ora;
-                    kezdOra = csakido[i].ora;
-                }
+                    aktOra = kezdOra = csakido[i].ora;
                 else
-                {
-                    elozoOra = aktOra;
                     aktOra = csakido[i].ora;
-                }
 
                 // Perc
                 if (aktPerc == 0)
-                {
-                    aktPerc = csakido[i].perc;
-                    kezdPerc = csakido[i].perc;
-                }
+                    aktPerc = kezdPerc = csakido[i].perc;
                 else
-                {
-                    elozoPerc = aktPerc;
                     aktPerc = csakido[i].perc;
-                }
 
                 // Mperc
                 if (aktMperc == 0)
-                {
-                    aktMperc = csakido[i].mperc;
-                    kezdMperc = csakido[i].mperc;
-                }
+                    aktMperc = kezdMperc = csakido[i].mperc;
                 else
-                {
-                    elozoMperc = aktMperc;
                     aktMperc = csakido[i].mperc;
-                }
 
                 // Eltelt idő
-                ora += aktOra - elozoOra;
-                perc += aktPerc - elozoPerc;
-                mperc += aktMperc - elozoMperc;
+                if (ellpontDb == 6)
+                {
+                    ora = aktOra - kezdOra;
+                    perc = aktPerc - kezdPerc;
+                    mperc = aktMperc - kezdMperc;
+                }
             }
-            idoadatok[versenyzoDb].ellszamdb = ellpontDb;
-        }
-        ora -= kezdOra;
-        perc -= kezdPerc;
-        mperc -= kezdMperc;
-        // Lower protections
-        if (perc < 0)
-        {
-            TELL "Perc < 0" << endl;
-            perc = abs(perc);
-            ora += 1;
-        }
-        if (mperc < 0)
-        {
-            TELL "Mperc < 0" << endl;
-            mperc = abs(mperc);
-            perc += 1;
-        }
-        // Upper protections
-        if (perc >= 60)
-        {
-            TELL "Perc > 60" << endl;
-            perc -= 60;
-            ora += 1;
-        }
-        if (mperc >= 60)
-        {
-            TELL "Mperc > 60" << endl;
-            mperc -= 60;
-            perc += 1;
+
+            // Lower protections
+            while (perc < 0)
+            {
+                TELL "Perc < 0" << endl;
+                perc += 60;
+                ora -= 1;
+            }
+            while (mperc < 0)
+            {
+                TELL "Mperc < 0" << endl;
+                mperc += 60;
+                perc -= 1;
+            }
+
+            // Upper protections
+            while (perc >= 60)
+            {
+                TELL "Perc > 60" << endl;
+                perc -= 60;
+                ora += 1;
+            }
+            while (mperc >= 60)
+            {
+                TELL "Mperc > 60" << endl;
+                mperc -= 60;
+                perc += 1;
+            }
+            idoadatok[versenyzoDb].ellszamdb = ellpontDb; // Ellenőrző pontok
         }
         idoadatok[versenyzoDb].befido += to_string(ora);
         idoadatok[versenyzoDb].befido += ':';
