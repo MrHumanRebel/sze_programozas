@@ -221,7 +221,7 @@ void kiir(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], i
         << endl;
     for (int i = 0; i < db; i++)
     {
-        TELL futok[i].sorszam << ' ' << futok[i].nev << endl;
+        TELL "A versenyző sorszáma: " << futok[i].sorszam << "\nNeve: " << futok[i].nev << "\nIdőeredménye: ";
         if (idoadatok[i].ellszamdb >= 6)
             TELL idoadatok[i].befido << "\n"
                                      << endl;
