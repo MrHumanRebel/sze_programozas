@@ -37,11 +37,29 @@ string jelszogen(int db, int hossz)
     return jelszo;
 }
 
+int szamBeker(int min, int max)
+{
+    bool szambe_ok = false;
+    int akt;
+    do
+    {
+        TELL "Adja meg a számot!" << endl;
+        ASK akt;
+        if (akt >= min && akt <= max)
+            szambe_ok = true;
+        else
+            TELL "Adjon meg " << min << "-től " << max << "-ig tartományba tartozó számot!" << endl;
+    } while (szambe_ok == false);
+    return akt;
+}
+
 int main()
 {
     int db, hossz;
-    db = 1;
-    hossz = 5;
+    TELL "Hány karakterből álljon a jelszó?" << endl;
+    hossz = szamBeker(5, 20);
+    TELL "Hány darab jelszót generáljunk?" << endl;
+    db = szamBeker(1, 500);
     jelszogen(db, hossz);
     return 0;
 }
