@@ -114,15 +114,10 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
     {
         int kezdEllpont = -1;
         int ellpontDb = 0;
-        int aktOra = 0;
-        int aktPerc = 0;
-        int aktMperc = 0;
-        int kezdOra = 0;
-        int kezdPerc = 0;
-        int kezdMperc = 0;
-        int ora = 0;
-        int perc = 0;
-        int mperc = 0;
+        int aktOra = 0, aktPerc = 0, aktMperc = 0;    // Aktuális beolvasott idő adat
+        int kezdOra = 0, kezdPerc = 0, kezdMperc = 0; // Kezdő idő adat
+        int ora = 0, perc = 0, mperc = 0;             // Számolt idő adat
+
         for (int i = 0; i <= db_2; i++)
         {
             if (futok[versenyzoDb].sorszam == idoadatok[i].sorszam)
