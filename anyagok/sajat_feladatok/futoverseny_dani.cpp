@@ -210,13 +210,23 @@ void szamol(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX],
             }
             idoadatok[versenyzoDb].ellszamdb = ellpontDb; // Ellenőrző pontok
         }
-        idoadatok[versenyzoDb].befido += to_string(ora) + ':' + to_string(perc) + ':' + to_string(mperc); // Kész adat tárolása kiírásra
+        string sperc = "\0", smperc = "\0";
+        if (perc < 10)
+            sperc = '0' + to_string(perc);
+        else
+            sperc = to_string(perc);
+        if (mperc < 10)
+            smperc = '0' + to_string(mperc);
+        else
+            smperc = to_string(mperc);
+        idoadatok[versenyzoDb].befido = to_string(ora) + ':' + sperc + ':' + smperc; // Kész adat tárolása kiírásra
         versenyzoDb++;
     }
 }
 
 void kiir(futo futok[FUTOMAX], ido csakido[IDOMAX], idoadat idoadatok[IDOMAX], int db, int db_2)
 {
+
     TELL "A versenyzők:\n"
         << endl;
     for (int i = 0; i < db; i++)
