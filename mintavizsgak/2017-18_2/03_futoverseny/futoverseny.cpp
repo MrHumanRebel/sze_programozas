@@ -24,7 +24,7 @@ struct futo
 {
   int rajtszam;
   string nev;
-  reszeredmeny *kezdo;
+  reszeredmeny *kezdoRe;
 };
 
 string sorFeldarabol(string &sor, int &szokozHelye)
@@ -95,23 +95,54 @@ reszeredmeny *reszeredmenyBetolt(string fajlnev, reszeredmeny *horgony, int &fut
   return horgony;
 }
 
-string idoKiir(int idoKomponens)
+reszeredmeny *reszeredmenyKeres(int keresettRajtszam, reszeredmeny *futoHorgony, reszeredmeny *horgony)
 {
-  return to_string(idoKomponens).length() == 1 ? '0' + to_string(idoKomponens) : to_string(idoKomponens);
-}
+  reszeredmeny *aktFuto = NULL;
 
-void reszeredmenyKiir(reszeredmeny *horgony)
-{
   reszeredmeny *akt = horgony;
   while (akt)
   {
-    cout << "Rajtszám: " << akt->rajtszam << '\n'
-         << "Ellenőrző pont: " << akt->ellenorzoPont << '\n'
-         << "Érkezési idő: " << idoKiir(akt->erkezesiIdo.ora) << ':' << idoKiir(akt->erkezesiIdo.perc) << ':' << idoKiir(akt->erkezesiIdo.masodperc) << '\n'
-         << endl;
+    if (akt->rajtszam == keresettRajtszam)
+    {
+      aktFuto = reszeredmenyBeszur(akt->rajtszam, akt->ellenorzoPont, akt->erkezesiIdo, aktFuto);
+      if (!futoHorgony)
+        futoHorgony = aktFuto;
+    }
 
     akt = akt->kov;
   }
+
+  return futoHorgony;
+}
+
+void futoBetolt(string fajlnev, futo futok[], int futokDb, reszeredmeny *horgony)
+{
+  ifstream fajl(fajlnev);
+  if (fajl.is_open())
+  {
+    string aktSor;
+    int aktFuto = 0;
+    while (getline(fajl, aktSor) && aktFuto < futokDb)
+    {
+      int szokozHelye = -1;
+
+      int rajtszam = stoi(sorFeldarabol(aktSor, szokozHelye));
+      string nev = sorFeldarabol(aktSor, szokozHelye);
+
+      reszeredmeny *futoReHorgony = NULL;
+      futoReHorgony = reszeredmenyKeres(rajtszam, futoReHorgony, horgony);
+
+      futok[aktFuto] = {rajtszam, nev, futoReHorgony};
+      aktFuto++;
+    }
+
+    fajl.close();
+  }
+}
+
+string idoFormaz(int idoKomponens)
+{
+  return to_string(idoKomponens).length() == 1 ? '0' + to_string(idoKomponens) : to_string(idoKomponens);
 }
 
 void reszeredmenyTorol(reszeredmeny *akt)
@@ -127,14 +158,14 @@ void reszeredmenyTorol(reszeredmeny *akt)
 
 int main(int argc, char const *argv[])
 {
-  cout << "Futoverseny" << endl;
-
-  reszeredmeny *kezdo = NULL;
+  reszeredmeny *horgony = NULL;
   int futokDb;
-  kezdo = reszeredmenyBetolt(IDOMERES_FAJLNEV, kezdo, futokDb);
+  horgony = reszeredmenyBetolt(IDOMERES_FAJLNEV, horgony, futokDb);
 
-  reszeredmenyKiir(kezdo);
-  reszeredmenyTorol(kezdo);
+  futo futok[futokDb];
+  futoBetolt(FUTOK_FAJLNEV, futok, futokDb, horgony);
+
+  reszeredmenyTorol(horgony);
 
   return 0;
 }
