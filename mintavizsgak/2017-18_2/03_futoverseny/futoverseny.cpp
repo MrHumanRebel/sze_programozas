@@ -38,9 +38,25 @@ string sorFeldarabol(string &sor, int &szokozHelye)
   return aktElem;
 }
 
-void reszeredmenyBeszur(int rajtszam, int ellenorzoPont, ido erkezesiIdo, reszeredmeny *elozo)
+reszeredmeny *reszeredmenyBeszur(int rajtszam, int ellenorzoPont, ido erkezesiIdo, reszeredmeny *elozo)
 {
+  reszeredmeny *uj = new reszeredmeny;
 
+  uj->rajtszam = rajtszam;
+  uj->ellenorzoPont = ellenorzoPont;
+  uj->erkezesiIdo = erkezesiIdo;
+
+  if (elozo)
+  {
+    uj->kov = elozo->kov;
+    elozo->kov = uj;
+  }
+  else
+  {
+    uj->kov = NULL;
+  }
+
+  return uj;
 }
 
 reszeredmeny *reszeredmenyBetolt(string fajlnev, reszeredmeny *horgony, int &futokDb)
@@ -58,6 +74,7 @@ reszeredmeny *reszeredmenyBetolt(string fajlnev, reszeredmeny *horgony, int &fut
     while (getline(fajl, aktSor))
     {
       int szokozHelye = -1;
+
       int rajtszam = stoi(sorFeldarabol(aktSor, szokozHelye));
 
       int ellenorzoPont = stoi(sorFeldarabol(aktSor, szokozHelye));
@@ -65,8 +82,11 @@ reszeredmeny *reszeredmenyBetolt(string fajlnev, reszeredmeny *horgony, int &fut
       int ora = stoi(sorFeldarabol(aktSor, szokozHelye));
       int perc = stoi(sorFeldarabol(aktSor, szokozHelye));
       int masodperc = stoi(sorFeldarabol(aktSor, szokozHelye));
-
       ido erkezesiIdo = {ora, perc, masodperc};
+
+      aktReszeredmeny = reszeredmenyBeszur(rajtszam, ellenorzoPont, erkezesiIdo, aktReszeredmeny);
+      if (!horgony)
+        horgony = aktReszeredmeny;
     }
 
     fajl.close();
@@ -75,8 +95,34 @@ reszeredmeny *reszeredmenyBetolt(string fajlnev, reszeredmeny *horgony, int &fut
   return horgony;
 }
 
-void reszeredmenyTorol(reszeredmeny *kezdo)
+string idoKiir(int idoKomponens)
 {
+  return to_string(idoKomponens).length() == 1 ? '0' + to_string(idoKomponens) : to_string(idoKomponens);
+}
+
+void reszeredmenyKiir(reszeredmeny *horgony)
+{
+  reszeredmeny *akt = horgony;
+  while (akt)
+  {
+    cout << "Rajtszám: " << akt->rajtszam << '\n'
+         << "Ellenőrző pont: " << akt->ellenorzoPont << '\n'
+         << "Érkezési idő: " << idoKiir(akt->erkezesiIdo.ora) << ':' << idoKiir(akt->erkezesiIdo.perc) << ':' << idoKiir(akt->erkezesiIdo.masodperc) << '\n'
+         << endl;
+
+    akt = akt->kov;
+  }
+}
+
+void reszeredmenyTorol(reszeredmeny *akt)
+{
+  reszeredmeny *kovEr;
+  while (akt)
+  {
+    kovEr = akt->kov;
+    delete akt;
+    akt = kovEr;
+  }
 }
 
 int main(int argc, char const *argv[])
@@ -86,6 +132,9 @@ int main(int argc, char const *argv[])
   reszeredmeny *kezdo = NULL;
   int futokDb;
   kezdo = reszeredmenyBetolt(IDOMERES_FAJLNEV, kezdo, futokDb);
+
+  reszeredmenyKiir(kezdo);
+  reszeredmenyTorol(kezdo);
 
   return 0;
 }
