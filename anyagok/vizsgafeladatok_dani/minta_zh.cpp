@@ -8,10 +8,15 @@ using namespace std;
 #define ASK cin >>
 #define TOMBMAX 256
 
-bool vege = false;
-
 char mshangzok[21]{'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'};
 char mahangzok[5]{'a', 'e', 'i', 'o', 'u'};
+
+/* Tesz 1-2:
+
+#Ebb3n N1nCS 1 db 'ipSŻ1l0n' illetv3 'Że' betU SEM!
+#Ez 1 Hosszu-hoSSZu sz0v3g3s infOrmAcio!?@.Zh
+
+*/
 
 int karsorBeker(char karakterek[TOMBMAX])
 {
@@ -37,33 +42,37 @@ void kiir(char karakterek[TOMBMAX], int db)
 void cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
-    // Magánhangzók
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 21; i++)
     {
+        bool aktmegvan = false;
         for (int j = 0; j < db; j++)
         {
-
-            if (karakterek[j] == mahangzok[i])
+            // Magánhangzók
+            if (i <= 5)
             {
-                karakterek[j]++;
+                if (aktmegvan == false)
+                {
+                    if (karakterek[j] == mahangzok[i])
+                    {
+                        karakterek[j]++;
+                        aktmegvan = true;
+                    }
+                }
             }
-        }
-    }
 
-    // Mássalhangzók
-    for (int i = 0; i < 27; i++)
-    {
-        for (int j = 0; j <= db; i++)
-        {
-            if (karakterek[j] == 'Z' or karakterek[j] == 'z')
+            // Mássalhangzók
+            if (aktmegvan == false)
             {
-                karakterek[j] = '!';
-            }
-            else if (karakterek[j] == mshangzok[i])
-            {
-                aktkar = karakterek[j];
-                aktkar = aktkar + 2;
-                karakterek[j] = aktkar;
+                if (karakterek[j] == 'Z' or karakterek[j] == 'z')
+                {
+                    karakterek[j] = '!';
+                }
+                else if (karakterek[j] == mshangzok[i])
+                {
+                    aktkar = karakterek[j] + 2;
+                    karakterek[j] = aktkar;
+                    aktmegvan = true;
+                }
             }
         }
     }
@@ -95,6 +104,7 @@ int main()
     char karakterek[TOMBMAX];
     int db = 0;
     db = karsorBeker(karakterek);
+    TELL db << endl;
     ujkarsor(karakterek, db);
     kiir(karakterek, db);
 
