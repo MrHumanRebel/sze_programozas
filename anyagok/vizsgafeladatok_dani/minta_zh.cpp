@@ -46,23 +46,64 @@ void cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
     int szamlalo = 0;
+    bool ms_nagy = false;
+    bool ma_nagy = false;
 
-    while (szamlalo < 7)
-    {
-        for (int i = 0; i <= db; i++)
+    do
+    { // Magánhangzók
+        while (szamlalo < 7)
         {
-            if (karakterek[i] == 'Z' or karakterek[i] == 'z')
+            for (int i = 0; i <= db; i++)
             {
-                karakterek[i] = '!';
+                if (karakterek[i] == 'Z' or karakterek[i] == 'z')
+                {
+                    karakterek[i] = '!';
+                }
+                else if (karakterek[i] == mahangzok[szamlalo])
+                {
+                    aktkar = karakterek[i];
+                    aktkar++;
+                    karakterek[i] = aktkar;
+                }
+                else if (karakterek[i] == mahangzok[szamlalo])
+                {
+                }
             }
-            else if (karakterek[i] == mahangzok[szamlalo])
-            {
-                karakterek[i] = aktkar;
-                aktkar++;
-                karakterek[i] = aktkar;
-            }
+            szamlalo++;
         }
-        szamlalo++;
+
+        // Mássalhangzók
+        szamlalo = 0;
+
+        while (szamlalo < 27)
+        {
+            for (int i = 0; i <= db; i++)
+            {
+                if (karakterek[i] == mshangzok[szamlalo])
+                {
+                    aktkar = karakterek[i];
+                    aktkar = aktkar + 2;
+                    karakterek[i] = aktkar;
+                }
+            }
+            szamlalo++;
+        }
+    } while (ms_nagy == false and ma_nagy == false);
+
+    // Nagybetűs variánsok
+    for (int i = 0; i <= 21; i++)
+    {
+        mshangzok[i] = aktkar;
+        aktkar = toupper(aktkar);
+        mshangzok[i] = aktkar;
+        bool ms_nagy = true;
+    }
+    for (int i = 0; i <= 5; i++)
+    {
+        mahangzok[i] = aktkar;
+        aktkar = toupper(aktkar);
+        mahangzok[i] = aktkar;
+        bool ma_nagy = true;
     }
 }
 
