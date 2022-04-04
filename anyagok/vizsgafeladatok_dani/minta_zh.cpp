@@ -1,9 +1,7 @@
-// Headers
 #include <iostream>
 #include <stdlib.h>
 
 using namespace std;
-
 #define TELL cout <<
 #define ASK cin >>
 #define TOMBMAX 256
@@ -11,7 +9,7 @@ using namespace std;
 char mshangzok[21]{'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'};
 char mahangzok[5]{'a', 'e', 'i', 'o', 'u'};
 
-/* Tesz 1-2:
+/* Tesztek:
 
 #Ebb3n N1nCS 1 db 'ipSŻ1l0n' illetv3 'Że' betU SEM!
 #Ez 1 Hosszu-hoSSZu sz0v3g3s infOrmAcio!?@.Zh
@@ -41,62 +39,57 @@ void kiir(char karakterek[TOMBMAX], int db)
 
 int cserel(char karakterek[TOMBMAX], int db)
 {
-    int aktkar;
-    int cseredb = 0;
-    int tulcsordul = 0;
+    int aktkar, cseredb = 0, tulcsordul = 0;
     for (int i = 0; i < db; i++)
     {
-        bool aktmegvan = false;
+        bool ok = false;
         for (int j = 0; j < 21; j++)
         {
             // Szóköz és speciális eset
             if (karakterek[i] == ' ')
             {
                 karakterek[i] = '_';
-                aktmegvan = true;
+                ok = true;
                 cseredb++;
             }
             else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
             {
                 karakterek[i] = '!';
-                aktmegvan = true;
+                ok = true;
                 cseredb++;
                 tulcsordul++;
             }
 
-            if (aktmegvan == false)
-            { // Magánhangzók
-                if (j <= 5)
+            if (ok == false) // Magánhangzók
+            {
+                if (j < 5)
                 {
                     if (karakterek[i] == mahangzok[j])
                     {
                         karakterek[i]++;
-                        aktmegvan = true;
+                        ok = true;
                         cseredb++;
                     }
                 }
             }
 
-            // Mássalhangzók
-            if (aktmegvan == false)
+            if (ok == false) // Mássalhangzók
             {
                 if (karakterek[i] == mshangzok[j])
                 {
                     aktkar = karakterek[i] + 2;
                     karakterek[i] = aktkar;
-                    aktmegvan = true;
+                    ok = true;
                     cseredb++;
                 }
             }
-            /*
+
             // Ismeretlen
-            if (aktmegvan == false and !isalpha(karakterek[i]) and !isdigit(karakterek[i]) and karakterek[i] != ' ')
+            if (ok == false && !isalpha(karakterek[i]) && !isdigit(karakterek[i]) && karakterek[i] != '_')
             {
                 karakterek[i] = '*';
-                aktmegvan = true;
                 cseredb++;
             }
-            */
         }
     }
     return cseredb;
