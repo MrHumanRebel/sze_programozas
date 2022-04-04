@@ -37,9 +37,9 @@ void kiir(char karakterek[TOMBMAX], int db)
     }
 }
 
-int cserel(char karakterek[TOMBMAX], int db)
+void cserel(char karakterek[TOMBMAX], int db, int tulcsordul, int ms_db, int ma_db, int space_db, int egyeb_db)
 {
-    int aktkar, cseredb = 0, tulcsordul = 0;
+    int aktkar;
     for (int i = 0; i < db; i++)
     {
         bool ok = false;
@@ -50,14 +50,14 @@ int cserel(char karakterek[TOMBMAX], int db)
             {
                 karakterek[i] = '_';
                 ok = true;
-                cseredb++;
+                space_db++;
             }
             else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
             {
                 karakterek[i] = '!';
                 ok = true;
-                cseredb++;
                 tulcsordul++;
+                ms_db++;
             }
 
             if (ok == false) // Magánhangzók
@@ -68,7 +68,7 @@ int cserel(char karakterek[TOMBMAX], int db)
                     {
                         karakterek[i]++;
                         ok = true;
-                        cseredb++;
+                        ma_db++;
                     }
                 }
             }
@@ -80,27 +80,23 @@ int cserel(char karakterek[TOMBMAX], int db)
                     aktkar = karakterek[i] + 2;
                     karakterek[i] = aktkar;
                     ok = true;
-                    cseredb++;
+                    ms_db++;
                 }
             }
 
             // Ismeretlen
-            if (ok == false && !isalpha(karakterek[i]) && !isdigit(karakterek[i]) && karakterek[i] != '_')
+            if (ok == false && !isalpha(karakterek[i]) && karakterek[i] != '_')
             {
                 karakterek[i] = '*';
-                cseredb++;
+                egyeb_db++;
             }
         }
     }
-    return cseredb;
 }
 
-int ujkarsor(char karakterek[TOMBMAX], int db)
+void ujkarsor(char karakterek[TOMBMAX], int db, int tulcsordul)
 {
     int aktkar;
-    // Kisbetűs variánsok
-    int csereldb = cserel(karakterek, db);
-    // Nagybetűs variánsok
     for (int i = 0; i <= 21; i++)
     {
         aktkar = mshangzok[i];
@@ -113,19 +109,20 @@ int ujkarsor(char karakterek[TOMBMAX], int db)
         aktkar = toupper(aktkar);
         mahangzok[i] = aktkar;
     }
-    csereldb += cserel(karakterek, db);
-    return csereldb;
 }
 
 int main()
 {
     char karakterek[TOMBMAX];
-    int db = 0, cseredb = 0;
+    int db = 0, ms_db = 0, ma_db = 0, space_db = 0, egyeb_db = 0, tulcsordul = 0;
     db = karsorBeker(karakterek);
-    TELL "Karaterek száma: " << db << endl;
-    cseredb = ujkarsor(karakterek, db);
-    TELL "Cserék száma: " << cseredb << endl;
+    TELL "Az összes karakter: " << db << endl;
+    cserel(karakterek, db, tulcsordul, ms_db, ma_db, space_db, egyeb_db);
+    ujkarsor(karakterek, db, tulcsordul);
+    cserel(karakterek, db, tulcsordul, ms_db, ma_db, space_db, egyeb_db);
+    TELL "Átkódolt: ";
     kiir(karakterek, db);
+    TELL "\n Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
 
     return 0;
 }
