@@ -118,13 +118,13 @@ int main()
     char karakterek[TOMBMAX];
     int db = 0;
     db = karsorBeker(karakterek);
-    TELL "Az összes karakter: " << db << endl;
     cserel(karakterek, db);
     ujkarsor(karakterek, db);
     cserel(karakterek, db);
     TELL "Átkódolt: ";
     kiir(karakterek, db);
-    TELL "\n Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
+    TELL "\nAz összes karakter: " << db << endl;
+    TELL "Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
     if (tulcsordul == 0)
     {
         TELL "Nincs túlcsordulás!" << endl;
