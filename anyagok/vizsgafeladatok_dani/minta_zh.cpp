@@ -39,23 +39,38 @@ void kiir(char karakterek[TOMBMAX], int db)
     }
 }
 
-void cserel(char karakterek[TOMBMAX], int db)
+int cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
-    for (int i = 0; i < 21; i++)
+    int cseredb = 0;
+    for (int i = 0; i < db; i++)
     {
         bool aktmegvan = false;
-        for (int j = 0; j < db; j++)
+        for (int j = 0; j < 21; j++)
         {
-            // Magánhangzók
-            if (i <= 5)
+            // Szóköz és speciális eset
+            if (karakterek[i] == ' ')
             {
-                if (aktmegvan == false)
+                karakterek[i] = '_';
+                aktmegvan = true;
+                cseredb++;
+            }
+            else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
+            {
+                karakterek[i] = '!';
+                aktmegvan = true;
+                cseredb++;
+            }
+
+            if (aktmegvan == false)
+            { // Magánhangzók
+                if (j <= 5)
                 {
-                    if (karakterek[j] == mahangzok[i])
+                    if (karakterek[i] == mahangzok[j])
                     {
-                        karakterek[j]++;
+                        karakterek[i]++;
                         aktmegvan = true;
+                        cseredb++;
                     }
                 }
             }
@@ -63,26 +78,33 @@ void cserel(char karakterek[TOMBMAX], int db)
             // Mássalhangzók
             if (aktmegvan == false)
             {
-                if (karakterek[j] == 'Z' or karakterek[j] == 'z')
+                if (karakterek[i] == mshangzok[j])
                 {
-                    karakterek[j] = '!';
-                }
-                else if (karakterek[j] == mshangzok[i])
-                {
-                    aktkar = karakterek[j] + 2;
-                    karakterek[j] = aktkar;
+                    aktkar = karakterek[i] + 2;
+                    karakterek[i] = aktkar;
                     aktmegvan = true;
+                    cseredb++;
                 }
             }
+            /*
+            // Ismeretlen
+            if (aktmegvan == false and !isalpha(karakterek[i]) and !isdigit(karakterek[i]) and karakterek[i] != ' ')
+            {
+                karakterek[i] = '*';
+                aktmegvan = true;
+                cseredb++;
+            }
+            */
         }
     }
+    return cseredb;
 }
 
-void ujkarsor(char karakterek[TOMBMAX], int db)
+int ujkarsor(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
     // Kisbetűs variánsok
-    cserel(karakterek, db);
+    int csereldb = cserel(karakterek, db);
     // Nagybetűs variánsok
     for (int i = 0; i <= 21; i++)
     {
@@ -96,16 +118,18 @@ void ujkarsor(char karakterek[TOMBMAX], int db)
         aktkar = toupper(aktkar);
         mahangzok[i] = aktkar;
     }
-    cserel(karakterek, db);
+    csereldb += cserel(karakterek, db);
+    return csereldb;
 }
 
 int main()
 {
     char karakterek[TOMBMAX];
-    int db = 0;
+    int db = 0, cseredb = 0;
     db = karsorBeker(karakterek);
-    TELL db << endl;
-    ujkarsor(karakterek, db);
+    TELL "Karaterek száma: " << db << endl;
+    cseredb = ujkarsor(karakterek, db);
+    TELL "Cserék száma: " << cseredb << endl;
     kiir(karakterek, db);
 
     return 0;
