@@ -8,6 +8,7 @@ using namespace std;
 
 char mshangzok[21]{'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'};
 char mahangzok[5]{'a', 'e', 'i', 'o', 'u'};
+int ms_db = 0, ma_db = 0, space_db = 0, egyeb_db = 0, tulcsordul = 0;
 
 /* Tesztek:
 
@@ -37,29 +38,30 @@ void kiir(char karakterek[TOMBMAX], int db)
     }
 }
 
-void cserel(char karakterek[TOMBMAX], int db, int tulcsordul, int ms_db, int ma_db, int space_db, int egyeb_db)
+void cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
     for (int i = 0; i < db; i++)
     {
         bool ok = false;
+
+        // Szóköz és speciális eset
+        if (karakterek[i] == ' ')
+        {
+            karakterek[i] = '_';
+            ok = true;
+            space_db++;
+        }
+        else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
+        {
+            karakterek[i] = '!';
+            ok = true;
+            tulcsordul++;
+            ms_db++;
+        }
+
         for (int j = 0; j < 21; j++)
         {
-            // Szóköz és speciális eset
-            if (karakterek[i] == ' ')
-            {
-                karakterek[i] = '_';
-                ok = true;
-                space_db++;
-            }
-            else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
-            {
-                karakterek[i] = '!';
-                ok = true;
-                tulcsordul++;
-                ms_db++;
-            }
-
             if (ok == false) // Magánhangzók
             {
                 if (j < 5)
@@ -83,18 +85,18 @@ void cserel(char karakterek[TOMBMAX], int db, int tulcsordul, int ms_db, int ma_
                     ms_db++;
                 }
             }
+        }
 
-            // Ismeretlen
-            if (ok == false && !isalpha(karakterek[i]) && karakterek[i] != '_')
-            {
-                karakterek[i] = '*';
-                egyeb_db++;
-            }
+        // Ismeretlen
+        if (ok == false && !isalpha(karakterek[i]) && karakterek[i] != '_' && karakterek[i] != '!')
+        {
+            karakterek[i] = '*';
+            egyeb_db++;
         }
     }
 }
 
-void ujkarsor(char karakterek[TOMBMAX], int db, int tulcsordul)
+void ujkarsor(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
     for (int i = 0; i <= 21; i++)
@@ -114,15 +116,23 @@ void ujkarsor(char karakterek[TOMBMAX], int db, int tulcsordul)
 int main()
 {
     char karakterek[TOMBMAX];
-    int db = 0, ms_db = 0, ma_db = 0, space_db = 0, egyeb_db = 0, tulcsordul = 0;
+    int db = 0;
     db = karsorBeker(karakterek);
     TELL "Az összes karakter: " << db << endl;
-    cserel(karakterek, db, tulcsordul, ms_db, ma_db, space_db, egyeb_db);
-    ujkarsor(karakterek, db, tulcsordul);
-    cserel(karakterek, db, tulcsordul, ms_db, ma_db, space_db, egyeb_db);
+    cserel(karakterek, db);
+    ujkarsor(karakterek, db);
+    cserel(karakterek, db);
     TELL "Átkódolt: ";
     kiir(karakterek, db);
     TELL "\n Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
+    if (tulcsordul == 0)
+    {
+        TELL "Nincs túlcsordulás!" << endl;
+    }
+    else
+    {
+        TELL tulcsordul << " db túlcsordulás található!" << endl;
+    }
 
     return 0;
 }
