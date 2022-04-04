@@ -43,6 +43,7 @@ int cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
     int cseredb = 0;
+    int tulcsordul = 0;
     for (int i = 0; i < db; i++)
     {
         bool aktmegvan = false;
@@ -60,6 +61,7 @@ int cserel(char karakterek[TOMBMAX], int db)
                 karakterek[i] = '!';
                 aktmegvan = true;
                 cseredb++;
+                tulcsordul++;
             }
 
             if (aktmegvan == false)
