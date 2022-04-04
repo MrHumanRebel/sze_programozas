@@ -1,10 +1,6 @@
 // Headers
 #include <iostream>
 #include <stdlib.h>
-#include <sstream>
-#include <fstream>
-#include <cstring>
-#include <string>
 
 using namespace std;
 
@@ -25,13 +21,7 @@ int karsorBeker(char karakterek[TOMBMAX])
     int db = akt.length();
     for (int i = 0; i <= TOMBMAX; i++)
     {
-        if (akt[i] == '\n')
-        {
-            TELL "KILÉP";
-            vege = true;
-        }
-        else
-            karakterek[i] = akt[i];
+        karakterek[i] = akt[i];
     }
     return db;
 }
@@ -47,47 +37,35 @@ void kiir(char karakterek[TOMBMAX], int db)
 void cserel(char karakterek[TOMBMAX], int db)
 {
     int aktkar;
-    int szamlalo = 0;
     // Magánhangzók
-    while (szamlalo < 7)
+    for (int i = 0; i < 5; i++)
     {
-        for (int i = 0; i < db; i++)
+        for (int j = 0; j < db; j++)
         {
-            if (karakterek[i] == 'Z' or karakterek[i] == 'z')
-            {
-                karakterek[i] = '!';
-            }
-            else if (karakterek[i] == mahangzok[szamlalo])
-            {
 
-                aktkar = karakterek[i];
-                TELL aktkar << endl;
-                aktkar++;
-                TELL aktkar << endl;
-                karakterek[i] = aktkar;
-            }
-            else if (karakterek[i] == mahangzok[szamlalo])
+            if (karakterek[j] == mahangzok[i])
             {
+                karakterek[j]++;
             }
         }
-        szamlalo++;
     }
 
     // Mássalhangzók
-    szamlalo = 0;
-
-    while (szamlalo < 27)
+    for (int i = 0; i < 27; i++)
     {
-        for (int i = 0; i <= db; i++)
+        for (int j = 0; j <= db; i++)
         {
-            if (karakterek[i] == mshangzok[szamlalo])
+            if (karakterek[j] == 'Z' or karakterek[j] == 'z')
             {
-                aktkar = karakterek[i];
+                karakterek[j] = '!';
+            }
+            else if (karakterek[j] == mshangzok[i])
+            {
+                aktkar = karakterek[j];
                 aktkar = aktkar + 2;
-                karakterek[i] = aktkar;
+                karakterek[j] = aktkar;
             }
         }
-        szamlalo++;
     }
 }
 
