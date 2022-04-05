@@ -56,13 +56,21 @@ void cserel(char karakterek[TOMBMAX], int db)
     {
         bool ok = false;
 
-        // Szóköz és speciális eset
-        if (karakterek[i] == ' ')
+        // Ismeretlen BETA
+        if (!isalpha(karakterek[i]) && karakterek[i] != ' ' && (karakterek[i] != 'Z' or karakterek[i] != 'z'))
+        {
+            karakterek[i] = '*';
+            ok = true;
+            egyeb_db++;
+        }
+        // Szóköz
+        else if (karakterek[i] == ' ')
         {
             karakterek[i] = '_';
             ok = true;
             space_db++;
         }
+        // Speciális eset
         else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
         {
             karakterek[i] = '!';
@@ -70,11 +78,11 @@ void cserel(char karakterek[TOMBMAX], int db)
             tulcsordul++;
             ms_db++;
         }
-
-        for (int j = 0; j < 21; j++)
+        else
         {
-            if (ok == false) // Magánhangzók
+            for (int j = 0; j < 21; j++)
             {
+                // Magánhangzók
                 if (j < 5)
                 {
                     if (karakterek[i] == mahangzok[j])
@@ -84,25 +92,18 @@ void cserel(char karakterek[TOMBMAX], int db)
                         ma_db++;
                     }
                 }
-            }
 
-            if (ok == false) // Mássalhangzók
-            {
-                if (karakterek[i] == mshangzok[j])
+                if (ok == false) // Mássalhangzók
                 {
-                    aktkar = karakterek[i] + 2;
-                    karakterek[i] = aktkar;
-                    ok = true;
-                    ms_db++;
+                    if (karakterek[i] == mshangzok[j])
+                    {
+                        aktkar = karakterek[i] + 2;
+                        karakterek[i] = aktkar;
+                        ok = true;
+                        ms_db++;
+                    }
                 }
             }
-        }
-
-        // Ismeretlen
-        if (ok == false && !isalpha(karakterek[i]) && karakterek[i] != '_' && karakterek[i] != '!')
-        {
-            karakterek[i] = '*';
-            egyeb_db++;
         }
     }
 }
