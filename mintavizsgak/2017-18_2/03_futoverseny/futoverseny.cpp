@@ -4,6 +4,8 @@ using namespace std;
 
 #define IDOMERES_FAJLNEV "idomeres.txt"
 #define FUTOK_FAJLNEV "futok_nevei.txt"
+#define ELL_PONT_DB 6
+#define ELL_PONT_BUNT 20 // Percben megadva
 
 struct ido
 {
@@ -25,6 +27,7 @@ struct futo
   int rajtszam;
   string nev;
   reszeredmeny *kezdoRe;
+  ido eredmeny;
 };
 
 string sorFeldarabol(string &sor, int &szokozHelye)
@@ -115,6 +118,59 @@ reszeredmeny *reszeredmenyKeres(int keresettRajtszam, reszeredmeny *futoHorgony,
   return futoHorgony;
 }
 
+int idoAtvalt(ido aktIdo)
+{
+  int oraMp = aktIdo.ora * 3600;
+  int percMp = aktIdo.perc * 60;
+
+  return oraMp + percMp + aktIdo.masodperc;
+}
+
+ido mpAtvalt(int aktMp)
+{
+  int ora = aktMp / 3600;
+  int perc = (aktMp % 3600) / 60;
+  int masodperc = (aktMp % 3600) % 60;
+
+  ido aktIdo = {ora, perc, masodperc};
+  return aktIdo;
+}
+
+ido eredmenySzamol(reszeredmeny *futoHorgony)
+{
+  reszeredmeny *akt = futoHorgony;
+
+  // Első (0.) teljesített állomás részideje
+  int reszidoMin = idoAtvalt(futoHorgony->erkezesiIdo);
+
+  // Utolsó teljesített állomás részideje
+  int reszidoMax = idoAtvalt(futoHorgony->erkezesiIdo);
+
+  // Teljesített állomások darabszáma (büntetés számításához)
+  int allomasDb = 0;
+
+  while (akt)
+  {
+    int reszidoAkt = idoAtvalt(akt->erkezesiIdo);
+    if (reszidoMin > reszidoAkt)
+      reszidoMin = reszidoAkt;
+
+    if (reszidoMax < reszidoAkt)
+      reszidoMax = reszidoAkt;
+
+    allomasDb++;
+
+    akt = akt->kov;
+  }
+
+  int teljesitesiIdo = reszidoMax - reszidoMin;
+  teljesitesiIdo += (ELL_PONT_DB - allomasDb) * ELL_PONT_BUNT * 60;
+
+  ido eredmeny = mpAtvalt(teljesitesiIdo);
+
+  return eredmeny;
+}
+
 void futoBetolt(string fajlnev, futo futok[], int futokDb, reszeredmeny *horgony)
 {
   ifstream fajl(fajlnev);
@@ -131,12 +187,30 @@ void futoBetolt(string fajlnev, futo futok[], int futokDb, reszeredmeny *horgony
 
       reszeredmeny *futoReHorgony = NULL;
       futoReHorgony = reszeredmenyKeres(rajtszam, futoReHorgony, horgony);
+      ido eredmeny = eredmenySzamol(futoReHorgony);
 
-      futok[aktFuto] = {rajtszam, nev, futoReHorgony};
+      futok[aktFuto] = {rajtszam, nev, futoReHorgony, eredmeny};
       aktFuto++;
     }
 
     fajl.close();
+  }
+}
+
+void futoRendez(futo futok[], int futokDb)
+{
+  // Buborékrendezés
+  for (int i = 0; i < futokDb; i++)
+  {
+    for (int j = 1; j < futokDb - i; j++)
+    {
+      if (idoAtvalt(futok[j - 1].eredmeny) > idoAtvalt(futok[j].eredmeny))
+      {
+        futo csere = futok[j - 1];
+        futok[j - 1] = futok[j];
+        futok[j] = csere;
+      }
+    }
   }
 }
 
@@ -145,14 +219,23 @@ string idoFormaz(int idoKomponens)
   return to_string(idoKomponens).length() == 1 ? '0' + to_string(idoKomponens) : to_string(idoKomponens);
 }
 
+void eredmenyKiir(futo futok[], int futokDb)
+{
+  for (int i = 0; i < futokDb; i++)
+  {
+    string aktEredmeny = idoFormaz(futok[i].eredmeny.ora) + ':' + idoFormaz(futok[i].eredmeny.perc) + ':' + idoFormaz(futok[i].eredmeny.masodperc);
+    cout << futok[i].rajtszam << ' ' << aktEredmeny << endl;
+  }
+}
+
 void reszeredmenyTorol(reszeredmeny *akt)
 {
-  reszeredmeny *kovEr;
+  reszeredmeny *kov;
   while (akt)
   {
-    kovEr = akt->kov;
+    kov = akt->kov;
     delete akt;
-    akt = kovEr;
+    akt = kov;
   }
 }
 
@@ -164,6 +247,8 @@ int main(int argc, char const *argv[])
 
   futo futok[futokDb];
   futoBetolt(FUTOK_FAJLNEV, futok, futokDb, horgony);
+  futoRendez(futok, futokDb);
+  eredmenyKiir(futok, futokDb);
 
   reszeredmenyTorol(horgony);
 
