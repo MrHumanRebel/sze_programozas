@@ -126,8 +126,7 @@ void ujkarsor(char karakterek[TOMBMAX])
 int main()
 {
     char karakterek[TOMBMAX];
-    int db = 0;
-    db = karsorBeker(karakterek);
+    int db = karsorBeker(karakterek);
     cserel(karakterek, db);
     ujkarsor(karakterek);
     cserel(karakterek, db);
