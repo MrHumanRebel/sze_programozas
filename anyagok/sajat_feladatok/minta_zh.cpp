@@ -106,7 +106,7 @@ void cserel(char karakterek[TOMBMAX], int db)
     }
 }
 
-void ujkarsor(char karakterek[TOMBMAX], int db)
+void ujkarsor(char karakterek[TOMBMAX])
 {
     int aktkar;
     for (int i = 0; i <= 21; i++)
@@ -129,7 +129,7 @@ int main()
     int db = 0;
     db = karsorBeker(karakterek);
     cserel(karakterek, db);
-    ujkarsor(karakterek, db);
+    ujkarsor(karakterek);
     cserel(karakterek, db);
     kiir(karakterek, db);
     return 0;
