@@ -56,7 +56,7 @@ void cserel(char karakterek[TOMBMAX], int db)
         bool ok = false;
 
         // Ismeretlen BETA
-        if (!isalpha(karakterek[i]) && karakterek[i] != ' ') // Miért nem jó? Elvileg akkor lép bele ha az aktuális karakter NEM betű és NEM space...
+        if (!(karakterek[i] >= 'A' && karakterek[i] <= 'Z') && !(karakterek[i] >= 'a' && karakterek[i] <= 'z') && karakterek[i] != ' ')
         {
             karakterek[i] = '*';
             ok = true;
