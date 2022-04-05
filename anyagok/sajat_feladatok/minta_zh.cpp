@@ -38,7 +38,7 @@ void kiir(char karakterek[TOMBMAX], int db)
         TELL karakterek[i];
     }
     TELL "\n\nAz összes karakter: " << db << endl;
-    TELL "Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
+    TELL "Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << (egyeb_db = db - ms_db - ma_db - space_db) << endl;
     if (tulcsordul == 0)
     {
         TELL "Nincs túlcsordulás!" << endl;
@@ -60,7 +60,6 @@ void cserel(char karakterek[TOMBMAX], int db)
         {
             karakterek[i] = '*';
             ok = true;
-            egyeb_db++;
         }
         // Szóköz
         else if (karakterek[i] == ' ')
