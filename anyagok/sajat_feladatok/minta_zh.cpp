@@ -32,9 +32,20 @@ int karsorBeker(char karakterek[TOMBMAX])
 
 void kiir(char karakterek[TOMBMAX], int db)
 {
+    TELL "Átkódolt: ";
     for (int i = 0; i <= db; i++)
     {
         TELL karakterek[i];
+    }
+    TELL "\nAz összes karakter: " << db << endl;
+    TELL "Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
+    if (tulcsordul == 0)
+    {
+        TELL "Nincs túlcsordulás!" << endl;
+    }
+    else
+    {
+        TELL tulcsordul << " db túlcsordulás található!" << endl;
     }
 }
 
@@ -121,18 +132,6 @@ int main()
     cserel(karakterek, db);
     ujkarsor(karakterek, db);
     cserel(karakterek, db);
-    TELL "Átkódolt: ";
     kiir(karakterek, db);
-    TELL "\nAz összes karakter: " << db << endl;
-    TELL "Ebből:\n\tMagánhangzó: " << ma_db << "\n\tSzóköz: " << space_db << "\n\tMássalhangzó: " << ms_db << "\n\tEgyéb: " << egyeb_db << endl;
-    if (tulcsordul == 0)
-    {
-        TELL "Nincs túlcsordulás!" << endl;
-    }
-    else
-    {
-        TELL tulcsordul << " db túlcsordulás található!" << endl;
-    }
-
     return 0;
 }
