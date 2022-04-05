@@ -51,7 +51,6 @@ void kiir(char karakterek[TOMBMAX], int db)
 
 void cserel(char karakterek[TOMBMAX], int db)
 {
-    int aktkar;
     for (int i = 0; i < db; i++)
     {
         bool ok = false;
@@ -97,7 +96,7 @@ void cserel(char karakterek[TOMBMAX], int db)
                 {
                     if (karakterek[i] == mshangzok[j])
                     {
-                        aktkar = karakterek[i] + 2;
+                        int aktkar = karakterek[i] + 2;
                         karakterek[i] = aktkar;
                         ok = true;
                         ms_db++;
