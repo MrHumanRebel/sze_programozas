@@ -81,8 +81,7 @@ void cserel(char karakterek[TOMBMAX], int db)
         {
             for (int j = 0; j < 21; j++)
             {
-                // Magánhangzók
-                if (j < 5)
+                if (j < 5) // Magánhangzók
                 {
                     if (karakterek[i] == mahangzok[j])
                     {
