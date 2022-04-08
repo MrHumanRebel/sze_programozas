@@ -13,65 +13,28 @@ int random(int tol, int ig)
     return (tol + rand() % (ig - tol + 1));
 }
 
-string jelszogen(int db, int hossz)
+string jelszogen(int db, int hossz, string szavak[])
 {
     int jelhossz = 0, szam;
     string jelszo;
     char kisbetu, nagybetu;
     bool ok = false;
+    string aktkar;
 
-    for (int i = 0; i < hossz; i++)
+    // BETA
+
+    for (int i = 0; i <= sizeof(szavak); i++)
     {
-        kisbetu = random(97, 122);
-        for (int j = 0; j <= jelhossz; j++)
+        for (int j = 0; j <= aktkar.length(); j++)
         {
-            if (kisbetu == jelszo[j])
-                kisbetu = random(97, 122);
-            else
-                ok = true;
-        }
-        if (ok)
-        {
-            jelszo += kisbetu;
-            jelhossz++;
-            if (jelhossz == hossz)
-                return jelszo;
-        }
-        ok = false;
-
-        nagybetu = random(65, 90);
-        for (int j = 0; j <= jelhossz; j++)
-        {
-            if (nagybetu == jelszo[j])
-                nagybetu = random(65, 90);
-            else
-                ok = true;
-        }
-        if (ok)
-        {
-            jelszo += nagybetu;
-            jelhossz++;
-            if (jelhossz == hossz)
-                return jelszo;
-        }
-        ok = false;
-
-        szam = random(0, 9);
-        for (int j = 0; j <= jelhossz; j++)
-        {
-            if (szam == jelszo[j])
-                szam = random(0, 9);
-            else
-                ok = true;
-        }
-        if (ok)
-        {
-            jelszo += to_string(szam);
-            jelhossz++;
-            if (jelhossz == hossz)
-                return jelszo;
+            if (szavak[i][j] != aktkar[j])
+            {
+                aktkar += szavak[i][j];
+            }
         }
     }
+    TELL aktkar;
+
     return jelszo;
 }
 
@@ -125,6 +88,7 @@ int main()
     int db, hossz, aktdb = 0;
     string jelszo, beker;
     string jelszavak[500];
+    string szavak[3];
     TELL "Hány karakterből álljon a jelszó?" << endl;
     hossz = szamBeker(MIN, MAX);
     TELL "Hány darab jelszót generáljunk?" << endl;
@@ -132,7 +96,13 @@ int main()
     do
     {
         string hasonlit = "\0";
-        jelszo = jelszogen(db, hossz);
+        for (int i = 1; i <= 3; i++)
+        {
+            TELL "Adja meg az " << i << " szót! ";
+            ASK beker;
+            szavak[i] = beker;
+        }
+        jelszo = jelszogen(db, hossz, szavak);
         jelszavak[aktdb] = jelszo;
         aktdb++;
         TELL "A(z) " << aktdb << ". generált jelszó: " << jelszo << endl;
