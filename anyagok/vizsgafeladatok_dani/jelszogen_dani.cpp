@@ -90,10 +90,23 @@ int szamBeker(int min, int max)
     return akt;
 }
 
+void kiir(string jelszavak[], int db)
+{
+    ofstream jelszoki;
+    string irashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/generalt.txt";
+    jelszoki.open(irashely);
+    for (int i = 0; i < db; i++)
+    {
+        jelszoki << jelszavak[i] << "\n";
+    }
+    jelszoki.close();
+}
+
 int main()
 {
     int db, hossz, aktdb = 0;
     string jelszo, beker;
+    string jelszavak[500];
     TELL "Hány karakterből álljon a jelszó?" << endl;
     hossz = szamBeker(MIN, MAX);
     TELL "Hány darab jelszót generáljunk?" << endl;
@@ -102,8 +115,8 @@ int main()
     {
         string hasonlit = "\0";
         jelszo = jelszogen(db, hossz);
+        jelszavak[aktdb] = jelszo;
         aktdb++;
-
         TELL "A(z) " << aktdb << ". generált jelszó: " << jelszo << endl;
         TELL "Adjon meg egy másik jelszót: ";
         ASK beker;
@@ -112,6 +125,8 @@ int main()
             TELL "A két jelszó hossza megegyezik!" << endl;
             for (long unsigned int i = 0; i < jelszo.length(); i++)
             {
+                beker[i] = toupper(beker[i]);
+                jelszo[i] = toupper(jelszo[i]);
                 if (jelszo[i] == beker[i])
                 {
                     hasonlit += jelszo[i];
@@ -127,6 +142,7 @@ int main()
         }
         else
             TELL "Az Ön által megadott jelszó rövidebb!" << endl;
+        kiir(jelszavak, aktdb);
 
     } while (aktdb < db);
 
