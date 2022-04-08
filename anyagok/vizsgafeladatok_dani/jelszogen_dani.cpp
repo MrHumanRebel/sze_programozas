@@ -93,16 +93,40 @@ int szamBeker(int min, int max)
 int main()
 {
     int db, hossz, aktdb = 0;
-    string jelszo;
+    string jelszo, beker;
     TELL "Hány karakterből álljon a jelszó?" << endl;
     hossz = szamBeker(5, 20);
     TELL "Hány darab jelszót generáljunk?" << endl;
     db = szamBeker(1, 500);
     do
     {
+        string hasonlit = "\0";
         jelszo = jelszogen(db, hossz);
-        TELL jelszo << endl;
         aktdb++;
+
+        TELL "A(z) " << aktdb << ". generált jelszó: " << jelszo << endl;
+        TELL "Adjon meg egy másik jelszót: ";
+        ASK beker;
+        if (jelszo.length() == beker.length())
+        {
+            TELL "A két jelszó hossza megegyezik!" << endl;
+            for (long unsigned int i = 0; i < jelszo.length(); i++)
+            {
+                if (jelszo[i] == beker[i])
+                {
+                    hasonlit += jelszo[i];
+                }
+                else
+                    hasonlit += '*';
+            }
+            TELL hasonlit << endl;
+        }
+        else if (jelszo.length() < beker.length())
+        {
+            TELL "Az Ön által megadott jelszó hosszabb!" << endl;
+        }
+        else
+            TELL "Az Ön által megadott jelszó rövidebb!" << endl;
 
     } while (aktdb < db);
 
