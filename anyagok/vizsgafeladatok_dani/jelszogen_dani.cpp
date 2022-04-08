@@ -5,48 +5,73 @@ using namespace std;
 
 #define TELL cout <<
 #define ASK cin >>
-
 #define MIN 5
 #define MAX 20
 
-int random(int tol, int db)
+int random(int tol, int ig)
 {
-    return ((rand() % tol) + db);
+    return (tol + rand() % (ig - tol + 1));
 }
 
 string jelszogen(int db, int hossz)
 {
-    int aktdb = 0, jelhossz = 0;
+    int jelhossz = 0, szam;
     string jelszo;
     char kisbetu, nagybetu;
-    int szam;
-    do
+    bool ok = false;
+
+    for (int i = 0; i < hossz; i++)
     {
-        for (int i = 0; i < hossz; i++)
+        kisbetu = random(97, 122);
+        for (int j = 0; j <= jelhossz; j++)
         {
-            kisbetu = random(97, 25);
+            if (kisbetu == jelszo[j])
+                kisbetu = random(97, 122);
+            else
+                ok = true;
+        }
+        if (ok)
+        {
             jelszo += kisbetu;
             jelhossz++;
-            if (jelhossz >= hossz)
-                return jelszo;
-
-            nagybetu = random(65, 25);
-            jelszo += nagybetu;
-            jelhossz++;
-            if (jelhossz >= hossz)
-                return jelszo;
-
-            szam = random(9, 0);
-            jelszo += szam;
-            jelhossz++;
-            if (jelhossz >= hossz)
+            if (jelhossz == hossz)
                 return jelszo;
         }
+        ok = false;
 
-        aktdb++;
+        nagybetu = random(65, 90);
+        for (int j = 0; j <= jelhossz; j++)
+        {
+            if (nagybetu == jelszo[j])
+                nagybetu = random(65, 90);
+            else
+                ok = true;
+        }
+        if (ok)
+        {
+            jelszo += nagybetu;
+            jelhossz++;
+            if (jelhossz == hossz)
+                return jelszo;
+        }
+        ok = false;
 
-    } while (aktdb < db);
-
+        szam = random(0, 9);
+        for (int j = 0; j <= jelhossz; j++)
+        {
+            if (szam == jelszo[j])
+                szam = random(0, 9);
+            else
+                ok = true;
+        }
+        if (ok)
+        {
+            jelszo += to_string(szam);
+            jelhossz++;
+            if (jelhossz == hossz)
+                return jelszo;
+        }
+    }
     return jelszo;
 }
 
@@ -67,13 +92,19 @@ int szamBeker(int min, int max)
 
 int main()
 {
-    int db, hossz;
+    int db, hossz, aktdb = 0;
     string jelszo;
     TELL "Hány karakterből álljon a jelszó?" << endl;
     hossz = szamBeker(5, 20);
     TELL "Hány darab jelszót generáljunk?" << endl;
     db = szamBeker(1, 500);
-    jelszo = jelszogen(db, hossz);
-    TELL jelszo;
+    do
+    {
+        jelszo = jelszogen(db, hossz);
+        TELL jelszo << endl;
+        aktdb++;
+
+    } while (aktdb < db);
+
     return 0;
 }
