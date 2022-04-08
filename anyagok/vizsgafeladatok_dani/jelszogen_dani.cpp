@@ -95,7 +95,7 @@ int main()
     int db, hossz, aktdb = 0;
     string jelszo, beker;
     TELL "Hány karakterből álljon a jelszó?" << endl;
-    hossz = szamBeker(5, 20);
+    hossz = szamBeker(MIN, MAX);
     TELL "Hány darab jelszót generáljunk?" << endl;
     db = szamBeker(1, 500);
     do
