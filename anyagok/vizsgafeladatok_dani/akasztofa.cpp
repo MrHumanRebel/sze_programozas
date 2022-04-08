@@ -69,7 +69,7 @@ int orszagok_olvas(string orszagok[])
         while (getline(olvas, akt))
         {
             olvas >> akt;
-            orszagok[i] = akt;
+            orszagok[i] = toupper(akt);
             i++;
         }
     }
@@ -97,6 +97,41 @@ int random(int tol, int ig)
     return (tol + rand() % (ig - tol + 1));
 }
 
+void kitalal(string tomb[], int aktdb)
+{
+    int index = random(0, aktdb);
+    string akt = tomb[index];
+    string tipp;
+    int hossz = akt.length();
+    int szamlalo = 1;
+    TELL akt << endl;
+    for (int i = 1; i < hossz; i++)
+    {
+        TELL '*';
+    }
+    do
+    {
+        TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
+        ASK tipp;
+        string kiir = "\0";
+        for (int i = 0; i < akt.length(); i++)
+        {
+            for (int j = 0; j < tipp.length(); j++)
+            {
+
+                if (akt[i] == tipp[j])
+                {
+                    kiir += akt[i];
+                }
+                else
+                    kiir += '*';
+            }
+        }
+        TELL kiir;
+
+    } while (hossz == 0);
+}
+
 int main()
 {
     string telepulesek[3256];
@@ -111,34 +146,22 @@ int main()
     {
         system("clear");
         TELL "Téma:\nMagyarország települései\n_________________________" << endl;
-        int index = random(0, telepules_db);
-        string akt = telepulesek[index];
-        string tipp;
-        int hossz = akt.length();
-        int szamlalo = 1;
-        TELL akt << endl;
-        for (int i = 1; i < hossz; i++)
-        {
-            TELL '*';
-        }
-        do
-        {
-            TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
-            getline(cin, tipp);
-
-        } while (hossz == 0);
+        int aktdb = telepules_db;
+        kitalal(telepulesek, aktdb);
     }
     else if (menu == 2)
     {
         system("clear");
         TELL "Téma:\nMagyarország megyéi\n_________________________" << endl;
-        int index = random(0, megye_db);
+        int aktdb = megye_db;
+        kitalal(megyek, aktdb);
     }
     else if (menu == 3)
     {
         system("clear");
         TELL "Téma:\nA világ országai\n_________________________" << endl; // Ötletek: Kutyafajták, lánynevek, fiunevek
-        int index = random(0, orszag_db);
+        int aktdb = orszag_db;
+        kitalal(orszagok, aktdb);
     }
 
     return 0;
