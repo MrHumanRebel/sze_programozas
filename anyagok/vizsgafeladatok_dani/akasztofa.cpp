@@ -99,7 +99,7 @@ int random(int tol, int ig)
     return (tol + rand() % (ig - tol + 1));
 }
 
-void nagybeture(string tomb[], int aktdb)
+void toupper_tomb(string tomb[], int aktdb)
 {
     for (int i = 0; i < aktdb; i++)
     {
@@ -156,7 +156,7 @@ int main()
         TELL "Téma:\nMagyarország települései\n_________________________" << endl;
         string telepulesek[3256];
         int telepules_db = telepules_olvas(telepulesek);
-        nagybeture(telepulesek, telepules_db);
+        toupper_tomb(telepulesek, telepules_db);
         kitalal(telepulesek, telepules_db);
     }
     else if (menu == 2)
@@ -165,7 +165,7 @@ int main()
         TELL "Téma:\nMagyarország megyéi\n_________________________" << endl;
         string megyek[20];
         int megye_db = megyek_olvas(megyek);
-        nagybeture(megyek, megye_db);
+        toupper_tomb(megyek, megye_db);
         kitalal(megyek, megye_db);
     }
     else if (menu == 3)
@@ -174,7 +174,7 @@ int main()
         TELL "Téma:\nA világ országai\n_________________________" << endl; // Ötletek: Kutyafajták, lánynevek, fiunevek
         string orszagok[250];
         int orszag_db = orszagok_olvas(orszagok);
-        nagybeture(orszagok, orszag_db);
+        toupper_tomb(orszagok, orszag_db);
         kitalal(orszagok, orszag_db);
     }
 
