@@ -116,10 +116,8 @@ void nagybeture(string tomb[], int aktdb)
 void kitalal(string tomb[], int aktdb)
 {
     int index = random(0, aktdb);
-    string akt = tomb[index];
-    string tipp;
-    int hossz = akt.length();
-    int szamlalo = 1;
+    string akt = tomb[index], tipp;
+    int hossz = akt.length(), szamlalo = 1;
     TELL akt << endl;
     for (int i = 1; i < hossz; i++)
     {
@@ -150,37 +148,34 @@ void kitalal(string tomb[], int aktdb)
 
 int main()
 {
-    string telepulesek[3256];
-    string megyek[20];
-    string orszagok[250];
-    int telepules_db = telepules_olvas(telepulesek);
-    int megye_db = megyek_olvas(megyek);
-    int orszag_db = orszagok_olvas(orszagok);
     TELL "Akasztófa játék\nA játék ékezetek nélkül játszandó!\n1-es gomb => Magyarország települései\n2-es gomb => Magyarország megyéi\n3-as gomb => A világ országai" << endl;
     int menu = szamBeker(1, 3);
     if (menu == 1)
     {
         system("clear");
         TELL "Téma:\nMagyarország települései\n_________________________" << endl;
-        int aktdb = telepules_db;
-        nagybeture(telepulesek, aktdb);
-        kitalal(telepulesek, aktdb);
+        string telepulesek[3256];
+        int telepules_db = telepules_olvas(telepulesek);
+        nagybeture(telepulesek, telepules_db);
+        kitalal(telepulesek, telepules_db);
     }
     else if (menu == 2)
     {
         system("clear");
         TELL "Téma:\nMagyarország megyéi\n_________________________" << endl;
-        int aktdb = megye_db;
-        nagybeture(megyek, aktdb);
-        kitalal(megyek, aktdb);
+        string megyek[20];
+        int megye_db = megyek_olvas(megyek);
+        nagybeture(megyek, megye_db);
+        kitalal(megyek, megye_db);
     }
     else if (menu == 3)
     {
         system("clear");
         TELL "Téma:\nA világ országai\n_________________________" << endl; // Ötletek: Kutyafajták, lánynevek, fiunevek
-        int aktdb = orszag_db;
-        nagybeture(orszagok, aktdb);
-        kitalal(orszagok, aktdb);
+        string orszagok[250];
+        int orszag_db = orszagok_olvas(orszagok);
+        nagybeture(orszagok, orszag_db);
+        kitalal(orszagok, orszag_db);
     }
 
     return 0;
