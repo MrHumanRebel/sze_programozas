@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <fstream>
+#include <string>
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
@@ -69,7 +70,8 @@ int orszagok_olvas(string orszagok[])
         while (getline(olvas, akt))
         {
             olvas >> akt;
-            orszagok[i] = toupper(akt);
+
+            orszagok[i] = akt;
             i++;
         }
     }
@@ -97,6 +99,20 @@ int random(int tol, int ig)
     return (tol + rand() % (ig - tol + 1));
 }
 
+void nagybeture(string tomb[], int aktdb)
+{
+    for (int i = 0; i < aktdb; i++)
+    {
+        string akt = tomb[i];
+        int db = tomb[i].length();
+        tomb[i] = "\0";
+        for (int j = 0; j < db; j++)
+        {
+            tomb[i] += toupper(akt[j]);
+        }
+    }
+}
+
 void kitalal(string tomb[], int aktdb)
 {
     int index = random(0, aktdb);
@@ -114,11 +130,11 @@ void kitalal(string tomb[], int aktdb)
         TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
         ASK tipp;
         string kiir = "\0";
-        for (int i = 0; i < akt.length(); i++)
+        for (long unsigned int i = 0; i < akt.length(); i++)
         {
-            for (int j = 0; j < tipp.length(); j++)
+            for (long unsigned int j = 0; j < tipp.length(); j++)
             {
-
+                tipp[j] = toupper(tipp[j]);
                 if (akt[i] == tipp[j])
                 {
                     kiir += akt[i];
@@ -140,13 +156,14 @@ int main()
     int telepules_db = telepules_olvas(telepulesek);
     int megye_db = megyek_olvas(megyek);
     int orszag_db = orszagok_olvas(orszagok);
-    TELL "Akasztófa játék\n1-es gomb => Magyarország települései\n2-es gomb => Magyarország megyéi\n3-as gomb => A világ országai" << endl;
+    TELL "Akasztófa játék\nA játék ékezetek nélkül játszandó!\n1-es gomb => Magyarország települései\n2-es gomb => Magyarország megyéi\n3-as gomb => A világ országai" << endl;
     int menu = szamBeker(1, 3);
     if (menu == 1)
     {
         system("clear");
         TELL "Téma:\nMagyarország települései\n_________________________" << endl;
         int aktdb = telepules_db;
+        nagybeture(telepulesek, aktdb);
         kitalal(telepulesek, aktdb);
     }
     else if (menu == 2)
@@ -154,6 +171,7 @@ int main()
         system("clear");
         TELL "Téma:\nMagyarország megyéi\n_________________________" << endl;
         int aktdb = megye_db;
+        nagybeture(megyek, aktdb);
         kitalal(megyek, aktdb);
     }
     else if (menu == 3)
@@ -161,6 +179,7 @@ int main()
         system("clear");
         TELL "Téma:\nA világ országai\n_________________________" << endl; // Ötletek: Kutyafajták, lánynevek, fiunevek
         int aktdb = orszag_db;
+        nagybeture(orszagok, aktdb);
         kitalal(orszagok, aktdb);
     }
 
