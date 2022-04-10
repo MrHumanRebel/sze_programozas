@@ -64,14 +64,6 @@ void toupper_tomb(string tomb[], int aktdb)
     }
 }
 
-void toupper_tipp(string tipp)
-{
-    for (long unsigned int i = 0; i < tipp.length(); i++)
-    {
-        tipp[i] = toupper(tipp[i]);
-    }
-}
-
 void kitalal(string tomb[], int aktdb)
 {
     int index = random(0, aktdb);
@@ -82,20 +74,29 @@ void kitalal(string tomb[], int aktdb)
     {
         TELL '*';
     }
+    char kitalalni_char[akt.length()];
+    for (long unsigned int i = 0; i < akt.length(); i++)
+    {
+        kitalalni_char[i] = akt[i];
+    }
     do
     {
         TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
         ASK tipp;
-        toupper_tipp(tipp);
+        TELL tipp << endl;
+
+        // Kitalálandó karakterek
+
         string kiir = "\0";
         for (long unsigned int i = 0; i < akt.length(); i++)
         {
             for (long unsigned int j = 0; j < tipp.length(); j++)
             {
                 tipp[j] = toupper(tipp[j]);
-                if (akt[i] == tipp[j])
+                if (kitalalni_char[i] == tipp[j])
                 {
-                    kiir += akt[i];
+                    kiir += kitalalni_char[i];
+                    kitalalni_char[i] = '\0';
                     hossz--;
                 }
                 else if (j == tipp.length() - 1)
@@ -107,7 +108,7 @@ void kitalal(string tomb[], int aktdb)
             }
         }
         szamlalo++;
-        TELL kiir;
+        TELL kiir << endl;
         TELL "Hossz:" << hossz << endl;
 
     } while (hossz >= 0);
