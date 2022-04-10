@@ -83,15 +83,13 @@ void kitalal(string tomb[], int aktdb)
     {
         TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
         ASK tipp;
-        TELL tipp << endl;
-
         // Kitalálandó karakterek
-
         string kiir = "\0";
         for (long unsigned int i = 0; i < akt.length(); i++)
         {
             for (long unsigned int j = 0; j < tipp.length(); j++)
             {
+
                 tipp[j] = toupper(tipp[j]);
                 if (kitalalni_char[i] == tipp[j])
                 {
@@ -109,7 +107,7 @@ void kitalal(string tomb[], int aktdb)
         }
         szamlalo++;
         TELL kiir << endl;
-        TELL "Hossz:" << hossz << endl;
+        TELL "DEBUG Hossz:" << hossz << endl;
 
     } while (hossz > 0);
 }
