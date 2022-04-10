@@ -1,4 +1,3 @@
-// Headers
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
@@ -8,10 +7,9 @@ using namespace std;
 #define TELL cout <<
 #define ASK cin >>
 
-int telepules_olvas(string telep[])
+int olvas(string tomb[], string olvashely)
 {
     ifstream olvas;
-    string olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/telepulesek.txt";
     string akt;
     int i = 0;
     olvas.open(olvashely);
@@ -24,54 +22,7 @@ int telepules_olvas(string telep[])
         while (getline(olvas, akt))
         {
             olvas >> akt;
-            telep[i] = akt;
-            i++;
-        }
-    }
-    return i;
-}
-
-int megyek_olvas(string megyek[])
-{
-    ifstream olvas;
-    string olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/megyek.txt";
-    string akt;
-    int i = 0;
-    olvas.open(olvashely);
-    if (!olvas.is_open())
-    {
-        TELL "A fájl nem létezik!" << endl;
-    }
-    else
-    {
-        while (getline(olvas, akt))
-        {
-            olvas >> akt;
-            megyek[i] = akt;
-            i++;
-        }
-    }
-    return i;
-}
-
-int orszagok_olvas(string orszagok[])
-{
-    ifstream olvas;
-    string olvashely = "/mnt/c/Users/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/orszagok.txt";
-    string akt;
-    int i = 0;
-    olvas.open(olvashely);
-    if (!olvas.is_open())
-    {
-        TELL "A fájl nem létezik!" << endl;
-    }
-    else
-    {
-        while (getline(olvas, akt))
-        {
-            olvas >> akt;
-
-            orszagok[i] = akt;
+            tomb[i] = akt;
             i++;
         }
     }
@@ -113,6 +64,14 @@ void toupper_tomb(string tomb[], int aktdb)
     }
 }
 
+void toupper_tipp(string tipp)
+{
+    for (long unsigned int i = 0; i < tipp.length(); i++)
+    {
+        tipp[i] = toupper(tipp[i]);
+    }
+}
+
 void kitalal(string tomb[], int aktdb)
 {
     int index = random(0, aktdb);
@@ -127,6 +86,7 @@ void kitalal(string tomb[], int aktdb)
     {
         TELL "\nAdja meg a(z) " << szamlalo << ". tippjét!" << endl;
         ASK tipp;
+        toupper_tipp(tipp);
         string kiir = "\0";
         for (long unsigned int i = 0; i < akt.length(); i++)
         {
@@ -155,7 +115,7 @@ int main()
         system("clear");
         TELL "Téma:\nMagyarország települései\n_________________________" << endl;
         string telepulesek[3256];
-        int telepules_db = telepules_olvas(telepulesek);
+        int telepules_db = olvas(telepulesek, "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/telepulesek.txt");
         toupper_tomb(telepulesek, telepules_db);
         kitalal(telepulesek, telepules_db);
     }
@@ -164,19 +124,18 @@ int main()
         system("clear");
         TELL "Téma:\nMagyarország megyéi\n_________________________" << endl;
         string megyek[20];
-        int megye_db = megyek_olvas(megyek);
+        int megye_db = olvas(megyek, "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/megyek.txt");
         toupper_tomb(megyek, megye_db);
         kitalal(megyek, megye_db);
     }
     else if (menu == 3)
     {
         system("clear");
-        TELL "Téma:\nA világ országai\n_________________________" << endl; // Ötletek: Kutyafajták, lánynevek, fiunevek
+        TELL "Téma:\nA világ országai\n_________________________" << endl;
         string orszagok[250];
-        int orszag_db = orszagok_olvas(orszagok);
+        int orszag_db = olvas(orszagok, "/home/szeke/uni/sze_programozas/anyagok/vizsgafeladatok_dani/orszagok.txt");
         toupper_tomb(orszagok, orszag_db);
         kitalal(orszagok, orszag_db);
     }
-
-    return 0;
+    return 0; // Ötletek: Kutyafajták, lánynevek, fiunevek
 }
