@@ -99,7 +99,6 @@ void kitalal(string tomb[], int aktdb)
                 }
                 else if (j == tipp.length() - 1)
                 {
-                    TELL "J:" << j << endl;
                     kiir += '*';
                     i++;
                 }
