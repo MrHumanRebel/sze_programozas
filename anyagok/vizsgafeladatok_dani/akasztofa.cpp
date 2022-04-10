@@ -78,7 +78,7 @@ void kitalal(string tomb[], int aktdb)
     string akt = tomb[index], tipp;
     int hossz = akt.length(), szamlalo = 1;
     TELL akt << endl;
-    for (int i = 1; i < hossz; i++)
+    for (int i = 0; i < hossz; i++)
     {
         TELL '*';
     }
@@ -96,14 +96,21 @@ void kitalal(string tomb[], int aktdb)
                 if (akt[i] == tipp[j])
                 {
                     kiir += akt[i];
+                    hossz--;
                 }
-                else
+                else if (j == tipp.length() - 1)
+                {
+                    TELL "J:" << j << endl;
                     kiir += '*';
+                    i++;
+                }
             }
         }
+        szamlalo++;
         TELL kiir;
+        TELL "Hossz:" << hossz << endl;
 
-    } while (hossz == 0);
+    } while (hossz >= 0);
 }
 
 int main()
