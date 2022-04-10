@@ -111,7 +111,7 @@ void kitalal(string tomb[], int aktdb)
         TELL kiir << endl;
         TELL "Hossz:" << hossz << endl;
 
-    } while (hossz >= 0);
+    } while (hossz > 0);
 }
 
 int main()
