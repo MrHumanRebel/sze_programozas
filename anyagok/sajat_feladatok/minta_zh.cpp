@@ -55,8 +55,8 @@ void cserel(char karakterek[TOMBMAX], int db)
     {
         bool ok = false;
 
-        // Ismeretlen BETA
-        if (!(karakterek[i] >= 'A' && karakterek[i] <= 'Z') && !(karakterek[i] >= 'a' && karakterek[i] <= 'z') && karakterek[i] != ' ')
+        // Ismeretlen karakter BETA
+        if (!isalpha(karakterek[i]) && karakterek[i] != ' ')
         {
             karakterek[i] = '*';
             ok = true;
@@ -69,7 +69,7 @@ void cserel(char karakterek[TOMBMAX], int db)
             space_db++;
         }
         // Speciális eset
-        else if (karakterek[i] == 'Z' or karakterek[i] == 'z')
+        else if (karakterek[i] == 'Z' or karakterek[i] == 'z' or karakterek[i] == 'y' or karakterek[i] == 'Y')
         {
             karakterek[i] = '!';
             ok = true;
