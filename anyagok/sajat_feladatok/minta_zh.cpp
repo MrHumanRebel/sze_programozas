@@ -49,7 +49,7 @@ void kiir(char karakterek[TOMBMAX], int db)
     }
 }
 
-void cserel(char karakterek[TOMBMAX], int db)
+void betucsere(char karakterek[TOMBMAX], int db)
 {
     for (int i = 0; i < db; i++)
     {
@@ -60,9 +60,9 @@ void cserel(char karakterek[TOMBMAX], int db)
             if (karakterek[i] == 'Z' or karakterek[i] == 'z' or karakterek[i] == 'y' or karakterek[i] == 'Y')
             {
                 karakterek[i] = '!';
-                ok = true;
                 tulcsordul++;
                 ms_db++;
+                ok = true;
             }
             else if (!ok && karakterek[i] != ' ')
             {
@@ -91,18 +91,29 @@ void cserel(char karakterek[TOMBMAX], int db)
                 }
             }
         }
+    }
+}
+
+void specialcsere(char karakterek[TOMBMAX], int db)
+{
+    for (int i = 0; i < db; i++)
+    {
+        bool ok = false;
         // Ismeretlen karakter BETA
-        else if (karakterek[i] != ' ' && !ok)
+        if (!isalpha(karakterek[i]))
         {
-            karakterek[i] = '*';
-            ok = true;
-        }
-        // Szóköz
-        else if (karakterek[i] == ' ' && !ok)
-        {
-            karakterek[i] = '_';
-            ok = true;
-            space_db++;
+            if (karakterek[i] != ' ' && karakterek[i] != '!')
+            {
+                karakterek[i] = '*';
+                ok = true;
+            }
+            // Szóköz
+            else if (karakterek[i] == ' ' && karakterek[i] != '!' && !ok)
+            {
+                karakterek[i] = '_';
+                ok = true;
+                space_db++;
+            }
         }
     }
 }
@@ -128,9 +139,10 @@ int main()
 {
     char karakterek[TOMBMAX];
     int db = karsorBeker(karakterek);
-    cserel(karakterek, db);
+    betucsere(karakterek, db);
     ujkarsor(karakterek);
-    cserel(karakterek, db);
+    betucsere(karakterek, db);
+    specialcsere(karakterek, db);
     kiir(karakterek, db);
     return 0;
 }
