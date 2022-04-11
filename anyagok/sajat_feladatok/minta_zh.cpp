@@ -54,53 +54,55 @@ void cserel(char karakterek[TOMBMAX], int db)
     for (int i = 0; i < db; i++)
     {
         bool ok = false;
+        // Betűk
+        if (isalpha(karakterek[i]))
+        {
+            if (karakterek[i] == 'Z' or karakterek[i] == 'z' or karakterek[i] == 'y' or karakterek[i] == 'Y')
+            {
+                karakterek[i] = '!';
+                ok = true;
+                tulcsordul++;
+                ms_db++;
+            }
+            else if (!ok && karakterek[i] != ' ')
+            {
+                for (int j = 0; j < 21; j++)
+                {
+                    if (j < 5) // Magánhangzók
+                    {
+                        if (karakterek[i] == mahangzok[j])
+                        {
+                            karakterek[i]++;
+                            ok = true;
+                            ma_db++;
+                        }
+                    }
 
+                    if (!ok) // Mássalhangzók
+                    {
+                        if (karakterek[i] == mshangzok[j])
+                        {
+                            int aktkar = karakterek[i] + 2;
+                            karakterek[i] = aktkar;
+                            ok = true;
+                            ms_db++;
+                        }
+                    }
+                }
+            }
+        }
         // Ismeretlen karakter BETA
-        if (!isalpha(karakterek[i]) && karakterek[i] != ' ')
+        else if (karakterek[i] != ' ' && !ok)
         {
             karakterek[i] = '*';
             ok = true;
         }
         // Szóköz
-        else if (karakterek[i] == ' ')
+        else if (karakterek[i] == ' ' && !ok)
         {
             karakterek[i] = '_';
             ok = true;
             space_db++;
-        }
-        // Speciális eset
-        else if (karakterek[i] == 'Z' or karakterek[i] == 'z' or karakterek[i] == 'y' or karakterek[i] == 'Y')
-        {
-            karakterek[i] = '!';
-            ok = true;
-            tulcsordul++;
-            ms_db++;
-        }
-        else
-        {
-            for (int j = 0; j < 21; j++)
-            {
-                if (j < 5) // Magánhangzók
-                {
-                    if (karakterek[i] == mahangzok[j])
-                    {
-                        karakterek[i]++;
-                        ok = true;
-                        ma_db++;
-                    }
-                }
-
-                if (ok == false) // Mássalhangzók
-                {
-                    if (karakterek[i] == mshangzok[j])
-                    {
-                        int aktkar = karakterek[i] + 2;
-                        karakterek[i] = aktkar;
-                        ok = true;
-                        ms_db++;
-                    }
-                }
-            }
         }
     }
 }
