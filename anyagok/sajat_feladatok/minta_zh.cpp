@@ -102,13 +102,13 @@ void specialcsere(char karakterek[TOMBMAX], int db)
         // Ismeretlen karakter BETA
         if (!isalpha(karakterek[i]))
         {
-            if (karakterek[i] != ' ' && karakterek[i] != '!')
+            if (karakterek[i] != ' ')
             {
                 karakterek[i] = '*';
                 ok = true;
             }
             // Szóköz
-            else if (karakterek[i] == ' ' && karakterek[i] != '!' && !ok)
+            else if (karakterek[i] == ' ' && !ok)
             {
                 karakterek[i] = '_';
                 ok = true;
@@ -139,10 +139,10 @@ int main()
 {
     char karakterek[TOMBMAX];
     int db = karsorBeker(karakterek);
+    specialcsere(karakterek, db);
     betucsere(karakterek, db);
     ujkarsor(karakterek);
     betucsere(karakterek, db);
-    specialcsere(karakterek, db);
     kiir(karakterek, db);
     return 0;
 }
