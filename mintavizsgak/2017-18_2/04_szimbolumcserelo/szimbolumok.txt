@@ -1,0 +1,9 @@
+nev Pista
+telepules Salakszentmotoros
+utca Zabhegyezo
+szam 42
+eszkoz lakat
+szin kek
+meret hatalmas
+noveny buza
+gep traktor

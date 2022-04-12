@@ -1,0 +1,12 @@
+Alma
+30	0	7	0
+Burgonya
+92	2.5	20	0.2
+Csirke
+110	25	0.5	1
+Kenyer
+250	10	54	1.4
+Sertes
+300	17	0.3	24
+Felzsiros tej
+60	3.4	5.3	2.8
