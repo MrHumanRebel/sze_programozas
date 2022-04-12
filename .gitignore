@@ -1,9 +1,4 @@
 *
 !/**/
 !*.*
-
-# VS Code
 .vscode/settings.json
-
-# Output
-amoba.txt

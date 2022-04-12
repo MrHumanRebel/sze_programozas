@@ -1,6 +1,6 @@
 # Programozás
 
-**Széchenyi István Egyetem // Győr // Programozás**
+**Széchenyi István Egyetem // Győr // Programozás // GKNB_INTM021**
 
 <img src="docs/c++.jpg" alt="Programozás" width="200" height="177">
 
@@ -14,19 +14,15 @@
 
 ## Információk
 
-<p align="center">
-    <table>
-        <tbody>
-            <td align="center">
-                <br><b>⚠️ Figyelmeztetés: Megjelenés előtti / Kísérleti anyag ⚠️</b><br><sub>
-                Az anyag nem teljes, még fejlesztés alatt áll!<br>
-                Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel, <a href="https://github.com/login?return_to=%2FMrHumanRebel%2Fsze_programozas">segítsd a projektet</a>! A Wiki jegyzet szerkesztéséhez szükséges jogokért keresd <a href="https://github.com/MrHumanRebel">MrHumanRebel</a>-t
-                <br><img width=1000><br>
-                <br><br>
-            </td>
-        </tbody>
-    </table>
-</p>
+** **
+**⚠️ Figyelmeztetés: Megjelenés előtti / Kísérleti anyag ⚠️**
+
+Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel,
+[segítsd a projektet](https://github.com/login?return_to=%2FMrHumanRebel%2Fsze_programozas)! 
+
+A Wiki jegyzet szerkesztéséhez szükséges jogokért keresd [MrHumanRebel](https://github.com/MrHumanRebel)-t!
+
+** **
 
 **Csak oktatási célokra használd, saját felelősségre!**
 
@@ -51,12 +47,14 @@ _A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a le
 
 Online programozási felület: [Replit](https://replit.com)
 
-Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
+Ajánlott programozási és futtató környezet: [VS Code](https://code.visualstudio.com/)
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
-Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki)
-
-GitHub.io page: [Programozás](https://mrhumanrebel.github.io/sze_programozas/)
+Wiki: [Jegyzetek](https://github.com/MrHumanRebel/sze_programozas/wiki/%231.0-Bevezet%C5%91)
 
 SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hatwagnf/prg/)
+
+GitHub.io oldal: [Programozás](https://mrhumanrebel.github.io/sze_programozas/)
+
+Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
