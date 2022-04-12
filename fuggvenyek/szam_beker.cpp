@@ -1,7 +1,5 @@
-// Headers
 #include <iostream>
 using namespace std;
-
 #define TELL cout <<
 #define ASK cin >>
 
