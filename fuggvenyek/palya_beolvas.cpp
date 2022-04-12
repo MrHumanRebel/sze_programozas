@@ -2,14 +2,12 @@
 #include <fstream>
 #include <string>
 using namespace std;
-#define TELL cout <<
-#define ASK cin >>
+
 #define SOR_MAX 10
 #define OSZLOP_MAX 10
 
 void palyaBeolvas(char palya[SOR_MAX][OSZLOP_MAX], int sor, int oszlop, string fajlnev)
 {
-  // TODO: Implementáld
   ifstream mentettPalya(fajlnev);
 
   string aktSor;
@@ -38,6 +36,8 @@ int main()
 {
   // Alap karakter olvasó függvény tesztelő
   char tabla[SOR_MAX][OSZLOP_MAX];
+
+  // TODO: Felülvizsgálni
   string fajlnev = "/home/szeke/uni/sze_programozas/anyagok/sajat_feladatok/amoba.txt";
   palyaBeolvas(tabla, SOR_MAX, OSZLOP_MAX, fajlnev);
   return 0;

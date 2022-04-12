@@ -1,33 +1,34 @@
 #include <iostream>
 using namespace std;
-#define TELL cout <<
-#define ASK cin >>
 
 // Karakter bekerő függvény
-int karBeker(char KEZD, char VEG)
+int karBeker(char kezd, char veg)
 {
-  bool karbe_ok = false;
-  char akt;
+  char karakter;
+
+  bool hibasKarakter = false;
   do
   {
-    TELL "Adja meg a karaktert!" << endl;
-    ASK akt;
-    // akt = tolower(akt);
-    // akt = toupper(akt);
-    if (akt >= KEZD && akt <= VEG)
-      karbe_ok = true;
-    else
-      TELL "Adjon meg " << KEZD << "-től " << VEG << "-ig tartományba tartozó karaktert!" << endl;
-  } while (karbe_ok == false);
-  return akt;
+    if (hibasKarakter)
+      cout << "Hibás karakter, adjon meg egy " << kezd << "-től " << veg << "-ig tartományba tartozó karaktert!" << endl;
+
+    cout << "Adjon meg egy karaktert: ";
+    cin >> karakter;
+
+    hibasKarakter = karakter < kezd || karakter > veg;
+  } while (hibasKarakter);
+
+  return karakter;
 }
 
+// Teszt
 int main()
 {
-  // Karakter bekerő függvény tesztelő
-  char KEZD = 'A';
-  char VEG = 'D';
-  char kar_akt = karBeker(KEZD, VEG);
-  TELL kar_akt << endl;
+  char kezd = 'A';
+  char veg = 'D';
+  char bekertKar = karBeker(kezd, veg);
+
+  cout << "Az Ön által megadott karakter: " << bekertKar << endl;
+
   return 0;
 }

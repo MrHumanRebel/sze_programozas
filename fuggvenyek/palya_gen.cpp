@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
-#define TELL cout <<
-#define ASK cin >>
+
 #define SOR_MAX 10
 #define OSZLOP_MAX 10
 

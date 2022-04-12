@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
-#define TELL cout <<
-#define ASK cin >>
+
 #define MIN 5
 #define MAX 50
 
@@ -11,10 +10,11 @@ int random(int tol, int ig)
   return (tol + rand() % (ig - tol + 1));
 }
 
+// Teszt
 int main()
 {
-  // Random szám generátor tesztelő
   int szam = random(MIN, MAX);
-  TELL szam;
+  cout << szam;
+
   return 0;
 }
