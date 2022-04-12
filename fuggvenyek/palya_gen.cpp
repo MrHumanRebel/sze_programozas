@@ -10,21 +10,21 @@ using namespace std;
 void palyaGen(char tabla[SOR_MAX][OSZLOP_MAX], int sor, int oszlop)
 {
 
-    for (int i = 0; i < sor; i++)
+  for (int i = 0; i < sor; i++)
+  {
+    for (int j = 0; j < oszlop; j++)
     {
-        for (int j = 0; j < oszlop; j++)
-        {
-            tabla[i][j] = '.';
-        }
+      tabla[i][j] = '.';
     }
+  }
 }
 
 int main()
 {
-    // Pálya generáló függvény tesztelő
-    int sor = 10;
-    int oszlop = 10;
-    char tabla[SOR_MAX][OSZLOP_MAX];
-    palyaGen(tabla, sor, oszlop);
-    return 0;
+  // Pálya generáló függvény tesztelő
+  int sor = 10;
+  int oszlop = 10;
+  char tabla[SOR_MAX][OSZLOP_MAX];
+  palyaGen(tabla, sor, oszlop);
+  return 0;
 }

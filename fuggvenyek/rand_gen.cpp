@@ -8,13 +8,13 @@ using namespace std;
 // Random szám generátor
 int random(int tol, int ig)
 {
-    return (tol + rand() % (ig - tol + 1));
+  return (tol + rand() % (ig - tol + 1));
 }
 
 int main()
 {
-    // Random szám generátor tesztelő
-    int szam = random(MIN, MAX);
-    TELL szam;
-    return 0;
+  // Random szám generátor tesztelő
+  int szam = random(MIN, MAX);
+  TELL szam;
+  return 0;
 }

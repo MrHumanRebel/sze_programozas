@@ -1,31 +1,38 @@
 // Headers
 #include <iostream>
 using namespace std;
+
 #define TELL cout <<
 #define ASK cin >>
 
 // Szám bekerő függvény
-int szamBeker(int MIN, int MAX)
+int szamBeker(int min, int max)
 {
-    bool szambe_ok = false;
-    int akt;
-    do
-    {
-        TELL "Adja meg a számot!" << endl;
-        ASK akt;
-        if (akt >= MIN && akt <= MAX)
-            szambe_ok = true;
-        else
-            TELL "Adjon meg " << MIN << "-től " << MAX << "-ig tartományba tartozó számot!" << endl;
-    } while (szambe_ok == false);
-    return akt;
+  int szam;
+
+  bool szamHibas = false;
+  do
+  {
+    if (szamHibas)
+      TELL "Nem megfelelő szám (tartomány: " << min << "-től " << max << "-ig)" << endl;
+
+    TELL "Adjon meg egy számot: ";
+    ASK szam;
+
+    szamHibas = szam < min || szam > max;
+  } while (szamHibas);
+
+  return szam;
 }
+
+// Teszt
 int main()
 {
-    // Szám bekerő függvény tesztelő
-    int MAX = 10;
-    int MIN = 1;
-    int szam_akt = szamBeker(MIN, MAX);
-    TELL szam_akt << endl;
-    return 0;
+  int min = 1;
+  int max = 10;
+
+  int aktSzam = szamBeker(min, max);
+  TELL "Az Ön által megadott szám: " << aktSzam << endl;
+
+  return 0;
 }
