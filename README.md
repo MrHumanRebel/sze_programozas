@@ -47,7 +47,7 @@ _A megoldások nem feltétlenül helyesek, ha igen akkor is lehet, hogy nem a le
 
 Online programozási felület: [Replit](https://replit.com)
 
-Ajánlott programozási és futtató környezet: [VS Code](https://code.visualstudio.com/)
+Ajánlott programozási és futtató környezet: [VS Code](https://code.visualstudio.com/) with [WSL](https://www.google.com/search?q=wsl+windows+subsystem+for+linux&sxsrf=APq-WBuLdg7qxoQ4BJ6wSlt0Pbz6Yj1nIw%3A1649747236193&ei=JCVVYoq5C8mVkwW607agCg&oq=wls+winows&gs_lcp=Cgdnd3Mtd2l6EAEYATIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDTIECAAQDToECAAQRzoFCAAQgAQ6BAgAEEM6CggAEIAEEIcCEBQ6BwgAEAoQywE6CwguEMcBEK8BEMsBOhAILhCABBCHAhDHARCvARAUOgoILhDHARCvARAKOgQIABAKOgUIIRCgAUoECEEYAEoECEYYAFDZAViyDGCXFWgAcAJ4AIABpQGIAd4FkgEDNC4zmAEAoAEByAEIwAEB&sclient=gws-wiz)
 
 Angol nyelvű YouTube kurzus: [C++](https://www.youtube.com/playlist?list=PLBlnK6fEyqRh6isJ01MBnbNpV3ZsktSyS)
 
