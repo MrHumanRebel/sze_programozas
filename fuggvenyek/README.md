@@ -4,4 +4,4 @@
 
 ...ADD TASKS...
 
-<img src="https://github.com/MrHumanRebel/sze_programozas/blob/main/docs/cheat.jpg?raw=true" alt="Programozás" width="500" height="473">
+<img src="../docs/cheat.jpg" alt="Programozás" width="500" height="473">
