@@ -17,9 +17,7 @@ int random(int tol, int ig)
 // Teszt
 int main()
 {
-  seed = random(1, 50);
   int szam = random(MIN, MAX);
   cout << szam;
-
   return 0;
 }
