@@ -32,6 +32,34 @@ int szamBeker(int min, int max)
     return szam;
 }
 
+void iras(char tabla[SOR_MAX][OSZL_MAX])
+{
+    ofstream allaski;
+    string irashely;
+    string akt;
+    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/01_memoriajatek/memoria.txt";
+    allaski.open(irashely);
+    for (int i = 0; i < SOR_MAX; i++)
+    {
+        for (int j = 0; j < OSZL_MAX; j++)
+        {
+            akt = tabla[i][j];
+            if (j == OSZL_MAX - 1)
+                allaski << "\n";
+            allaski << akt;
+        }
+    }
+    allaski.close();
+}
+
+void torol()
+{
+    for (int i = 0; i <= 24; i++)
+    {
+        TELL endl;
+    }
+}
+
 void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX])
 {
     int a = 0, b = 0, c = 0;
@@ -130,7 +158,7 @@ void kiir(char tomb[SOR_MAX][OSZL_MAX])
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     TELL "Memoriajatek\n"
         << endl;
@@ -138,6 +166,7 @@ int main()
     int ok = 0, db = 0;
     char kartyak_eleje[SOR_MAX][OSZL_MAX];
     feltolt_eleje(kartyak_eleje);
+    iras(kartyak_eleje);
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
     feltolt_hatulja(kartyak_hatulja);
 
@@ -180,6 +209,8 @@ int main()
             TELL "Nem egyeznek, visszaforditom a lapokat." << endl;
             kartyak_hatulja[elozosor][elozooszlop] = '*';
             kartyak_hatulja[sor][oszlop] = '*';
+            if (*argv == "torol")
+                torol();
         }
     } while (ok != 3);
     if (ok == 3)
