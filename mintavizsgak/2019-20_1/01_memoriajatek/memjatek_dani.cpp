@@ -130,17 +130,10 @@ void kiir(char tomb[SOR_MAX][OSZL_MAX])
     }
 }
 
-void beker(int sor, int oszlop)
-{
-    TELL "\nMegforditando kartya sora: ";
-    sor = szamBeker(1, 2);
-    TELL "Oszlopa: ";
-    oszlop = szamBeker(1, 3);
-}
-
 char ellenoriz(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszlop)
 {
-    char akt = tomb[sor - 1][oszlop - 1];
+    char akt = tomb[sor][oszlop];
+    TELL "Kivalasztott karakter: " << akt << " Sor: " << sor << " Oszlop: " << oszlop << endl;
     return akt;
 }
 
@@ -149,32 +142,53 @@ int main()
     TELL "Memoriajatek\n"
         << endl;
     // Inicializáció
-    int ok = 0, sor = '\0', oszlop = '\0', elozosor = '\0', elozooszlop = '\0';
+    int ok = 0, sor = -5, oszlop = -5, elozosor = -5, elozooszlop = -5;
+    bool stop = true;
     char kartyak_eleje[SOR_MAX][OSZL_MAX];
     feltolt_eleje(kartyak_eleje);
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
     feltolt_hatulja(kartyak_hatulja);
 
+    kiir(kartyak_eleje);
     kiir(kartyak_hatulja);
     do
     {
-        beker(sor, oszlop);
-        char elozo = ellenoriz(kartyak_eleje, sor, oszlop);
-        elozosor = sor;
-        elozooszlop = oszlop;
-        beker(sor, oszlop);
+        TELL "\nMegforditando kartya sora: ";
+        elozosor = szamBeker(1, 2);
+        TELL "Oszlopa: ";
+        elozooszlop = szamBeker(1, 3);
+        char elozo = ellenoriz(kartyak_eleje, elozosor, elozooszlop);
+        kartyak_hatulja[elozosor][elozooszlop] = elozo;
+
+        while (stop == true)
+        {
+            TELL "\nMegforditando kartya sora: ";
+            sor = szamBeker(1, 2);
+            TELL "Oszlopa: ";
+            oszlop = szamBeker(1, 3);
+            if (sor != elozosor or oszlop != elozooszlop)
+            {
+                stop = false;
+                continue;
+            }
+            TELL "Egyforma input!" << endl;
+        }
+
         char akt = ellenoriz(kartyak_eleje, sor, oszlop);
+        kartyak_hatulja[sor][oszlop] = akt;
 
         if (akt == elozo)
         {
             ok++;
             TELL "Egyformak, a kartyak igy maradnak." << endl;
-            kartyak_hatulja[elozosor][elozooszlop] = elozo;
-            kartyak_hatulja[sor][oszlop] = akt;
             kiir(kartyak_hatulja);
         }
         else
+        {
             TELL "Nem egyeznek, visszaforditom a lapokat." << endl;
+            kartyak_hatulja[elozosor][elozooszlop] = '*';
+            kartyak_hatulja[sor][oszlop] = '*';
+        }
     } while (ok != 3);
 
     return 0;
