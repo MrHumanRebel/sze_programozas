@@ -130,54 +130,46 @@ void kiir(char tomb[SOR_MAX][OSZL_MAX])
     }
 }
 
-char ellenoriz(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszlop)
-{
-    char akt = tomb[sor][oszlop];
-    TELL "Kivalasztott karakter: " << akt << " Sor: " << sor << " Oszlop: " << oszlop << endl;
-    return akt;
-}
-
 int main()
 {
     TELL "Memoriajatek\n"
         << endl;
     // Inicializáció
-    int ok = 0, sor = -5, oszlop = -5, elozosor = -5, elozooszlop = -5;
-    bool stop = true;
+    int ok = 0, db = 0;
     char kartyak_eleje[SOR_MAX][OSZL_MAX];
     feltolt_eleje(kartyak_eleje);
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
     feltolt_hatulja(kartyak_hatulja);
 
+    TELL "DEBUG" << endl;
     kiir(kartyak_eleje);
+    TELL "________________" << endl;
+
     kiir(kartyak_hatulja);
     do
     {
+        int sor = '\0', oszlop = '\0', elozosor = '\0', elozooszlop = '\0';
+        char elozo = '\0', akt = '\0';
+
         TELL "\nMegforditando kartya sora: ";
-        elozosor = szamBeker(1, 2);
+        elozosor = szamBeker(1, 2) - 1;
         TELL "Oszlopa: ";
-        elozooszlop = szamBeker(1, 3);
-        char elozo = ellenoriz(kartyak_eleje, elozosor, elozooszlop);
+        elozooszlop = szamBeker(1, 3) - 1;
+        db++;
+
+        elozo = kartyak_eleje[elozosor][elozooszlop];
         kartyak_hatulja[elozosor][elozooszlop] = elozo;
 
-        while (stop == true)
-        {
-            TELL "\nMegforditando kartya sora: ";
-            sor = szamBeker(1, 2);
-            TELL "Oszlopa: ";
-            oszlop = szamBeker(1, 3);
-            if (sor != elozosor or oszlop != elozooszlop)
-            {
-                stop = false;
-                continue;
-            }
-            TELL "Egyforma input!" << endl;
-        }
+        TELL "\nMegforditando kartya sora: ";
+        sor = szamBeker(1, 2) - 1;
+        TELL "Oszlopa: ";
+        oszlop = szamBeker(1, 3) - 1;
+        db++;
 
-        char akt = ellenoriz(kartyak_eleje, sor, oszlop);
+        akt = kartyak_eleje[sor][oszlop];
         kartyak_hatulja[sor][oszlop] = akt;
 
-        if (akt == elozo)
+        if (akt == elozo && akt != '\0' && elozo != '\0')
         {
             ok++;
             TELL "Egyformak, a kartyak igy maradnak." << endl;
@@ -190,6 +182,9 @@ int main()
             kartyak_hatulja[sor][oszlop] = '*';
         }
     } while (ok != 3);
-
+    if (ok == 3)
+    {
+        TELL "Gratulalok, On nyert " << db << " forditasbol." << endl;
+    }
     return 0;
 }
