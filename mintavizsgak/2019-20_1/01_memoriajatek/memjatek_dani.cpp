@@ -44,9 +44,9 @@ void iras(char tabla[SOR_MAX][OSZL_MAX], int sor, int oszl)
         for (int j = 0; j < oszl; j++)
         {
             akt = tabla[i][j];
-            if (j == OSZL_MAX - 1)
-                allaski << "\n";
             allaski << akt;
+            if (j == oszl - 1)
+                allaski << "\n";
         }
     }
     allaski.close();
