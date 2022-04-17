@@ -1,5 +1,7 @@
-aabc
-bccc
-bbbb
-bbbb
-bbbb
+baabbb
+caabac
+cacabb
+cacbba
+aababa
+bababa
+bababa

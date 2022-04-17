@@ -69,8 +69,9 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
         {
             seed = random(1, 50);
             char akt = random('a', 'c');
+            bool ok = false;
 
-            if (akt == 'a')
+            if (akt == 'a' && ok == false)
             {
                 a++;
                 if (a >= 3)
@@ -84,8 +85,9 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
                         c++;
                 }
                 tomb[i][j] = akt;
+                ok = true;
             }
-            else if (akt == 'b')
+            else if (akt == 'b' && ok == false)
             {
                 b++;
                 if (b >= 3)
@@ -98,11 +100,24 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
                     else if (akt == 'c')
                         c++;
                     else if (akt == 'b')
-                        akt = 'c';
+                    {
+                        int x = random(1, 2);
+                        if (x == 1)
+                        {
+                            akt = 'c';
+                            c++;
+                        }
+                        else
+                        {
+                            akt = 'a';
+                            a++;
+                        }
+                    }
                 }
                 tomb[i][j] = akt;
+                ok = true;
             }
-            else if (akt == 'c')
+            else if (akt == 'c' && ok == false)
             {
                 c++;
                 if (c >= 3)
@@ -116,6 +131,7 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
                         b++;
                 }
                 tomb[i][j] = akt;
+                ok = true;
             }
         }
     }
