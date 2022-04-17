@@ -194,9 +194,9 @@ int main(int argc, char *argv[])
         char elozo = '\0', akt = '\0';
 
         TELL "\nMegforditando kartya sora: ";
-        elozosor = szamBeker(1, 2) - 1;
+        elozosor = szamBeker(1, sor_db) - 1;
         TELL "Oszlopa: ";
-        elozooszlop = szamBeker(1, 3) - 1;
+        elozooszlop = szamBeker(1, oszl_db) - 1;
         db++;
 
         elozo = kartyak_eleje[elozosor][elozooszlop];
