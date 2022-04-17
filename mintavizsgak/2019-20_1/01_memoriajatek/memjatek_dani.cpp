@@ -181,12 +181,11 @@ int main(int argc, char *argv[])
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
     feltolt_hatulja(kartyak_hatulja, sor_db, oszl_db);
 
-    
+    /*
     TELL "DEBUG" << endl; // Teszt
     kiir(kartyak_eleje, sor_db, oszl_db);
     TELL "________________\n\n"
-        << endl;
-    
+        << endl;*/
 
     kiir(kartyak_hatulja, sor_db, oszl_db);
     do
