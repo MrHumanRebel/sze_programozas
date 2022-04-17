@@ -37,7 +37,7 @@ void iras(char tabla[SOR_MAX][OSZL_MAX], int sor, int oszl)
     ofstream allaski;
     string irashely;
     string akt;
-    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/01_memoriajatek/memoria.txt";
+    irashely = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/01_memoriajatek/memoria.txt";
     allaski.open(irashely);
     for (int i = 0; i < sor; i++)
     {
