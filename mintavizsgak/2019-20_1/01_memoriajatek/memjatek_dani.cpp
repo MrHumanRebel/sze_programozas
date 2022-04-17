@@ -6,8 +6,8 @@
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define SOR_MAX 2
-#define OSZL_MAX 3
+#define SOR_MAX 7
+#define OSZL_MAX 7
 int seed = 0;
 
 int random(int tol, int ig)
@@ -32,16 +32,16 @@ int szamBeker(int min, int max)
     return szam;
 }
 
-void iras(char tabla[SOR_MAX][OSZL_MAX])
+void iras(char tabla[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
     ofstream allaski;
     string irashely;
     string akt;
     irashely = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/01_memoriajatek/memoria.txt";
     allaski.open(irashely);
-    for (int i = 0; i < SOR_MAX; i++)
+    for (int i = 0; i < sor; i++)
     {
-        for (int j = 0; j < OSZL_MAX; j++)
+        for (int j = 0; j < oszl; j++)
         {
             akt = tabla[i][j];
             if (j == OSZL_MAX - 1)
@@ -60,96 +60,97 @@ void torol()
     }
 }
 
-void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX])
+void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
     int a = 0, b = 0, c = 0;
-    for (int i = 0; i < SOR_MAX; i++)
+    for (int i = 0; i < sor; i++)
     {
-        for (int j = 0; j < OSZL_MAX; j++)
+        for (int j = 0; j < oszl; j++)
         {
             seed = random(1, 50);
-            tomb[i][j] = random('a', 'c');
+            char akt = random('a', 'c');
 
-            if (tomb[i][j] == 'a')
+            if (akt == 'a')
             {
                 a++;
                 if (a >= 3)
                 {
-                    do
-                    {
-                        seed = random(1000, 2000);
-                        tomb[i][j] = random('b', 'c');
-                    } while (tomb[i][j] != 'a');
-
+                    seed = random(1000, 2000);
+                    akt = random('b', 'c');
                     a--;
-                    if (tomb[i][j] == 'b')
+                    if (akt == 'b')
                         b++;
-                    else if (tomb[i][j] == 'c')
+                    else if (akt == 'c')
                         c++;
                 }
+                tomb[i][j] = akt;
             }
-            else if (tomb[i][j] == 'b')
+            else if (akt == 'b')
             {
                 b++;
                 if (b >= 3)
                 {
-                    do
-                    {
-                        seed = random(3000, 4000);
-                        tomb[i][j] = random('a', 'c');
-                    } while (tomb[i][j] != 'b');
-
+                    seed = random(3000, 4000);
+                    akt = random('a', 'c');
                     b--;
-                    if (tomb[i][j] == 'a')
+                    if (akt == 'a')
                         a++;
-                    else if (tomb[i][j] == 'c')
+                    else if (akt == 'c')
                         c++;
+                    else if (akt == 'b')
+                        akt = 'c';
                 }
+                tomb[i][j] = akt;
             }
-            else if (tomb[i][j] == 'c')
+            else if (akt == 'c')
             {
                 c++;
                 if (c >= 3)
                 {
-                    do
-                    {
-                        seed = random(4000, 5000);
-                        tomb[i][j] = random('a', 'b');
-                    } while (tomb[i][j] != 'c');
-
+                    seed = random(4000, 5000);
+                    akt = random('a', 'b');
                     c--;
-                    if (tomb[i][j] == 'a')
+                    if (akt == 'a')
                         a++;
-                    else if (tomb[i][j] == 'b')
+                    else if (akt == 'b')
                         b++;
                 }
+                tomb[i][j] = akt;
             }
-
-            // TELL "a: " << a_db << " b: " << b_db << " c: " << c_db << endl;
         }
     }
 }
 
-void feltolt_hatulja(char tomb[SOR_MAX][OSZL_MAX])
+void feltolt_hatulja(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
-    for (int i = 0; i < SOR_MAX; i++)
+    for (int i = 0; i < sor; i++)
     {
-        for (int j = 0; j < OSZL_MAX; j++)
+        for (int j = 0; j < oszl; j++)
         {
             tomb[i][j] = '*';
         }
     }
 }
 
-void kiir(char tomb[SOR_MAX][OSZL_MAX])
+void kiir(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
-    TELL "♤ 123"
-        << "\n─────" << endl;
+    TELL "♤ ";
+    for (int i = 1; i <= oszl; i++)
+    {
+        TELL i;
+    }
+    TELL endl;
+    for (int i = 1; i <= oszl; i++)
+    {
+        TELL "──";
+    }
+    TELL endl;
+
     int x = 1;
-    for (int i = 0; i < SOR_MAX; i++)
+    for (int i = 0; i < sor; i++)
     {
         TELL x << '|';
-        for (int j = 0; j < OSZL_MAX; j++)
+        for (int j = 0; j < oszl; j++)
         {
             TELL tomb[i][j];
         }
@@ -163,18 +164,30 @@ int main(int argc, char *argv[])
     TELL "Memoriajatek\n"
         << endl;
     // Inicializáció
-    int ok = 0, db = 0;
+    int ok = 0, db = 0, sor = 0, oszl = 0, szumma = 0;
+    do
+    {
+        TELL "Adja meg a sorok számát: ";
+        sor = szamBeker(1, 7);
+        TELL "Adja meg az oszlopok számát: ";
+        oszl = szamBeker(1, 7);
+        szumma = oszl * sor;
+        if (szumma % 2 != 0)
+            TELL "Adjon meg páros szorzatot adó számokat!" << endl;
+    } while (szumma % 2 != 0);
+
     char kartyak_eleje[SOR_MAX][OSZL_MAX];
-    feltolt_eleje(kartyak_eleje);
-    iras(kartyak_eleje);
+    feltolt_eleje(kartyak_eleje, sor, oszl);
+    iras(kartyak_eleje, sor, oszl);
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
-    feltolt_hatulja(kartyak_hatulja);
+    feltolt_hatulja(kartyak_hatulja, sor, oszl);
 
-    TELL "DEBUG" << endl;
-    kiir(kartyak_eleje);
-    TELL "________________" << endl;
+    TELL "DEBUG" << endl; // Teszt
+    kiir(kartyak_eleje, sor, oszl);
+    TELL "________________\n\n"
+        << endl;
 
-    kiir(kartyak_hatulja);
+    kiir(kartyak_hatulja, sor, oszl);
     do
     {
         int sor = '\0', oszlop = '\0', elozosor = '\0', elozooszlop = '\0';
@@ -202,7 +215,7 @@ int main(int argc, char *argv[])
         {
             ok++;
             TELL "Egyformak, a kartyak igy maradnak." << endl;
-            kiir(kartyak_hatulja);
+            kiir(kartyak_hatulja, sor, oszl);
         }
         else
         {
