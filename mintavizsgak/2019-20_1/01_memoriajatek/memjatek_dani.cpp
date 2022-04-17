@@ -62,9 +62,9 @@ void torol()
 
 void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
-    int a = 0, b = 0, c = 0;
     for (int i = 0; i < sor; i++)
     {
+        int a = 0, b = 0, c = 0;
         for (int j = 0; j < oszl; j++)
         {
             seed = random(1, 50);
@@ -74,7 +74,7 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
             if (akt == 'a' && ok == false)
             {
                 a++;
-                if (a >= 3)
+                if (a > oszl / 3)
                 {
                     seed = random(1000, 2000);
                     akt = random('b', 'c');
@@ -90,7 +90,7 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
             else if (akt == 'b' && ok == false)
             {
                 b++;
-                if (b >= 3)
+                if (b > oszl / 3)
                 {
                     seed = random(3000, 4000);
                     akt = random('a', 'c');
@@ -120,7 +120,7 @@ void feltolt_eleje(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
             else if (akt == 'c' && ok == false)
             {
                 c++;
-                if (c >= 3)
+                if (c > oszl / 3)
                 {
                     seed = random(4000, 5000);
                     akt = random('a', 'b');

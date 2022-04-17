@@ -1,7 +1,2 @@
-baabbb
-caabac
-cacabb
-cacbba
-aababa
-bababa
-bababa
+bac
+bca
