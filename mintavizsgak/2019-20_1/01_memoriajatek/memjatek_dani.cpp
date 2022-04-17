@@ -134,7 +134,7 @@ void feltolt_hatulja(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 
 void kiir(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 {
-    TELL "♤ ";
+    TELL "\n♤ ";
     for (int i = 1; i <= oszl; i++)
     {
         TELL i;
@@ -161,33 +161,34 @@ void kiir(char tomb[SOR_MAX][OSZL_MAX], int sor, int oszl)
 
 int main(int argc, char *argv[])
 {
+    int ok = 0, db = 0, sor_db = 0, oszl_db = 0, szumma = 0;
     TELL "Memoriajatek\n"
         << endl;
-    // Inicializáció
-    int ok = 0, db = 0, sor = 0, oszl = 0, szumma = 0;
     do
     {
         TELL "Adja meg a sorok számát: ";
-        sor = szamBeker(1, 7);
+        sor_db = szamBeker(1, 7);
         TELL "Adja meg az oszlopok számát: ";
-        oszl = szamBeker(1, 7);
-        szumma = oszl * sor;
+        oszl_db = szamBeker(1, 7);
+        szumma = oszl_db * sor_db;
         if (szumma % 2 != 0)
             TELL "Adjon meg páros szorzatot adó számokat!" << endl;
     } while (szumma % 2 != 0);
 
     char kartyak_eleje[SOR_MAX][OSZL_MAX];
-    feltolt_eleje(kartyak_eleje, sor, oszl);
-    iras(kartyak_eleje, sor, oszl);
+    feltolt_eleje(kartyak_eleje, sor_db, oszl_db);
+    iras(kartyak_eleje, sor_db, oszl_db);
     char kartyak_hatulja[SOR_MAX][OSZL_MAX];
-    feltolt_hatulja(kartyak_hatulja, sor, oszl);
+    feltolt_hatulja(kartyak_hatulja, sor_db, oszl_db);
 
+    
     TELL "DEBUG" << endl; // Teszt
-    kiir(kartyak_eleje, sor, oszl);
+    kiir(kartyak_eleje, sor_db, oszl_db);
     TELL "________________\n\n"
         << endl;
+    
 
-    kiir(kartyak_hatulja, sor, oszl);
+    kiir(kartyak_hatulja, sor_db, oszl_db);
     do
     {
         int sor = '\0', oszlop = '\0', elozosor = '\0', elozooszlop = '\0';
@@ -215,7 +216,7 @@ int main(int argc, char *argv[])
         {
             ok++;
             TELL "Egyformak, a kartyak igy maradnak." << endl;
-            kiir(kartyak_hatulja, sor, oszl);
+            kiir(kartyak_hatulja, sor_db, oszl_db);
         }
         else
         {
