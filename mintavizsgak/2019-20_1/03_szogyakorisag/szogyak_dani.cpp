@@ -10,6 +10,8 @@ using namespace std;
 #define MAXKIIR 10
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
+// a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b
+// Előzőnél több karakternél => [terminate called after throwing an instance of 'std::bad_alloc' what():  std::bad_alloc]
 
 struct elemek
 {
@@ -27,13 +29,16 @@ string beolv()
 
 void szamol()
 {
+    // Struktúratömb nullázása
     elemek elem[MAXHOSSZ];
-    for (int i = 0; i <= MAXHOSSZ; i++)
+    for (int x = 0; x <= MAXHOSSZ; x++)
     {
-        elem[i].akt = "\0";
-        elem[i].db = 0;
+        elem[x].akt = "\0";
+        elem[x].db = 0;
     }
+    // Adatbekérés
     string input = beolv();
+    // Adatfeldolgozás
     long unsigned int i = 0;
     int k = 0;
     while (i < input.length())
@@ -54,11 +59,46 @@ void szamol()
             i++;
         }
     }
-    for (long unsigned int j = 0; j < i; j++)
+
+    // Növekvő bubi rendezés
+    for (int v = k - 1; v >= 1; v--)
     {
-        TELL elem[j].akt;
-        if (elem[j].db != 0)
-            TELL elem[j].db;
+        for (int e = 0; e < v; e++)
+        {
+            if (elem[e].db > elem[e + 1].db)
+            {
+                int csere = elem[e].db;
+                elem[e].db = elem[e + 1].db;
+                elem[e + 1].db = csere;
+                string szocsere = elem[e].akt;
+                elem[e].akt = elem[e + 1].akt;
+                elem[e + 1].akt = szocsere;
+            }
+        }
+    }
+
+    // Struktúratömb nullázása
+    elemek gyakori[MAXKIIR];
+    for (int x = 0; x <= MAXKIIR; x++)
+    {
+        gyakori[x].akt = "\0";
+        gyakori[x].db = 0;
+    }
+
+    int j = 0;
+    for (int i = 0; i <= k; i++)
+    {
+        if (elem[i].akt == elem[i + 1].akt)
+        {
+            gyakori[j].akt = elem[i].akt;
+            gyakori[j].db++;
+            TELL gyakori[j].akt;
+            TELL gyakori[j].db;
+        }
+        else
+        {
+            j++;
+        }
     }
 }
 
