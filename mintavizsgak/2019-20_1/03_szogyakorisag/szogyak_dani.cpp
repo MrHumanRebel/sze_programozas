@@ -8,9 +8,11 @@ using namespace std;
 #define ASK cin >>
 #define MAXHOSSZ 96
 #define MAXKIIR 10
+#define MAXSZELES 20
+#define VEGEJEL "[vege]"
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
-// a aa a aa aaa a
+// a aa a b b b b b b b b bb bbb
 
 struct elemek
 {
@@ -26,6 +28,25 @@ string beolv()
   return input;
 }
 
+void gyorsbubi(elemek tomb[], int n)
+{
+  bool cserelt;
+  for (int i = 0; i < n - 1; i++)
+  {
+    cserelt = false;
+    for (int j = 0; j < n - i - 1; j++)
+    {
+      if (tomb[j].db < tomb[j + 1].db)
+      {
+        swap(tomb[j], tomb[j + 1]);
+        cserelt = true;
+      }
+    }
+    if (cserelt == false)
+      break;
+  }
+}
+
 int keres(elemek gyakori[], string akt, int elemszam)
 {
   int i;
@@ -37,18 +58,10 @@ int keres(elemek gyakori[], string akt, int elemszam)
   return -1;
 }
 
-void szamol(string input)
+int szamol(elemek gyakori[], string input)
 {
-  // Struktúratömb nullázása
-  elemek gyakori[MAXHOSSZ];
-  for (int i = 0; i < MAXHOSSZ; i++)
-  {
-    gyakori[i].akt = "\0";
-    gyakori[i].db = 0;
-  }
-
   // Adatfeldolgozás
-  int vegeHelye = input.find("[vege]");
+  int vegeHelye = input.find(VEGEJEL);
   input = input.substr(0, vegeHelye - 1);
 
   size_t i = 0;
@@ -63,7 +76,7 @@ void szamol(string input)
     }
     else // Ha space
     {
-      int talalt = keres(gyakori, akt, MAXHOSSZ); // Van már ilyen karakter?
+      int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
 
       if (talalt == -1)
       {
@@ -75,30 +88,65 @@ void szamol(string input)
       {
         gyakori[talalt].db += 1;
       }
-      TELL "Aktuális karakter:" << akt << "\tFG Értéke: " << talalt << "\t Akt elemszám: " << elemszam << endl;
+      // TELL "Aktuális karakter:" << akt << "\tFG Értéke: " << talalt << "\t Akt elemszám: " << elemszam << endl;
 
       akt = "\0";
       i++;
     }
   }
+  return elemszam;
+}
 
-  // DEBUG
-  for (int i = 0; i <= elemszam; i++)
+void kiir(elemek gyakori[], int elemszam)
+{
+  double szazalekok[elemszam];
+  int osszdb = 0, kiirdb = 0;
+  for (int i = 0; i < elemszam; i++)
+    osszdb += gyakori[i].db;
+  for (int i = 0; i < elemszam; i++)
+    szazalekok[i] = (double)gyakori[i].db / (double)osszdb * 100;
+
+  while (kiirdb < MAXKIIR)
+  {
+    int egycsillag = MAXSZELES / szazalekok[0];
+    int n = szazalekok[kiirdb] * egycsillag;
+    for (int i = 0; i < n; i++)
+    {
+      TELL '*';
+    }
+    TELL "\t" << gyakori[kiirdb].akt << "\t" << gyakori[kiirdb].db << "\t" << szazalekok[kiirdb] << endl;
+    kiirdb++;
+  }
+
+  /*// DEBUG
+  TELL "\n"
+      << endl;
+  for (int i = 0; i < elemszam; i++)
   {
     TELL gyakori[i].akt;
     if (gyakori[i].db != 0)
       TELL gyakori[i].db;
     TELL "  ";
-  }
+  }*/
 }
 
 int main()
 {
+  // Struktúratömb nullázása
+  elemek gyakori[MAXHOSSZ];
+  for (int i = 0; i < MAXHOSSZ; i++)
+  {
+    gyakori[i].akt = "\0";
+    gyakori[i].db = 0;
+  }
+
   TELL "Szogyakorisagi statisztika. ";
 
   // Adatbekérés
   string input = beolv();
-  szamol(input);
+  int elemszam = szamol(gyakori, input);
+  gyorsbubi(gyakori, elemszam);
+  kiir(gyakori, elemszam);
 
   return 0;
 }
