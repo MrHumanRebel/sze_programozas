@@ -71,7 +71,7 @@ int main()
 
             if (vizsgal == 6)
             {
-                for (long unsigned int i = 5; i >= 3; i--)
+                for (size_t i = 5; i >= 3; i--)
                 {
                     rszam[i + 1] = rszam[i];
                 }

@@ -23,7 +23,7 @@ string decode()
 {
     int szamlalo = 0;
     int akt;
-    for (long unsigned int i = 0; i <= kod.length(); i++)
+    for (size_t i = 0; i <= kod.length(); i++)
     {
         bool nemjo = false;
         if (kod[i] == '1')
@@ -135,7 +135,7 @@ string beker()
 string code()
 {
     bool megvan = false;
-    for (long unsigned int i = 0; i < ujuzenet.length(); i++)
+    for (size_t i = 0; i < ujuzenet.length(); i++)
     {
         bool lower = false;
         if (islower(ujuzenet[i]))

@@ -15,7 +15,7 @@ string uzenet = "\0", input = "\0", cserel = "\0";
 void dekod()
 {
 
-    for (long unsigned int i = 0; i < input.length(); i++)
+    for (size_t i = 0; i < input.length(); i++)
     {
         cserel = "\0";
         if (input[i] == '[')

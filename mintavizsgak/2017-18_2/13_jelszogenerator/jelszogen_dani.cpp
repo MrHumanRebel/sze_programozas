@@ -141,7 +141,7 @@ int main()
         if (jelszo.length() == beker.length())
         {
             TELL "A két jelszó hossza megegyezik!" << endl;
-            for (long unsigned int i = 0; i < jelszo.length(); i++)
+            for (size_t i = 0; i < jelszo.length(); i++)
             {
                 beker[i] = toupper(beker[i]);
                 jelszo[i] = toupper(jelszo[i]);

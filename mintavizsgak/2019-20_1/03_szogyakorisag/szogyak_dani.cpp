@@ -6,7 +6,7 @@
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define MAXHOSSZ 64
+#define MAXHOSSZ 96
 #define MAXKIIR 10
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
@@ -52,7 +52,6 @@ void szamol(string input)
   input = input.substr(0, vegeHelye - 1);
 
   size_t i = 0;
-  int k = 0;
   string akt = "\0";
   int elemszam = 0;
   while (i < input.length())
@@ -64,12 +63,12 @@ void szamol(string input)
     }
     else // Ha space
     {
-      int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
+      int talalt = keres(gyakori, akt, MAXHOSSZ); // Van már ilyen karakter?
 
       if (talalt == -1)
       {
-        gyakori[k].akt = akt;
-        gyakori[k].db = 1;
+        gyakori[elemszam].akt = akt;
+        gyakori[elemszam].db = 1;
         elemszam++;
       }
       else
@@ -80,7 +79,6 @@ void szamol(string input)
 
       akt = "\0";
       i++;
-      k++;
     }
   }
 

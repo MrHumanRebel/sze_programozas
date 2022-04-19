@@ -75,7 +75,7 @@ void kitalal(string tomb[], int aktdb)
         TELL '*';
     }
     char kitalalni_char[akt.length()];
-    for (long unsigned int i = 0; i < akt.length(); i++)
+    for (size_t i = 0; i < akt.length(); i++)
     {
         kitalalni_char[i] = akt[i];
     }
@@ -85,9 +85,9 @@ void kitalal(string tomb[], int aktdb)
         ASK tipp;
         // Kitalálandó karakterek
         string kiir = "\0";
-        for (long unsigned int i = 0; i < akt.length(); i++)
+        for (size_t i = 0; i < akt.length(); i++)
         {
-            for (long unsigned int j = 0; j < tipp.length(); j++)
+            for (size_t j = 0; j < tipp.length(); j++)
             {
 
                 tipp[j] = toupper(tipp[j]);

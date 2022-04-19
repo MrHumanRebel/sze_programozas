@@ -46,7 +46,7 @@ void mozog()
     int db = 0;      // Aktuális szám int-ként
     bool ok = false; // Szám beolvásás vége?
 
-    for (long unsigned int i = 0; i <= beker.length(); i++)
+    for (size_t i = 0; i <= beker.length(); i++)
     {
         ok = false;
         // BETŰ
@@ -134,7 +134,7 @@ string input()
 {
     cout << "Adja meg a vezérlő parancssort..." << endl;
     getline(cin, beker);
-    for (long unsigned int i = 0; i <= beker.length(); i++)
+    for (size_t i = 0; i <= beker.length(); i++)
     {
         if (isalpha(beker[i]))
         {
