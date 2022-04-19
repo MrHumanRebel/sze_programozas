@@ -1,16 +1,14 @@
 #include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 #define MAX 10
 
-int tomb_meret(int tomb[])
-{
-    int n = *(&tomb + 1) - tomb; // Not working ATM
-    return n;
-}
-
 int main()
 {
-    int tomb[MAX]{10, 20, 30, 40, 50, 60};
-    cout << tomb_meret(tomb);
+    int tomb[]{10, 20, 30, 40, 50, 60};
+    int n = *(&tomb + 1) - tomb;
+    int n2 = sizeof(tomb) / sizeof(tomb[0]);
+    cout << n << endl;
+    cout << n2 << endl;
     return 0;
 }

@@ -28,16 +28,13 @@ string beolv()
 
 int keres(elemek gyakori[], string akt, int elemszam)
 {
-  for (int i = 0; i <= elemszam; i++)
+  int i;
+  for (i = 0; i < elemszam; i++)
   {
     if (akt == gyakori[i].akt)
-      return i; // Már van ilyen elem
-    else if (akt == "\0")
-      return -1; // Üres
-    else
-      return -2; // Még nincs ilyen elem
+      return i;
   }
-  return -3;
+  return -1;
 }
 
 void szamol(string input)
@@ -69,7 +66,7 @@ void szamol(string input)
     {
       int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
 
-      if (talalt == -2)
+      if (talalt == -1)
       {
         gyakori[k].akt = akt;
         gyakori[k].db = 1;
