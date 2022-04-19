@@ -37,6 +37,7 @@ int keres(elemek gyakori[], string akt, int elemszam)
     else
       return -2; // Még nincs ilyen elem
   }
+  return -3;
 }
 
 void szamol(string input)
@@ -67,7 +68,7 @@ void szamol(string input)
     else // Ha space
     {
       int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
-      TELL "Aktuális karakter:" << akt << "FG Értéke: " << talalt << endl;
+      TELL "Aktuális karakter:" << akt << "\tFG Értéke: " << talalt << endl;
 
       if (talalt == -2)
       {
@@ -87,10 +88,12 @@ void szamol(string input)
   }
 
   // DEBUG
-  for (int i = 0; i < elemszam; i++)
+  for (int i = 0; i <= elemszam; i++)
   {
     TELL gyakori[i].akt;
-    TELL gyakori[i].db;
+    if (gyakori[i].db != 0)
+      TELL gyakori[i].db;
+    TELL "  ";
   }
 }
 
