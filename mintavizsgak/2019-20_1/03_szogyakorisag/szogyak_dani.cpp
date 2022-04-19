@@ -6,12 +6,11 @@
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define MAXHOSSZ 256
+#define MAXHOSSZ 64
 #define MAXKIIR 10
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b
-// Előzőnél több karakternél => [terminate called after throwing an instance of 'std::bad_alloc' what():  std::bad_alloc]
 
 struct elemek
 {
@@ -27,82 +26,72 @@ string beolv()
   return input;
 }
 
+int keres(elemek gyakori[], string akt, int elemszam)
+{
+  for (int i = 0; i <= elemszam; i++)
+  {
+    if (akt == gyakori[i].akt)
+      return i; // Már van ilyen elem
+    else if (akt == "\0")
+      return -1; // Üres
+    else
+      return -2; // Még nincs ilyen elem
+  }
+}
+
 void szamol(string input)
 {
   // Struktúratömb nullázása
-  elemek elem[MAXHOSSZ];
+  elemek gyakori[MAXHOSSZ];
   for (int i = 0; i < MAXHOSSZ; i++)
   {
-    elem[i].akt = "\0";
-    elem[i].db = 0;
+    gyakori[i].akt = "\0";
+    gyakori[i].db = 0;
   }
 
   // Adatfeldolgozás
   int vegeHelye = input.find("[vege]");
   input = input.substr(0, vegeHelye - 1);
-  cout << input << endl;
 
   size_t i = 0;
   int k = 0;
+  string akt = "\0";
+  int elemszam = 0;
   while (i < input.length())
   {
-    if (input[i] != ' ')
+    if (input[i] != ' ') // Ha nem space
     {
-      elem[k].akt += input[i];
-
+      akt += input[i];
       i++;
     }
-    else
+    else // Ha space
     {
-      elem[k].db++;
+      int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
+      TELL "Aktuális karakter:" << akt << "FG Értéke: " << talalt << endl;
 
-      k++;
-      i++;
-    }
-  }
-
-  // Növekvő bubi rendezés
-  for (int v = k - 1; v >= 1; v--)
-  {
-    for (int e = 0; e < v; e++)
-    {
-      if (elem[e].db > elem[e + 1].db)
+      if (talalt == -2)
       {
-        int csere = elem[e].db;
-        elem[e].db = elem[e + 1].db;
-        elem[e + 1].db = csere;
-        string szocsere = elem[e].akt;
-        elem[e].akt = elem[e + 1].akt;
-        elem[e + 1].akt = szocsere;
+        gyakori[k].akt = akt;
+        gyakori[k].db = 1;
+        elemszam++;
       }
+      else
+      {
+        gyakori[talalt].db += 1;
+      }
+
+      akt = "\0";
+      i++;
+      k++;
     }
   }
 
-  // Struktúratömb nullázása
-  elemek gyakori[MAXKIIR];
-  for (int x = 0; x < MAXKIIR; x++)
+  // DEBUG
+  for (int i = 0; i < elemszam; i++)
   {
-    gyakori[x].akt = "\0";
-    gyakori[x].db = 0;
+    TELL gyakori[i].akt;
+    TELL gyakori[i].db;
   }
-
-  int j = 0;
-  for (int i = 0; i <= j; i++)
-  {
-    if (elem[i].akt == elem[i + 1].akt)
-    {
-      gyakori[j].akt = elem[i].akt;
-      gyakori[j].db++;
-      TELL gyakori[j].akt;
-      TELL gyakori[j].db;
-    }
-    else
-    {
-      j++;
-    }
-  }
-
-  TELL endl;
 }
 
 int main()

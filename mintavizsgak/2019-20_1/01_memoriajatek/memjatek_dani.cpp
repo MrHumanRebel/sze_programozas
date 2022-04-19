@@ -241,8 +241,8 @@ int main(int argc, char *argv[])
       if (argv[1] == string("torol"))
         torol();
     }
-  } while (ok != 3);
-  if (ok == 3)
+  } while (ok != szumma / 2);
+  if (ok == szumma / 2)
   {
     TELL "Gratulalok, On nyert " << db << " forditasbol." << endl;
   }
