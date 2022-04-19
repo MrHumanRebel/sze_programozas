@@ -10,7 +10,7 @@ using namespace std;
 #define MAXKIIR 10
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
-// a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b
+// a aa a aa aaa a
 
 struct elemek
 {
@@ -68,7 +68,6 @@ void szamol(string input)
     else // Ha space
     {
       int talalt = keres(gyakori, akt, elemszam); // Van már ilyen karakter?
-      TELL "Aktuális karakter:" << akt << "\tFG Értéke: " << talalt << endl;
 
       if (talalt == -2)
       {
@@ -80,6 +79,7 @@ void szamol(string input)
       {
         gyakori[talalt].db += 1;
       }
+      TELL "Aktuális karakter:" << akt << "\tFG Értéke: " << talalt << "\t Akt elemszám: " << elemszam << endl;
 
       akt = "\0";
       i++;
