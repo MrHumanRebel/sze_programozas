@@ -58,17 +58,6 @@ int keres(elem gyakori[], string akt, int elemszam)
   return -1;
 }
 
-int charkeres(char gyakori[], char akt, int elemszam)
-{
-  int i;
-  for (i = 0; i < elemszam; i++)
-  {
-    if (akt == gyakori[i])
-      return i;
-  }
-  return -1;
-}
-
 int szamol(elem gyakori[], string input)
 {
   int vegeHelye = input.find(VEGEJEL);
