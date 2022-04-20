@@ -12,6 +12,7 @@ using namespace std;
 #define VEGEJEL "[vege]"
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
+// a aa aaa a aa a!!aa a aa aaa. a a.a aaa b bb bbb b bb bbb? b b????b bbb c cc c!cc c cc ccc d dd ddd [vege]
 
 struct elem
 {
@@ -52,6 +53,17 @@ int keres(elem gyakori[], string akt, int elemszam)
   for (i = 0; i < elemszam; i++)
   {
     if (akt == gyakori[i].akt)
+      return i;
+  }
+  return -1;
+}
+
+int charkeres(char gyakori[], char akt, int elemszam)
+{
+  int i;
+  for (i = 0; i < elemszam; i++)
+  {
+    if (akt == gyakori[i])
       return i;
   }
   return -1;
@@ -109,9 +121,60 @@ void kiir(elem gyakori[], int elemszam)
     {
       TELL '*';
     }
-    TELL "\t" << gyakori[kiirdb].akt << "\t" << gyakori[kiirdb].db << "\t" << szazalekok[kiirdb] << endl;
+    if (gyakori[kiirdb].db != 0)
+      TELL "\t" << gyakori[kiirdb].akt << "\t" << gyakori[kiirdb].db << "\t" << szazalekok[kiirdb] << endl;
     kiirdb++;
   }
+}
+
+int betuszamlal(string input)
+{
+  int n = 0;
+  for (size_t i = 0; i < input.length(); i++)
+  {
+    if (isalpha(input[i]) && input[i] != ' ')
+      n++;
+  }
+  return n;
+}
+
+int szoszamlal(string input)
+{
+  int n = 0;
+  for (size_t i = 0; i < input.length(); i++)
+  {
+    if (input[i] == ' ' && input[i + 1] != ' ')
+      n++;
+  }
+  return n + 1;
+}
+
+int bekszamlal(string input)
+{
+  int n = 1;
+  for (size_t i = 0; i < input.length(); i++)
+  {
+    if (input[i] == '\n')
+      n++;
+  }
+  return n;
+}
+
+int mondatszamlal(string input)
+{
+  int n = 0;
+  for (size_t i = 1; i < input.length(); i++)
+  {
+    if (input[i] == '.' && input[i + 1] == ' ' && input[i - 1] != ' ')
+      n++;
+    else if (input[i] == '!' && input[i + 1] == ' ' && input[i - 1] != ' ')
+      n++;
+    else if (input[i] == '?' && input[i + 1] == ' ' && input[i - 1] != ' ')
+      n++;
+    else if (i == input.length() - 1)
+      n++;
+  }
+  return n;
 }
 
 int main()
@@ -129,5 +192,11 @@ int main()
   int elemszam = szamol(gyakori, input);
   gyorsbubi(gyakori, elemszam);
   kiir(gyakori, elemszam);
+  int betudb = betuszamlal(input);
+  int szodb = szoszamlal(input);
+  int bekdb = bekszamlal(input);
+  int mondatdb = mondatszamlal(input);
+  TELL "\nBetűk száma: " << betudb << "\nSzavak száma: " << szodb << "\nBekezdések száma: " << bekdb << "\nMondatok száma: " << mondatdb << endl;
+
   return 0;
 }
