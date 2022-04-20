@@ -12,7 +12,7 @@ using namespace std;
 #define VEGEJEL "[vege]"
 
 // a aa aaa a aa aaa a aa aaa a aa aaa b bb bbb b bb bbb b bb bbb c cc ccc c cc ccc d dd ddd [vege]
-// a aa aaa a aa a!!aa a aa aaa. a a.a aaa b bb bbb b bb bbb? b b????b bbb c cc c!cc c cc ccc d dd ddd [vege]
+// a aa aaa a aa a!!aa a aa aaa. A a.a aaa b bb bbb b bb bbb? b b????b bbb c. Cc c!cc c cc ccc d dd ddd [vege]
 
 struct elem
 {
@@ -165,11 +165,11 @@ int mondatszamlal(string input)
   int n = 0;
   for (size_t i = 1; i < input.length(); i++)
   {
-    if (input[i] == '.' && input[i + 1] == ' ' && input[i - 1] != ' ')
+    if (input[i] == '.' && input[i + 1] == ' ' && input[i - 1] != ' ' && !islower(input[i + 2]))
       n++;
-    else if (input[i] == '!' && input[i + 1] == ' ' && input[i - 1] != ' ')
+    else if (input[i] == '!' && input[i + 1] == ' ' && input[i - 1] != ' ' && !islower(input[i + 2]))
       n++;
-    else if (input[i] == '?' && input[i + 1] == ' ' && input[i - 1] != ' ')
+    else if (input[i] == '?' && input[i + 1] == ' ' && input[i - 1] != ' ' && !islower(input[i + 2]))
       n++;
     else if (i == input.length() - 1)
       n++;
