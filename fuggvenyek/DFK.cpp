@@ -9,12 +9,16 @@
 *  ##::::::::::'##:::: ##: ##:::: ##:
 *  ##::::::::::. #######::. #######::
 * ..::::::::::::.......::::.......:::
-* 
+*
 */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 
 #define say cout << 
 #define read cin >>
@@ -30,19 +34,19 @@ template<class T> void Reverse(T* arr, int length);
 string ReverseString(string str);
 template<class T> int IndexOf(T* arr, int length, T searchedElement);
 template<class T> int LastIndex(T* arr, int length, T searchedElement);
-string* ReadAllLines(string fileName, int* length);
-// TODO: Fix C6385 at ReadAllLines
+char** ReadAllLines(string fileName, int* length);
+// TODO: Fix error
 // TODO: Expand
 // TODO: Intensive and extensive testing
 
-//int main()
-//{
-//	int a[] = { 7,6,5,4,3,2,1,0 };
-//	QuickSort(a, 8);
-//	string asd = "asd";
-//	asd = ReverseString(asd);
-//	say "asd";
-//}
+int main()
+{
+	char** asd;
+	int asdLength = 0;
+	asd = ReadAllLines("test.txt", &asdLength);
+	free(asd);
+	int asdd = _CrtDumpMemoryLeaks();
+}
 
 
 /// <summary>
@@ -163,7 +167,7 @@ int ConvertToInt(string str)
 /// <summary>
 /// Swaps two variables
 /// </summary>
-/// <typeparam name="T">Anything</typeparam>
+/// <typeparam name="T">Any non-pointer type</typeparam>
 /// <param name="left">First variable</param>
 /// <param name="right">Second variable</param>
 template<class T> void Swap(T& left, T& right)
@@ -243,32 +247,109 @@ template<class T> int LastIndex(T* arr, int length, T searchedElement)
 }
 
 /// <summary>
-/// Reads all lines of a file and stores them in the memory
+/// Reads all lines of a file and stores them in the memory. Don't use!
 /// </summary>
 /// <param name="fileName">The name of the file</param>
 /// <param name="length">Output parameter: the length of the returned array</param>
-/// <returns>All lines for the file as a string*</returns>
-string* ReadAllLines(string fileName, int* length)
+/// <returns>All lines for the file as a char**</returns>
+char** ReadAllLines(string fileName, int* length)
 {
 	ifstream ifs(fileName);
 	*length = 1;
-	int count = 0;
-	string* arr = (string*)calloc(*length, sizeof(string));
+	int count = -1;
+	char** arr = (char**)calloc(*length, sizeof(char*));
 	string line;
+	char* lineChar;
+
 	while (getline(ifs, line))
 	{
-		arr[count] = line;
+		/*char* temp = (char*)calloc(line.length(), line.length() * sizeof(char));
+		for (int i = 0; i < line.length(); i++)
+		{
+			temp[i] = line[i];
+		}
 		count++;
-		if (count == *length)
+		arr[count] = temp;
+		if (count == *length - 1)
 		{
 			*length *= 2;
-			string* tmp = (string*)realloc(arr, *length);
-			arr = (tmp == nullptr) ? throw new exception("Out of memory") : tmp;
+			char** tmp = (char**)calloc(*length, sizeof(char*));
+			if (tmp == nullptr)
+			{
+				*length /= 2;
+				int i = 0;
+				for (i = (*length) * 2 - 1; i >= *length; i--)
+				{
+					tmp = (char**)calloc(*length, sizeof(char*));
+					if (tmp != nullptr)
+					{
+
+						break;
+					}
+				}
+				*length += i;
+
+				for (int i = 0; i < count; i++)
+				{
+					tmp[i] = arr[i];
+				}
+				free(arr);
+				arr = (char**)calloc(*length, sizeof(char*));
+				for (int i = 0; i < *length; i++)
+				{
+					arr[i] = tmp[i];
+				}
+			}
+			else
+			{
+				for (int i = 0; i < count + 1; i++)
+				{
+					tmp[i] = arr[i];
+				}
+				free(arr);
+				arr = (char**)calloc(*length, sizeof(char*));
+				for (int i = 0; i < count + 1; i++)
+				{
+					arr[i] = tmp[i];
+				}
+			}
+			free(tmp);
+		}*/
+		lineChar = (char*)malloc(line.length() * sizeof(char) + 1);
+		for (int i = 0; i < line.length(); i++)
+		{
+			lineChar[i] = line[i];
 		}
+		lineChar[line.length()] = '\0';
+		count++;
+		arr[count] = lineChar;
+		for (int i = 0; i < count + 1; i++)
+		{
+			say arr[i];
+			creturn;
+		}
+		if (count + 1 == *length)
+		{
+			*length *= 2;
+			char** tmp = (char**)malloc(*length *sizeof(char*));
+			for (int i = 0; i < count + 1; i++)
+			{
+				tmp[i] = arr[i];
+			}
+			free(arr); // amikor felszabdítom az arr-t, az adatai nem vesznel el
+			char** arr = (char**)malloc(*length * sizeof(char*));
+			for (int i = 0; i < count + 1; i++)
+			{
+				arr[i] = tmp[i];
+			}
+			free(tmp); // amikor felszabadítom a tmp-t, az adatai mennek vele együtt
+		}
+
 	}
-	string* tmp = (string*)realloc(arr, *length);
-	arr = (tmp == nullptr) ? throw new exception("Out of memory") : tmp;
+
 	*length = count;
 	ifs.close();
 	return arr;
 }
+// TODO: Fix error 
+// need help
