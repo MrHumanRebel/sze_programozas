@@ -1,12 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <cstring>
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define MAX 256
+#define MAX 512
+
+struct oraperc
+{
+    int ora;
+    int perc;
+};
 
 string beolv()
 {
@@ -38,14 +45,14 @@ int olvas(string tomb[], string fajlnev)
     return i;
 }
 
-void feldolgoz(string vonat[], int sor_db, string start, string stop)
+void feldolgoz(string vonat[], oraperc ido[], int sor_db, string start, string stop)
 {
     for (int i = 0; i < sor_db; i++)
     {
         string akt = "\0";
         if (isdigit(vonat[i][0]))
         {
-            for (int j = 0; j < vonat[i + 1].length(); j++)
+            for (size_t j = 0; j < vonat[i + 1].length(); j++)
             {
                 if (!isdigit(vonat[i + 1][j]) && vonat[i + 1][j] != ':' && vonat[i + 1][j] != ' ')
                     akt += vonat[i + 1][j];
@@ -54,6 +61,35 @@ void feldolgoz(string vonat[], int sor_db, string start, string stop)
             if (start == akt)
             {
             }
+        }
+    }
+}
+
+void jaratido(string vonat[], oraperc ido[], int sor_db)
+{
+    int k = 0;
+    for (int i = 0; i < sor_db; i++)
+    {
+        string akt = vonat[i];
+        string beido = "\0";
+        string kiido = "\0";
+        if (!isdigit(vonat[i][0]))
+        {
+            int tabHelye = akt.find("	");
+
+            ido[k].ora = stoi(akt.substr(tabHelye, 2));
+            tabHelye += 3;
+            ido[k].perc = stoi(akt.substr(tabHelye, 2));
+            k++;
+
+            TELL "Beidő: " << ido[k].ora << ido[k].perc << endl;
+
+            ido[k].ora = stoi(akt.substr(tabHelye, 2));
+            tabHelye += 3;
+            ido[k].perc = stoi(akt.substr(tabHelye, 2));
+            k++;
+
+            TELL "Kiidő: " << ido[k].ora << ido[k].perc << endl;
         }
     }
 }
@@ -74,12 +110,19 @@ int main()
     string vonat[MAX];
     int sor_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
     int jarat_db = jaratok(vonat, sor_db);
-
-    TELL "Indulás: ";
-    string start = beolv();
-    TELL "Érkezés: ";
-    string stop = beolv();
-    feldolgoz(vonat, sor_db, start, stop);
+    oraperc ido[jarat_db];
+    string start, stop;
+    do
+    {
+        TELL "Indulás: ";
+        start = beolv();
+        TELL "Érkezés: ";
+        stop = beolv();
+        if (start == stop)
+            TELL "Nem megfelelő adatok!" << endl;
+    } while (start == stop);
+    feldolgoz(vonat, ido, sor_db, start, stop);
+    jaratido(vonat, ido, sor_db);
 
     return 0;
 }
