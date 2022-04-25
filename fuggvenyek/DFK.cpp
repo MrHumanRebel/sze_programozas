@@ -35,7 +35,7 @@ string ReverseString(string str);
 template<class T> int IndexOf(T* arr, int length, T searchedElement);
 template<class T> int LastIndex(T* arr, int length, T searchedElement);
 char** ReadAllLines(string fileName, int* length);
-// TODO: Fix error
+// TODO: Improve
 // TODO: Expand
 // TODO: Intensive and extensive testing
 
@@ -44,8 +44,13 @@ int main()
 	char** asd;
 	int asdLength = 0;
 	asd = ReadAllLines("test.txt", &asdLength);
+	for (int i = 0; i < asdLength; i++)
+	{
+		free(asd[i]);
+	}
 	free(asd);
 	int asdd = _CrtDumpMemoryLeaks();
+	say "asd";
 }
 
 
@@ -247,7 +252,7 @@ template<class T> int LastIndex(T* arr, int length, T searchedElement)
 }
 
 /// <summary>
-/// Reads all lines of a file and stores them in the memory. Don't use!
+/// Reads all lines of a file and stores them in the memory
 /// </summary>
 /// <param name="fileName">The name of the file</param>
 /// <param name="length">Output parameter: the length of the returned array</param>
@@ -323,33 +328,27 @@ char** ReadAllLines(string fileName, int* length)
 		lineChar[line.length()] = '\0';
 		count++;
 		arr[count] = lineChar;
-		for (int i = 0; i < count + 1; i++)
-		{
-			say arr[i];
-			creturn;
-		}
 		if (count + 1 == *length)
 		{
 			*length *= 2;
-			char** tmp = (char**)malloc(*length *sizeof(char*));
+			char** tmp = (char**)malloc(*length * sizeof(char*));
 			for (int i = 0; i < count + 1; i++)
 			{
 				tmp[i] = arr[i];
 			}
-			free(arr); // amikor felszabdítom az arr-t, az adatai nem vesznel el
-			char** arr = (char**)malloc(*length * sizeof(char*));
+			free(arr);
+			arr = (char**)malloc(*length * sizeof(char*));
 			for (int i = 0; i < count + 1; i++)
 			{
 				arr[i] = tmp[i];
 			}
-			free(tmp); // amikor felszabadítom a tmp-t, az adatai mennek vele együtt
+			free(tmp);
 		}
 
 	}
 
-	*length = count;
+	*length = count + 1;
 	ifs.close();
 	return arr;
 }
-// TODO: Fix error 
-// need help
+// TODO: Improve
