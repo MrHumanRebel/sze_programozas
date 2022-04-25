@@ -11,8 +11,8 @@ using namespace std;
 
 struct oraperc
 {
-    int ora;
-    int perc;
+    string ora;
+    string perc;
 };
 
 string beolv()
@@ -71,22 +71,21 @@ void jaratido(string vonat[], oraperc ido[], int sor_db)
     for (int i = 0; i < sor_db; i++)
     {
         string akt = vonat[i];
-        string beido = "\0";
-        string kiido = "\0";
-        if (!isdigit(vonat[i][0]))
+        if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
         {
             int tabHelye = akt.find("	");
+            TELL "Tab helye: " << tabHelye << endl;
 
-            ido[k].ora = stoi(akt.substr(tabHelye, 2));
+            ido[k].ora = akt.substr(tabHelye, 2);
             tabHelye += 3;
-            ido[k].perc = stoi(akt.substr(tabHelye, 2));
+            ido[k].perc = akt.substr(tabHelye, 2);
             k++;
 
             TELL "Beidő: " << ido[k].ora << ido[k].perc << endl;
 
-            ido[k].ora = stoi(akt.substr(tabHelye, 2));
+            ido[k].ora = akt.substr(tabHelye, 2);
             tabHelye += 3;
-            ido[k].perc = stoi(akt.substr(tabHelye, 2));
+            ido[k].perc = akt.substr(tabHelye, 2);
             k++;
 
             TELL "Kiidő: " << ido[k].ora << ido[k].perc << endl;
@@ -110,7 +109,7 @@ int main()
     string vonat[MAX];
     int sor_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
     int jarat_db = jaratok(vonat, sor_db);
-    oraperc ido[jarat_db];
+    oraperc ido[jarat_db * 2];
     string start, stop;
     do
     {
