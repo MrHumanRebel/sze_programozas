@@ -73,22 +73,22 @@ void jaratido(string vonat[], oraperc ido[], int sor_db)
         string akt = vonat[i];
         if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
         {
-            int tabHelye = akt.find("	");
+            int tabHelye = akt.find("\t");
             TELL "Tab helye: " << tabHelye << endl;
 
             ido[k].ora = akt.substr(tabHelye, 2);
             tabHelye += 3;
             ido[k].perc = akt.substr(tabHelye, 2);
-            k++;
-
+            tabHelye += 3;
             TELL "Beidő: " << ido[k].ora << ido[k].perc << endl;
+            k++;
 
             ido[k].ora = akt.substr(tabHelye, 2);
             tabHelye += 3;
             ido[k].perc = akt.substr(tabHelye, 2);
-            k++;
-
+            tabHelye += 3;
             TELL "Kiidő: " << ido[k].ora << ido[k].perc << endl;
+            k++;
         }
     }
 }
