@@ -7,12 +7,12 @@
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define MAX 512
+#define MAX 256
 
 struct oraperc
 {
-    string ora;
-    string perc;
+    int ora;
+    int perc;
 };
 
 string beolv()
@@ -71,25 +71,35 @@ void jaratido(string vonat[], oraperc ido[], int sor_db)
     for (int i = 0; i < sor_db; i++)
     {
         string akt = vonat[i];
-        if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
+        if (akt == "vege")
+            return;
+        else if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
         {
             int tabHelye = akt.find("\t");
-            TELL "Tab helye: " << tabHelye << endl;
-
-            ido[k].ora = akt.substr(tabHelye, 2);
-            tabHelye += 3;
-            ido[k].perc = akt.substr(tabHelye, 2);
-            tabHelye += 3;
-            TELL "Beidő: " << ido[k].ora << ido[k].perc << endl;
+            ido[k].ora = stoi(akt.substr(tabHelye, 3));
+            tabHelye += 4;
+            ido[k].perc = stoi(akt.substr(tabHelye, 3));
+            tabHelye += 2;
             k++;
 
-            ido[k].ora = akt.substr(tabHelye, 2);
-            tabHelye += 3;
-            ido[k].perc = akt.substr(tabHelye, 2);
-            tabHelye += 3;
-            TELL "Kiidő: " << ido[k].ora << ido[k].perc << endl;
+            ido[k].ora = stoi(akt.substr(tabHelye, 3));
+            tabHelye += 4;
+            ido[k].perc = stoi(akt.substr(tabHelye, 3));
+            tabHelye += 2;
             k++;
         }
+    }
+    int j = 0;
+    for (int i = 0; i < k; i++)
+    {
+        int elozoora = ido[i].ora;
+        int aktora = ido[i + 1].ora;
+        int elozoperc = ido[i].perc;
+        int aktperc = ido[i + 1].perc;
+        ido[j].ora = aktora - elozoora;
+        ido[j].perc = aktperc - elozoperc;
+        TELL ido[j].ora << ":" << ido[j].perc << endl;
+        j++;
     }
 }
 
@@ -108,8 +118,9 @@ int main()
 {
     string vonat[MAX];
     int sor_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
+    TELL "Sorok száma: " << sor_db << endl;
     int jarat_db = jaratok(vonat, sor_db);
-    oraperc ido[jarat_db * 2];
+    oraperc ido[MAX];
     string start, stop;
     do
     {
