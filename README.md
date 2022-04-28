@@ -57,4 +57,6 @@ SZE tananyag és vizsgasorok: [Hatwágner Ferenc Miklós](http://rs1.sze.hu/~hat
 
 GitHub.io oldal: [Programozás](https://mrhumanrebel.github.io/sze_programozas/)
 
+GeeksForGeeks: [C++](https://www.geeksforgeeks.org/c-plus-plus)
+
 Interaktív gyakorlási és tanulási lehetőség: [CodinGame](https://www.codingame.com/servlet/urlinvite?u=4740387)
