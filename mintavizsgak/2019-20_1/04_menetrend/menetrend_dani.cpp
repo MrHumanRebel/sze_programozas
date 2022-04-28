@@ -10,20 +10,15 @@ using namespace std;
 #define ASK cin >>
 #define MAX 128
 
-struct megallo
+struct adat
 {
+    string jarat;
     string hely;
     int erk_ora;
     int erk_perc;
     int el_ora;
     int el_perc;
-};
-
-struct adat
-{
-    string jarat;
-    megallo megallok[MAX];
-    int db;
+    int megallo_db;
 };
 
 string beolv()
@@ -55,96 +50,81 @@ int toint(string str)
 
 int olvas(adat vonat[], string fajlnev)
 {
-    int i = 0, j = 0;
-
     ifstream fajl(fajlnev);
     string aktSor;
+    int i = 0;
+    int adat_db = 0;
 
     if (fajl.is_open())
     {
+        string aktjaratszam = "\0";
         while (getline(fajl, aktSor) && aktSor != "vege")
         {
-            if (!isdigit(aktSor[0]) && aktSor[0] != '-' && aktSor[0] != 'v')
+            if (!isdigit(aktSor[0]) && aktSor != "---" && aktSor != "vege")
             {
+                vonat[i].jarat = aktjaratszam;
+
                 int tabHelye = aktSor.find("\t");
-                vonat[i].megallok[j].hely = aktSor.substr(0, tabHelye);
+
+                vonat[i].hely = aktSor.substr(0, tabHelye);
 
                 string akt = aktSor.substr(tabHelye + 1, 2);
-                vonat[i].megallok[j].erk_ora = toint(akt);
+                vonat[i].erk_ora = toint(akt);
                 tabHelye += 4;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].megallok[j].erk_perc = toint(akt);
+                vonat[i].erk_perc = toint(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].megallok[j].el_ora = toint(akt);
+                vonat[i].el_ora = toint(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].megallok[j].el_perc = toint(akt);
-                j++;
-            }
-            else if (aktSor[0] != '-' && aktSor[0] != 'v')
-            {
-                vonat[i].jarat = aktSor;
+                vonat[i].el_perc = toint(akt);
+                // TELL "Járat szám: " << vonat[i].jarat << "\nTelepülés: " << vonat[i].hely << "\nÉrkezési idő: " << vonat[i].erk_ora << ":" << vonat[i].erk_perc << "\tTávozási idő: " << vonat[i].el_ora << ":" << vonat[i].el_perc << endl;
                 i++;
-                j = 0;
             }
-            vonat[i].db = j;
+            else if (aktSor != "---" && aktSor != "vege")
+            {
+                aktjaratszam = aktSor;
+                i++;
+            }
+            adat_db++;
         }
     }
     else
     {
         TELL "A fájl nem létezik!" << endl;
     }
-    return i;
-}
-
-void kiir(adat tomb[], int db)
-{
-    for (int i = 0; i < db; i++)
-    {
-        TELL tomb[i].jarat << endl;
-        for (int j = 0; j < tomb[i].db; j++)
-        {
-            TELL tomb[i].megallok[j].hely << endl;
-        }
-    }
+    return adat_db;
 }
 
 void feldolgoz(adat vonat[], string start, string stop, int db)
 {
-    int startid, startjaratid, stopid, stopjaratid, i = 0;
-    do
+    for (int i = 0; i < db; i++)
     {
-
-        for (int j = 0; j < vonat[i].db; j++)
+        if (start == vonat[i].hely)
         {
-            if (vonat[i].megallok[j].hely == start)
+            for (int j = i; j < db; j++)
             {
-                startid = j;
-                startjaratid = i;
-            }
-            if (vonat[i].megallok[j].hely == stop)
-            {
-                stopid = j;
-                stopjaratid = i;
+                if (stop == vonat[j].hely)
+                    if (vonat[i].jarat == vonat[j].jarat)
+                        TELL vonat[i].jarat << " " << vonat[i].el_ora << ":" << vonat[i].el_perc << " --> " << vonat[j].erk_ora << ":" << vonat[j].erk_perc << endl;
             }
         }
-        i++;
-
-    } while (startjaratid != stopjaratid or i < db);
-    TELL vonat[startjaratid].megallok[startid].erk_ora << ":" << vonat[startjaratid].megallok[startid].erk_perc << endl;
+    }
 }
 
 int main()
 {
     adat vonat[MAX];
-    int adat_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
-    TELL "Sorok száma: " << adat_db << endl;
+    string filename = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt";
+    // string filename = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt";
+    int adat_db = olvas(vonat, filename);
 
     string start, stop;
+    TELL "Vonat menetrend" << endl;
     do
     {
         TELL "Indulás: ";
