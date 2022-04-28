@@ -94,6 +94,8 @@ string feldolgoz(adat vonat[], string start, string stop, int db)
             }
         }
     }
+    if (er == "\0")
+        TELL "Nincs találat!";
     return er;
 }
 
@@ -114,17 +116,24 @@ int main()
     string filename = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt", start, stop, er;
     // string filename = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt",start, stop, er;
     int adat_db = olvas(vonat, filename);
+    bool run = true;
     TELL "Vonat menetrend" << endl;
     do
     {
-        TELL "Indulás: ";
-        start = beolv();
-        TELL "Érkezés: ";
-        stop = beolv();
-        if (start == stop)
-            TELL "Nem megfelelő adatok!" << endl;
-    } while (start == stop);
-    er = feldolgoz(vonat, start, stop, adat_db);
-    iras(vonat, er);
+        do
+        {
+            TELL "Indulás: ";
+            start = beolv();
+            if (start == "vege")
+                return 0;
+            TELL "Érkezés: ";
+            stop = beolv();
+            if (start == stop)
+                TELL "Nem megfelelő adatok!" << endl;
+        } while (start == stop);
+        er = feldolgoz(vonat, start, stop, adat_db);
+        iras(vonat, er);
+    } while (run);
+
     return 0;
 }
