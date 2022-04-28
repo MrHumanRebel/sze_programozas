@@ -88,7 +88,7 @@ string feldolgoz(adat vonat[], string start, string stop, int db)
                     if (vonat[i].jarat == vonat[j].jarat)
                     {
                         er = vonat[i].jarat + " " + to_string(vonat[i].el_ora) + ":" + to_string(vonat[i].el_perc) + " --> " + to_string(vonat[j].erk_ora) + ":" + to_string(vonat[j].erk_perc) + "\n";
-                        TELL vonat[i].jarat << " " << vonat[i].el_ora << ":" << vonat[i].el_perc << " --> " << vonat[j].erk_ora << ":" << vonat[j].erk_perc << endl;
+                        TELL er << endl;
                         return er;
                     }
             }
