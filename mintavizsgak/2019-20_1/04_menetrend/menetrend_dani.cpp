@@ -128,6 +128,8 @@ int main()
                 return 0;
             TELL "Érkezés: ";
             stop = beolv();
+            if (stop == "vege")
+                return 0;
             if (start == stop)
                 TELL "Nem megfelelő adatok!" << endl;
         } while (start == stop);
