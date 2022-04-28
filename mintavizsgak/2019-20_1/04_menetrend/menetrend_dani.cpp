@@ -8,15 +8,22 @@
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
-#define MAX 256
+#define MAX 128
 
-struct adatok
+struct megallo
 {
     string hely;
     int erk_ora;
     int erk_perc;
     int el_ora;
     int el_perc;
+};
+
+struct adat
+{
+    string jarat;
+    megallo megallok[MAX];
+    int db;
 };
 
 string beolv()
@@ -46,52 +53,45 @@ int toint(string str)
     return szam;
 }
 
-int olvas(adatok vonat[], string jaratok[], string fajlnev)
+int olvas(adat vonat[], string fajlnev)
 {
-    int i = 0, k = 0;
+    int i = 0, j = 0;
 
     ifstream fajl(fajlnev);
     string aktSor;
 
     if (fajl.is_open())
     {
-        while (getline(fajl, aktSor))
+        while (getline(fajl, aktSor) && aktSor != "vege")
         {
-            if (!isdigit(aktSor[0]) && aktSor[0] != '-')
+            if (!isdigit(aktSor[0]) && aktSor[0] != '-' && aktSor[0] != 'v')
             {
                 int tabHelye = aktSor.find("\t");
-
-                vonat[i].hely = aktSor.substr(0, tabHelye);
+                vonat[i].megallok[j].hely = aktSor.substr(0, tabHelye);
 
                 string akt = aktSor.substr(tabHelye + 1, 2);
-                if (akt[0] == '0')
-                    akt[0] = akt[1];
-                vonat[i].erk_ora = toint(akt);
+                vonat[i].megallok[j].erk_ora = toint(akt);
                 tabHelye += 4;
 
                 akt = aktSor.substr(tabHelye, 2);
-                if (akt[0] == '0')
-                    akt[0] = akt[1];
-                vonat[i].erk_perc = toint(akt);
+                vonat[i].megallok[j].erk_perc = toint(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                if (akt[0] == '0')
-                    akt[0] = akt[1];
-                vonat[i].el_ora = toint(akt);
+                vonat[i].megallok[j].el_ora = toint(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                if (akt[0] == '0')
-                    akt[0] = akt[1];
-                vonat[i].el_perc = toint(akt);
-                i++;
+                vonat[i].megallok[j].el_perc = toint(akt);
+                j++;
             }
-            else
+            else if (aktSor[0] != '-' && aktSor[0] != 'v')
             {
-                jaratok[k] = aktSor;
-                k++;
+                vonat[i].jarat = aktSor;
+                i++;
+                j = 0;
             }
+            vonat[i].db = j;
         }
     }
     else
@@ -101,43 +101,48 @@ int olvas(adatok vonat[], string jaratok[], string fajlnev)
     return i;
 }
 
-/*void feldolgoz(string vonat[], adatok ido[], int sor_db, string start, string stop)
+void kiir(adat tomb[], int db)
 {
-    for (int i = 0; i < sor_db; i++)
+    for (int i = 0; i < db; i++)
     {
-        string akt = "\0";
-        if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
+        TELL tomb[i].jarat << endl;
+        for (int j = 0; j < tomb[i].db; j++)
         {
-            for (size_t j = 0; j < vonat[i].length(); j++)
-            {
-                if (!isdigit(vonat[i][j]) && vonat[i][j] != ':' && vonat[i][j] != ' ')
-                    akt += vonat[i][j];
-            }
-            if (start == akt)
-            {
-                TELL akt << endl;
-            }
+            TELL tomb[i].megallok[j].hely << endl;
         }
     }
 }
 
-int jaratok(string vonat[], int sor_db)
+void feldolgoz(adat vonat[], string start, string stop, int db)
 {
-    int db = 0;
-    for (int i = 0; i < sor_db; i++)
+    int startid, startjaratid, stopid, stopjaratid, i = 0;
+    do
     {
-        if (isdigit(vonat[i][0]))
-            db++;
-    }
-    return db;
-}*/
+
+        for (int j = 0; j < vonat[i].db; j++)
+        {
+            if (vonat[i].megallok[j].hely == start)
+            {
+                startid = j;
+                startjaratid = i;
+            }
+            if (vonat[i].megallok[j].hely == stop)
+            {
+                stopid = j;
+                stopjaratid = i;
+            }
+        }
+        i++;
+
+    } while (startjaratid != stopjaratid or i < db);
+    TELL vonat[startjaratid].megallok[startid].erk_ora << ":" << vonat[startjaratid].megallok[startid].erk_perc << endl;
+}
 
 int main()
 {
-    adatok vonat[MAX];
-    string jaratok[MAX];
-    int sor_db = olvas(vonat, jaratok, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
-    TELL "Sorok száma: " << sor_db << endl;
+    adat vonat[MAX];
+    int adat_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
+    TELL "Sorok száma: " << adat_db << endl;
 
     string start, stop;
     do
@@ -149,6 +154,7 @@ int main()
         if (start == stop)
             TELL "Nem megfelelő adatok!" << endl;
     } while (start == stop);
-
+    feldolgoz(vonat, start, stop, adat_db);
+    // kiir(vonat, adat_db);
     return 0;
 }
