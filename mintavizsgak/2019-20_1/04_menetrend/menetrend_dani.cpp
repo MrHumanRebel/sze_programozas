@@ -100,8 +100,9 @@ int olvas(adat vonat[], string fajlnev)
     return adat_db;
 }
 
-void feldolgoz(adat vonat[], string start, string stop, int db)
+string feldolgoz(adat vonat[], string start, string stop, int db)
 {
+    string er = "\0";
     for (int i = 0; i < db; i++)
     {
         if (start == vonat[i].hely)
@@ -110,10 +111,28 @@ void feldolgoz(adat vonat[], string start, string stop, int db)
             {
                 if (stop == vonat[j].hely)
                     if (vonat[i].jarat == vonat[j].jarat)
+                    {
+                        er = vonat[i].jarat + " " + to_string(vonat[i].el_ora) + ":" + to_string(vonat[i].el_perc) + " --> " + to_string(vonat[j].erk_ora) + ":" + to_string(vonat[j].erk_perc) + "\n";
                         TELL vonat[i].jarat << " " << vonat[i].el_ora << ":" << vonat[i].el_perc << " --> " << vonat[j].erk_ora << ":" << vonat[j].erk_perc << endl;
+                        return er;
+                    }
             }
         }
     }
+    return er;
+}
+
+void iras(adat vonat[], string ki)
+{
+    ofstream allaski;
+    string irashely;
+    string akt = "\0";
+    irashely = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/menetrend.txt";
+    allaski.open(irashely);
+
+    allaski << ki;
+
+    allaski.close();
 }
 
 int main()
@@ -123,7 +142,7 @@ int main()
     // string filename = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt";
     int adat_db = olvas(vonat, filename);
 
-    string start, stop;
+    string start, stop, er;
     TELL "Vonat menetrend" << endl;
     do
     {
@@ -134,7 +153,7 @@ int main()
         if (start == stop)
             TELL "Nem megfelelő adatok!" << endl;
     } while (start == stop);
-    feldolgoz(vonat, start, stop, adat_db);
-    // kiir(vonat, adat_db);
+    er = feldolgoz(vonat, start, stop, adat_db);
+    iras(vonat, er);
     return 0;
 }
