@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <cstring>
+#include <cmath>
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
@@ -25,9 +26,29 @@ string beolv()
     return input;
 }
 
-int olvas(adatok vonat[], string fajlnev)
+int toint(string str)
 {
-    int i = 0;
+    bool negativ = (str[0] == '-');
+    int szam = 0;
+    for (size_t i = negativ; i < str.length(); i++)
+    {
+        if ((int)(str[i]) - 48 >= 0 && (int)(str[i]) - 48 <= 9)
+        {
+            szam += (int)(((int)(str[i])) - (int)48) * pow(10, str.length() - i - (int)1);
+        }
+        else
+        {
+            szam = 0;
+            break;
+        }
+    }
+    szam -= (int)negativ * szam * 2;
+    return szam;
+}
+
+int olvas(adatok vonat[], string jaratok[], string fajlnev)
+{
+    int i = 0, k = 0;
 
     ifstream fajl(fajlnev);
     string aktSor;
@@ -36,20 +57,41 @@ int olvas(adatok vonat[], string fajlnev)
     {
         while (getline(fajl, aktSor))
         {
-            int tabHelye = aktSor.find("\t");
+            if (!isdigit(aktSor[0]) && aktSor[0] != '-')
+            {
+                int tabHelye = aktSor.find("\t");
 
-            string akthely = vonat[i].hely = aktSor.substr(0, tabHelye);
+                vonat[i].hely = aktSor.substr(0, tabHelye);
 
-            vonat[i].erk_ora = stoi(aktSor.substr(tabHelye, 3));
-            tabHelye += 4;
-            vonat[i].erk_perc = stoi(aktSor.substr(tabHelye, 3));
-            tabHelye += 2;
+                string akt = aktSor.substr(tabHelye + 1, 2);
+                if (akt[0] == '0')
+                    akt[0] = akt[1];
+                vonat[i].erk_ora = toint(akt);
+                tabHelye += 4;
 
-            vonat[i].el_ora = stoi(aktSor.substr(tabHelye, 3));
-            tabHelye += 4;
-            vonat[i].el_perc = stoi(aktSor.substr(tabHelye, 3));
-            tabHelye += 2;
-            i++;
+                akt = aktSor.substr(tabHelye, 2);
+                if (akt[0] == '0')
+                    akt[0] = akt[1];
+                vonat[i].erk_perc = toint(akt);
+                tabHelye += 3;
+
+                akt = aktSor.substr(tabHelye, 2);
+                if (akt[0] == '0')
+                    akt[0] = akt[1];
+                vonat[i].el_ora = toint(akt);
+                tabHelye += 3;
+
+                akt = aktSor.substr(tabHelye, 2);
+                if (akt[0] == '0')
+                    akt[0] = akt[1];
+                vonat[i].el_perc = toint(akt);
+                i++;
+            }
+            else
+            {
+                jaratok[k] = aktSor;
+                k++;
+            }
         }
     }
     else
@@ -93,7 +135,8 @@ int jaratok(string vonat[], int sor_db)
 int main()
 {
     adatok vonat[MAX];
-    int sor_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
+    string jaratok[MAX];
+    int sor_db = olvas(vonat, jaratok, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
     TELL "Sorok száma: " << sor_db << endl;
 
     string start, stop;
