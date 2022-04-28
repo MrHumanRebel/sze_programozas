@@ -1,10 +1,6 @@
 #include <iostream>
-#include <cstdlib>
 #include <fstream>
-#include <sstream>
 #include <string>
-#include <cstring>
-#include <cmath>
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
@@ -25,26 +21,6 @@ string beolv()
     string input;
     getline(cin, input);
     return input;
-}
-
-int toint(string str)
-{
-    bool negativ = (str[0] == '-');
-    int szam = 0;
-    for (size_t i = negativ; i < str.length(); i++)
-    {
-        if ((int)(str[i]) - 48 >= 0 && (int)(str[i]) - 48 <= 9)
-        {
-            szam += (int)(((int)(str[i])) - (int)48) * pow(10, str.length() - i - (int)1);
-        }
-        else
-        {
-            szam = 0;
-            break;
-        }
-    }
-    szam -= (int)negativ * szam * 2;
-    return szam;
 }
 
 int olvas(adat vonat[], string fajlnev)
@@ -68,19 +44,19 @@ int olvas(adat vonat[], string fajlnev)
                 vonat[i].hely = aktSor.substr(0, tabHelye);
 
                 string akt = aktSor.substr(tabHelye + 1, 2);
-                vonat[i].erk_ora = toint(akt);
+                vonat[i].erk_ora = stoi(akt);
                 tabHelye += 4;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].erk_perc = toint(akt);
+                vonat[i].erk_perc = stoi(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].el_ora = toint(akt);
+                vonat[i].el_ora = stoi(akt);
                 tabHelye += 3;
 
                 akt = aktSor.substr(tabHelye, 2);
-                vonat[i].el_perc = toint(akt);
+                vonat[i].el_perc = stoi(akt);
                 // TELL "Járat szám: " << vonat[i].jarat << "\nTelepülés: " << vonat[i].hely << "\nÉrkezési idő: " << vonat[i].erk_ora << ":" << vonat[i].erk_perc << "\tTávozási idő: " << vonat[i].el_ora << ":" << vonat[i].el_perc << endl;
                 i++;
             }
@@ -128,20 +104,16 @@ void iras(adat vonat[], string ki)
     string akt = "\0";
     irashely = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/menetrend.txt";
     allaski.open(irashely);
-
     allaski << ki;
-
     allaski.close();
 }
 
 int main()
 {
     adat vonat[MAX];
-    string filename = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt";
-    // string filename = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt";
+    string filename = "/home/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt", start, stop, er;
+    // string filename = "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt",start, stop, er;
     int adat_db = olvas(vonat, filename);
-
-    string start, stop, er;
     TELL "Vonat menetrend" << endl;
     do
     {
