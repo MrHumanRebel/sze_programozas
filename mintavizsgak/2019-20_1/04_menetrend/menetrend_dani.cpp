@@ -18,7 +18,6 @@ struct adat
     int erk_perc;
     int el_ora;
     int el_perc;
-    int megallo_db;
 };
 
 string beolv()
