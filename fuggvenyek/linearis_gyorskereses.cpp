@@ -8,7 +8,6 @@ void gyorskeres(vector<int> tomb, int mitkeres)
     int hossz = tomb.size();
     int pozicio = -1;
     int jobb = hossz - 1;
-
     for (bal = 0; bal <= jobb;)
     {
         if (tomb[bal] == mitkeres)
@@ -31,7 +30,6 @@ void gyorskeres(vector<int> tomb, int mitkeres)
         bal++;
         jobb--;
     }
-
     if (pozicio == -1)
         cout << "Nincs találat! "
              << bal << ". alkalommal";

@@ -9,10 +9,13 @@ using namespace std;
 #define ASK cin >>
 #define MAX 256
 
-struct oraperc
+struct adatok
 {
-    int ora;
-    int perc;
+    string hely;
+    int erk_ora;
+    int erk_perc;
+    int el_ora;
+    int el_perc;
 };
 
 string beolv()
@@ -22,7 +25,7 @@ string beolv()
     return input;
 }
 
-int olvas(string tomb[], string fajlnev)
+int olvas(adatok vonat[], string fajlnev)
 {
     int i = 0;
 
@@ -33,7 +36,19 @@ int olvas(string tomb[], string fajlnev)
     {
         while (getline(fajl, aktSor))
         {
-            tomb[i] = aktSor;
+            int tabHelye = aktSor.find("\t");
+
+            string akthely = vonat[i].hely = aktSor.substr(0, tabHelye);
+
+            vonat[i].erk_ora = stoi(aktSor.substr(tabHelye, 3));
+            tabHelye += 4;
+            vonat[i].erk_perc = stoi(aktSor.substr(tabHelye, 3));
+            tabHelye += 2;
+
+            vonat[i].el_ora = stoi(aktSor.substr(tabHelye, 3));
+            tabHelye += 4;
+            vonat[i].el_perc = stoi(aktSor.substr(tabHelye, 3));
+            tabHelye += 2;
             i++;
         }
     }
@@ -41,65 +56,26 @@ int olvas(string tomb[], string fajlnev)
     {
         TELL "A fájl nem létezik!" << endl;
     }
-
     return i;
 }
 
-void feldolgoz(string vonat[], oraperc ido[], int sor_db, string start, string stop)
+/*void feldolgoz(string vonat[], adatok ido[], int sor_db, string start, string stop)
 {
     for (int i = 0; i < sor_db; i++)
     {
         string akt = "\0";
-        if (isdigit(vonat[i][0]))
+        if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
         {
-            for (size_t j = 0; j < vonat[i + 1].length(); j++)
+            for (size_t j = 0; j < vonat[i].length(); j++)
             {
-                if (!isdigit(vonat[i + 1][j]) && vonat[i + 1][j] != ':' && vonat[i + 1][j] != ' ')
-                    akt += vonat[i + 1][j];
+                if (!isdigit(vonat[i][j]) && vonat[i][j] != ':' && vonat[i][j] != ' ')
+                    akt += vonat[i][j];
             }
-            TELL akt << endl;
             if (start == akt)
             {
+                TELL akt << endl;
             }
         }
-    }
-}
-
-void jaratido(string vonat[], oraperc ido[], int sor_db)
-{
-    int k = 0;
-    for (int i = 0; i < sor_db; i++)
-    {
-        string akt = vonat[i];
-        if (akt == "vege")
-            return;
-        else if (!isdigit(vonat[i][0]) && vonat[i][0] != '-')
-        {
-            int tabHelye = akt.find("\t");
-            ido[k].ora = stoi(akt.substr(tabHelye, 3));
-            tabHelye += 4;
-            ido[k].perc = stoi(akt.substr(tabHelye, 3));
-            tabHelye += 2;
-            k++;
-
-            ido[k].ora = stoi(akt.substr(tabHelye, 3));
-            tabHelye += 4;
-            ido[k].perc = stoi(akt.substr(tabHelye, 3));
-            tabHelye += 2;
-            k++;
-        }
-    }
-    int j = 0;
-    for (int i = 0; i < k; i++)
-    {
-        int elozoora = ido[i].ora;
-        int aktora = ido[i + 1].ora;
-        int elozoperc = ido[i].perc;
-        int aktperc = ido[i + 1].perc;
-        ido[j].ora = aktora - elozoora;
-        ido[j].perc = aktperc - elozoperc;
-        TELL ido[j].ora << ":" << ido[j].perc << endl;
-        j++;
     }
 }
 
@@ -112,15 +88,14 @@ int jaratok(string vonat[], int sor_db)
             db++;
     }
     return db;
-}
+}*/
 
 int main()
 {
-    string vonat[MAX];
+    adatok vonat[MAX];
     int sor_db = olvas(vonat, "/mnt/c/Users/szeke/uni/sze_programozas/mintavizsgak/2019-20_1/04_menetrend/vonat.txt");
     TELL "Sorok száma: " << sor_db << endl;
-    int jarat_db = jaratok(vonat, sor_db);
-    oraperc ido[MAX];
+
     string start, stop;
     do
     {
@@ -131,8 +106,6 @@ int main()
         if (start == stop)
             TELL "Nem megfelelő adatok!" << endl;
     } while (start == stop);
-    feldolgoz(vonat, ido, sor_db, start, stop);
-    jaratido(vonat, ido, sor_db);
 
     return 0;
 }

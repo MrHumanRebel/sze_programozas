@@ -1,23 +1,20 @@
 #include <iostream>
 using namespace std;
 
-int bubi(int tomb[], int db)
+void bubi(int tomb[], int db)
 {
-    int szamlalo = 0;
     for (int v = db - 1; v >= 1; v--)
     {
         for (int e = 0, csere; e < v; e++)
         {
             if (tomb[e] > tomb[e + 1])
             {
-                szamlalo++;
                 csere = tomb[e];
                 tomb[e] = tomb[e + 1];
                 tomb[e + 1] = csere;
             }
         }
     }
-    return szamlalo;
 }
 
 void kiir(int tomb[], int aktDb)

@@ -7,7 +7,6 @@ using namespace std;
 // Pálya generáló függvény
 void palyaGen(char tabla[SOR_MAX][OSZLOP_MAX], int sor, int oszlop)
 {
-
   for (int i = 0; i < sor; i++)
   {
     for (int j = 0; j < oszlop; j++)

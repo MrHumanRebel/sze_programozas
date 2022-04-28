@@ -5,7 +5,6 @@ using namespace std;
 int karBeker(char kezd, char veg)
 {
   char karakter;
-
   bool hibasKarakter = false;
   do
   {
@@ -17,7 +16,6 @@ int karBeker(char kezd, char veg)
 
     hibasKarakter = karakter < kezd || karakter > veg;
   } while (hibasKarakter);
-
   return karakter;
 }
 
@@ -27,8 +25,6 @@ int main()
   char kezd = 'A';
   char veg = 'D';
   char bekertKar = karBeker(kezd, veg);
-
   cout << "Az Ön által megadott karakter: " << bekertKar << endl;
-
   return 0;
 }
