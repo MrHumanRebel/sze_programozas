@@ -69,10 +69,12 @@ void kiir(string szoveg)
     {
         TELL '*' << sorok[i];
         if (sorok[i].length() < MAX)
+        {
             for (size_t k = 0; k < MAX - sorok[i].length(); k++)
             {
                 TELL ' ';
             }
+        }
         TELL '*' << endl;
     }
     oszlopir();
