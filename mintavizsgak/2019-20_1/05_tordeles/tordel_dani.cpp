@@ -80,9 +80,10 @@ void kiir(string szoveg)
 
 int main()
 {
+    TELL "Szoveg tordelese" << endl;
     string szoveg = beolv();
     int vegeHelye = szoveg.find(VEGEJEL);
-    szoveg = szoveg.substr(0, vegeHelye - 1);
+    szoveg = szoveg.substr(0, vegeHelye);
     kiir(szoveg);
     return 0;
 }
