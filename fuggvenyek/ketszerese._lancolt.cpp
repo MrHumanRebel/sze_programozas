@@ -7,6 +7,7 @@ struct Lista
 {
     int adat;
     Lista *kov;
+    Lista *elozo;
 };
 
 // Beszúrunk egy elemet az előző után
@@ -19,12 +20,19 @@ Lista *beszur(int adat, Lista *elozo)
 
         if (elozo) // elozo != null
         {
+            if (elozo->kov != nullptr)
+            {
+                Lista *tmp = elozo->kov;
+                tmp->elozo = uj;
+            }
             uj->kov = elozo->kov;
+            uj->elozo = elozo;
             elozo->kov = uj;
         }
         else
         {
             uj->kov = NULL;
+            uj->elozo = NULL;
         }
     }
 
