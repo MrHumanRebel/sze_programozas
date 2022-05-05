@@ -44,6 +44,7 @@ void kiir(string szoveg)
         sorok[i] = "\0";
     }
     int j = 0;
+    int elozohossz;
     for (int i = 0; i < db; i++)
     {
         if (szoveg[i] != ' ')
@@ -52,7 +53,9 @@ void kiir(string szoveg)
             szamlalo++;
             if (szamlalo >= MAX)
             {
-                szamlalo = 0;
+                if (szamlalo != 0)
+                    elozohossz = akt.length();
+                szamlalo = 0 + elozohossz;
                 j++;
             }
         }
