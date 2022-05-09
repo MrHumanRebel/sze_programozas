@@ -21,10 +21,11 @@
 #include <crtdbg.h>
 
 #define say cout << 
-#define read cin >>
+#define ask cin >>
 #define creturn say endl;
 
 using namespace std;
+
 
 void QuickSort(int* unsortedArray, int length, int left = 0, int right = -1);
 void CountSort(int* unsortedArray, int length);
@@ -39,19 +40,422 @@ char** ReadAllLines(string fileName, int* length);
 // TODO: Expand
 // TODO: Intensive and extensive testing
 
+
+/// <summary>
+/// The elements of which the DLinkedList is made up
+/// </summary>
+/// <typeparam name="T">Any</typeparam>
+template <class T>
+class LinkedListNode
+{
+public:
+	/// <summary>
+	/// The stored data
+	/// </summary>
+	T data;
+
+	/// <summary>
+	/// The next element in the list
+	/// </summary>
+	LinkedListNode<T>* nextElement;
+
+	/// <summary>
+	/// The previous element in the list
+	/// </summary>
+	LinkedListNode<T>* previousElement;
+
+	/// <summary>
+	/// Default constructor
+	/// </summary>
+	LinkedListNode()
+	{
+		data = NULL;
+		nextElement = nullptr;
+		previousElement = nullptr;
+	}
+
+	/// <summary>
+	/// Constructor with definable data as parameter
+	/// </summary>
+	/// <param name="data">Data to be stored</param>
+	LinkedListNode(T data)
+	{
+		this->data = data;
+		nextElement = nullptr;
+		previousElement = nullptr;
+	}
+	~LinkedListNode()
+	{
+
+	}
+
+private:
+
+};
+
+/// <summary>
+/// Two way linked list made possible by Debreczeni, Kálmán
+/// </summary>
+/// <typeparam name="T">Any</typeparam>
+template<class T>
+class DLinkedList
+{
+
+public:
+
+	/// <summary>
+	/// The first element of the linked list
+	/// </summary>
+	LinkedListNode<T>* firstElement;
+
+	/// <summary>
+	/// The last element of the list
+	/// </summary>
+	LinkedListNode<T>* lastElement;
+
+	/// <summary>
+	/// The currently active element of the list
+	/// </summary>
+	LinkedListNode<T>* currentElement;
+
+	/// <summary>
+	/// Constructor
+	/// </summary>
+	DLinkedList()
+	{
+
+	}
+
+	/// <summary>
+	/// Count of the elements in the list
+	/// </summary>
+	/// <returns>Count of the elements in the list</returns>
+	int Count()
+	{
+		return count;
+	}
+
+	/// <summary>
+	/// The index of the currently active node
+	/// </summary>
+	/// <returns>The index of the currently active node</returns>
+	int CurrentIndex()
+	{
+		return currentIndex;
+	}
+
+	// Need help in this one. Doesn't recognize [] as an operator
+	/*LinkedListNode<T>* operator[](int index)
+	{
+		SeekToIndex(index);
+		return currentElement;
+	}*/
+
+	/// <summary>
+	/// Seeks to the specified index in the list, making the nth element active
+	/// </summary>
+	/// <param name="newIndex">The index to seek to</param>
+	void SeekToIndex(int newIndex)
+	{
+		if (currentIndex == newIndex)
+		{
+			return;
+		}
+		else
+		{
+			if (currentIndex > newIndex)
+			{
+				if (currentIndex - newIndex > newIndex)
+				{
+					currentElement = firstElement;
+					currentIndex = 0;
+					for (int i = 0; i < newIndex; i++)
+					{
+						StepForward();
+					}
+				}
+				else
+				{
+					for (int i = 0; i < currentIndex - newIndex; i++)
+					{
+						StepBackward();
+					}
+				}
+			}
+			else
+			{
+				if (newIndex - currentIndex > count - newIndex)
+				{
+					currentElement = lastElement;
+					currentIndex = count - 1;
+					for (int i = 0; i < count - newIndex; i++)
+					{
+						StepBackward();
+					}
+				}
+				else
+				{
+					for (int i = 0; i < newIndex - currentIndex; i++)
+					{
+						StepForward();
+					}
+				}
+			}
+		}
+		currentIndex = newIndex;
+	}
+
+	/// <summary>
+	/// Steps to the next element of the list
+	/// </summary>
+	/// <returns>Whether the step was possible</returns>
+	bool StepForward()
+	{
+		if (currentIndex == count - 1)
+		{
+			return false;
+		}
+		else
+		{
+			currentElement = currentElement->nextElement;
+		}
+		return true;
+	}
+
+	/// <summary>
+	/// Steps to the previous element of the list
+	/// </summary>
+	/// <returns>Whether the step was possible</returns>
+	bool StepBackward()
+	{
+		if (currentIndex == 0)
+		{
+			return false;
+		}
+		else
+		{
+			currentElement = currentElement->previousElement;
+		}
+		return true;
+	}
+
+	/// <summary>
+	/// Pushes data to the list, behind the active element
+	/// </summary>
+	/// <param name="data">Data to be stored</param>
+	/// <returns>Whether the push was sucessful</returns>
+	bool Push(T data)
+	{
+		if (count == 0)
+		{
+			LinkedListNode<T>* n = new LinkedListNode<T>(data);
+			if (n != nullptr)
+			{
+				firstElement = n;
+				currentElement = n;
+				lastElement = n;
+				currentIndex = 0;
+				count = 1;
+				return true;
+			}
+			else return false;
+		}
+		else
+		{
+			if (currentIndex == count - 1)
+			{
+				currentIndex++;
+				bool tmp = PushLast(data);
+				currentElement = lastElement;
+				return tmp;
+			}
+			else
+			{
+				LinkedListNode<T>* n = new LinkedListNode<T>(data);
+				if (n != nullptr)
+				{
+					currentElement->nextElement->previousElement = n;
+					n->nextElement = currentElement->nextElement;
+					currentElement->nextElement = n;
+					n->previousElement = currentElement;
+					currentElement = n;
+					count++;
+					currentIndex++;
+					return true;
+				}
+				else return false;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Pushes data to the head of the list
+	/// </summary>
+	/// <param name="data">Data to be stored</param>
+	/// <returns>Whether the push was sucessful</returns>
+	bool PushFirst(T data)
+	{
+		LinkedListNode<T>* n = new LinkedListNode<T>(data);
+		if (n != nullptr)
+		{
+			firstElement->previousElement = n;
+			n->nextElement = firstElement;
+			firstElement = n;
+			count++;
+		}
+		else return false;
+	}
+
+	/// <summary>
+	/// Pushes data to the tail of the list
+	/// </summary>
+	/// <param name="data">Data to be stored</param>
+	/// <returns>Whether the push was sucessful</returns>
+	bool PushLast(T data)
+	{
+		LinkedListNode<T>* n = new LinkedListNode<T>(data);
+		if (n != nullptr)
+		{
+			lastElement->nextElement = n;
+			n->previousElement = lastElement;
+			lastElement = n;
+			count++;
+		}
+		else return false;
+	}
+
+	/// <summary>
+	/// Pushes data to the specified index, moving the rest of the list backwards
+	/// </summary>
+	/// <param name="index">The index of the new element</param>
+	/// <param name="data">Data to be stored</param>
+	/// <returns>Whether the push was sucessful</returns>
+	bool PushAt(int index, T data)
+	{
+		int revert = currentIndex;
+		SeekToIndex(index);
+		bool tmp = Push(data);
+		SeekToIndex(revert);
+		return tmp;
+
+	}
+
+	/// <summary>
+	/// Removes the element at the specified index
+	/// </summary>
+	/// <param name="index">The index of the element</param>
+	void RemoveAt(int index)
+	{
+		int revert = currentIndex;
+		SeekToIndex(index);
+		if (index == 0) // first element
+		{
+			currentElement = currentElement->nextElement;
+			delete (firstElement);
+			firstElement = currentElement;
+			currentElement->previousElement = nullptr;
+		}
+		else if (index == count - 1)
+		{
+			currentElement = currentElement->previousElement;
+			delete lastElement;
+			lastElement = currentElement;
+			currentElement->nextElement = nullptr;
+			currentIndex--;
+		}
+		else
+		{
+			currentElement = currentElement->previousElement;
+			currentElement->nextElement = currentElement->nextElement->nextElement;
+			delete (currentElement->nextElement->previousElement);
+			currentElement->nextElement->previousElement = currentElement;
+		}
+		count--;
+		SeekToIndex(revert);
+	}
+
+	/// <summary>
+	/// Reads the data of the given index
+	/// </summary>
+	/// <param name="index">The index of the requested element</param>
+	/// <returns>The data of teh element</returns>
+	T GetDataAt(int index)
+	{
+		int revert = currentIndex;
+		SeekToIndex(index);
+		T tmp = currentElement->data;
+		SeekToIndex(revert);
+		return tmp;
+	}
+
+	void Swap(int leftIndex, int rightIndex)
+	{
+		int revert = currentIndex;
+		SeekToIndex(leftIndex);
+		T left = currentElement->data;
+		SeekToIndex(rightIndex);
+		T right = currentElement->data;
+		SeekToIndex(leftIndex);
+		currentElement->data = right;
+		SeekToIndex(rightIndex);
+		currentElement->data = left;
+		SeekToIndex(revert);
+	}
+
+
+	/// <summary>
+	/// Empties the list and sets it up to be reused
+	/// </summary>
+	void Empty()
+	{
+		LinkedListNode<T>* tmp;
+		while (firstElement != nullptr)
+		{
+			tmp = firstElement->nextElement;
+			delete(firstElement);
+			firstElement = tmp;
+		}
+		currentIndex = -1;
+		count = 0;
+	}
+
+	~DLinkedList()
+	{
+		Empty();
+	}
+
+private:
+	int currentIndex;
+	unsigned int count;
+
+};
+
 int main()
 {
-	char** asd;
-	int asdLength = 0;
-	asd = ReadAllLines("test.txt", &asdLength);
-	for (int i = 0; i < asdLength; i++)
+	DLinkedList<int>* test = new DLinkedList<int>;
+
+	for (int i = 0; i < 100000; i++)
 	{
-		free(asd[i]);
+		test->PushAt((test->Count() == 0) ? 0 : rand() % test->Count(), i);
 	}
-	free(asd);
-	int asdd = _CrtDumpMemoryLeaks();
-	say "asd";
+	creturn;
+	test->Swap(5, 7);
+	for (int i = 0; i < test->Count()-1; i++)
+	{
+		test->Swap(i, i+1);
+
+	}
+	delete (test);
+	int leaks = _CrtDumpMemoryLeaks();
+	say leaks;
 }
+
+
+
+
+
+
+
 
 
 /// <summary>
