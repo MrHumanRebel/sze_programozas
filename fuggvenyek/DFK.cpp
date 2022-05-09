@@ -10,21 +10,21 @@
 *  ##::::::::::. #######::. #######::
 * ..::::::::::::.......::::.......:::
 *
+*  Debreczeni Kálmán
 */
 
+using namespace std;
 #include <iostream>
-#include <fstream>
+#include <fstream> // Base
 #include <string>
 
 #define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
+#include <stdlib.h> // For testing
 #include <crtdbg.h>
 
 #define say cout << 
-#define ask cin >>
+#define ask cin >> // QOL Macros
 #define creturn say endl;
-
-using namespace std;
 
 
 void QuickSort(int* unsortedArray, int length, int left = 0, int right = -1);
@@ -36,9 +36,34 @@ string ReverseString(string str);
 template<class T> int IndexOf(T* arr, int length, T searchedElement);
 template<class T> int LastIndex(T* arr, int length, T searchedElement);
 char** ReadAllLines(string fileName, int* length);
+template <class T>
+class LinkedListNode;
+template<class T>
+class DLinkedList;
 // TODO: Improve
 // TODO: Expand
 // TODO: Intensive and extensive testing
+
+
+int main()
+{
+	DLinkedList<int>* test = new DLinkedList<int>;
+
+	for (int i = 0; i < 100000; i++)
+	{
+		test->PushAt((test->Count() == 0) ? 0 : rand() % test->Count(), i);
+	}
+	creturn;
+	test->Swap(5, 7);
+	for (int i = 0; i < test->Count() - 1; i++)
+	{
+		test->Swap(i, i + 1);
+
+	}
+	delete (test);
+	int leaks = _CrtDumpMemoryLeaks();
+	say leaks;
+}
 
 
 /// <summary>
@@ -430,33 +455,6 @@ private:
 
 };
 
-int main()
-{
-	DLinkedList<int>* test = new DLinkedList<int>;
-
-	for (int i = 0; i < 100000; i++)
-	{
-		test->PushAt((test->Count() == 0) ? 0 : rand() % test->Count(), i);
-	}
-	creturn;
-	test->Swap(5, 7);
-	for (int i = 0; i < test->Count()-1; i++)
-	{
-		test->Swap(i, i+1);
-
-	}
-	delete (test);
-	int leaks = _CrtDumpMemoryLeaks();
-	say leaks;
-}
-
-
-
-
-
-
-
-
 
 /// <summary>
 /// Sorts array elements using Quicksort.
@@ -672,58 +670,6 @@ char** ReadAllLines(string fileName, int* length)
 
 	while (getline(ifs, line))
 	{
-		/*char* temp = (char*)calloc(line.length(), line.length() * sizeof(char));
-		for (int i = 0; i < line.length(); i++)
-		{
-			temp[i] = line[i];
-		}
-		count++;
-		arr[count] = temp;
-		if (count == *length - 1)
-		{
-			*length *= 2;
-			char** tmp = (char**)calloc(*length, sizeof(char*));
-			if (tmp == nullptr)
-			{
-				*length /= 2;
-				int i = 0;
-				for (i = (*length) * 2 - 1; i >= *length; i--)
-				{
-					tmp = (char**)calloc(*length, sizeof(char*));
-					if (tmp != nullptr)
-					{
-
-						break;
-					}
-				}
-				*length += i;
-
-				for (int i = 0; i < count; i++)
-				{
-					tmp[i] = arr[i];
-				}
-				free(arr);
-				arr = (char**)calloc(*length, sizeof(char*));
-				for (int i = 0; i < *length; i++)
-				{
-					arr[i] = tmp[i];
-				}
-			}
-			else
-			{
-				for (int i = 0; i < count + 1; i++)
-				{
-					tmp[i] = arr[i];
-				}
-				free(arr);
-				arr = (char**)calloc(*length, sizeof(char*));
-				for (int i = 0; i < count + 1; i++)
-				{
-					arr[i] = tmp[i];
-				}
-			}
-			free(tmp);
-		}*/
 		lineChar = (char*)malloc(line.length() * sizeof(char) + 1);
 		for (int i = 0; i < line.length(); i++)
 		{
