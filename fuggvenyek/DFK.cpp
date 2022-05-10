@@ -36,34 +36,8 @@ string ReverseString(string str);
 template<class T> int IndexOf(T* arr, int length, T searchedElement);
 template<class T> int LastIndex(T* arr, int length, T searchedElement);
 char** ReadAllLines(string fileName, int* length);
-template <class T>
-class LinkedListNode;
-template<class T>
-class DLinkedList;
-// TODO: Improve
-// TODO: Expand
-// TODO: Intensive and extensive testing
 
 
-int main()
-{
-	DLinkedList<int>* test = new DLinkedList<int>;
-
-	for (int i = 0; i < 100000; i++)
-	{
-		test->PushAt((test->Count() == 0) ? 0 : rand() % test->Count(), i);
-	}
-	creturn;
-	test->Swap(5, 7);
-	for (int i = 0; i < test->Count() - 1; i++)
-	{
-		test->Swap(i, i + 1);
-
-	}
-	delete (test);
-	int leaks = _CrtDumpMemoryLeaks();
-	say leaks;
-}
 
 
 /// <summary>
@@ -102,13 +76,14 @@ public:
 	/// <summary>
 	/// Constructor with definable data as parameter
 	/// </summary>
-	/// <param name="data">Data to be stored</param>
+	/// <param name="data">Data to be stored</param>	
 	LinkedListNode(T data)
 	{
 		this->data = data;
 		nextElement = nullptr;
 		previousElement = nullptr;
 	}
+
 	~LinkedListNode()
 	{
 
@@ -213,7 +188,7 @@ public:
 				{
 					currentElement = lastElement;
 					currentIndex = count - 1;
-					for (int i = 0; i < count - newIndex; i++)
+					for (int i = 0; i < count - 1 - newIndex; i++)
 					{
 						StepBackward();
 					}
@@ -265,7 +240,7 @@ public:
 	}
 
 	/// <summary>
-	/// Pushes data to the list, behind the active element
+	/// Pushes data to the list, before the active element
 	/// </summary>
 	/// <param name="data">Data to be stored</param>
 	/// <returns>Whether the push was sucessful</returns>
@@ -287,25 +262,37 @@ public:
 		}
 		else
 		{
-			if (currentIndex == count - 1)
+			if (currentIndex == 0)
 			{
-				currentIndex++;
-				bool tmp = PushLast(data);
-				currentElement = lastElement;
-				return tmp;
+				LinkedListNode<T>* n = new LinkedListNode<T>(data);
+				if (n != nullptr)
+				{
+					currentElement->previousElement = n;
+					n->nextElement = currentElement;
+
+					firstElement = n;
+
+					count++;
+					currentIndex++;
+
+					return true;
+				}
+				else return false;
 			}
 			else
 			{
 				LinkedListNode<T>* n = new LinkedListNode<T>(data);
 				if (n != nullptr)
 				{
-					currentElement->nextElement->previousElement = n;
-					n->nextElement = currentElement->nextElement;
-					currentElement->nextElement = n;
-					n->previousElement = currentElement;
-					currentElement = n;
+					n->nextElement = currentElement;
+					n->previousElement = currentElement->previousElement;
+
+					n->previousElement->nextElement = n;
+					n->nextElement->previousElement = n;
+
 					count++;
 					currentIndex++;
+
 					return true;
 				}
 				else return false;
@@ -320,15 +307,25 @@ public:
 	/// <returns>Whether the push was sucessful</returns>
 	bool PushFirst(T data)
 	{
-		LinkedListNode<T>* n = new LinkedListNode<T>(data);
-		if (n != nullptr)
+		if (count == 0)
 		{
-			firstElement->previousElement = n;
-			n->nextElement = firstElement;
-			firstElement = n;
-			count++;
+			return Push(data);
 		}
-		else return false;
+		else
+		{
+			LinkedListNode<T>* n = new LinkedListNode<T>(data);
+			if (n != nullptr)
+			{
+				firstElement->previousElement = n;
+				n->nextElement = firstElement;
+
+				firstElement = n;
+
+				currentIndex++;
+				count++;
+			}
+			else return false;
+		}
 	}
 
 	/// <summary>
@@ -338,19 +335,28 @@ public:
 	/// <returns>Whether the push was sucessful</returns>
 	bool PushLast(T data)
 	{
-		LinkedListNode<T>* n = new LinkedListNode<T>(data);
-		if (n != nullptr)
+		if (count == 0)
 		{
-			lastElement->nextElement = n;
-			n->previousElement = lastElement;
-			lastElement = n;
-			count++;
+			return Push(data);
 		}
-		else return false;
+		else
+		{
+			LinkedListNode<T>* n = new LinkedListNode<T>(data);
+			if (n != nullptr)
+			{
+				lastElement->nextElement = n;
+				n->previousElement = lastElement;
+
+				lastElement = n;
+
+				count++;
+			}
+			else return false;
+		}
 	}
 
 	/// <summary>
-	/// Pushes data to the specified index, moving the rest of the list backwards
+	/// Pushes data to the specified index, moving the rest of the list forward
 	/// </summary>
 	/// <param name="index">The index of the new element</param>
 	/// <param name="data">Data to be stored</param>
@@ -380,7 +386,7 @@ public:
 			firstElement = currentElement;
 			currentElement->previousElement = nullptr;
 		}
-		else if (index == count - 1)
+		else if (index == count - 1) // last element
 		{
 			currentElement = currentElement->previousElement;
 			delete lastElement;
@@ -388,7 +394,7 @@ public:
 			currentElement->nextElement = nullptr;
 			currentIndex--;
 		}
-		else
+		else // Any in between
 		{
 			currentElement = currentElement->previousElement;
 			currentElement->nextElement = currentElement->nextElement->nextElement;
@@ -413,6 +419,11 @@ public:
 		return tmp;
 	}
 
+	/// <summary>
+	/// Swaps two elements' stored data
+	/// </summary>
+	/// <param name="leftIndex">The first element of swap</param>
+	/// <param name="rightIndex">The second element of swap</param>
 	void Swap(int leftIndex, int rightIndex)
 	{
 		int revert = currentIndex;
@@ -440,7 +451,7 @@ public:
 			delete(firstElement);
 			firstElement = tmp;
 		}
-		currentIndex = -1;
+		currentIndex = 0;
 		count = 0;
 	}
 
@@ -450,10 +461,44 @@ public:
 	}
 
 private:
-	int currentIndex;
+	unsigned int currentIndex;
 	unsigned int count;
 
 };
+// TODO: Improve
+// TODO: Expand
+// TODO: Intensive and extensive testing
+
+
+int main()
+{
+	DLinkedList<int>* test = new DLinkedList<int>;
+	test->PushFirst(0);
+	for (int i = 1; i < 100; i++)
+	{
+		test->PushLast(i);
+	}
+	test->Empty();
+	for (int i = 0; i < 100; i++)
+	{
+		test->PushLast(i);
+		say i << '\t' << test->currentElement->data;
+		creturn;
+	}
+	creturn;
+	//test->Swap(5, 7);
+	test->PushAt(50, 1000000);
+	test->RemoveAt(5);
+	for (int i = 0; i < test->Count(); i++)
+	{
+		say i << '\t' << test->GetDataAt(i);
+		creturn;
+
+	}
+	delete (test);
+	int leaks = _CrtDumpMemoryLeaks();
+	say leaks;
+}
 
 
 /// <summary>
