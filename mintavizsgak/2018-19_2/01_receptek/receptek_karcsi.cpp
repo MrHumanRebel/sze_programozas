@@ -17,6 +17,12 @@ struct alapanyag
   alapanyag *kov;
 };
 
+struct etel
+{
+  string nev;
+  alapanyag *alapanyagok;
+};
+
 alapanyag *beszur(string nev, alapanyag *horgony)
 {
   if (!horgony)
@@ -35,6 +41,23 @@ alapanyag *beszur(string nev, alapanyag *horgony)
   else
   {
     horgony->elozo = beszur(nev, horgony->elozo);
+  }
+
+  return horgony;
+}
+
+alapanyag *alapanyagBeker(alapanyag *horgony)
+{
+  alapanyag *akt = NULL;
+
+  cout << ALAPANYAG_KISERO << ' ' << INPUT_KISERO << endl;
+
+  string aktSor = "";
+  while (getline(cin, aktSor) && aktSor.find(INPUT_VEGE) == -1)
+  {
+    akt = beszur(aktSor, akt);
+    if (!horgony)
+      horgony = akt;
   }
 
   return horgony;
@@ -67,9 +90,11 @@ int main(int argc, char const *argv[])
 {
   cout << KEZDO_KISERO << endl;
 
-  alapanyag *horgony = NULL;
+  alapanyag *rendelkezesreAll = NULL;
+  rendelkezesreAll = alapanyagBeker(rendelkezesreAll);
 
-  torolMind(horgony);
+  kiirRendezett(rendelkezesreAll);
+  torolMind(rendelkezesreAll);
 
   return 0;
 }
