@@ -86,12 +86,38 @@ etel etelBeker()
   return uj;
 }
 
+alapanyag *keres(string nev, alapanyag *horgony)
+{
+  if (horgony == NULL || horgony->nev == nev)
+    return horgony;
+
+  if (nev.compare(horgony->nev) > 0)
+    return keres(nev, horgony->kov);
+
+  return keres(nev, horgony->elozo);
+}
+
+bool elkeszitheto(alapanyag *elerheto, alapanyag *szukseges)
+{
+  alapanyag *aktAlapanyag = szukseges;
+
+  while (aktAlapanyag)
+  {
+    string nev = aktAlapanyag->nev;
+    alapanyag *talalat = keres(nev, elerheto);
+    if (!talalat)
+      return false;
+
+    aktAlapanyag = aktAlapanyag->kov;
+  }
+
+  return true;
+}
+
 void kiirRendezett(alapanyag *horgony)
 {
   if (!horgony)
-  {
     return;
-  }
 
   kiirRendezett(horgony->elozo);
   cout << horgony->nev << endl;
@@ -113,24 +139,28 @@ int main(int argc, char const *argv[])
 {
   cout << KEZDO_KISERO << endl;
 
-  alapanyag *rendelkezesreAll = NULL;
-  rendelkezesreAll = alapanyagBeker(rendelkezesreAll, false);
+  alapanyag *elerheto = NULL;
+  elerheto = alapanyagBeker(elerheto, false);
 
   bool kilepes = false;
   do
   {
     etel akt = etelBeker();
     if (akt.nev[0] == INPUT_VEGE)
-      // Nem túl szép, hisz a kilepes helyett így simán lehetne egy true is
+      // Nem túl szép, hisz a "kilepes" helyett így simán lehetne egy true is
       break;
 
-    
+    bool etelElkeszitheto = elkeszitheto(elerheto, akt.szukseges);
+    string eredmeny = etelElkeszitheto ? " elkeszitheto" : " nem keszitheto el";
 
+    cout << "A(z) " << akt.nev << eredmeny << endl;
+
+    torolMind(akt.szukseges);
   } while (!kilepes);
 
   cout << KILEP << endl;
 
-  torolMind(rendelkezesreAll);
+  torolMind(elerheto);
 
   return 0;
 }
