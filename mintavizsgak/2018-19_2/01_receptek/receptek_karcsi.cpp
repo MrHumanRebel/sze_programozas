@@ -4,9 +4,13 @@ using namespace std;
 
 #define KEZDO_KISERO "Fozesi lehetosegeket analizalo program."
 
-#define ALAPANYAG_KISERO "Milyen alapanyagok allnak rendelkezesre?"
-#define ETEL_KISERO "Milyen alapanyagokra van szukseg?"
+#define ALAP_KISERO "Milyen alapanyagok allnak rendelkezesre?"
+#define SZUKSEGES_KISERO "Milyen alapanyagokra van szukseg?"
 #define INPUT_KISERO "Befejezes #-tel."
+
+#define ETEL_KISERO "Etel neve: "
+
+#define KILEP "Kilepes."
 
 #define INPUT_VEGE '#'
 
@@ -20,7 +24,7 @@ struct alapanyag
 struct etel
 {
   string nev;
-  alapanyag *alapanyagok;
+  alapanyag *szukseges;
 };
 
 alapanyag *beszur(string nev, alapanyag *horgony)
@@ -46,11 +50,12 @@ alapanyag *beszur(string nev, alapanyag *horgony)
   return horgony;
 }
 
-alapanyag *alapanyagBeker(alapanyag *horgony)
+alapanyag *alapanyagBeker(alapanyag *horgony, bool szukseges)
 {
   alapanyag *akt = NULL;
 
-  cout << ALAPANYAG_KISERO << ' ' << INPUT_KISERO << endl;
+  string kisero = szukseges ? SZUKSEGES_KISERO : ALAP_KISERO;
+  cout << kisero << ' ' << INPUT_KISERO << endl;
 
   string aktSor = "";
   while (getline(cin, aktSor) && aktSor.find(INPUT_VEGE) == -1)
@@ -61,6 +66,24 @@ alapanyag *alapanyagBeker(alapanyag *horgony)
   }
 
   return horgony;
+}
+
+etel etelBeker()
+{
+  cout << ETEL_KISERO;
+
+  string etelNeve;
+  getline(cin, etelNeve);
+
+  if (etelNeve[0] == INPUT_VEGE)
+    return {etelNeve, NULL};
+
+  alapanyag *szukseges = NULL;
+  szukseges = alapanyagBeker(szukseges, true);
+
+  etel uj = {etelNeve, szukseges};
+
+  return uj;
 }
 
 void kiirRendezett(alapanyag *horgony)
@@ -91,9 +114,22 @@ int main(int argc, char const *argv[])
   cout << KEZDO_KISERO << endl;
 
   alapanyag *rendelkezesreAll = NULL;
-  rendelkezesreAll = alapanyagBeker(rendelkezesreAll);
+  rendelkezesreAll = alapanyagBeker(rendelkezesreAll, false);
 
-  kiirRendezett(rendelkezesreAll);
+  bool kilepes = false;
+  do
+  {
+    etel akt = etelBeker();
+    if (akt.nev[0] == INPUT_VEGE)
+      // Nem túl szép, hisz a kilepes helyett így simán lehetne egy true is
+      break;
+
+    
+
+  } while (!kilepes);
+
+  cout << KILEP << endl;
+
   torolMind(rendelkezesreAll);
 
   return 0;
