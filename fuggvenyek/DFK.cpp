@@ -94,7 +94,7 @@ private:
 };
 
 /// <summary>
-/// Two way linked list made possible by Debreczeni, Kálmán
+/// Two way linked list
 /// </summary>
 /// <typeparam name="T">Any</typeparam>
 template<class T>
@@ -145,11 +145,14 @@ public:
 	}
 
 	// Need help in this one. Doesn't recognize [] as an operator
-	/*LinkedListNode<T>* operator[](int index)
-	{
-		SeekToIndex(index);
-		return currentElement;
-	}*/
+	//LinkedListNode<T>* operator[](int index)
+	//{
+	//	int revert = index;
+	//	SeekToIndex(index);
+	//	LinkedListNode<T>* tmp = currentElement;
+	//	SeekToIndex(revert);
+	//	return tmp;
+	//}
 
 	/// <summary>
 	/// Seeks to the specified index in the list, making the nth element active
@@ -176,7 +179,8 @@ public:
 				}
 				else
 				{
-					for (int i = 0; i < currentIndex - newIndex; i++)
+					int steps = currentIndex - newIndex;
+					for (int i = 0; i < steps; i++)
 					{
 						StepBackward();
 					}
@@ -195,7 +199,8 @@ public:
 				}
 				else
 				{
-					for (int i = 0; i < newIndex - currentIndex; i++)
+					int steps = newIndex - currentIndex;
+					for (int i = 0; i < steps; i++)
 					{
 						StepForward();
 					}
@@ -217,6 +222,7 @@ public:
 		}
 		else
 		{
+			currentIndex++;
 			currentElement = currentElement->nextElement;
 		}
 		return true;
@@ -234,6 +240,7 @@ public:
 		}
 		else
 		{
+			currentIndex--;
 			currentElement = currentElement->previousElement;
 		}
 		return true;
@@ -481,7 +488,7 @@ int main()
 	test->Empty();
 	for (int i = 0; i < 100; i++)
 	{
-		test->PushLast(i);
+		test->Push(i);
 		say i << '\t' << test->currentElement->data;
 		creturn;
 	}
@@ -661,8 +668,8 @@ string ReverseString(string str)
 /// <summary>
 /// Finds the first index in the array that matches the given search parameter
 /// </summary>
-/// <typeparam name="T">Array-like structure</typeparam>
-/// <param name="arr">The search array</param>
+/// <typeparam name="T">Any</typeparam>
+/// <param name="arr">Array-like object</param>
 /// <param name="length">Lenght of the array</param>
 /// <param name="searchedElement">The element that needs to be found</param>
 /// <returns>The first index of the searched element, otherwise -1</returns>
@@ -679,13 +686,13 @@ template<class T> int IndexOf(T* arr, int length, T searchedElement)
 }
 
 /// <summary>
-/// Finds the last index in the array that matches the given search parameter
+/// Finds the first index in the array that matches the given search parameter
 /// </summary>
-/// <typeparam name="T">Array-like structure</typeparam>
-/// <param name="arr">The search array</param>
+/// <typeparam name="T">Any</typeparam>
+/// <param name="arr">Array-like object</param>
 /// <param name="length">Lenght of the array</param>
 /// <param name="searchedElement">The element that needs to be found</param>
-/// <returns>The last index of the searched element, otherwise -1</returns>
+/// <returns>The first index of the searched element, otherwise -1</returns>
 template<class T> int LastIndex(T* arr, int length, T searchedElement)
 {
 	for (int i = length - 1; i >= 0; i--)
