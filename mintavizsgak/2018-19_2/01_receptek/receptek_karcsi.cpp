@@ -9,6 +9,8 @@ using namespace std;
 #define INPUT_KISERO "Befejezes #-tel."
 
 #define ETEL_KISERO "Etel neve: "
+#define ELKESZITHETO "elkeszitheto."
+#define NEM_KESZITHETO_EL "nem keszitheto el, a kovetkezo alapanyagok hianyoznak: "
 
 #define KILEP "Kilepes."
 
@@ -97,21 +99,27 @@ alapanyag *keres(string nev, alapanyag *horgony)
   return keres(nev, horgony->elozo);
 }
 
-bool elkeszitheto(alapanyag *elerheto, alapanyag *szukseges)
+alapanyag *hianyzik(alapanyag *hianyzo, alapanyag *elerheto, alapanyag *szukseges)
 {
-  alapanyag *aktAlapanyag = szukseges;
+  alapanyag *aktHianyzo = NULL;
+  alapanyag *aktSzuks = szukseges;
 
-  while (aktAlapanyag)
+  while (aktSzuks)
   {
-    string nev = aktAlapanyag->nev;
+    string nev = aktSzuks->nev;
     alapanyag *talalat = keres(nev, elerheto);
-    if (!talalat)
-      return false;
 
-    aktAlapanyag = aktAlapanyag->kov;
+    if (!talalat)
+    {
+      aktHianyzo = beszur(nev, aktHianyzo);
+      if (!hianyzo)
+        hianyzo = aktHianyzo;
+    }
+
+    aktSzuks = aktSzuks->kov;
   }
 
-  return true;
+  return hianyzo;
 }
 
 void kiirRendezett(alapanyag *horgony)
@@ -154,13 +162,20 @@ int main(int argc, char const *argv[])
     if (akt.nev[0] == INPUT_VEGE)
       break;
 
-    bool etelElkeszitheto = elkeszitheto(elerheto, akt.szukseges);
-    string eredmeny = etelElkeszitheto ? " elkeszitheto" : " nem keszitheto el";
+    /* A keres() függvény segítségével összeszedjük a hiányzó alapanyagokat
+       Üres láncolt lista esetén tudjuk, hogy elkészíthető,
+       hiszen semmi se hiányzik */
+    alapanyag *hianyzo = NULL;
+    hianyzo = hianyzik(hianyzo, elerheto, akt.szukseges);
 
-    cout << "A(z) " << akt.nev << eredmeny << endl;
+    string eredmeny = hianyzo ? NEM_KESZITHETO_EL : ELKESZITHETO;
+    cout << "A(z) " << akt.nev << ' ' << eredmeny << endl;
+    if (hianyzo)
+      kiirRendezett(hianyzo);
 
-    // A biztonság kedvéért likvidáljuk a memóriából az aktuális alapanyagokat
+    // A biztonság kedvéért likvidáljuk a memóriából az aktuális és a hiányzó alapanyagokat
     torolMind(akt.szukseges);
+    torolMind(hianyzo);
   } while (!kilepes);
 
   cout << KILEP << endl;
