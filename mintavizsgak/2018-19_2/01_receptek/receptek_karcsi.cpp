@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ using namespace std;
 #define KILEP "Kilepes."
 
 #define INPUT_VEGE '#'
+#define FAJLNEV "alapanyagok_karcsi.txt"
 
 struct alapanyag
 {
@@ -52,21 +54,66 @@ alapanyag *beszur(string nev, alapanyag *horgony)
   return horgony;
 }
 
-alapanyag *alapanyagBeker(alapanyag *horgony, bool szukseges)
+void alapanyagMent(alapanyag *horgony, string fajlnev)
+{
+  ofstream fajl(fajlnev);
+
+  alapanyag *akt = horgony;
+  while (akt)
+  {
+    fajl << akt->nev << endl;
+    akt = akt->kov;
+  }
+}
+
+void kiirEsMentRendezett(alapanyag *horgony, ostream &kimenet)
+{
+  if (!horgony)
+    return;
+
+  kiirEsMentRendezett(horgony->elozo, kimenet);
+  kimenet << horgony->nev << endl;
+  kiirEsMentRendezett(horgony->kov, kimenet);
+}
+
+void torolMind(alapanyag *horgony)
+{
+
+  while (horgony)
+  {
+    alapanyag *kovSzimb = horgony->kov;
+    delete horgony;
+    horgony = kovSzimb;
+  }
+}
+
+alapanyag *alapanyagBeker(alapanyag *horgony, bool szukseges, string fajlnev = "")
 {
   alapanyag *akt = NULL;
 
-  string kisero = szukseges ? SZUKSEGES_KISERO : ALAP_KISERO;
-  cout << kisero << ' ' << INPUT_KISERO << endl;
+  ifstream fajl(fajlnev);
+  istream &bemenet = !szukseges && fajl.is_open() ? fajl : cin;
 
-  string aktSor = "";
-  while (getline(cin, aktSor) && aktSor.find(INPUT_VEGE) == -1)
+  string aktSor;
+
+  if (!fajl.is_open())
+  {
+    string kisero = szukseges ? SZUKSEGES_KISERO : ALAP_KISERO;
+    cout << kisero << ' ' << INPUT_KISERO << endl;
+  }
+
+  while (getline(bemenet, aktSor) && aktSor[0] != INPUT_VEGE)
   {
     akt = beszur(aktSor, akt);
     if (!horgony)
       horgony = akt;
   }
 
+  if (!fajl.is_open())
+  {
+    ofstream mentes(fajlnev);
+    kiirEsMentRendezett(horgony, mentes);
+  }
   return horgony;
 }
 
@@ -122,27 +169,6 @@ alapanyag *hianyzik(alapanyag *hianyzo, alapanyag *elerheto, alapanyag *szuksege
   return hianyzo;
 }
 
-void kiirRendezett(alapanyag *horgony)
-{
-  if (!horgony)
-    return;
-
-  kiirRendezett(horgony->elozo);
-  cout << horgony->nev << endl;
-  kiirRendezett(horgony->kov);
-}
-
-void torolMind(alapanyag *horgony)
-{
-
-  while (horgony)
-  {
-    alapanyag *kovSzimb = horgony->kov;
-    delete horgony;
-    horgony = kovSzimb;
-  }
-}
-
 int main(int argc, char const *argv[])
 {
   cout << KEZDO_KISERO << endl;
@@ -150,7 +176,7 @@ int main(int argc, char const *argv[])
   /* A rendelkezésünkre álló alapanyagok bekérése
      és eltárolása egy bináris keresőfában (ABC-sorrendben rendezett) */
   alapanyag *elerheto = NULL;
-  elerheto = alapanyagBeker(elerheto, false);
+  elerheto = alapanyagBeker(elerheto, false, FAJLNEV);
 
   bool kilepes = false;
   do
@@ -171,7 +197,7 @@ int main(int argc, char const *argv[])
     string eredmeny = hianyzo ? NEM_KESZITHETO_EL : ELKESZITHETO;
     cout << "A(z) " << akt.nev << ' ' << eredmeny << endl;
     if (hianyzo)
-      kiirRendezett(hianyzo);
+      kiirEsMentRendezett(hianyzo, cout);
 
     // A biztonság kedvéért likvidáljuk a memóriából az aktuális és a hiányzó alapanyagokat
     torolMind(akt.szukseges);
