@@ -139,6 +139,8 @@ int main(int argc, char const *argv[])
 {
   cout << KEZDO_KISERO << endl;
 
+  /* A rendelkezésünkre álló alapanyagok bekérése
+     és eltárolása egy bináris keresőfában (ABC-sorrendben rendezett) */
   alapanyag *elerheto = NULL;
   elerheto = alapanyagBeker(elerheto, false);
 
@@ -146,8 +148,10 @@ int main(int argc, char const *argv[])
   do
   {
     etel akt = etelBeker();
+
+    /* '#' esetén nem szükséges tovább folytatnunk az adatok feldolgozását,
+       így "elegánsan" kilépünk a ciklusból */
     if (akt.nev[0] == INPUT_VEGE)
-      // Nem túl szép, hisz a "kilepes" helyett így simán lehetne egy true is
       break;
 
     bool etelElkeszitheto = elkeszitheto(elerheto, akt.szukseges);
@@ -155,6 +159,7 @@ int main(int argc, char const *argv[])
 
     cout << "A(z) " << akt.nev << eredmeny << endl;
 
+    // A biztonság kedvéért likvidáljuk a memóriából az aktuális alapanyagokat
     torolMind(akt.szukseges);
   } while (!kilepes);
 
