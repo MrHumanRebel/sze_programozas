@@ -93,6 +93,11 @@ int main()
 
     TELL "Etel neve: ";
     string aktetel = beolv();
+    if (aktetel == "#")
+    {
+        TELL "Kilepes." << endl;
+        return 0;
+    }
 
     TELL "Milyen alapanyagokra van szukseg? Befejezes #-tel." << endl;
     int hanykell = beker(mikell) - 1;
