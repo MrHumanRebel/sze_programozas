@@ -146,6 +146,7 @@ alapanyag *keres(string nev, alapanyag *horgony)
   return keres(nev, horgony->elozo);
 }
 
+// TODO: Újragondolni az egészet, nem működik a jelenlegi formájában
 alapanyag *hianyzik(alapanyag *hianyzo, alapanyag *elerheto, alapanyag *szukseges)
 {
   alapanyag *aktHianyzo = NULL;
@@ -169,6 +170,31 @@ alapanyag *hianyzik(alapanyag *hianyzo, alapanyag *elerheto, alapanyag *szuksege
   return hianyzo;
 }
 
+bool etelKezel(alapanyag *elerheto)
+{
+  etel akt = etelBeker();
+
+  if (akt.nev[0] == INPUT_VEGE)
+    return true;
+
+  /* A keres() függvény segítségével összeszedjük a hiányzó alapanyagokat
+   Üres láncolt lista esetén tudjuk, hogy elkészíthető,
+   hiszen semmi se hiányzik */
+  alapanyag *hianyzo = NULL;
+  hianyzo = hianyzik(hianyzo, elerheto, akt.szukseges);
+
+  string eredmeny = hianyzo ? NEM_KESZITHETO_EL : ELKESZITHETO;
+  cout << "A(z) " << akt.nev << ' ' << eredmeny << endl;
+  if (hianyzo)
+    kiirEsMentRendezett(hianyzo, cout);
+
+  // A biztonság kedvéért likvidáljuk a memóriából az aktuális és a hiányzó alapanyagokat
+  torolMind(akt.szukseges);
+  torolMind(hianyzo);
+
+  return false;
+}
+
 int main(int argc, char const *argv[])
 {
   cout << KEZDO_KISERO << endl;
@@ -178,31 +204,11 @@ int main(int argc, char const *argv[])
   alapanyag *elerheto = NULL;
   elerheto = alapanyagBeker(elerheto, false, FAJLNEV);
 
-  bool kilepes = false;
+  bool kilep = false;
   do
   {
-    etel akt = etelBeker();
-
-    /* '#' esetén nem szükséges tovább folytatnunk az adatok feldolgozását,
-       így "elegánsan" kilépünk a ciklusból */
-    if (akt.nev[0] == INPUT_VEGE)
-      break;
-
-    /* A keres() függvény segítségével összeszedjük a hiányzó alapanyagokat
-       Üres láncolt lista esetén tudjuk, hogy elkészíthető,
-       hiszen semmi se hiányzik */
-    alapanyag *hianyzo = NULL;
-    hianyzo = hianyzik(hianyzo, elerheto, akt.szukseges);
-
-    string eredmeny = hianyzo ? NEM_KESZITHETO_EL : ELKESZITHETO;
-    cout << "A(z) " << akt.nev << ' ' << eredmeny << endl;
-    if (hianyzo)
-      kiirEsMentRendezett(hianyzo, cout);
-
-    // A biztonság kedvéért likvidáljuk a memóriából az aktuális és a hiányzó alapanyagokat
-    torolMind(akt.szukseges);
-    torolMind(hianyzo);
-  } while (!kilepes);
+    kilep = etelKezel(elerheto);
+  } while (!kilep);
 
   cout << KILEP << endl;
 
