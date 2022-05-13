@@ -103,6 +103,61 @@ mu *muFeltolt(mu *horgony)
   return horgony;
 }
 
+int datumFeldarabol(string &datum, int &kotojelHelye)
+{
+  if (kotojelHelye > 0)
+    datum = datum.substr(kotojelHelye + 1);
+
+  kotojelHelye = datum.find("-");
+  int aktElem = stoi(datum.substr(0, kotojelHelye));
+
+  return aktElem;
+}
+
+bool korabbiMu(string datum, string datum2)
+{
+  int kotojelHelye = -1;
+  int kotojelHelye2 = -1;
+
+  int ev = datumFeldarabol(datum, kotojelHelye);
+  int ev2 = datumFeldarabol(datum2, kotojelHelye2);
+
+  cout << "Ev: " << ev << " - " << ev2 << endl;
+  if (ev2 < ev)
+    return false;
+
+  int honap = datumFeldarabol(datum, kotojelHelye);
+  int honap2 = datumFeldarabol(datum2, kotojelHelye2);
+
+  cout << "Honap: " << honap << " - " << honap2 << endl;
+  if (ev == ev2 && honap > honap2)
+    return false;
+
+  int nap = datumFeldarabol(datum, kotojelHelye);
+  int nap2 = datumFeldarabol(datum2, kotojelHelye2);
+
+  cout << "Nap: " << nap << " - " << nap2 << endl;
+  if (ev == ev2 && honap == honap2 && nap > nap2)
+    return false;
+
+  return true;
+}
+
+// TODO: Implementáld
+string szerzoEllenoriz(string nev, string datum, mu *horgony)
+{
+  string eredmeny;
+
+  while (horgony)
+  {
+    
+
+    horgony = horgony->kov;
+  }
+
+  return eredmeny;
+}
+
 int main(int argc, char const *argv[])
 {
   cout << KEZDO << endl;
