@@ -140,7 +140,7 @@ bool korabbiMu(string datum, string datum2)
   return true;
 }
 
-int mennyireEgyezik(string tartalom, string tartalom2, int minSzazalek = 1)
+int mennyireEgyezik(string tartalom, string tartalom2, double minSzazalek)
 {
   int egyezikDb = 0;
 
@@ -151,11 +151,16 @@ int mennyireEgyezik(string tartalom, string tartalom2, int minSzazalek = 1)
       egyezikDb++;
   }
 
+  if (minSzazalek > 0)
+  {
+    double szazalekPlagizalt = (egyezikDb * 1.0 / tartalom.length()) * 100;
+    egyezikDb = szazalekPlagizalt < minSzazalek ? 0 : egyezikDb;
+  }
+
   return egyezikDb;
 }
 
-// TODO: Implementáld
-string szerzoEllenoriz(string nev, string tartalom, string datum, mu *horgony)
+string szerzoEllenoriz(string nev, string tartalom, string datum, mu *horgony, double minSzazalek)
 {
   string eredmeny = "";
 
@@ -163,7 +168,7 @@ string szerzoEllenoriz(string nev, string tartalom, string datum, mu *horgony)
   {
     if (nev != horgony->tudosNeve && korabbiMu(horgony->datum, datum))
     {
-      int egyezikDb = mennyireEgyezik(tartalom, horgony->tartalom);
+      int egyezikDb = mennyireEgyezik(tartalom, horgony->tartalom, minSzazalek);
       if (egyezikDb > 0)
       {
         eredmeny = eredmeny == "" ? "csalt (lopott tole: " : eredmeny;
@@ -193,10 +198,11 @@ int main(int argc, char const *argv[])
   mu *publikaciok = NULL;
   publikaciok = muFeltolt(publikaciok);
 
+  double szazalekMegengedett = argc == 2 ? stod(argv[1]) : 0;
   mu *aktPubl = publikaciok;
   while (aktPubl)
   {
-    string eredmeny = szerzoEllenoriz(aktPubl->tudosNeve, aktPubl->tartalom, aktPubl->datum, publikaciok);
+    string eredmeny = szerzoEllenoriz(aktPubl->tudosNeve, aktPubl->tartalom, aktPubl->datum, publikaciok, szazalekMegengedett);
 
     cout << aktPubl->tudosNeve << " - " << eredmeny << endl;
     aktPubl = aktPubl->kov;
