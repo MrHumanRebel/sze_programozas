@@ -122,37 +122,66 @@ bool korabbiMu(string datum, string datum2)
   int ev = datumFeldarabol(datum, kotojelHelye);
   int ev2 = datumFeldarabol(datum2, kotojelHelye2);
 
-  cout << "Ev: " << ev << " - " << ev2 << endl;
   if (ev2 < ev)
     return false;
 
   int honap = datumFeldarabol(datum, kotojelHelye);
   int honap2 = datumFeldarabol(datum2, kotojelHelye2);
 
-  cout << "Honap: " << honap << " - " << honap2 << endl;
   if (ev == ev2 && honap > honap2)
     return false;
 
   int nap = datumFeldarabol(datum, kotojelHelye);
   int nap2 = datumFeldarabol(datum2, kotojelHelye2);
 
-  cout << "Nap: " << nap << " - " << nap2 << endl;
   if (ev == ev2 && honap == honap2 && nap > nap2)
     return false;
 
   return true;
 }
 
-// TODO: Implementáld
-string szerzoEllenoriz(string nev, string datum, mu *horgony)
+int mennyireEgyezik(string tartalom, string tartalom2, int minSzazalek = 1)
 {
-  string eredmeny;
+  int egyezikDb = 0;
+
+  int karDb = tartalom < tartalom2 ? tartalom.length() : tartalom2.length();
+  for (int i = 0; i < karDb; i++)
+  {
+    if (tartalom[i] == tartalom2[i])
+      egyezikDb++;
+  }
+
+  return egyezikDb;
+}
+
+// TODO: Implementáld
+string szerzoEllenoriz(string nev, string tartalom, string datum, mu *horgony)
+{
+  string eredmeny = "";
 
   while (horgony)
   {
-    
+    if (nev != horgony->tudosNeve && korabbiMu(horgony->datum, datum))
+    {
+      int egyezikDb = mennyireEgyezik(tartalom, horgony->tartalom);
+      if (egyezikDb > 0)
+      {
+        eredmeny = eredmeny == "" ? "csalt (lopott tole: " : eredmeny;
+        eredmeny += horgony->tudosNeve + ", ";
+      }
+    }
 
     horgony = horgony->kov;
+  }
+
+  if (eredmeny == "")
+  {
+    eredmeny = "becsuletes, nem csalt";
+  }
+  else
+  {
+    eredmeny = eredmeny.substr(0, eredmeny.length() - 2);
+    eredmeny += ")";
   }
 
   return eredmeny;
@@ -164,7 +193,15 @@ int main(int argc, char const *argv[])
   mu *publikaciok = NULL;
   publikaciok = muFeltolt(publikaciok);
 
-  muKiir(publikaciok);
+  mu *aktPubl = publikaciok;
+  while (aktPubl)
+  {
+    string eredmeny = szerzoEllenoriz(aktPubl->tudosNeve, aktPubl->tartalom, aktPubl->datum, publikaciok);
+
+    cout << aktPubl->tudosNeve << " - " << eredmeny << endl;
+    aktPubl = aktPubl->kov;
+  }
+
   muTorolMind(publikaciok);
 
   return 0;
