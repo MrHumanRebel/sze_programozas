@@ -146,26 +146,11 @@ alapanyag *keres(string nev, alapanyag *horgony)
   return keres(nev, horgony->elozo);
 }
 
-// TODO: Újragondolni az egészet, nem működik a jelenlegi formájában
+// Pszichológiai horror, nem működik
 alapanyag *hianyzik(alapanyag *hianyzo, alapanyag *elerheto, alapanyag *szukseges)
 {
   alapanyag *aktHianyzo = NULL;
   alapanyag *aktSzuks = szukseges;
-
-  while (aktSzuks)
-  {
-    string nev = aktSzuks->nev;
-    alapanyag *talalat = keres(nev, elerheto);
-
-    if (!talalat)
-    {
-      aktHianyzo = beszur(nev, aktHianyzo);
-      if (!hianyzo)
-        hianyzo = aktHianyzo;
-    }
-
-    aktSzuks = aktSzuks->kov;
-  }
 
   return hianyzo;
 }
