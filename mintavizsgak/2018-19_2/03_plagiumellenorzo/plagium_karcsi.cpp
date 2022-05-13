@@ -7,6 +7,8 @@ using namespace std;
 #define TART "Mu: "
 #define DATUM "Datum: "
 
+#define URES "--- Ures sort adtak meg, beolvasas vege. ---"
+
 struct mu
 {
   string tudosNeve;
@@ -16,15 +18,15 @@ struct mu
   mu *kov;
 };
 
-mu *muBeszur(string tudosNeve, string datum, string tartalom, mu *elozo)
+mu *muBeszur(string tudosNeve, string tartalom, string datum, mu *elozo)
 {
   mu *uj = new mu;
 
   if (uj)
   {
     uj->tudosNeve = tudosNeve;
-    uj->datum = datum;
     uj->tartalom = tartalom;
+    uj->datum = datum;
 
     if (elozo)
     {
@@ -44,12 +46,10 @@ void muKiir(mu *horgony)
 {
   while (horgony)
   {
-    cout << TUDOS
-         << horgony->tudosNeve << endl;
+    cout << horgony->tudosNeve << " (" << horgony->datum << ")" << endl;
     cout << TART
          << horgony->tartalom << endl;
-    cout << DATUM
-         << horgony->datum << endl;
+    cout << endl;
 
     horgony = horgony->kov;
   }
@@ -65,10 +65,49 @@ void muTorolMind(mu *horgony)
   }
 }
 
+string adatBeker(string kisero, bool &kilep)
+{
+  string adat;
+
+  cout << kisero;
+  getline(cin, adat);
+
+  if (adat.empty())
+  {
+    cout << URES << endl;
+    kilep = true;
+  }
+
+  return adat;
+}
+
+mu *muFeltolt(mu *horgony)
+{
+  mu *akt = NULL;
+
+  bool kilep = false;
+  do
+  {
+    string tudosNeve = adatBeker(TUDOS, kilep);
+    string tartalom = kilep ? "" : adatBeker(TART, kilep);
+    string datum = kilep ? "" : adatBeker(DATUM, kilep);
+
+    if (!kilep)
+    {
+      akt = muBeszur(tudosNeve, tartalom, datum, akt);
+      if (!horgony)
+        horgony = akt;
+    }
+  } while (!kilep);
+
+  return horgony;
+}
+
 int main(int argc, char const *argv[])
 {
   cout << KEZDO << endl;
   mu *publikaciok = NULL;
+  publikaciok = muFeltolt(publikaciok);
 
   muKiir(publikaciok);
   muTorolMind(publikaciok);
