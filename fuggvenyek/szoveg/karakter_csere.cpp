@@ -3,26 +3,25 @@
 
 using namespace std;
 
+string replaceChar(string szoveg, char mit, char mire)
+{
 
-string replaceChar(string szoveg, char mit, char mire) {
+  int n = szoveg.length();
+  string modositottSzoveg = "";
 
-	int n = szoveg.length();
-	string modositottSzoveg = "";
+  for (int i = 0; i < n; i++)
+  {
+    modositottSzoveg += szoveg[i] == mit ? mire : szoveg[i];
+  }
 
-	for (int i = 0; i < n; i++)
-	{
-		modositottSzoveg += szoveg[i] == mit ? mire : szoveg[i];
-	}
-	
-	return modositottSzoveg;
+  return modositottSzoveg;
 }
 
 int main()
 {
-	string s = "Haha gen";
-	string vmi = replaceChar(s, ' ', '!');
-	cout << vmi;
+  string s = "Haha gen";
+  string vmi = replaceChar(s, ' ', '!');
+  cout << vmi;
 
-
-	return 0;
+  return 0;
 }
