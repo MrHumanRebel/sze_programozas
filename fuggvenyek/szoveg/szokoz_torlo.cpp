@@ -25,9 +25,9 @@ string unspaceString(string szoveg) {
 
 int main()
 {
-	string szóköztelen = "";
-	szóköztelen = unspaceString("E z E gy          Mondat.");
-	cout << szóköztelen;
+	string szokoztelen = "";
+	szokoztelen = unspaceString("E z E gy          Mondat.");
+	cout << szokoztelen;
 
 	return 0;
 }
