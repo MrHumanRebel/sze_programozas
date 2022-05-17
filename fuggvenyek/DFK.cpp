@@ -35,6 +35,8 @@ template<class T> void Reverse(T* arr, int length);
 string ReverseString(string str);
 template<class T> int IndexOf(T* arr, int length, T searchedElement);
 template<class T> int LastIndex(T* arr, int length, T searchedElement);
+template<class T> void RotateArray(T* arr, int length, int steps);
+template<class T> void ShiftArray(T* arr, int length, int steps, T filler = NULL);
 char** ReadAllLines(string fileName, int* length);
 
 
@@ -479,32 +481,26 @@ private:
 
 int main()
 {
-	DLinkedList<int>* test = new DLinkedList<int>;
-	test->PushFirst(0);
-	for (int i = 1; i < 100; i++)
+	int asd[15];
+	for (int i = 0; i < 15; i++)
 	{
-		test->PushLast(i);
+		asd[i] = i;
 	}
-	test->Empty();
-	for (int i = 0; i < 100; i++)
+	ShiftArray<int>(asd, 15, 17);
+	for (int i = 0; i < 15; i++)
 	{
-		test->Push(i);
-		say i << '\t' << test->currentElement->data;
+		say asd[i];
 		creturn;
 	}
+	ShiftArray<int>(asd, 15, -17);
 	creturn;
-	//test->Swap(5, 7);
-	test->PushAt(50, 1000000);
-	test->RemoveAt(5);
-	for (int i = 0; i < test->Count(); i++)
+	for (int i = 0; i < 15; i++)
 	{
-		say i << '\t' << test->GetDataAt(i);
+		say asd[i];
 		creturn;
-
 	}
-	delete (test);
 	int leaks = _CrtDumpMemoryLeaks();
-	say leaks;
+	say "Leaks: " << leaks;
 }
 
 
@@ -703,6 +699,91 @@ template<class T> int LastIndex(T* arr, int length, T searchedElement)
 		}
 	}
 	return -1;
+}
+
+/// <summary>
+/// Moves array elements left or right the specified amount
+/// </summary>
+/// <typeparam name="T">Any</typeparam>
+/// <param name="arr">Array-like object</param>
+/// <param name="length">Length of the array</param>
+/// <param name="steps">How much steps should the array be rotated</param>
+template<class T> void RotateArray(T* arr, int length, int steps)
+{
+	bool toRight = steps >= 0;
+	steps = steps % length;
+	if (steps == 0)
+	{
+		return;
+	}
+	else if (toRight)
+	{
+		for (int i = 0; i < steps; i++)
+		{
+			int last = arr[length - 1];
+			for (int j = length - 2; j >= 0; j--)
+			{
+				arr[j + 1] = arr[j];
+			}
+			arr[0] = last;
+		}
+	}
+	else
+	{
+		steps *= -1;
+		for (int i = 0; i < steps; i++)
+		{
+			int first = arr[0];
+			for (int j = 0; j < length - 1; j++)
+			{
+				arr[j] = arr[j + 1];
+			}
+			arr[length - 1] = first;
+		}
+	}
+	return;
+}
+
+/// <summary>
+/// Shifts elements in the array the specified amount and fills in the empty space
+/// </summary>
+/// <typeparam name="T">Any</typeparam>
+/// <param name="arr">Array-like object</param>
+/// <param name="length">Length of the array</param>
+/// <param name="steps">How much steps should the array be rotated</param>
+/// <param name="filler">The data what fills in the new space</param>
+template<class T> void ShiftArray(T* arr, int length, int steps, T filler)
+{
+	bool toRight = steps >= 0;
+	steps = steps % length;
+	if (steps == 0)
+	{
+		return;
+	}
+	else if (toRight)
+	{
+		for (int i = length - 1; i >= steps; i--)
+		{
+			arr[i] = arr[i - steps];
+		}
+		for (int i = 0; i < steps; i++)
+		{
+			arr[i] = filler;
+		}
+	}
+	else
+	{
+		steps *= -1;
+		for (int i = 0; i < length - steps; i++)
+		{
+			arr[i] = arr[i + steps];
+		}
+		for (int i = length - steps; i < length; i++)
+		{
+			arr[i] = filler;
+		}
+	}
+	return;
 }
 
 /// <summary>
