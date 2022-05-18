@@ -481,24 +481,16 @@ private:
 
 int main()
 {
-	int asd[15];
-	for (int i = 0; i < 15; i++)
-	{
-		asd[i] = i;
-	}
-	ShiftArray<int>(asd, 15, 17);
-	for (int i = 0; i < 15; i++)
-	{
-		say asd[i];
-		creturn;
-	}
-	ShiftArray<int>(asd, 15, -17);
+	say ConvertToInt("-654");
 	creturn;
-	for (int i = 0; i < 15; i++)
-	{
-		say asd[i];
-		creturn;
-	}
+	say ConvertToInt("654asd");
+	creturn;
+	say ConvertToInt("-654asd");
+	creturn;
+	say ConvertToInt("642654");
+	creturn;
+	say ConvertToInt("asd");
+	creturn;
 	int leaks = _CrtDumpMemoryLeaks();
 	say "Leaks: " << leaks;
 }
@@ -603,18 +595,16 @@ int ConvertToInt(string str)
 {
 	bool isNegative = (str[0] == '-');
 	int retNumber = 0;
-	for (short i = isNegative; i < str.length(); i++)
+	short i;
+	for (i = isNegative; i < str.length(); i++)
 	{
-		if ((int)(str[i]) - 48 >= 0 && (int)(str[i]) - 48 <= 9)
+		if ((int)str[i] >= 48 && (int)str[i] <= 57)
 		{
-			retNumber += (int)(((int)(str[i])) - (int)48) * pow(10, str.length() - i - (int)1);
+			retNumber += ((int)str[i] - 48) * pow(10, str.length() - (i + 1));
 		}
-		else
-		{
-			retNumber = 0;
-			break;
-		}
+		else break;
 	}
+	retNumber = retNumber / (pow(10, str.length()) / pow(10, i));
 	retNumber -= (int)isNegative * retNumber * 2;
 	return retNumber;
 }
@@ -636,7 +626,7 @@ template<class T> void Swap(T& left, T& right)
 /// <summary>
 /// Reverses the given array
 /// </summary>
-/// <typeparam name="T">Anything but string</typeparam>
+/// <typeparam name="T">Any but string</typeparam>
 /// <param name="arr">The array to be reversed</param>
 /// <param name="length">Length of the array</param>
 template<class T> void Reverse(T* arr, int length)
