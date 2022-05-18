@@ -7,23 +7,17 @@ using namespace std;
 
 #define SOR_MAX 5
 #define OSZLOP_MAX 5
-#define SEED 0
 #define FAJLNEV "palya_iras_teszt.txt"
 
-int random(int tol, int ig, int seed)
-{
-  srand(time(NULL) + seed);
-  return (tol + rand() % (ig - tol + 1));
-}
 
-void feltolt(char tabla[SOR_MAX][OSZLOP_MAX], int seed)
+void feltolt(char tabla[SOR_MAX][OSZLOP_MAX])
 {
   for (int i = 0; i < SOR_MAX; i++)
   {
     for (int j = 0; j < OSZLOP_MAX; j++)
     {
-      seed = random(1, 50, seed);
-      tabla[i][j] = random('A', 'Z', seed);
+      // Minden cella az ABC egyik random betűje (demonstrációs célzattal csak)
+      tabla[i][j] = 'A' + (rand() % 26);
     }
   }
 }
@@ -51,9 +45,8 @@ void ment(char tabla[SOR_MAX][OSZLOP_MAX])
 int main()
 {
   char tabla[SOR_MAX][OSZLOP_MAX];
-  int seed = 0;
-  
-  feltolt(tabla, seed);
+
+  feltolt(tabla);
   ment(tabla);
 
   return 0;
