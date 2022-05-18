@@ -1,37 +1,41 @@
 #include <iostream>
+
 using namespace std;
 
 void bubi(int tomb[], int db)
 {
-    for (int v = db - 1; v >= 1; v--)
+  for (int i = db - 1; i >= 1; i--)
+  {
+    for (int j = 0; j < i; j++)
     {
-        for (int e = 0, csere; e < v; e++)
-        {
-            if (tomb[e] > tomb[e + 1])
-            {
-                csere = tomb[e];
-                tomb[e] = tomb[e + 1];
-                tomb[e + 1] = csere;
-            }
-        }
+      if (tomb[j] > tomb[j + 1])
+      {
+        int csere = tomb[j];
+        tomb[j] = tomb[j + 1];
+        tomb[j + 1] = csere;
+      }
     }
+  }
 }
 
-void kiir(int tomb[], int aktDb)
+void kiir(int tomb[], int db)
 {
-    for (int i = 0; i < aktDb; i++)
-    {
-        cout << tomb[i] << endl;
-    }
-    cout << endl;
+  for (int i = 0; i < db; i++)
+  {
+    cout << tomb[i] << endl;
+  }
+
+  cout << endl;
 }
 
 int main()
 {
-    int tomb[] = {1, -3, 9, -7, 5};
-    int meret = sizeof(tomb) / sizeof(tomb[0]);
-    kiir(tomb, meret);
-    bubi(tomb, meret);
-    kiir(tomb, meret);
-    return 0;
+  int tomb[] = {1, -3, 9, -7, 5};
+  int meret = sizeof(tomb) / sizeof(tomb[0]);
+
+  kiir(tomb, meret);
+  bubi(tomb, meret);
+  kiir(tomb, meret);
+
+  return 0;
 }

@@ -22,6 +22,8 @@ int main()
   int sor = 10;
   int oszlop = 10;
   char tabla[SOR_MAX][OSZLOP_MAX];
+
   palyaGen(tabla, sor, oszlop);
+
   return 0;
 }
