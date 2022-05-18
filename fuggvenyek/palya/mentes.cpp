@@ -4,47 +4,57 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+
 #define SOR_MAX 5
 #define OSZLOP_MAX 5
-int seed = 0;
+#define SEED 0
+#define FAJLNEV "palya_iras_teszt.txt"
 
-void iras(char tabla[SOR_MAX][OSZLOP_MAX])
+int random(int tol, int ig, int seed)
 {
-    ofstream allaski;
-    string irashely;
-    string akt;
-    irashely = "/mnt/c/Users/szeke/uni/sze_programozas/fuggvenyek/palya_iras_teszt.txt";
-    allaski.open(irashely);
-    for (int i = 0; i <= SOR_MAX; i++)
-    {
-        for (int j = 0; j <= OSZLOP_MAX; j++)
-        {
-            akt = tabla[i][j];
-            if (j == OSZLOP_MAX)
-                allaski << "\n";
-            allaski << akt;
-        }
-    }
-    allaski.close();
+  srand(time(NULL) + seed);
+  return (tol + rand() % (ig - tol + 1));
 }
 
-int random(int tol, int ig)
+void feltolt(char tabla[SOR_MAX][OSZLOP_MAX], int seed)
 {
-    srand(time(NULL) + seed);
-    return (tol + rand() % (ig - tol + 1));
+  for (int i = 0; i < SOR_MAX; i++)
+  {
+    for (int j = 0; j < OSZLOP_MAX; j++)
+    {
+      seed = random(1, 50, seed);
+      tabla[i][j] = random('A', 'Z', seed);
+    }
+  }
+}
+
+void ment(char tabla[SOR_MAX][OSZLOP_MAX])
+{
+  ofstream mentes(FAJLNEV);
+
+  // A pálya méretének mentése, a betöltés megkönnyítésért
+  mentes << SOR_MAX << endl;
+  mentes << OSZLOP_MAX << endl;
+
+  for (int i = 0; i < SOR_MAX; i++)
+  {
+    for (int j = 0; j < OSZLOP_MAX; j++)
+    {
+      mentes << tabla[i][j];
+    }
+    mentes << endl;
+  }
+
+  mentes.close();
 }
 
 int main()
 {
-    char tabla[SOR_MAX][OSZLOP_MAX];
-    for (int i = 0; i <= SOR_MAX; i++)
-    {
-        for (int j = 0; j <= OSZLOP_MAX; j++)
-        {
-            seed = random(1, 50);
-            tabla[i][j] = random('A', 'Z');
-        }
-    }
-    iras(tabla);
-    return 0;
+  char tabla[SOR_MAX][OSZLOP_MAX];
+  int seed = 0;
+  
+  feltolt(tabla, seed);
+  ment(tabla);
+
+  return 0;
 }
