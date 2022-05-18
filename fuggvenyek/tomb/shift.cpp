@@ -1,20 +1,41 @@
 #include <iostream>
 using namespace std;
 
-// NOT WORKING
-// BETA VERSION
+// !!! BETA VERSION !!!
 
-void tomb_shift(int tomb[], int shift)
+int tomb_shift(int tomb[], int hossz, int lepes, int ureshely)
 {
-    int tombhossz = sizeof(tomb) / sizeof(tomb[0]);
-    for (int i = tombhossz - 1; i >= shift; i--)
+    bool toRight = lepes >= 0;
+    int ujhossz = hossz + lepes;
+    lepes = lepes % hossz;
+    if (lepes == 0)
     {
-        tomb[i] = tomb[i - shift];
+        return 0;
     }
-    for (int i = 0; i < shift; i++)
+    else if (toRight)
     {
-        tomb[i] = 0;
+        for (int i = hossz - 1; i >= lepes; i--)
+        {
+            tomb[i] = tomb[i - lepes];
+        }
+        for (int i = 0; i < lepes; i++)
+        {
+            tomb[i] = ureshely;
+        }
     }
+    else
+    {
+        lepes *= -1;
+        for (int i = 0; i < hossz - lepes; i++)
+        {
+            tomb[i] = tomb[i + lepes];
+        }
+        for (int i = hossz - lepes; i < hossz; i++)
+        {
+            tomb[i] = ureshely;
+        }
+    }
+    return ujhossz;
 }
 
 void kiir(int tomb[], int aktDb)
@@ -32,7 +53,7 @@ int main()
     int shift = 2;
     int tombhossz = sizeof(tomb) / sizeof(tomb[0]);
     kiir(tomb, tombhossz);
-    tomb_shift(tomb, shift);
+    tombhossz = tomb_shift(tomb, tombhossz, shift, 0);
     kiir(tomb, tombhossz);
     return 0;
 }
