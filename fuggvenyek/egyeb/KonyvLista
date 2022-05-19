@@ -1,0 +1,88 @@
+
+struct KonyvLista
+{
+	std::string cim;
+	unsigned int pagenumber;
+	KonyvLista* next;
+};
+
+
+KonyvLista* beszur(KonyvLista* lista, const std::string& line)
+{
+	unsigned int i_sep= 0;
+	unsigned int len_line = line.length();
+	for (unsigned int i = 0; i < len_line; i++)
+	{
+		if (line[i] == ',')
+		{
+			i_sep = i;
+			break;
+		}
+	}
+	KonyvLista* n;
+	n = new KonyvLista;
+	
+	n->cim = line.substr(0, i_sep);
+	n->pagenumber = atoi(line.substr(i_sep + 1, len_line-i_sep).c_str());
+	if (lista == NULL || lista->cim[0] > n->cim[0])
+	{
+		n->next = lista;
+		lista = n;
+	}
+	else
+	{
+		KonyvLista* it, * anchor = NULL;
+		for (it = lista; it != NULL && it->cim[0] <= n->cim[0]; it = it->next)
+		{
+			anchor = it;
+		}
+		n->next = it;
+		anchor->next = n;
+	}
+	return lista;
+}
+
+KonyvLista* konyvekBeolvas(const std::string filename)
+{
+	KonyvLista* lista = NULL;
+	std::ifstream f(filename.c_str());
+	if (f.is_open())
+	{
+		std::string line;
+		while (!f.eof())
+		{
+			std::getline(f, line);
+			lista = beszur(lista, line);
+		}
+	}
+	return lista;
+}
+
+void konyvListaKiir(KonyvLista* lista)
+{
+	for (KonyvLista* it = lista; it != NULL; it = it->next)
+	{
+		std::cout << it->cim << ' ' << it->pagenumber << '\n';
+	}
+}
+
+
+KonyvLista* maxOldalSzam(KonyvLista* lista)
+{
+	KonyvLista* maxkonyv = NULL;
+	for (KonyvLista* it = lista; it != NULL; it = it->next)
+	{
+		if (maxkonyv == NULL || it->pagenumber > maxkonyv->pagenumber)
+		{
+			maxkonyv = it;
+		}
+	}
+	return maxkonyv;
+}
+/*
+Készítsen egy programot ami könyvek listáját tárolja. A fájlban soronként vesszővel elválasztva a könyv címét és oldalainak számát tároljuk.
+
+A könyveket olvassa be a KonyvLista* konyvekBeolvas(const string filename) függvénnyel, ami a könyvek eltárolására alkalmas láncolt lista mutatójával tér vissza. A beolvasás során ügyeljen arra, hogy a könyvek a cím első karaktere szerint rendezetten tárolódjanak. Implementálja a konyvListaKiir(KonyvLista* lista) függvényt is, ami kiírja standard outputra az egyes attribútumokat szóközzel elválasztva. A maxOldalszam adja vissza a leghosszabb könyvet (ebben a függvényben ne írjon ki semmit a standard outputra)!
+
+TIPP: készítsen külön beszur függvényt a sor beolvasására. A függvény egyrészt dolgozza fel a bemenetként kapott sort, másrészt szúrja be a kiolvasott elemet a listába!
+*/
