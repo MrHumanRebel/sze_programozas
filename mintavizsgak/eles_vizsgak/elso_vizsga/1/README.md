@@ -23,3 +23,15 @@ A függvény visszatérési értéke a 10 db szám összege legyen.
 A másik függvény a void kiir(int szum, int min, int max),
 pedig írja ki a beker függvény visszatérési értékét illetve a 2. és 3. paraméterek
 értékeit a példában látott szövegezéssel.
+
+For example:
+
+Input	Result
+0 1 2 3 4 5 6 7 8 9
+Szum: 45
+Prtln min: 1
+Prs max: 8
+2 0 -1 -2 2 3 3 4 5 6 7 8 9
+Szum: 39
+Prtln min: -1
+Prs max: 8
