@@ -26,3 +26,11 @@ void rendez(struct munka m[], int n) {
     }
   }
 }
+int main(){
+  struct munka munkak[DB] = {{"Cecil", "a5", 10 , 5}, {"Dani", "a4", 8 , 3}, {"Ede", "a3", 10 , 5}, {"Benedek", "a2", 10 , 5}, {"Albert", "a1", 10 , 5}};  
+  int i;
+  rendez(munkak, DB);
+  for(i = 0; i < DB; i++) 
+    kiiratas(munkak[i]);
+  return 0;
+}
