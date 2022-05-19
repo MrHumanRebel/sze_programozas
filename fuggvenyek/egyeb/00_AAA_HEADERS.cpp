@@ -1,5 +1,5 @@
 #include <iostream>      // Alap header
-#include <stdlib.h>      // ??
+#include <stdlib.h>      // Csak kell
 #include <cstdlib>       //Random generátor
 #include <fstream>       //File kezelés
 #include <sstream>       //String stream
