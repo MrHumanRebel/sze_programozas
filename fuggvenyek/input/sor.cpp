@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <string>
+
 using namespace std;
 #define TELL cout <<
 #define ASK cin >>
