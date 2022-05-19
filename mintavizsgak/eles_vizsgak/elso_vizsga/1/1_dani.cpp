@@ -5,7 +5,6 @@ using namespace std;
 
 int beker(int be_tb[], int *min, int *max)
 {
-    int akttomb[TOMBMAX];
     int szum = 0;
     int aktszam;
     int i = 0;
@@ -22,7 +21,7 @@ int beker(int be_tb[], int *min, int *max)
                     ok = true;
 
             } while (ok == false);
-            akttomb[i] = aktszam;
+            be_tb[i] = aktszam;
         }
         else if (i % 2 == 0) // Páros
         {
@@ -33,7 +32,7 @@ int beker(int be_tb[], int *min, int *max)
                     ok = true;
 
             } while (ok == false);
-            akttomb[i] = aktszam;
+            be_tb[i] = aktszam;
             szum += aktszam;
             if (aktszam > *max)
                 *max = aktszam;
@@ -47,18 +46,13 @@ int beker(int be_tb[], int *min, int *max)
                     ok = true;
 
             } while (ok == false);
-            akttomb[i] = aktszam;
+            be_tb[i] = aktszam;
             szum += aktszam;
             if (aktszam < *min)
                 *min = aktszam;
         }
         i++;
     } while (i < 10);
-
-    for (int j = 0; j < TOMBMAX; j++)
-    {
-        be_tb[j] = akttomb[j];
-    }
     return szum;
 }
 
