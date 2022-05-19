@@ -15,7 +15,7 @@
 ## Információk
 
 ** **
-**⚠️ Figyelmeztetés: Megjelenés előtti / Kísérleti anyag ⚠️**
+**⚠️ Figyelmeztetés: A repo a 2021/2022/2 tavaszi félévben készült, és azóta nem frissül! ⚠️**
 
 Ha szeretnéd, hogy ez a projekt gyorsabban haladjon, vagy bővebb C++ tapasztalattal rendelkezel,
 [segítsd a projektet](https://github.com/login?return_to=%2FMrHumanRebel%2Fsze_programozas)! 
