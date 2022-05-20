@@ -1,6 +1,6 @@
 # 5. feladat
 
-Írjon egy string `first_last(string fbe, string fki)` függvényt, amely kiírja az alábbi átalakításon átesett szerzők neveit a képernyőre és egy kimeneti file-ba (2. paraméter).
+Írjon egy `string first_last(string fbe, string fki)` függvényt, amely kiírja az alábbi átalakításon átesett szerzők neveit a képernyőre és egy kimeneti file-ba (2. paraméter).
 
 A kimeneti file létrejöttét is ellenőrizni kell! A kiírások pontos formátumát a példa mutatja!
 
