@@ -2,8 +2,7 @@
 
 # Feladat
 
-Írjon egy `double area(string fbe)` függvényt, amely kiírja az alábbi feltételeknek
-megfelelő általános háromszögek területeit. A kiírás pontos formátumát a példa mutatja!
+Írjon egy `double area(string fbe)` függvényt, amely kiírja az alábbi feltételeknek megfelelő általános háromszögek területeit. A kiírás pontos formátumát a példa mutatja!
 
 A 10 db háromszög adatait egy adat-file tartalmazza, amelynek a létezését ellenőrizni kell! A hibaüzenet formátumát a példa mutatja!
 
