@@ -71,6 +71,7 @@ string tri_result(triathlete tomb[], string fbe)
     else
     {
         cout << "Sikertelen file-nyitás!\nN/A!" << endl;
+        return "\0";
     }
     versenyzo ujadatok[adatdb];
     for (int i = 1; i <= adatdb; i++)
