@@ -32,11 +32,24 @@ void torol(char s_tb[], int h)
 {
     char ujtomb[MAX];
     ujtomb[0] = s_tb[0];
-    cout << ujtomb[0];
+    int j = 1;
+    // Megtartandó elemek eltárolása
     for (int i = 2; i < h; i += 2)
     {
-        ujtomb[i] = s_tb[i];
-        cout << ujtomb[i];
+        ujtomb[j] = s_tb[i];
+        j++;
+    }
+    // Régi tömb kiűrítése
+    for (int i = 0; i < MAX; i++)
+    {
+        s_tb[i] = '\0';
+    }
+    //Új elemsor eltárolása
+    int ujmeret = h / 2;
+    for (int i = 0; i < ujmeret - 1; i++)
+    {
+        s_tb[i] = ujtomb[i];
+        cout << s_tb[i];
     }
 }
 
