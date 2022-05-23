@@ -45,7 +45,7 @@ void torol(char s_tb[], int h)
         s_tb[i] = '\0';
     }
     //Új elemsor eltárolása
-    int ujmeret = h / 2 + 1;
+    int ujmeret = j;
     for (int i = 0; i < ujmeret; i++)
     {
         s_tb[i] = ujtomb[i];
