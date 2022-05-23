@@ -5,6 +5,9 @@ using namespace std;
 
 #define MAX 16
 
+// BETA VERSION
+//  NOT WORKING
+
 string first_last(string fbe, string fki)
 {
     string nevek[MAX][MAX];
@@ -41,9 +44,8 @@ string first_last(string fbe, string fki)
                 string id4;
                 int aktsorhossz = aktSor.length();
 
-                int spacecounter = 0;
-
                 int spacehelye = aktSor.find(' ');
+                int spacecounter = 1;
 
                 id1 = aktSor.substr(0, spacehelye);
                 spacehelye++;
