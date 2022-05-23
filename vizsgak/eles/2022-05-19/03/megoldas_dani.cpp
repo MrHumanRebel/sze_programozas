@@ -121,7 +121,6 @@ string tri_result(triathlete tomb[], string fbe)
         ujadatok[i].hours = aktora;
         ujadatok[i].minutes = aktperc;
         ujadatok[i].seconds = aktmperc;
-        
     }
     cout << tomb[min_id].lic << " => " << ujadatok[min_id].hours << ':' << ujadatok[min_id].minutes << ':' << ujadatok[min_id].seconds << " [h:m:s]" << endl;
     cout << tomb[max_id].lic << " => " << ujadatok[max_id].hours << ':' << ujadatok[max_id].minutes << ':' << ujadatok[max_id].seconds << " [h:m:s]" << endl;
