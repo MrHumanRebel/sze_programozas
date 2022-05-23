@@ -41,19 +41,38 @@ triathlete versenyzoBeolvas(string aktSor)
   return versenyzo;
 }
 
+void buborekrendez(triathlete versenyzok[], int db)
+{
+  for (int i = db - 1; i >= 1; i--)
+  {
+    for (int j = 0; j < i; j++)
+    {
+      if (versenyzok[j].sum > versenyzok[j + 1].sum)
+      {
+        triathlete csere = versenyzok[j];
+        versenyzok[j] = versenyzok[j + 1];
+        versenyzok[j + 1] = csere;
+      }
+    }
+  }
+}
+
 string mpIdobelyegge(int sum)
 {
   int ora, perc, mp;
 
-  perc = int((mp / 60) % 60);
+  perc = int((sum / 60) % 60);
   ora = int(perc / 60);
-  mp = int(mp % 60);
+  mp = int(sum % 60);
 
   string eredmeny = to_string(ora) + ":" + to_string(perc) + ":" + to_string(mp);
+  return eredmeny;
 }
 
 string tri_result(string fbe)
 {
+  string eredmeny = "N/A!";
+
   ifstream fajl(fbe);
   if (fajl.is_open())
   {
@@ -70,22 +89,18 @@ string tri_result(string fbe)
       i++;
     }
 
-    int minIndex = 0;
-    for (int i = 0; i < versenyzokDb; i++)
-    {
-      if (versenyzok[minIndex].sum > versenyzok[minIndex].sum)
-        minIndex = i;
-    }
+    buborekrendez(versenyzok, versenyzokDb);
 
-    cout << versenyzok[minIndex].lic << " => " << mpIdobelyegge(versenyzok[minIndex].sum) << endl;
+    cout << versenyzok[0].lic << " => " << mpIdobelyegge(versenyzok[0].sum) << endl;
 
-    return versenyzok[versenyzokDb - 1].lic;
+    eredmeny = versenyzok[versenyzokDb - 1].lic;
   }
   else
   {
-    cout << "Sikertelen file-nyitás!";
-    return "N/A!";
+    cout << "Sikertelen file-nyitás!" << endl;
   }
+
+  return eredmeny;
 }
 
 int main()
