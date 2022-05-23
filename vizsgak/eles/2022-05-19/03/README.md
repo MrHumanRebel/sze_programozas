@@ -2,9 +2,7 @@
 
 # Feladat
 
-Írjon egy `string tri_result(string fbe)` függvényt, amely kiírja egy adott triatlon
-verseny győztesének az azonosítóját (licence), és a cél-idejét; `óra:perc:másodperc`
-alakban.
+Írjon egy `string tri_result(string fbe)` függvényt, amely kiírja egy adott triatlon verseny győztesének az azonosítóját (licence), és a cél-idejét; `óra:perc:másodperc` alakban.
 
 A cél-idő a következő részeredményekből tevődik össze: `úszás + kerékpár + futás + depo`. A kiírás pontos formátumát a példa mutatja!
 
