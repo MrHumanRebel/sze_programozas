@@ -16,7 +16,6 @@ struct triathlete
 
 struct versenyzo
 {
-    string lic;
     int hours;
     int minutes;
     int seconds;
