@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <climits>
 
 using namespace std;
 #define MAX 16
@@ -24,6 +25,10 @@ struct versenyzo
 string tri_result(triathlete tomb[], string fbe)
 {
     int i = 0;
+    int min = INT_MAX;
+    int min_id;
+    int max = INT_MIN;
+    int max_id;
     ifstream fajl(fbe);
     string aktSor;
     int adatdb = 0;
@@ -60,6 +65,16 @@ string tri_result(triathlete tomb[], string fbe)
                 // cout << tomb[i].depo << "\t";
 
                 tomb[i].sum = tomb[i].swim + tomb[i].cycle + tomb[i].run + tomb[i].depo;
+                if (tomb[i].sum > max)
+                {
+                    max = tomb[i].sum;
+                    max_id = i;
+                }
+                if (tomb[i].sum < min)
+                {
+                    min = tomb[i].sum;
+                    min_id = i;
+                }
                 // cout << tomb[i].sum << "\t";
                 // cout << endl;
 
@@ -106,8 +121,10 @@ string tri_result(triathlete tomb[], string fbe)
         ujadatok[i].hours = aktora;
         ujadatok[i].minutes = aktperc;
         ujadatok[i].seconds = aktmperc;
-        cout << tomb[i].lic << " => " << ujadatok[i].hours << ':' << ujadatok[i].minutes << ':' << ujadatok[i].seconds << " [h:m:s]" << endl;
+        
     }
+    cout << tomb[min_id].lic << " => " << ujadatok[min_id].hours << ':' << ujadatok[min_id].minutes << ':' << ujadatok[min_id].seconds << " [h:m:s]" << endl;
+    cout << tomb[max_id].lic << " => " << ujadatok[max_id].hours << ':' << ujadatok[max_id].minutes << ':' << ujadatok[max_id].seconds << " [h:m:s]" << endl;
     return tomb[adatdb].lic;
 }
 
