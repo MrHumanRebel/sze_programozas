@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cstring>
-
 using namespace std;
-
 #define MAX 50
 
 int feltolt(char s_tb[])
@@ -45,8 +43,7 @@ void torol(char s_tb[], int h)
         s_tb[i] = '\0';
     }
     //Új elemsor eltárolása
-    int ujmeret = j;
-    for (int i = 0; i < ujmeret; i++)
+    for (int i = 0; i < j; i++)
     {
         s_tb[i] = ujtomb[i];
         cout << s_tb[i];
