@@ -40,7 +40,7 @@ string first_last(string fbe, string fki)
             string aktvezetek = adat[i][0];
             string aktkereszt = "\0";
 
-            for (size_t j = 0; j < (adat[i][1].length() - 1); j++)
+            for (size_t j = 0; j < (adat[i][1].length() - 1); j++) //Így tűnik el a "\r" a stringből
             {
                 aktkereszt += adat[i][1][j];
             }
