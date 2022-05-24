@@ -33,7 +33,7 @@ double area(string fbe)
                 spacehelye += 4;
                 // cout << b_oldalak[i] << "\t";
 
-                szogek[i] = stoi(aktSor.substr(spacehelye, 2));
+                szogek[i] = stoi(aktSor.substr(spacehelye, 2)) * (M_PI / 180); // RAD TO DEG
                 // cout << szogek[i] << "\t";
 
                 teruletek[i] = (a_oldalak[i] * b_oldalak[i] * sin(szogek[i])) / 2;
