@@ -38,8 +38,13 @@ string first_last(string fbe, string fki)
         for (int i = 0; i < adatdb; i++)
         {
             string aktvezetek = adat[i][0];
-            string aktkereszt = adat[i][1];
-            string akt = adat[i][1] + ", " + adat[i][0];
+            string aktkereszt = "\0";
+
+            for (size_t j = 0; j < (adat[i][1].length() - 1); j++)
+            {
+                aktkereszt += adat[i][1][j];
+            }
+            string akt = aktkereszt + ", " + aktvezetek;
 
             cout << akt << endl;
             kimenet << akt << endl;
@@ -49,8 +54,8 @@ string first_last(string fbe, string fki)
     }
     else
     {
-        cout << "Sikertelen file-nyitás" << endl;
-        return "-1";
+        cout << "Sikertelen file-nyitás!" << endl;
+        return "\0";
     }
 }
 
