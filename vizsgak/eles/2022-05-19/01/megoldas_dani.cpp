@@ -58,7 +58,7 @@ int beker(int be_tb[], int *min, int *max)
 
 void kiir(int szum, int min, int max)
 {
-  cout << "Szum:" << szum << "\nPrtln min:" << min << "\nPrs max:" << max;
+  cout << "Szum: " << szum << "\nPrtln min: " << min << "\nPrs max: " << max;
 }
 
 int main()

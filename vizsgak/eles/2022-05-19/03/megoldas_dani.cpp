@@ -22,8 +22,9 @@ struct versenyzo
     int seconds;
 };
 
-string tri_result(triathlete tomb[], string fbe)
+string tri_result(string fbe)
 {
+    triathlete tomb[MAX];
     int i = 0;
     int min = INT_MAX;
     int min_id;
@@ -123,14 +124,13 @@ string tri_result(triathlete tomb[], string fbe)
         ujadatok[i].seconds = aktmperc;
     }
     cout << tomb[min_id].lic << " => " << ujadatok[min_id].hours << ':' << ujadatok[min_id].minutes << ':' << ujadatok[min_id].seconds << " [h:m:s]" << endl;
-    cout << tomb[max_id].lic << " => " << ujadatok[max_id].hours << ':' << ujadatok[max_id].minutes << ':' << ujadatok[max_id].seconds << " [h:m:s]" << endl;
-    return tomb[adatdb].lic;
+    // cout << tomb[max_id].lic << " => " << ujadatok[max_id].hours << ':' << ujadatok[max_id].minutes << ':' << ujadatok[max_id].seconds << " [h:m:s]" << endl;
+    return tomb[max_id].lic;
 }
 
 int main()
 {
-    triathlete adatok[MAX];
-    string filename = "/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/03/Chip.txt";
-    tri_result(adatok, filename);
+    string u = tri_result("/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/03/Chip.txt");
+    cout << u;
     return 0;
 }
