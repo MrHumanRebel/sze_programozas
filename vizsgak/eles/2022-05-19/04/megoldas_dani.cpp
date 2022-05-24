@@ -33,10 +33,10 @@ double area(string fbe)
                 spacehelye += 4;
                 // cout << b_oldalak[i] << "\t";
 
-                szogek[i] = stoi(aktSor.substr(spacehelye, 2)) * (M_PI / 180); // RAD TO DEG
+                szogek[i] = stoi(aktSor.substr(spacehelye, 2));
                 // cout << szogek[i] << "\t";
 
-                teruletek[i] = (a_oldalak[i] * b_oldalak[i] * sin(szogek[i])) / 2;
+                teruletek[i] = (a_oldalak[i] * b_oldalak[i] * sin(szogek[i] * (M_PI / 180))) / 2; // RAD TO DEG * (M_PI / 180)
                 // cout << teruletek[i] << "\t";
             }
             else
@@ -49,10 +49,10 @@ double area(string fbe)
                 spacehelye += 3;
                 // cout << b_oldalak[i] << "\t";
 
-                szogek[i] = stoi(aktSor.substr(spacehelye, 2)) * (M_PI / 180); // RAD TO DEG
+                szogek[i] = stoi(aktSor.substr(spacehelye, 2));
                 // cout << szogek[i] << "\t";
 
-                teruletek[i] = (a_oldalak[i] * b_oldalak[i] * sin(szogek[i])) / 2;
+                teruletek[i] = (a_oldalak[i] * b_oldalak[i] * sin(szogek[i] * (M_PI / 180))) / 2; // RAD TO DEG * (M_PI / 180)
                 // cout << teruletek[i] << "\t";
             }
 
