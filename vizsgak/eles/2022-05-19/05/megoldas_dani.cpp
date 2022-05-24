@@ -14,6 +14,13 @@ string first_last(string fbe, string fki)
         getline(fajl, aktSor);
         int adatdb = stoi(aktSor);
         string adat[adatdb][adatdb];
+        for (int i = 0; i < adatdb; i++)
+        {
+            for (int j = 0; j < adatdb; j++)
+            {
+                adat[i][j] = "\0";
+            }
+        }
 
         int i = 0;
         while (getline(fajl, aktSor))
