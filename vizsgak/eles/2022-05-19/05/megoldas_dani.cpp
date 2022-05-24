@@ -3,126 +3,55 @@
 
 using namespace std;
 
-#define MAX 16
-
-// BETA VERSION
-//  NOT WORKING
-
 string first_last(string fbe, string fki)
 {
-    string nevek[MAX][MAX];
-
-    for (int i = 0; i < MAX; i++)
-    {
-        for (int j = 0; j < MAX; j++)
-        {
-            nevek[i][j] = "\0";
-        }
-    }
-
-    int i = 0;
-    int j = 0;
+    // Beolvas
     ifstream fajl(fbe);
-    string aktSor;
-    int adatdb = 0;
     if (fajl.is_open())
     {
+        string aktSor;
+
+        getline(fajl, aktSor);
+        int adatdb = stoi(aktSor);
+        string adat[adatdb][adatdb];
+
+        int i = 0;
         while (getline(fajl, aktSor))
         {
+            int spacehelye = aktSor.find_last_of(' ');
 
-            if (isdigit(aktSor[0]) == true)
-            {
-                adatdb = stoi(aktSor);
-                i++;
-                // cout << adatdb << endl;
-            }
-            else
-            {
-                string id1;
-                string id2;
-                string id3;
-                string id4;
-                int aktsorhossz = aktSor.length();
+            adat[i][0] = aktSor.substr(0, spacehelye);  // Vezezéknél tárolása
+            adat[i][1] = aktSor.substr(spacehelye + 1); // Maradék összes karakter tárolása, azaz keresztnevek
 
-                int spacehelye = aktSor.find(' ');
-                int spacecounter = 1;
-
-                id1 = aktSor.substr(0, spacehelye);
-                spacehelye++;
-
-                int kardb = aktSor.find(' ', spacehelye) - spacehelye;
-                spacecounter++;
-
-                id2 = aktSor.substr(spacehelye, kardb);
-
-                spacehelye += kardb + 1;
-
-                if (spacehelye < aktsorhossz)
-                {
-                    kardb = aktSor.find(' ', spacehelye) - spacehelye;
-                    spacecounter++;
-
-                    id3 = aktSor.substr(spacehelye, kardb);
-                }
-
-                spacehelye += kardb + 1;
-
-                if (spacehelye < aktsorhossz)
-                {
-                    kardb = aktSor.find(' ', spacehelye) - spacehelye;
-                    spacecounter++;
-
-                    id4 = aktSor.substr(spacehelye, kardb);
-                }
-
-                // Különböző névhosszok
-
-                if (spacecounter == 1)
-                {
-                    nevek[i][j] += id1;
-                    j++;
-                    nevek[i][j] += id2;
-                }
-                else if (spacecounter == 2)
-                {
-                    nevek[i][j] += id1;
-                    if (id1 != id2)
-                    {
-                        nevek[i][j] += " ";
-                        nevek[i][j] += id2;
-                        j++;
-                    }
-                    if (id1 != id3 && id2 != id3)
-                    {
-                        nevek[i][j] += " ";
-                        nevek[i][j] += id3;
-                    }
-                }
-
-                for (int i = 0; i < adatdb; i++)
-                {
-                    for (int j = 0; j < adatdb; j++)
-                    {
-                        if (nevek[i][j] != "\0")
-                            cout << nevek[i][j];
-                    }
-                }
-
-                // cout << id1 << " " << id2 << " " << id3 << " " << id4 << endl;
-            }
+            i++;
         }
-        i++;
+
+        // Kiir
+        ofstream kimenet(fki);
+        for (int i = 0; i < adatdb; i++)
+        {
+            string aktvezetek = adat[i][0];
+            string aktkereszt = adat[i][1];
+            string akt = adat[i][1] + ", " + adat[i][0];
+
+            cout << akt << endl;
+            kimenet << akt << endl;
+        }
+
+        return "Hibátlan futás!";
     }
     else
     {
-        cout << "A fájl nem létezik!" << endl;
+        cout << "Sikertelen file-nyitás" << endl;
+        return "-1";
     }
-    return "\0";
 }
 
 int main()
 {
-    first_last("/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/05/Writers.txt",
-               "/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/05/Sretirw.txt");
+    string ki = first_last("/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/05/Writers.txt",
+                           "/home/szeke/uni/sze_programozas/vizsgak/eles/2022-05-19/05/Sretirw.txt");
+    cout << ki;
+
     return 0;
 }
