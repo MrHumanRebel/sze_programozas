@@ -15,6 +15,7 @@ double area(string fbe)
     double teruletek[MAX];
     double osszterulet = 0;
     int i = 0;
+    int okdb = 0;
     ifstream fajl(fbe);
     string aktSor;
 
@@ -57,9 +58,12 @@ double area(string fbe)
             }
 
             if (teruletek[i] >= KIIRMIN && teruletek[i] <= KIIRMAX)
+            {
                 cout << teruletek[i] << " [nm]" << endl;
+                osszterulet += teruletek[i];
+                okdb++;
+            }
 
-            osszterulet += teruletek[i];
             i++;
             // cout << endl;
         }
@@ -69,7 +73,7 @@ double area(string fbe)
         cout << "Sikertelen file-nyitás!" << endl;
         return -1;
     }
-    return (osszterulet / i);
+    return (osszterulet / okdb);
 }
 
 int main()
