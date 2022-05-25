@@ -1,3 +1,18 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+struct triathlete
+{
+  string lic;
+  int swim;
+  int cycle;
+  int run;
+  int depo;
+  int sum;
+};
+
 void buborek(triathlete** tb, int hossz){
     string cs;
     for(int i = hossz - 1; i >= 1; i-- ){
