@@ -28,7 +28,7 @@ int feltolt(char s_tb[])
 
 void torol(char s_tb[], int h)
 {
-    char ujtomb[MAX];
+    char *ujtomb = new char[MAX];
     ujtomb[0] = s_tb[0];
     int j = 1;
     // Megtartandó elemek eltárolása
@@ -48,6 +48,7 @@ void torol(char s_tb[], int h)
         s_tb[i] = ujtomb[i];
         cout << s_tb[i];
     }
+    delete[] ujtomb;
 }
 
 int main()
