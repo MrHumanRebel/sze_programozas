@@ -14,7 +14,7 @@ unsigned int beker(int be_tb[])
 	do
 	{
 		ok = false;
-		if(i<5) //Első 5 elem
+		if (i < 5) // Első 5 elem
 		{
 			do
 			{
@@ -28,9 +28,8 @@ unsigned int beker(int be_tb[])
 				pozszorzat = be_tb[i];
 			else
 			{
-				pozszorzat*= be_tb[i];
+				pozszorzat *= be_tb[i];
 			}
-
 		}
 		else // Maradék 5
 		{
@@ -61,7 +60,7 @@ unsigned int beker(int be_tb[])
 
 void kiir(unsigned int sr)
 {
-	cout <<"A kisebb szorzat: "<< sr ;
+	cout << "A kisebb szorzat: " << sr;
 }
 
 int main()

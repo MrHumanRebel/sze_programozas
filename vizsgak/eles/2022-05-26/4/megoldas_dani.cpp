@@ -9,11 +9,10 @@ using namespace std;
 #define MAX1 10
 #define MAX2 2
 
-
-double** befogok(string fbe)
+double **befogok(string fbe)
 {
-	int adatok[MAX1][MAX2]; //Elso adat atfogo másik hegyesszog
-	double szogek[MAX1][MAX2]; //Elso adat hegyesszöggel szembeni befogó masodik hegyesszög melletti befogó
+	int adatok[MAX1][MAX2];	   // Elso adat atfogo másik hegyesszog
+	double szogek[MAX1][MAX2]; // Elso adat hegyesszöggel szembeni befogó masodik hegyesszög melletti befogó
 	int i = 0;
 	ifstream fajl(fbe);
 	string aktSor;
@@ -32,11 +31,9 @@ double** befogok(string fbe)
 				adatok[i][1] = stoi(aktSor.substr(spacehelye, 3));
 				spacehelye += 4;
 				// cout << b_oldalak[i] << "\t";
-				szogek[i][0] = adatok[i][1] * sin(adatok[i][2]*(M_PI / 180));
+				szogek[i][0] = adatok[i][1] * sin(adatok[i][2] * (M_PI / 180));
 				szogek[i][1] = adatok[i][1] * cos(adatok[i][2] * (M_PI / 180));
 				// cout << szogek[i] << "\t";
-
-
 			}
 			else
 			{
@@ -62,3 +59,4 @@ double** befogok(string fbe)
 	}
 	return 0;
 }
+

@@ -33,7 +33,7 @@ string run_result(string fbe)
 		{
 			if (isdigit(aktSor[0]) == true)
 			{
-				adatdb = stoi(aktSor);				
+				adatdb = stoi(aktSor);
 				// cout << adatdb << endl;
 				i++;
 			}
@@ -58,7 +58,6 @@ string run_result(string fbe)
 				// cout << tomb[i].run << "\t";
 
 				tomb[i].best = tomb[i].run_1;
-
 
 				if (tomb[i].best < tomb[i].run_2)
 				{
