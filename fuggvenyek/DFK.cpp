@@ -162,7 +162,7 @@ public:
 	/// Seeks to the specified index in the list, making the nth element active
 	/// </summary>
 	/// <param name="newIndex">The index to seek to</param>
-	void SeekToIndex(int newIndex)
+	void SeekToIndex(unsigned int newIndex)
 	{
 		if (newIndex < 0 || newIndex >= count)
 		{
@@ -471,6 +471,7 @@ public:
 				lastElement = n;
 
 				count++;
+				return true;
 			}
 			else return false;
 		}
@@ -531,6 +532,43 @@ public:
 	}
 
 	/// <summary>
+	/// Removes current element and moves the back of the list forward
+	/// </summary>
+	void RemoveCurrent()
+	{
+		if (count == 1)
+		{
+			Empty();
+		}
+		else if (currentIndex == 0)
+		{
+			currentElement = currentElement->nextElement;
+			delete firstElement;
+			firstElement = currentElement;
+			currentElement->previousElement = nullptr;
+			count--;
+		}
+		else if (currentIndex == count - 1)
+		{
+			currentElement = currentElement->previousElement;
+			delete lastElement;
+			lastElement = currentElement;
+			currentElement->nextElement = nullptr;
+			count--;
+			currentIndex--;
+		}
+		else
+		{
+			LinkedListNode<T>* tmp = currentElement;
+			currentElement->previousElement->nextElement = currentElement->nextElement;
+			currentElement->nextElement->previousElement = currentElement->previousElement;
+			currentElement = currentElement->nextElement;
+			delete tmp;
+			count--;
+		}
+	}
+
+	/// <summary>
 	/// Reads the data of the given index
 	/// </summary>
 	/// <param name="index">The index of the requested element</param>
@@ -576,6 +614,9 @@ public:
 			delete(firstElement);
 			firstElement = tmp;
 		}
+		firstElement = nullptr;
+		lastElement = nullptr;
+		currentElement = nullptr;
 		currentIndex = 0;
 		count = 0;
 	}
@@ -614,7 +655,7 @@ public:
 		this->ID = ID;
 		timesCalled = 0;
 	}
-	DDelegateAction(int ID, Return(*function)(Params...))
+	DDelegateAction(Return(*function)(Params...), int ID)
 	{
 		this->functionPointer = function;
 		this->ID = ID;
@@ -631,6 +672,11 @@ public:
 
 	}
 
+	/// <summary>
+	/// Calls the function
+	/// </summary>
+	/// <param name="...p">Parameters for the functions to use</param>
+	/// <returns>The returned value of the function</returns>
 	Return Fire(Params... p)
 	{
 		timesCalled++;
@@ -658,47 +704,167 @@ public:
 
 	DDelegate()
 	{
-		_CrtDumpMemoryLeaks();
 		actionList = new DLinkedList<DDelegateAction<Return, Params...>*>();
-		_CrtDumpMemoryLeaks();
 	}
 	~DDelegate()
 	{
-		_CrtDumpMemoryLeaks();
 		delete actionList;
-		_CrtDumpMemoryLeaks();
-
 	}
 
 	/// <summary>
-	/// Fires every function in subscribe order but deletes their returned value
+	/// Calls every function in subscribe order but deletes their returned value
 	/// </summary>
 	/// <param name="...p">Parameters for the functions to use</param>
 	void FireAllWithoutReturns(Params... p)
 	{
-		int length = actionList->Count();
-		Return* retArray = new Return[length];
-		for (int i = 0; i < length; i++)
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
 		{
-			retArray[i] = actionList->GetDataAt(i)->Fire(p...);
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				actionList->currentElement->data->Fire(p...);
+			}
 		}
-		delete retArray;
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				retArray[i] = actionList->currentElement->data->Fire(p...);
+			}
+			delete[] retArray;
+		}
+		actionList->SeekToIndex(revert);
 	}
 
 	/// <summary>
-	/// Fires every function in subscribe order
+	/// Calls every function in subscribe order
+	/// </summary>
+	/// <param name="...p">An array of parameters for the functions to use</param>
+	void FireAllWithoutReturns(Params... p[])
+	{
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
+		{
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				actionList->currentElement->data->Fire(p[i]...);
+			}
+		}
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				retArray[i] = actionList->currentElement->data->Fire(p[i]...);
+			}
+			delete[] retArray;
+		}
+		actionList->SeekToIndex(revert);
+	}
+
+	/// <summary>
+	/// Calls every function in subscribe order with specific ID
+	/// </summary>
+	/// <param name="...p">Parameters for the functions to use</param>
+	/// <param name="ID">ID of function to call</param>
+	void FireAllWithoutReturns(Params... p, int ID)
+	{
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
+		{
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					actionList->currentElement->data->Fire(p...);
+				}
+			}
+		}
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					retArray[i] = actionList->currentElement->data->Fire(p...);
+				}
+			}
+			delete[] retArray;
+		}
+		actionList->SeekToIndex(revert);
+	}
+
+	/// <summary>
+	/// Calls every function in subscribe order with specific ID
+	/// </summary>
+	/// <param name="...p">An array of parameters for the functions to use</param>
+	/// <param name="ID">ID of function to call</param>
+	void FireAllWithoutReturns(Params... p[], int ID)
+	{
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
+		{
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					actionList->currentElement->data->Fire(p[i]...);
+				}
+			}
+		}
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					retArray[i] = actionList->currentElement->data->Fire(p[i]...);
+				}
+			}
+			delete[] retArray;
+		}
+		actionList->SeekToIndex(revert);
+	}
+
+
+	/// <summary>
+	/// Calls every function in subscribe order
 	/// </summary>
 	/// <param name="...p">Parameters for the functions to use</param>
 	/// <returns>An array of the returned value of the functions</returns>
 	Return* FireAll(Params... p)
 	{
+		int revert = actionList->CurrentIndex();
+
 		if (typeid(Return) == typeid(void))
 		{
 			int length = actionList->Count();
 			for (int i = 0; i < length; i++)
 			{
-				actionList->GetDataAt(i)->Fire(p...);
+
+				actionList->SeekToIndex(i);
+				actionList->currentElement->data->Fire(p...);
 			}
+			actionList->SeekToIndex(revert);
 			return NULL;
 		}
 		else
@@ -707,26 +873,70 @@ public:
 			Return* retArray = new Return[length];
 			for (int i = 0; i < length; i++)
 			{
-				retArray[i] = actionList->GetDataAt(i)->Fire(p...);
+				actionList->SeekToIndex(i);
+				retArray[i] = actionList->currentElement->data->Fire(p...);
 			}
+			actionList->SeekToIndex(revert);
 			return retArray;
 		}
 
 	}
 
 	/// <summary>
-	/// Fires every function in subscribe order
+	/// Calls every function in subscribe order
 	/// </summary>
 	/// <param name="...p">An array of parameters for the functions to use</param>
 	/// <returns>An array of the returned value of the functions</returns>
 	Return* FireAll(Params... p[])
 	{
+		int revert = actionList->CurrentIndex();
 		if (typeid(Return) == typeid(void))
 		{
 			int length = actionList->Count();
 			for (int i = 0; i < length; i++)
 			{
-				actionList->GetDataAt(i)->Fire(p[i]...);
+				actionList->SeekToIndex(i);
+				actionList->currentElement->data->Fire(p...);
+			}
+			actionList->SeekToIndex(revert);
+			return NULL;
+		}
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				retArray[i] = actionList->currentElement->data->Fire(p[i]...);
+			}
+			actionList->SeekToIndex(revert);
+			return retArray;
+		}
+	}
+
+	/// <summary>
+	/// Calls every function in subscribe order  with specific ID
+	/// </summary>
+	/// <param name="...p">Parameters for the functions to use</param>
+	/// <param name="ID">ID of function to call</param>
+	/// <returns>An array of the returned value of the functions</returns>
+	Return* FireAll(Params... p, int ID)
+	{
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
+		{
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				if (actionList->currentElement->data->ID == ID)
+				{
+					actionList->SeekToIndex(i);
+					if (actionList->currentElement->data->ID == ID)
+					{
+						actionList->currentElement->data->Fire(p...);
+					}
+				}
 			}
 			return NULL;
 		}
@@ -736,16 +946,110 @@ public:
 			Return* retArray = new Return[length];
 			for (int i = 0; i < length; i++)
 			{
-				retArray[i] = actionList->GetDataAt(i)->Fire(p[i]...);
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					retArray[i] = actionList->currentElement->data->Fire(p...);
+				}
 			}
 			return retArray;
 		}
 	}
 
-	bool UnSubscribe(Return(*function)(Params...)) // TODO
+	/// <summary>
+	/// Calls every function in subscribe order  with specific ID
+	/// </summary>
+	/// <param name="...p">An array of parameters for the functions to use</param>
+	/// <param name="ID">ID of function to call</param>
+	/// <returns>An array of the returned value of the functions</returns>
+	Return* FireAll(Params... p[], int ID)
 	{
-		
+		int revert = actionList->CurrentIndex();
+		if (typeid(Return) == typeid(void))
+		{
+			int length = actionList->Count();
+			for (int i = 0; i < length; i++)
+			{
+				if (actionList->currentElement->data->ID == ID)
+				{
+					actionList->SeekToIndex(i);
+					if (actionList->currentElement->data->ID == ID)
+					{
+						actionList->currentElement->data->Fire(p[i]...);
+					}
+				}
+			}
+			return NULL;
+		}
+		else
+		{
+			int length = actionList->Count();
+			Return* retArray = new Return[length];
+			for (int i = 0; i < length; i++)
+			{
+				actionList->SeekToIndex(i);
+				if (actionList->currentElement->data->ID == ID)
+				{
+					retArray[i] = actionList->currentElement->data->Fire(p[i]...);
+				}
+			}
+			return retArray;
+		}
 	}
+
+
+	/// <summary>
+	/// Unsubscribes every function that matches the parameter
+	/// </summary>
+	/// <param name="function">Function to unsubscribe</param>
+	void UnSubscribe(Return(*function)(Params...)) // TODO
+	{
+		int revert = actionList->CurrentIndex();
+
+		// actionList->SeekToIndex(0);
+
+		for (int i = 0; i < actionList->Count(); i++)
+		{
+			actionList->SeekToIndex(i);
+			if (actionList->currentElement->data->functionPointer == function)
+			{
+				actionList->RemoveCurrent();
+				i--;
+				revert--;
+			}
+		}
+		if (revert != -1)
+		{
+			actionList->SeekToIndex(revert);
+		}
+	}
+
+	/// <summary>
+	/// Unsubscribes every function with the same ID as parameter
+	/// </summary>
+	/// <param name="id">ID to unsubscibe</param>
+	void UnSubscribe(int id)
+	{
+		int revert = actionList->CurrentIndex();
+
+		// actionList->SeekToIndex(0);
+
+		for (int i = 0; i < actionList->Count(); i++)
+		{
+			actionList->SeekToIndex(i);
+			if (actionList->currentElement->data->ID == id)
+			{
+				actionList->RemoveCurrent();
+				i--;
+				revert--;
+			}
+		}
+		if (revert != -1)
+		{
+			actionList->SeekToIndex(revert);
+		}
+	}
+
 
 	/// <summary>
 	/// Subscribes a function to the delegate
@@ -754,7 +1058,24 @@ public:
 	/// <returns>Whether the subscription was sucessful</returns>
 	bool Subscribe(Return(*function)(Params...))
 	{
-		DDelegateAction<Return, Params...> tmp = new DDelegateAction<Return, Params...>(function);
+		DDelegateAction<Return, Params...>* tmp = new DDelegateAction<Return, Params...>(function);
+		if (tmp != nullptr)
+		{
+			actionList->PushAfter(tmp);
+			return true;
+		}
+		else return false;
+	}
+
+	/// <summary>
+	/// Subscribes a function to the delegate
+	/// </summary>
+	/// <param name="function">The pointer to the function</param>
+	/// <param name="id">ID of function</param>
+	/// <returns>Whether the subscription was sucessful</returns>
+	bool Subscribe(Return(*function)(Params...), int id)
+	{
+		DDelegateAction<Return, Params...>* tmp = new DDelegateAction<Return, Params...>(function, id);
 		if (tmp != nullptr)
 		{
 			actionList->PushAfter(tmp);
@@ -764,12 +1085,14 @@ public:
 	}
 
 
+	/// <summary>
+	/// Two way linked list that stores the function pointers
+	/// </summary>
 	DLinkedList<DDelegateAction<Return, Params...>*>* actionList;
-
-
 
 private:
 };
+// TODO: void return type not working
 
 
 
@@ -786,49 +1109,11 @@ bool Test(bool asd, int dsa)
 
 int main()
 {
-	_CrtDumpMemoryLeaks();
-	{
+	DDelegate<bool, bool, int>* test = new DDelegate<bool, bool, int>;
+	test->Subscribe(Test);
+	test->FireAllWithoutReturns(true, 1);
 
-		DDelegate<bool, bool, int>* a = new DDelegate<bool, bool, int>();
-		a->Subscribe(&Test);
-		a->Subscribe(&Test);
-		//a->actionList->PushAfter(new DDelegateAction<bool, bool, int>(&Test));
-		bool* tmp;
-		bool arg1[] = { true, false };
-		int arg2[] = { 0, 42 };
-		tmp = a->FireAll(arg1, arg2);
-		free(tmp);
-		//DLinkedList<int>* asd = new DLinkedList<int>;
-		//for (int i = 0; i < 1000; i++)
-		//{
-		//	asd->PushBefore(i); // (asd->Count() == 0) ? 0 : rand() % asd->Count()
-		//}
-		//say "full"; 
-		//asd->operator[](32)->data;
-		//creturn;
-		////for (int i = 0; i < asd->Count(); i++)
-		////{
-		////	asd->SeekToIndex(i);
-		////	say asd->currentElement->data;
-		////	creturn;
-		////}
-		//for (int i = 0; i < asd->Count() / 2; i++)
-		//{
-		//	asd->Swap(i, asd->Count() - 1 - i);
-		//}
-		//say "reversed";
-		//creturn;
-		//for (int i = 0; i < asd->Count(); i++)
-		//{
-		//	asd->SeekToIndex(i);
-		//	say asd->currentElement->data;
-		//	creturn;
-		//}
-		//delete asd;
-		delete a; // Persze, itt keresem 45 percen keresztül, hogy honnan jön a 8 byte leak
-		// aztán delete helyett csak a destruktort hívtam meg...
-		// Tanúlság? éjfél elõtt foglalkozzak ilyenekkel
-	}
+	delete test;
 	int leaks = _CrtDumpMemoryLeaks();
 	say "Leaks: " << leaks;
 }
