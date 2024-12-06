@@ -6,7 +6,6 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/MrHumanRebel/sze_programozas)
 ![GitHub repo file count](https://img.shields.io/github/directory-file-count/MrHumanRebel/sze_programozas)
-![Lines of code](https://img.shields.io/tokei/lines/github/MrHumanRebel/sze_programozas)
 ![GitHub](https://img.shields.io/github/license/MrHumanRebel/sze_programozas)
 
 ![GitHub all releases](https://img.shields.io/github/downloads/MrHumanRebel/sze_programozas/total)
